@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,21 +11,18 @@
     <Folder Include="ModuloAutomovel\" />
     <Folder Include="ModuloCliente\" />
     <Folder Include="ModuloCondutor\" />
-    <Folder Include="ModuloGrupoAutomovel\" />
-    <Folder Include="ModuloPlanoCobranca\" />
-    <Folder Include="ModuloFuncionario\" />
-    <Folder Include="ModuloTaxaServico\" />
     <Folder Include="ModuloCupom\" />
+    <Folder Include="ModuloFuncionario\" />
+    <Folder Include="ModuloGrupoAutomovel\" />
     <Folder Include="ModuloParceiro\" />
+    <Folder Include="ModuloPlanoCobranca\" />
+    <Folder Include="ModuloTaxaServico\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentResults" Version="3.15.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
-    <PackageReference Include="Serilog" Version="3.0.1" />
-    <PackageReference Include="Serilog.Expressions" Version="3.4.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="Serilog.Sinks.Seq" Version="5.2.2" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
 </Project>

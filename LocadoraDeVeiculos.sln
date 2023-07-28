@@ -5,6 +5,30 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoraDeVeiculos", "LocadoraDeVeiculos\LocadoraDeVeiculos.csproj", "{D36694B3-8BB3-4E27-8868-A0092BA03ADC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Aplicação", "2.Aplicação", "{523AB139-E7A3-456C-9C0B-A299220B176D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Apresentacao", "1.Apresentacao", "{2832CF8C-0CF8-41B0-8E7A-1FDDC4F0566F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Dominio", "3.Dominio", "{629D08D4-7B0F-4279-BFFA-1A7B897D43D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Infra", "4.Infra", "{C44C7CB4-614F-4D0C-9670-2CCD28E9B3FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Testes", "5.Testes", "{645E5003-4852-4804-B122-229EA3273B58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoraDeVeiculos.Aplicacao", "LocadoraDeVeiculos.Aplicacao\LocadoraDeVeiculos.Aplicacao.csproj", "{279CA8D2-7117-4E3C-A354-15A69598CB7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoraDeVeiculos.Dominio", "LocadoraDeVeiculos.Dominio\LocadoraDeVeiculos.Dominio.csproj", "{BEC7DE59-81E6-479E-A5F8-BB8E996AB150}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoraDeVeiculos.Infra.Orm", "LocadoraDeVeiculos.Infra\LocadoraDeVeiculos.Infra.Orm.csproj", "{91317E46-2E99-4575-A6CD-638AF0BB08B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.1 UnitTests", "5.1 UnitTests", "{BCD46429-D364-4ECC-9A99-B8AAF1305B38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.2 IntegrationTests", "5.2 IntegrationTests", "{15235787-A99D-49F1-A7CB-1515422E0989}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoraDeVeiculos.TestUnitario", "LocadoraDeVeiculos.TestUnitario\LocadoraDeVeiculos.TestUnitario.csproj", "{6A17F06C-870C-4D86-A514-60610AF51BED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoraDeVeiculos.TestIntegracao", "LocadoraDeVeiculos.TestIntegracao\LocadoraDeVeiculos.TestIntegracao.csproj", "{717D09E4-0E3E-4A9A-B051-DCC040CD5C77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +39,39 @@ Global
 		{D36694B3-8BB3-4E27-8868-A0092BA03ADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D36694B3-8BB3-4E27-8868-A0092BA03ADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D36694B3-8BB3-4E27-8868-A0092BA03ADC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{279CA8D2-7117-4E3C-A354-15A69598CB7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{279CA8D2-7117-4E3C-A354-15A69598CB7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{279CA8D2-7117-4E3C-A354-15A69598CB7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{279CA8D2-7117-4E3C-A354-15A69598CB7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEC7DE59-81E6-479E-A5F8-BB8E996AB150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEC7DE59-81E6-479E-A5F8-BB8E996AB150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEC7DE59-81E6-479E-A5F8-BB8E996AB150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEC7DE59-81E6-479E-A5F8-BB8E996AB150}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91317E46-2E99-4575-A6CD-638AF0BB08B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91317E46-2E99-4575-A6CD-638AF0BB08B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91317E46-2E99-4575-A6CD-638AF0BB08B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91317E46-2E99-4575-A6CD-638AF0BB08B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A17F06C-870C-4D86-A514-60610AF51BED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A17F06C-870C-4D86-A514-60610AF51BED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A17F06C-870C-4D86-A514-60610AF51BED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A17F06C-870C-4D86-A514-60610AF51BED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{717D09E4-0E3E-4A9A-B051-DCC040CD5C77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{717D09E4-0E3E-4A9A-B051-DCC040CD5C77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{717D09E4-0E3E-4A9A-B051-DCC040CD5C77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{717D09E4-0E3E-4A9A-B051-DCC040CD5C77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D36694B3-8BB3-4E27-8868-A0092BA03ADC} = {2832CF8C-0CF8-41B0-8E7A-1FDDC4F0566F}
+		{279CA8D2-7117-4E3C-A354-15A69598CB7A} = {523AB139-E7A3-456C-9C0B-A299220B176D}
+		{BEC7DE59-81E6-479E-A5F8-BB8E996AB150} = {629D08D4-7B0F-4279-BFFA-1A7B897D43D2}
+		{91317E46-2E99-4575-A6CD-638AF0BB08B6} = {C44C7CB4-614F-4D0C-9670-2CCD28E9B3FD}
+		{BCD46429-D364-4ECC-9A99-B8AAF1305B38} = {645E5003-4852-4804-B122-229EA3273B58}
+		{15235787-A99D-49F1-A7CB-1515422E0989} = {645E5003-4852-4804-B122-229EA3273B58}
+		{6A17F06C-870C-4D86-A514-60610AF51BED} = {BCD46429-D364-4ECC-9A99-B8AAF1305B38}
+		{717D09E4-0E3E-4A9A-B051-DCC040CD5C77} = {15235787-A99D-49F1-A7CB-1515422E0989}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C10698E-712E-4945-A114-28EB2A0DB13D}

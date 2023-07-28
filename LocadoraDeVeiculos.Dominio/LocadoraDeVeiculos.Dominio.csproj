@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Compartilhado\" />
+    <Folder Include="ModuloAutomovel\" />
+    <Folder Include="ModuloCliente\" />
+    <Folder Include="ModuloCondutor\" />
+    <Folder Include="ModuloCupom\" />
+    <Folder Include="ModuloFuncionario\" />
+    <Folder Include="ModuloGrupoAutomovel\" />
+    <Folder Include="ModuloParceiro\" />
+    <Folder Include="ModuloPlanoCobranca\" />
+    <Folder Include="ModuloTaxaServico\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.6.0" />
+  </ItemGroup>
+
+</Project>

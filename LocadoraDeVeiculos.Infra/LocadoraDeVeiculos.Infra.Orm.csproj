@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="4.1 Acesso a Dados\Compartilhado\" />
+    <Folder Include="4.1 Acesso a Dados\ModuloAutomovel\" />
+    <Folder Include="4.1 Acesso a Dados\ModuloCliente\" />
+    <Folder Include="4.1 Acesso a Dados\ModuloCondutor\" />
+    <Folder Include="4.1 Acesso a Dados\ModuloCupom\" />
+    <Folder Include="4.1 Acesso a Dados\ModuloFuncionario\" />
+    <Folder Include="4.1 Acesso a Dados\ModuloGrupoAutomovel\" />
+    <Folder Include="4.1 Acesso a Dados\ModuloParceiro\" />
+    <Folder Include="4.1 Acesso a Dados\ModuloPlanoCobranca\" />
+    <Folder Include="4.1 Acesso a Dados\ModuloTaxaServico\" />
+    <Folder Include="4.1 Acesso a Dados\" />
+    <Folder Include="4.2 Massa de Dados\" />
+    <Folder Include="4.3 PDF\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>
