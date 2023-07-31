@@ -122,6 +122,8 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
         public override void CarregarItens()
         {
             var listaFuncionario = repositorioFuncionario.SelecionarTodos();
+
+            tebalaFuncionario.AtualizarRegistros(listaFuncionario);
         }
     }
 }
