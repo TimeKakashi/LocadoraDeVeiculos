@@ -6,5 +6,10 @@ namespace LocadoraDeVeiculos
         {
             InitializeComponent();
         }
+
+        private void TelaPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
