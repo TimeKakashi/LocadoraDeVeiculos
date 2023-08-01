@@ -114,7 +114,7 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
 
         public override Funcionario ObterItemSelecionado()
         {
-            int id = tebalaFuncionario.ObterIdSelecionado();
+            var id = tebalaFuncionario.ObterIdSelecionado();
 
             return repositorioFuncionario.SelecionarPorId(id);
         }

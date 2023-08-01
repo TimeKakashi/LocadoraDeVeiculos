@@ -1,21 +1,35 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 {
     /// <inheritdoc />
-    public partial class TBGrupoAutomovel : Migration
+    public partial class ArrumandoTabelas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "TBFuncionario",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(100)", nullable: false),
+                    DataEntrada = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Salario = table.Column<decimal>(type: "decimal(8,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TBFuncionario", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TBPlanoCobranca",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Plano = table.Column<int>(type: "int", nullable: false),
                     ValorDiaria = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     PrecoKm = table.Column<decimal>(type: "decimal(8,2)", nullable: true),
@@ -30,10 +44,9 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 name: "TBGrupoAutomovel",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
-                    PlanoCobrancaId = table.Column<int>(type: "int", nullable: false)
+                    PlanoCobrancaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,9 +63,8 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 name: "Veiculo",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GrupoAutomovelId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    GrupoAutomovelId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,6 +90,9 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "TBFuncionario");
+
             migrationBuilder.DropTable(
                 name: "Veiculo");
 

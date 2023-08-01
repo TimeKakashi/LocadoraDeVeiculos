@@ -17,7 +17,7 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel
         {
             grupoAutomovelBuild.ToTable("TBGrupoAutomovel");
             grupoAutomovelBuild.Property(g => g.Nome).HasColumnType("varchar(100)").IsRequired();
-            grupoAutomovelBuild.Property(g => g.Id).IsRequired().ValueGeneratedOnAdd();
+            grupoAutomovelBuild.Property(g => g.Id).IsRequired().ValueGeneratedNever();
             grupoAutomovelBuild.HasOne(g => g.PlanoCobranca).WithMany().IsRequired().HasConstraintName("FK_TBGrupoAutomovel_TBPlanoCobranca");
         }
     }

@@ -15,7 +15,7 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloPlanoCobranca
         public void Configure(EntityTypeBuilder<PlanoCobranca> planoBuilder)
         {
             planoBuilder.ToTable("TBPlanoCobranca");
-            planoBuilder.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            planoBuilder.Property(p => p.Id).IsRequired().ValueGeneratedNever();
             planoBuilder.Property(p => p.ValorDiaria).HasColumnType("decimal(8,2)").IsRequired();
             planoBuilder.Property(p => p.PrecoKm).HasColumnType("decimal(8,2)").IsRequired(false);
             planoBuilder.Property(p => p.KmDisponivel).IsRequired(false);
