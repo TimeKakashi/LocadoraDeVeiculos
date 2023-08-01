@@ -112,7 +112,7 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
 
         private Funcionario ObterItemSelecionado()
         {
-            var id = tebalaFuncionario.ObterIdSelecionado();
+            var id = tabelaFuncionario.ObterIdSelecionado();
 
             return repositorioFuncionario.SelecionarPorId(id);
         }
