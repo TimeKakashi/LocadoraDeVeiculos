@@ -57,12 +57,7 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
         }
         public Guid ObterIdSelecionado()
         {
-            if (grid.SelectedRows.Count == 0)
-                return Guid.Parse("-1");
-
-            int id = Convert.ToInt32(grid.SelectedRows[0].Cells["id"].Value);
-
-            return Guid.Parse(id.ToString());
+            return grid.SelecionarId();
         }
     }
 }
