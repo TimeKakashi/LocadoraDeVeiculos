@@ -12,9 +12,13 @@ namespace LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel
 {
     public class GrupoAutomovel : EntidadeBase<GrupoAutomovel>
     {
+        public GrupoAutomovel(string nome)
+        {
+            Nome = nome;
+        }
+
         public string Nome { get; set; }
         public List<Veiculo> Veiculos { get; set; } = new List<Veiculo>();
-        public PlanoCobranca PlanoCobranca { get; set; }
         
         public override void Atualizar(GrupoAutomovel registro)
         {

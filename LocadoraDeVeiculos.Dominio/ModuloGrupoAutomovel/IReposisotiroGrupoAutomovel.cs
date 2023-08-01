@@ -9,6 +9,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel
 {
     public interface IReposisotiroGrupoAutomovel : IRepositorioBase<GrupoAutomovel>
     {
-        
+        GrupoAutomovel SelecionarPorNome(string nome);
     }
 }

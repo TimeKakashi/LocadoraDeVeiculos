@@ -14,6 +14,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca
         public decimal ValorDiaria { get; set; }
         public decimal? PrecoKm { get; set; }
         public int? KmDisponivel { get; set; }
+        public GrupoAutomovel GrupoAutomovel { get; set; }
 
         public PlanoCobranca()
         {

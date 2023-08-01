@@ -1,9 +1,13 @@
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
+using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.ModuloFuncionario;
+using LocadoraDeVeiculos.ModuloGrupoAutomovel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -12,7 +16,10 @@ namespace LocadoraDeVeiculos
     public partial class TelaPrincipal : Form
     {
         private static TelaPrincipal telaPrincipal;
+
         private IRepositorioFuncionario repositorioFuncionario;
+        private IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
+
         private ControladorBase controlador;
         public TelaPrincipal()
         {
@@ -41,6 +48,7 @@ namespace LocadoraDeVeiculos
             }
 
             repositorioFuncionario = new RepositorioFuncionarioOrm(dbContext);
+            reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovel(dbContext);
         }
         public static TelaPrincipal Instancia
         {
@@ -103,7 +111,13 @@ namespace LocadoraDeVeiculos
 
         private void gruposDeAutomóveisToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var validadorGrupo = new ValidadorGrupoAutomovel();
 
+            var servicoGrupo = new ServicoGrupoAutomovel(reposisotiroGrupoAutomovel, validadorGrupo);
+
+            controlador = new ControladorGrupoAutomovel(reposisotiroGrupoAutomovel, servicoGrupo);
+
+            ConfigurarTelaPrincipal(controlador);
         }
 
         private void planosDeCobrançaToolStripMenuItem_Click(object sender, EventArgs e)
