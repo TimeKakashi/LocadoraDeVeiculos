@@ -12,17 +12,16 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.ModuloFuncionario
 {
-    public class ControladorFuncionario : ControladorBase<Funcionario>
+    public class ControladorFuncionario : ControladorBase
     {
         private IRepositorioFuncionario repositorioFuncionario;
-        private TabelaFuncionario tebalaFuncionario;
         private ServicoFuncionario servicoFuncionario;
+        private TabelaFuncionario tabelaFuncionario;
 
 
-        public ControladorFuncionario(IRepositorioFuncionario repositorioFuncionario, TabelaFuncionario tebalaFuncionario, ServicoFuncionario servicoFuncionario)
+        public ControladorFuncionario(IRepositorioFuncionario repositorioFuncionario, ServicoFuncionario servicoFuncionario)
         {
             this.repositorioFuncionario = repositorioFuncionario;
-            this.tebalaFuncionario = tebalaFuncionario;
             this.servicoFuncionario = servicoFuncionario;
         }
 
@@ -103,16 +102,15 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
 
         public override UserControl ObterTabela()
         {
-            if (tebalaFuncionario == null)
-                return new TabelaFuncionario();
+            if (tabelaFuncionario == null)
+                tabelaFuncionario=  new TabelaFuncionario();
 
-            else
-                return tebalaFuncionario;
+                return tabelaFuncionario;
         }
 
         public override string ObterTipoCadastro() => "Cadastro de Funcionário";        
 
-        public override Funcionario ObterItemSelecionado()
+        private Funcionario ObterItemSelecionado()
         {
             var id = tebalaFuncionario.ObterIdSelecionado();
 
@@ -123,7 +121,7 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
         {
             var listaFuncionario = repositorioFuncionario.SelecionarTodos();
 
-            tebalaFuncionario.AtualizarRegistros(listaFuncionario);
+            tabelaFuncionario.AtualizarRegistros(listaFuncionario);
         }
     }
 }

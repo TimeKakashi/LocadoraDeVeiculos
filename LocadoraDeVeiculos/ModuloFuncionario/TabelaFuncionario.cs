@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
+﻿using LocadoraDeVeiculos.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 
 namespace LocadoraDeVeiculos.ModuloFuncionario
 {
@@ -7,6 +8,9 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
         public TabelaFuncionario()
         {
             InitializeComponent();
+            ConfigurarColunas();
+            ConfiguracaoGrid.ConfigurarGridSomenteLeitura(grid);
+            ConfiguracaoGrid.ConfigurarGridZebrado(grid);
         }
 
         private void ConfigurarColunas()
