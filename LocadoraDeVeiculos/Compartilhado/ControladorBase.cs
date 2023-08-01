@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Compartilhado
 {
-    public abstract class ControladorBase<T> where T : EntidadeBase<T>
+    public abstract class ControladorBase
     {
         public abstract string ToolTipInserir { get; }
         public abstract string ToolTipEditar { get; }
@@ -27,7 +27,6 @@ namespace LocadoraDeVeiculos.Compartilhado
         public virtual void GerarPdf() { }
         public abstract UserControl ObterTabela();
         public abstract string ObterTipoCadastro();
-        public abstract T ObterItemSelecionado();
         public abstract void CarregarItens();
     }
 }

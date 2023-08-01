@@ -16,25 +16,7 @@ namespace LocadoraDeVeiculos
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            var configuracao = new ConfigurationBuilder()
-               .SetBasePath(Directory.GetCurrentDirectory())
-               .AddJsonFile("appsettings.json")
-               .Build();
-
-            var connectionString = configuracao.GetConnectionString("SqlServer");
-
-            var optionsBuilder = new DbContextOptionsBuilder<LocadoraDeVeiculosDbContext>();
-
-            optionsBuilder.UseSqlServer(connectionString);
-
-            var dbContext = new LocadoraDeVeiculosDbContext(optionsBuilder.Options);
-
-            var migracoesPendentes = dbContext.Database.GetPendingMigrations();
-
-            if (migracoesPendentes.Count() > 0)
-            {
-                dbContext.Database.Migrate();
-            }
+           
 
             Application.Run(new TelaPrincipal());
         }

@@ -41,9 +41,10 @@
             cuponsEParceirosToolStripMenuItem = new ToolStripMenuItem();
             preçosToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
-            toolStrip1 = new ToolStrip();
+            panelRegistros = new Panel();
             statusStrip1 = new StatusStrip();
-            btnCadastrar = new ToolStripButton();
+            toolStrip1 = new ToolStrip();
+            btnInserir = new ToolStripButton();
             btnEditar = new ToolStripButton();
             btnExcluir = new ToolStripButton();
             btnFiltrar = new ToolStripButton();
@@ -75,6 +76,7 @@
             funcionáriosToolStripMenuItem.Name = "funcionáriosToolStripMenuItem";
             funcionáriosToolStripMenuItem.Size = new Size(142, 22);
             funcionáriosToolStripMenuItem.Text = "Funcionários";
+            funcionáriosToolStripMenuItem.Click += funcionáriosToolStripMenuItem_Click;
             // 
             // automóveisToolStripMenuItem
             // 
@@ -136,6 +138,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(panelRegistros);
             panel1.Controls.Add(statusStrip1);
             panel1.Controls.Add(toolStrip1);
             panel1.Dock = DockStyle.Fill;
@@ -144,14 +147,13 @@
             panel1.Size = new Size(716, 344);
             panel1.TabIndex = 1;
             // 
-            // toolStrip1
+            // panelRegistros
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnCadastrar, btnEditar, btnExcluir, btnFiltrar, toolStripSeparator1, toolStripLabel1 });
-            toolStrip1.Location = new Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(716, 31);
-            toolStrip1.TabIndex = 0;
-            toolStrip1.Text = "toolStrip1";
+            panelRegistros.Dock = DockStyle.Fill;
+            panelRegistros.Location = new Point(0, 31);
+            panelRegistros.Name = "panelRegistros";
+            panelRegistros.Size = new Size(716, 291);
+            panelRegistros.TabIndex = 2;
             // 
             // statusStrip1
             // 
@@ -161,15 +163,25 @@
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
-            // btnCadastrar
+            // toolStrip1
             // 
-            btnCadastrar.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnCadastrar.Image = Properties.Resources.add_circle_FILL0_wght400_GRAD0_opsz24__1_;
-            btnCadastrar.ImageScaling = ToolStripItemImageScaling.None;
-            btnCadastrar.ImageTransparentColor = Color.Magenta;
-            btnCadastrar.Name = "btnCadastrar";
-            btnCadastrar.Size = new Size(28, 28);
-            btnCadastrar.Text = "toolStripButton1";
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, btnFiltrar, toolStripSeparator1, toolStripLabel1 });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(716, 31);
+            toolStrip1.TabIndex = 0;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // btnInserir
+            // 
+            btnInserir.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnInserir.Image = Properties.Resources.add_circle_FILL0_wght400_GRAD0_opsz24__1_;
+            btnInserir.ImageScaling = ToolStripItemImageScaling.None;
+            btnInserir.ImageTransparentColor = Color.Magenta;
+            btnInserir.Name = "btnInserir";
+            btnInserir.Size = new Size(28, 28);
+            btnInserir.Text = "toolStripButton1";
+            btnInserir.Click += btnInserir_Click;
             // 
             // btnEditar
             // 
@@ -222,7 +234,6 @@
             MainMenuStrip = menuStrip1;
             Name = "TelaPrincipal";
             Text = "Locadora de Veiculos";
-            Load += TelaPrincipal_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             panel1.ResumeLayout(false);
@@ -250,11 +261,12 @@
         private Panel panel1;
         private StatusStrip statusStrip1;
         private ToolStrip toolStrip1;
-        private ToolStripButton btnCadastrar;
+        private ToolStripButton btnInserir;
         private ToolStripButton btnEditar;
         private ToolStripButton btnExcluir;
         private ToolStripButton btnFiltrar;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripLabel toolStripLabel1;
+        private Panel panelRegistros;
     }
 }
