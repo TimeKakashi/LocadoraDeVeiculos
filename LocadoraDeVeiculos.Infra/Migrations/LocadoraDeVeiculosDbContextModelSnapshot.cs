@@ -24,14 +24,12 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloAutomovel.Veiculo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("GrupoAutomovelId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("GrupoAutomovelId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -42,11 +40,8 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloFuncionario.Funcionario", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataEntrada")
                         .HasColumnType("datetime2");
@@ -65,18 +60,15 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.Property<int>("PlanoCobrancaId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PlanoCobrancaId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -87,11 +79,8 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca.PlanoCobranca", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("KmDisponivel")
                         .HasColumnType("int");

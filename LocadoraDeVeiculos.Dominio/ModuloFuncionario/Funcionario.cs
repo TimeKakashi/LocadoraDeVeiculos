@@ -25,7 +25,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloFuncionario
             this.DataEntrada = data;
         }
 
-        public Funcionario(int id, string nome, decimal salario, DateTime data) : this(nome, salario, data)
+        public Funcionario(Guid id, string nome, decimal salario, DateTime data) : this(nome, salario, data)
         {
             this.Id = id;
         }

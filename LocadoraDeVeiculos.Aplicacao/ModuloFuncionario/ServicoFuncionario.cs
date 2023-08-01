@@ -1,12 +1,13 @@
 ﻿using FluentResults;
 using FluentValidation.Results;
+using LocadoraDeVeiculos.Aplicacao.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using Serilog;
 using System.Data.SqlClient;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
 {
-    public class ServicoFuncionario
+    public class ServicoFuncionario : ServicoBase<Funcionario>
     {
         private IRepositorioFuncionario repositorioFuncionario;
         private IValidadorFuncionario validadorFuncionario;
@@ -17,11 +18,11 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
             this.validadorFuncionario = validadorFuncionario;
         }
 
-        public Result Inserir(Funcionario funcionario)
+        public override Result Inserir(Funcionario funcionario)
         {
             Log.Debug("Tentando Inserir um funcionario");
 
-            List<string> erros = ValidarFuncionario(funcionario);
+            List<string> erros = ValidarRegistro(funcionario);
 
             if(erros.Count > 0)
                 return Result.Fail(erros);
@@ -44,11 +45,11 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
             }
         }
 
-        public Result Editar(Funcionario funcionario)
+        public override Result Editar(Funcionario funcionario)
         {
             Log.Debug("Tentando editar funcionario...{@d}", funcionario);
 
-            List<string> erros = ValidarFuncionario(funcionario);
+            List<string> erros = ValidarRegistro(funcionario);
 
             if (erros.Count() > 0)
                 return Result.Fail(erros);
@@ -71,7 +72,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
             }
         }
 
-        public Result Excluir(Funcionario funcionario)
+        public override Result Excluir(Funcionario funcionario)
         {
             Log.Debug("Tentando excluir disciplina...{@d}", funcionario);
 
@@ -111,7 +112,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
             }
         }
 
-        private List<string> ValidarFuncionario(Funcionario funcionario)
+        protected override List<string> ValidarRegistro(Funcionario funcionario)
         {
             ValidationResult resultValidation = validadorFuncionario.Validate(funcionario);
 
@@ -129,7 +130,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
             return erros;
         }
 
-        private bool NomeDuplicado(Funcionario funcionario)
+        protected override bool NomeDuplicado(Funcionario funcionario)
         {
             Funcionario funcionarioEncontrado = repositorioFuncionario.SelecionarPorNome(funcionario.Nome);
 

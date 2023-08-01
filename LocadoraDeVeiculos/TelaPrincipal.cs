@@ -96,15 +96,82 @@ namespace LocadoraDeVeiculos
             ConfigurarTelaPrincipal(controlador);
         }
 
+        private void automóveisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gruposDeAutomóveisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void planosDeCobrançaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void condutoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aluguéisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void taxasEServiçosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cuponsEParceirosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void preçosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnInserir_Click(object sender, EventArgs e)
         {
-            if(controlador == null)
+            if (controlador == null)
             {
                 MessageBox.Show("Selecione uma area primerio!");
                 return;
             }
 
             controlador.Inserir();
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            if (controlador == null)
+            {
+                MessageBox.Show("Selecione uma area primerio!");
+                return;
+            }
+
+            controlador.Editar();
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if (controlador == null)
+            {
+                MessageBox.Show("Selecione uma area primerio!");
+                return;
+            }
+
+            controlador.Excluir();
         }
     }
 }
