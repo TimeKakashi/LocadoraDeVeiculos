@@ -21,6 +21,11 @@ namespace LocadoraDeVeiculos.ModuloCliente
             this.repositorioCliente = repositorioCliente;
             this.listagemClienteControl = listagemClienteControl;
             this.servicoCliente = servicoCliente;
+
+            if (listagemClienteControl == null)
+                listagemClienteControl = new TabelaCliente();
+
+            CarregarItens();
         }
 
         public override string ToolTipInserir => "Inserir Cliente";
@@ -95,9 +100,9 @@ namespace LocadoraDeVeiculos.ModuloCliente
         public override UserControl ObterTabela()
         {
             if (listagemClienteControl == null)
-                return new TabelaCliente();
-            else
-                return listagemClienteControl;
+                listagemClienteControl = new TabelaCliente();
+            
+            return listagemClienteControl;
         }
 
         public override string ObterTipoCadastro() => "Tela Cliente";
@@ -113,6 +118,7 @@ namespace LocadoraDeVeiculos.ModuloCliente
         public override void CarregarItens()
         {
             var listaClientes = repositorioCliente.SelecionarTodos();
+
             listagemClienteControl.AtualizarRegistros(listaClientes);
         }
     }
