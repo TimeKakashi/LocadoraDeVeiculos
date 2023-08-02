@@ -1,6 +1,6 @@
 ﻿namespace LocadoraDeVeiculos.ModuloCliente
 {
-    partial class ListagemClienteControl
+    partial class TabelaCliente
     {
         /// <summary> 
         /// Variável de designer necessária.

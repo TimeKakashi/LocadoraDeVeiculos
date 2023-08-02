@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.ModuloCliente
 {
-    public class ControladorCliente : ControladorBase<Cliente>
+    public class ControladorCliente : ControladorBase
     {
         private IRepositorioCliente repositorioCliente;
-        private ListagemClienteControl listagemClienteControl;
+        private TabelaCliente listagemClienteControl;
         private ServicoCliente servicoCliente;
 
-        public ControladorCliente(IRepositorioCliente repositorioCliente, ListagemClienteControl listagemClienteControl, ServicoCliente servicoCliente)
+        public ControladorCliente(IRepositorioCliente repositorioCliente, TabelaCliente listagemClienteControl, ServicoCliente servicoCliente)
         {
             this.repositorioCliente = repositorioCliente;
             this.listagemClienteControl = listagemClienteControl;
@@ -95,19 +95,22 @@ namespace LocadoraDeVeiculos.ModuloCliente
         public override UserControl ObterTabela()
         {
             if (listagemClienteControl == null)
-                return new ListagemClienteControl();
+                return new TabelaCliente();
             else
                 return listagemClienteControl;
         }
 
         public override string ObterTipoCadastro() => "Tela Cliente";
+
         public override Cliente ObterItemSelecionado()
         {
-            throw new NotImplementedException();
+            return listagemClienteControl.ObterClienteSelecionado();
         }
 
         public override void CarregarItens()
         {
-            throw new NotImplementedException();
+            var listaClientes = repositorioCliente.SelecionarTodos();
+            listagemClienteControl.AtualizarRegistros(listaClientes);
         }
-    } }
+    }
+}

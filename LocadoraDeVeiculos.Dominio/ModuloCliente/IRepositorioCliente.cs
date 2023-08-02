@@ -14,8 +14,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
        
         Cliente SelecionarPorCPF(string cpf);
         Cliente SelecionarPorCNPJ(string cnpj);
-     
-       
+        Cliente SelecionarPorId(int id);
     }
 
 }
