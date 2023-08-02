@@ -14,7 +14,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloParceiro
             RuleFor(x => x.Nome)
                 .NotEmpty()
                 .NotNull()
-                .MinimumLength(3);
+                .MinimumLength(4);
         }
     }
 }

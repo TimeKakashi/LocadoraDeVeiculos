@@ -40,9 +40,11 @@
             taxasEServiçosToolStripMenuItem = new ToolStripMenuItem();
             cuponsEParceirosToolStripMenuItem = new ToolStripMenuItem();
             preçosToolStripMenuItem = new ToolStripMenuItem();
+            parceiroToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
             panelRegistros = new Panel();
             statusStrip1 = new StatusStrip();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
             toolStrip1 = new ToolStrip();
             btnInserir = new ToolStripButton();
             btnEditar = new ToolStripButton();
@@ -50,7 +52,6 @@
             btnFiltrar = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripLabel1 = new ToolStripLabel();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -76,7 +77,7 @@
             // funcionáriosToolStripMenuItem
             // 
             funcionáriosToolStripMenuItem.Name = "funcionáriosToolStripMenuItem";
-            funcionáriosToolStripMenuItem.Size = new Size(142, 22);
+            funcionáriosToolStripMenuItem.Size = new Size(180, 22);
             funcionáriosToolStripMenuItem.Text = "Funcionários";
             funcionáriosToolStripMenuItem.Click += funcionáriosToolStripMenuItem_Click;
             // 
@@ -84,7 +85,7 @@
             // 
             automóveisToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gruposDeAutomóveisToolStripMenuItem });
             automóveisToolStripMenuItem.Name = "automóveisToolStripMenuItem";
-            automóveisToolStripMenuItem.Size = new Size(142, 22);
+            automóveisToolStripMenuItem.Size = new Size(180, 22);
             automóveisToolStripMenuItem.Text = "Automóveis";
             automóveisToolStripMenuItem.Click += automóveisToolStripMenuItem_Click;
             // 
@@ -107,7 +108,7 @@
             // 
             clientesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { condutoresToolStripMenuItem });
             clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            clientesToolStripMenuItem.Size = new Size(142, 22);
+            clientesToolStripMenuItem.Size = new Size(180, 22);
             clientesToolStripMenuItem.Text = "Clientes";
             clientesToolStripMenuItem.Click += clientesToolStripMenuItem_Click;
             // 
@@ -120,36 +121,39 @@
             // 
             // aluguéisToolStripMenuItem
             // 
-            aluguéisToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { taxasEServiçosToolStripMenuItem, cuponsEParceirosToolStripMenuItem, preçosToolStripMenuItem});
+            aluguéisToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { taxasEServiçosToolStripMenuItem, cuponsEParceirosToolStripMenuItem, preçosToolStripMenuItem, parceiroToolStripMenuItem });
             aluguéisToolStripMenuItem.Name = "aluguéisToolStripMenuItem";
-            aluguéisToolStripMenuItem.Size = new Size(142, 22);
+            aluguéisToolStripMenuItem.Size = new Size(180, 22);
             aluguéisToolStripMenuItem.Text = "Aluguéis";
             aluguéisToolStripMenuItem.Click += aluguéisToolStripMenuItem_Click;
             // 
             // taxasEServiçosToolStripMenuItem
             // 
             taxasEServiçosToolStripMenuItem.Name = "taxasEServiçosToolStripMenuItem";
-            taxasEServiçosToolStripMenuItem.Size = new Size(175, 22);
+            taxasEServiçosToolStripMenuItem.Size = new Size(180, 22);
             taxasEServiçosToolStripMenuItem.Text = "Taxas e Serviços";
             taxasEServiçosToolStripMenuItem.Click += taxasEServiçosToolStripMenuItem_Click;
             // 
             // cuponsEParceirosToolStripMenuItem
             // 
             cuponsEParceirosToolStripMenuItem.Name = "cuponsEParceirosToolStripMenuItem";
-            cuponsEParceirosToolStripMenuItem.Size = new Size(175, 22);
-            cuponsEParceirosToolStripMenuItem.Text = "Cupons e Parceiros";
+            cuponsEParceirosToolStripMenuItem.Size = new Size(180, 22);
+            cuponsEParceirosToolStripMenuItem.Text = "Cupom";
             cuponsEParceirosToolStripMenuItem.Click += cuponsEParceirosToolStripMenuItem_Click;
             // 
             // preçosToolStripMenuItem
             // 
             preçosToolStripMenuItem.Name = "preçosToolStripMenuItem";
-            preçosToolStripMenuItem.Size = new Size(175, 22);
+            preçosToolStripMenuItem.Size = new Size(180, 22);
             preçosToolStripMenuItem.Text = "Preços";
             preçosToolStripMenuItem.Click += preçosToolStripMenuItem_Click;
             // 
             // parceiroToolStripMenuItem
             // 
-            
+            parceiroToolStripMenuItem.Name = "parceiroToolStripMenuItem";
+            parceiroToolStripMenuItem.Size = new Size(180, 22);
+            parceiroToolStripMenuItem.Text = "Parceiro";
+            parceiroToolStripMenuItem.Click += parceiroToolStripMenuItem_Click;
             // 
             // panel1
             // 
@@ -178,6 +182,12 @@
             statusStrip1.Size = new Size(716, 22);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(33, 17);
+            toolStripStatusLabel1.Text = "Erros";
             // 
             // toolStrip1
             // 
@@ -242,12 +252,6 @@
             toolStripLabel1.Size = new Size(118, 28);
             toolStripLabel1.Text = "Locadora de Veiculos";
             // 
-            // toolStripStatusLabel1
-            // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(33, 17);
-            toolStripStatusLabel1.Text = "Erros";
-            // 
             // TelaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -295,5 +299,6 @@
         private ToolStripLabel toolStripLabel1;
         private Panel panelRegistros;
         private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripMenuItem parceiroToolStripMenuItem;
     }
 }

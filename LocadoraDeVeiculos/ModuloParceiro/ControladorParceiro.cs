@@ -92,6 +92,8 @@ namespace LocadoraDeVeiculos.ModuloParceiro
 
             telaParceiroForm.onGravarRegistro += servicoParceiro.Inserir;
 
+            telaParceiroForm.ConfigurarParceiro(new Parceiro());
+
             DialogResult result = telaParceiroForm.ShowDialog();
 
             if (result == DialogResult.OK)

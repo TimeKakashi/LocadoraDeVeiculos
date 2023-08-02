@@ -1,20 +1,24 @@
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
+using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
 using LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
+using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.ModuloCliente;
 using LocadoraDeVeiculos.ModuloFuncionario;
 using LocadoraDeVeiculos.ModuloGrupoAutomovel;
+using LocadoraDeVeiculos.ModuloParceiro;
 using LocadoraDeVeiculos.ModuloPlanoCobranca;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +32,7 @@ namespace LocadoraDeVeiculos
         private IRepositorioFuncionario repositorioFuncionario;
         private IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
         private IRepositorioPlanoCobranca repositorioPlanoCobranca;
+        private IRepositorioParceiro repositorioParceiro;
         private IRepositorioCliente repositorioCliente;
         private TabelaCliente TabelaCliente;
 
@@ -63,6 +68,7 @@ namespace LocadoraDeVeiculos
             reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovel(dbContext);
             repositorioPlanoCobranca = new RepositorioPlanoCobrancaOrm(dbContext);
             repositorioCliente = new RepositorioClienteOrm(dbContext);
+            repositorioParceiro = new RepositorioParceiroOrm(dbContext);
         }
         public static TelaPrincipal Instancia
         {
@@ -155,6 +161,16 @@ namespace LocadoraDeVeiculos
 
             ConfigurarTelaPrincipal(controlador);
         }
+        private void parceiroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var validadorParceiro = new ValidadorParceiro();
+
+            var servicoParceiro = new ServicoParceiro(repositorioParceiro, validadorParceiro);
+
+            controlador = new ControladorParceiro(repositorioParceiro, servicoParceiro);
+
+            ConfigurarTelaPrincipal(controlador);
+        }
 
 
         private void condutoresToolStripMenuItem_Click(object sender, EventArgs e)
@@ -219,5 +235,7 @@ namespace LocadoraDeVeiculos
         {
             toolStripLabel1.Text = erro;
         }
+
+        
     }
 }
