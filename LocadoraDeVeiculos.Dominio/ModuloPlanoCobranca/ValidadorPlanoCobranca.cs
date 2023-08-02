@@ -13,7 +13,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca
         public ValidadorPlanoCobranca()
         {
             RuleFor(p => p.ValorDiaria).NotEmpty().NotNull().GreaterThan(0);
-            RuleFor(p => p.Plano).NotNull().NotEmpty();
+            RuleFor(p => p.Plano).NotNull();
             RuleFor(p => p.PrecoKm).Custom((precoKm, context) =>
             {
                 if (context.InstanceToValidate.Plano == planoCobranca.Diaria && precoKm == null)
@@ -26,6 +26,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca
                     context.AddFailure("Valor Plano", "Valor do km não pode ser vazio, eh necessario passar um valor pora cada km extra");
                 }
             });
+
             RuleFor(p => p.KmDisponivel).Custom((KmDisponivel, context) =>
             {
                 if (context.InstanceToValidate.Plano == planoCobranca.Controlado && KmDisponivel == null)

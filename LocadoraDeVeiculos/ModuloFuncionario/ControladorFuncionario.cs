@@ -46,6 +46,8 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
 
             telaFuncionario.onGravarRegistro += servicoFuncionario.Inserir;
 
+            telaFuncionario.ArrumaTela(new Funcionario(), true);
+
             DialogResult result = telaFuncionario.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -54,19 +56,19 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
 
         public override void Editar()
         {
-            Funcionario materia = ObterItemSelecionado();
+            Funcionario funcionario = ObterItemSelecionado();
 
-            if (materia == null)
+            if (funcionario == null)
             {
                 MessageBox.Show("Selecione um funcionário primeiro!", "Edição de funcionário", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            telaFuncionarioForm telaMateria = new telaFuncionarioForm();
-            telaMateria.ArrumaTela(materia);
-            telaMateria.onGravarRegistro += servicoFuncionario.Editar;
+            telaFuncionarioForm telaFuncionario = new telaFuncionarioForm();
+            telaFuncionario.ArrumaTela(funcionario);
+            telaFuncionario.onGravarRegistro += servicoFuncionario.Editar;
 
-            DialogResult result = telaMateria.ShowDialog();
+            DialogResult result = telaFuncionario.ShowDialog();
 
             if (result == DialogResult.OK)
                 CarregarItens();

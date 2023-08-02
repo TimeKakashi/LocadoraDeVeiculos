@@ -12,17 +12,32 @@ namespace LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel
 {
     public class GrupoAutomovel : EntidadeBase<GrupoAutomovel>
     {
+        public string Nome { get; set; }
+        public List<Veiculo> Veiculos { get; set; } = new List<Veiculo>();
         public GrupoAutomovel(string nome)
         {
             Nome = nome;
         }
-
-        public string Nome { get; set; }
-        public List<Veiculo> Veiculos { get; set; } = new List<Veiculo>();
-        
+        public GrupoAutomovel()
+        {
+            
+        }
         public override void Atualizar(GrupoAutomovel registro)
         {
             throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return this.Nome;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is GrupoAutomovel grupo &&
+                   Id == grupo.Id &&
+                   Nome == grupo.Nome;
+                   
         }
     }
 }

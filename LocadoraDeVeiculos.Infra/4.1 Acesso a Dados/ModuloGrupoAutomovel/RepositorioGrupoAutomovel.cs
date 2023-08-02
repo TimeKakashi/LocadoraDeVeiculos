@@ -13,5 +13,15 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel
         {
             return registros.FirstOrDefault(x => x.Nome == nome);
         }
+
+        public override void Editar(GrupoAutomovel registro)
+        {
+            GrupoAutomovel grupoEncontrado = registros.FirstOrDefault(x => x.Id == registro.Id);
+
+            grupoEncontrado.Veiculos = registro.Veiculos;
+            grupoEncontrado.Nome = registro.Nome;
+
+            dbContext.SaveChanges();
+        }
     }
 }

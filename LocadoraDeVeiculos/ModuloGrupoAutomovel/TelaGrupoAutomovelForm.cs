@@ -14,16 +14,19 @@ namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
         public event GravarRegistroDelegate<GrupoAutomovel> onGravarRegistro;
         private GrupoAutomovel grupoAutomovel;
 
-        public void ArrumaTela(GrupoAutomovel grupo)
+        public void ArrumaTela(GrupoAutomovel grupo, bool insercao = false)
         {
-            txNome.Text = grupo.Nome;
+            this.grupoAutomovel = grupo;
+
+            if(!insercao)
+                txNome.Text = grupo.Nome;
         }
 
         public GrupoAutomovel ObterGrupo()
         {
-            string nome = txNome.Text;
+           grupoAutomovel.Nome = txNome.Text;
 
-            return new GrupoAutomovel(nome);
+            return grupoAutomovel;
         }
 
         private void btnCadastarr_Click(object sender, EventArgs e)

@@ -1,4 +1,5 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,18 @@ namespace LocadoraDeVeiculos.Dominio.ModuloFuncionario
             this.Nome = registro.Nome;
             this.DataEntrada = registro.DataEntrada;
             this.Salario = registro.Salario;
+        }
+
+        public override string ToString()
+        {
+            return this.Nome;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Funcionario funcionario &&
+                   Id == funcionario.Id &&
+                   Nome == funcionario.Nome;
         }
     }
 }

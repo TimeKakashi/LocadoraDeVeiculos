@@ -19,38 +19,38 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado
             registros = dbContext.Set<T>();
         }
 
-        public void Inserir(T novoRegistro)
+        public virtual void Inserir(T novoRegistro)
         {
             registros.Add(novoRegistro);
 
             dbContext.SaveChanges();
         }
 
-        public void Editar(T registro)
+        public virtual void Editar(T registro)
         {
             registros.Update(registro);
 
             dbContext.SaveChanges();
         }
 
-        public void Excluir(T registro)
+        public virtual void Excluir(T registro)
         {
             registros.Remove(registro);
 
             dbContext.SaveChanges();
         }
 
-        public bool Existe(T registro)
+        public virtual bool Existe(T registro)
         {
             return registros.Contains(registro);
         }
 
-        public T SelecionarPorId(Guid id)
+        public virtual T SelecionarPorId(Guid id)
         {
             return registros.Find(id);
         }
 
-        public List<T> SelecionarTodos()
+        public virtual List<T> SelecionarTodos()
         {
             return registros.ToList();
         }
