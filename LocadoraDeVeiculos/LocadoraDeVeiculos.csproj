@@ -13,7 +13,6 @@
     <Folder Include="ModuloCondutor\" />
     <Folder Include="ModuloTaxaServico\" />
     <Folder Include="ModuloCupom\" />
-    <Folder Include="ModuloParceiro\" />
   </ItemGroup>
 
   <ItemGroup>

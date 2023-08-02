@@ -54,5 +54,6 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado
         {
             return registros.ToList();
         }
+
     }
 }

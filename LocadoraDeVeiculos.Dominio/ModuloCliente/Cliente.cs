@@ -17,7 +17,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
 
         public TipoCliente Tipo { get; private set; }
 
-        // Atributos comuns a Pessoa Física e Jurídica
         public string Nome { get; set; }
         public string Telefone { get; set; }
         public string Bairro { get; set; }
@@ -27,10 +26,10 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
         public string Estado { get; set; }
         public string Email { get; set; }
 
-        // Atributos específicos para Pessoa Física
+       
         public string CPF { get; set; }
 
-        // Atributos específicos para Pessoa Jurídica
+       
         public string CNPJ { get; set; }
         public Cliente()
         {
@@ -65,8 +64,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
 
         public override void Atualizar(Cliente registro)
         {
-            // Implementação do método Atualizar
-            // ...
+           
         }
     }
 
