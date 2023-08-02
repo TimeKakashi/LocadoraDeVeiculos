@@ -40,7 +40,6 @@
             taxasEServiçosToolStripMenuItem = new ToolStripMenuItem();
             cuponsEParceirosToolStripMenuItem = new ToolStripMenuItem();
             preçosToolStripMenuItem = new ToolStripMenuItem();
-            parceiroToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
             panelRegistros = new Panel();
             statusStrip1 = new StatusStrip();
@@ -121,7 +120,7 @@
             // 
             // aluguéisToolStripMenuItem
             // 
-            aluguéisToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { taxasEServiçosToolStripMenuItem, cuponsEParceirosToolStripMenuItem, preçosToolStripMenuItem, parceiroToolStripMenuItem });
+            aluguéisToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { taxasEServiçosToolStripMenuItem, cuponsEParceirosToolStripMenuItem, preçosToolStripMenuItem});
             aluguéisToolStripMenuItem.Name = "aluguéisToolStripMenuItem";
             aluguéisToolStripMenuItem.Size = new Size(142, 22);
             aluguéisToolStripMenuItem.Text = "Aluguéis";
@@ -150,10 +149,7 @@
             // 
             // parceiroToolStripMenuItem
             // 
-            parceiroToolStripMenuItem.Name = "parceiroToolStripMenuItem";
-            parceiroToolStripMenuItem.Size = new Size(180, 22);
-            parceiroToolStripMenuItem.Text = "Parceiro";
-            parceiroToolStripMenuItem.Click += parceiroToolStripMenuItem_Click;
+            
             // 
             // panel1
             // 

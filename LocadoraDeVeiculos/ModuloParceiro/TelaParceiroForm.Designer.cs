@@ -28,27 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            button1 = new Button();
+            txtNome = new TextBox();
+            btnGravar = new Button();
             button2 = new Button();
             label1 = new Label();
             SuspendLayout();
             // 
-            // textBox1
+            // txtNome
             // 
-            textBox1.Location = new Point(100, 53);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(206, 23);
-            textBox1.TabIndex = 0;
+            txtNome.Location = new Point(100, 53);
+            txtNome.Name = "txtNome";
+            txtNome.Size = new Size(206, 23);
+            txtNome.TabIndex = 0;
             // 
-            // button1
+            // btnGravar
             // 
-            button1.Location = new Point(194, 117);
-            button1.Name = "button1";
-            button1.Size = new Size(85, 34);
-            button1.TabIndex = 1;
-            button1.Text = "Gravar";
-            button1.UseVisualStyleBackColor = true;
+            btnGravar.Location = new Point(194, 117);
+            btnGravar.Name = "btnGravar";
+            btnGravar.Size = new Size(85, 34);
+            btnGravar.TabIndex = 1;
+            btnGravar.Text = "Gravar";
+            btnGravar.UseVisualStyleBackColor = true;
+            btnGravar.Click += button1_Click;
             // 
             // button2
             // 
@@ -69,19 +70,19 @@
             label1.TabIndex = 3;
             label1.Text = "Nome :";
             // 
-            // TelaParceiro
+            // TelaParceiroForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(372, 175);
             Controls.Add(label1);
             Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(textBox1);
+            Controls.Add(btnGravar);
+            Controls.Add(txtNome);
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
-            Name = "TelaParceiro";
+            Name = "TelaParceiroForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "TelaParceiro";
             ResumeLayout(false);
@@ -90,8 +91,8 @@
 
         #endregion
 
-        private TextBox textBox1;
-        private Button button1;
+        private TextBox txtNome;
+        private Button btnGravar;
         private Button button2;
         private Label label1;
     }
