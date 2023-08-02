@@ -1,4 +1,4 @@
-# LocadoraDeVeiculos
+# Locadora De Veiculos
 O sistema visa facilitar o gerenciamento das operações de uma locadora de automóveis, abrangendo desde o cadastro de funcionários, grupos de automóveis, veículos e clientes até a configuração de preços, aluguéis e devoluções.
 
 O sistema calcula o valor dos aluguéis considerando diversos fatores, como tipo do veículo, plano escolhido e taxas adicionais.
