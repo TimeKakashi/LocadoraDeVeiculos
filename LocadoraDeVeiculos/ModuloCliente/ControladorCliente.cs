@@ -23,7 +23,7 @@ namespace LocadoraDeVeiculos.ModuloCliente
             this.servicoCliente = servicoCliente;
 
             if (listagemClienteControl == null)
-                listagemClienteControl = new TabelaCliente();
+                this.listagemClienteControl = new TabelaCliente();
 
             CarregarItens();
         }
