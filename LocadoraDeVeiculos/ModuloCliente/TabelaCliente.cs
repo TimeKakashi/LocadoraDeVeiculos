@@ -70,17 +70,9 @@ namespace LocadoraDeVeiculos.ModuloCliente
                               );
             }
         }
-
-        public int ObterIdSelecionado()
+        public Guid ObterIdSelecionado()
         {
-            int rowIndex = grid.CurrentRow.Index;
-
-            if (rowIndex >= 0 && rowIndex < grid.Rows.Count)
-            {
-                return Convert.ToInt32(grid.Rows[rowIndex].Cells["id"].Value);
-            }
-
-            return -1;
+            return grid.SelecionarId();
         }
 
         internal Cliente ObterClienteSelecionado()

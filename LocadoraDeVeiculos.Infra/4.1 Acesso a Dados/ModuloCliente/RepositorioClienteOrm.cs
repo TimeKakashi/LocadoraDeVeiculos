@@ -25,15 +25,10 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente
             return registros.FirstOrDefault(x => x.CNPJ == cnpj);
         }
 
-        
+
         public Cliente SelecionarPorNome(string nome)
         {
             return registros.FirstOrDefault(x => x.Nome == nome);
-        }
-
-        public Cliente SelecionarPorId(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 

@@ -32,6 +32,10 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
 
         // Atributos específicos para Pessoa Jurídica
         public string CNPJ { get; set; }
+        public Cliente()
+        {
+            
+        }
 
         public Cliente(TipoCliente tipo, string nome, string telefone, string email, string bairro, string cidade, string estado, string numero, string rua, string cpfOuCnpj)
         {
