@@ -40,6 +40,7 @@
             taxasEServiçosToolStripMenuItem = new ToolStripMenuItem();
             cuponsEParceirosToolStripMenuItem = new ToolStripMenuItem();
             preçosToolStripMenuItem = new ToolStripMenuItem();
+            parceiroToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
             panelRegistros = new Panel();
             statusStrip1 = new StatusStrip();
@@ -118,7 +119,7 @@
             // 
             // aluguéisToolStripMenuItem
             // 
-            aluguéisToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { taxasEServiçosToolStripMenuItem, cuponsEParceirosToolStripMenuItem, preçosToolStripMenuItem });
+            aluguéisToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { taxasEServiçosToolStripMenuItem, cuponsEParceirosToolStripMenuItem, preçosToolStripMenuItem, parceiroToolStripMenuItem });
             aluguéisToolStripMenuItem.Name = "aluguéisToolStripMenuItem";
             aluguéisToolStripMenuItem.Size = new Size(180, 22);
             aluguéisToolStripMenuItem.Text = "Aluguéis";
@@ -135,7 +136,7 @@
             // 
             cuponsEParceirosToolStripMenuItem.Name = "cuponsEParceirosToolStripMenuItem";
             cuponsEParceirosToolStripMenuItem.Size = new Size(180, 22);
-            cuponsEParceirosToolStripMenuItem.Text = "Cupons e Parceiros";
+            cuponsEParceirosToolStripMenuItem.Text = "Cupom";
             cuponsEParceirosToolStripMenuItem.Click += cuponsEParceirosToolStripMenuItem_Click;
             // 
             // preçosToolStripMenuItem
@@ -144,6 +145,13 @@
             preçosToolStripMenuItem.Size = new Size(180, 22);
             preçosToolStripMenuItem.Text = "Preços";
             preçosToolStripMenuItem.Click += preçosToolStripMenuItem_Click;
+            // 
+            // parceiroToolStripMenuItem
+            // 
+            parceiroToolStripMenuItem.Name = "parceiroToolStripMenuItem";
+            parceiroToolStripMenuItem.Size = new Size(180, 22);
+            parceiroToolStripMenuItem.Text = "Parceiro";
+            parceiroToolStripMenuItem.Click += parceiroToolStripMenuItem_Click;
             // 
             // panel1
             // 
@@ -279,5 +287,6 @@
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripLabel toolStripLabel1;
         private Panel panelRegistros;
+        private ToolStripMenuItem parceiroToolStripMenuItem;
     }
 }

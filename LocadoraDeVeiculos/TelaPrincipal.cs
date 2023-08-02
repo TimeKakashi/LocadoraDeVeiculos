@@ -1,9 +1,13 @@
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
+using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
+using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeVeiculos.ModuloFuncionario;
+using LocadoraDeVeiculos.ModuloParceiro;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -13,6 +17,7 @@ namespace LocadoraDeVeiculos
     {
         private static TelaPrincipal telaPrincipal;
         private IRepositorioFuncionario repositorioFuncionario;
+        private IRepositorioParceiro repositorioParceiro;
         private ControladorBase controlador;
         public TelaPrincipal()
         {
@@ -41,6 +46,10 @@ namespace LocadoraDeVeiculos
             }
 
             repositorioFuncionario = new RepositorioFuncionarioOrm(dbContext);
+
+            repositorioParceiro = new RepositorioParceiroOrm(dbContext);
+
+
         }
         public static TelaPrincipal Instancia
         {
@@ -172,6 +181,17 @@ namespace LocadoraDeVeiculos
             }
 
             controlador.Excluir();
+        }
+
+        private void parceiroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var validadorParceiro = new ValidadorParceiro();
+
+            var servicoParceiro = new ServicoParceiro(repositorioParceiro, validadorParceiro);
+
+            controlador = new ControladorParceiro(repositorioParceiro, servicoParceiro);
+
+            ConfigurarTelaPrincipal(controlador);
         }
     }
 }

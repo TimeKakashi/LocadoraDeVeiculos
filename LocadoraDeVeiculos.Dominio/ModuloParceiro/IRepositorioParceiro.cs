@@ -4,6 +4,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloParceiro
 {
     public interface IRepositorioParceiro : IRepositorioBase<Parceiro>
     {
-        Parceiro SelecionarPorNome(string nome);
+
+        public Parceiro SelecionarPorNome(string nome);
     }
 }

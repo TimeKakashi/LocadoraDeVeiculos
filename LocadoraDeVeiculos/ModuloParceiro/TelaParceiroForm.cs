@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FluentResults;
+using LocadoraDeVeiculos.Dominio.ModuloParceiro;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +12,11 @@ using System.Windows.Forms;
 
 namespace LocadoraDeVeiculos.ModuloParceiro
 {
-    public partial class TelaParceiro : Form
+    public partial class TelaParceiroForm : Form
     {
-        public TelaParceiro()
+        internal Func<Parceiro, Result> onGravarRegistro;
+
+        public TelaParceiroForm()
         {
             InitializeComponent();
         }
