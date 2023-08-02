@@ -24,11 +24,16 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
             InitializeComponent();
         }
 
-        public void ArrumaTela(Funcionario funcionario)
+        public void ArrumaTela(Funcionario funcionario, bool inserir = false)
         {
-            txNome.Text = funcionario.Nome;
-            txData.Text = funcionario.DataEntrada.ToString();
-            txSalario.Text = funcionario.Salario.ToString();
+            this.funcionario = funcionario;
+
+            if (!inserir)
+            {
+                txNome.Text = funcionario.Nome;
+                txData.Text = funcionario.DataEntrada.ToString();
+                txSalario.Text = funcionario.Salario.ToString();
+            }
         }
 
         public Funcionario ObterFuncionario()
@@ -37,12 +42,18 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
             var data = txData.Value;
             decimal salario;
 
+           
+
             if (!decimal.TryParse(txSalario.Text, out salario))
             {
                 salario = 0;
             }
 
-            return new Funcionario(nome, salario, data);
+            funcionario.Nome = nome;
+            funcionario.DataEntrada = data;
+            funcionario.Salario = salario;
+
+            return funcionario;
         }
 
         private void btnCadastrar_Click(object sender, EventArgs e)

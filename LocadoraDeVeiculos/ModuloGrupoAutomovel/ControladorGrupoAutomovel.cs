@@ -1,6 +1,7 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 
 namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
@@ -92,11 +93,13 @@ namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
 
         public override void Inserir()
         {
-            TelaGrupoAutomovelForm telaFuncionario = new TelaGrupoAutomovelForm();
+            TelaGrupoAutomovelForm telaGrupo = new TelaGrupoAutomovelForm();
 
-            telaFuncionario.onGravarRegistro += servicoGrupoAutomovel.Inserir;
+            telaGrupo.onGravarRegistro += servicoGrupoAutomovel.Inserir;
 
-            DialogResult result = telaFuncionario.ShowDialog();
+            telaGrupo.ArrumaTela(new GrupoAutomovel(), true);
+
+            DialogResult result = telaGrupo.ShowDialog();
 
             if (result == DialogResult.OK)
                 CarregarItens();

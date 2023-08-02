@@ -1,13 +1,17 @@
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
+using LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
+using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.ModuloFuncionario;
 using LocadoraDeVeiculos.ModuloGrupoAutomovel;
+using LocadoraDeVeiculos.ModuloPlanoCobranca;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -19,6 +23,7 @@ namespace LocadoraDeVeiculos
 
         private IRepositorioFuncionario repositorioFuncionario;
         private IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
+        private IRepositorioPlanoCobranca repositorioPlanoCobranca;
 
         private ControladorBase controlador;
         public TelaPrincipal()
@@ -49,6 +54,7 @@ namespace LocadoraDeVeiculos
 
             repositorioFuncionario = new RepositorioFuncionarioOrm(dbContext);
             reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovel(dbContext);
+            repositorioPlanoCobranca = new RepositorioPlanoCobrancaOrm(dbContext);
         }
         public static TelaPrincipal Instancia
         {
@@ -122,7 +128,13 @@ namespace LocadoraDeVeiculos
 
         private void planosDeCobrançaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var validadorPlano = new ValidadorPlanoCobranca();
 
+            var servicoPlano = new ServicoPlanoCobranca(repositorioPlanoCobranca, validadorPlano);
+
+            controlador = new ControladorPlanoBbranca(servicoPlano, repositorioPlanoCobranca, reposisotiroGrupoAutomovel);
+
+            ConfigurarTelaPrincipal(controlador);
         }
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -186,6 +198,11 @@ namespace LocadoraDeVeiculos
             }
 
             controlador.Excluir();
+        }
+
+        public void AtualizarRodape(string erro)
+        {
+            toolStripLabel1.Text = erro;
         }
     }
 }
