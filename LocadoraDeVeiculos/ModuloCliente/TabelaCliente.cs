@@ -82,6 +82,11 @@ namespace LocadoraDeVeiculos.ModuloCliente
 
             return -1;
         }
+
+        internal Cliente ObterClienteSelecionado()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

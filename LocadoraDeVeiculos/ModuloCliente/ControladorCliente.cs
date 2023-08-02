@@ -102,10 +102,13 @@ namespace LocadoraDeVeiculos.ModuloCliente
 
         public override string ObterTipoCadastro() => "Tela Cliente";
 
-        public override Cliente ObterItemSelecionado()
+        private Cliente ObterItemSelecionado()
         {
-            return listagemClienteControl.ObterClienteSelecionado();
+            var id = listagemClienteControl.ObterIdSelecionado();
+
+            return repositorioCliente.SelecionarPorId(id);
         }
+
 
         public override void CarregarItens()
         {
