@@ -20,53 +20,55 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
         // Atributos comuns a Pessoa Física e Jurídica
         public string Nome { get; set; }
         public string Telefone { get; set; }
-        public Endereco Endereco { get; set; }
+        public string Bairro { get; set; }
+        public string Rua { get; set; }
+        public string Numero { get; set; }
+        public string Cidade { get; set; }
+        public string Estado { get; set; }
+        public string Email { get; set; }
 
         // Atributos específicos para Pessoa Física
         public string CPF { get; set; }
-        public string RG { get; set; }
-        public string CNH { get; set; }
-        public Cliente PessoaJuridicaAssociada { get; set; } // Referência à Pessoa Jurídica associada, pode ser nulo
 
         // Atributos específicos para Pessoa Jurídica
         public string CNPJ { get; set; }
-        public string CondutorCPF { get; set; }
 
-        public Cliente(string nome, string telefone, Endereco endereco, string cpf, string rg, string cnh)
+        public Cliente(TipoCliente tipo, string nome, string telefone, string email, string bairro, string cidade, string estado, string numero, string rua, string cpfOuCnpj)
         {
-            Tipo = TipoCliente.PessoaFisica;
+            Tipo = tipo;
             Nome = nome;
             Telefone = telefone;
-            Endereco = endereco;
-            CPF = cpf;
-            RG = rg;
-            CNH = cnh;
-        }
+            Email = email;
+            Bairro = bairro;
+            Cidade = cidade;
+            Estado = estado;
+            Numero = numero;
+            Rua = rua;
 
-        public Cliente(string nome, string telefone, Endereco endereco, string cnpj, string condutorCpf)
-        {
-            Tipo = TipoCliente.PessoaJuridica;
-            Nome = nome;
-            Telefone = telefone;
-            Endereco = endereco;
-            CNPJ = cnpj;
-            CondutorCPF = condutorCpf;
+            if (Tipo == TipoCliente.PessoaFisica)
+            {
+                CPF = cpfOuCnpj;
+            }
+            else if (Tipo == TipoCliente.PessoaJuridica)
+            {
+                CNPJ = cpfOuCnpj;
+            }
+            else
+            {
+                throw new ArgumentException("Tipo de cliente inválido");
+            }
         }
 
         public override void Atualizar(Cliente registro)
         {
-            throw new NotImplementedException();
+            // Implementação do método Atualizar
+            // ...
         }
     }
 
-    public class Endereco
-    {
-        public string Logradouro { get; set; }
-        public string Numero { get; set; }
-        public string Complemento { get; set; }
-        public string Bairro { get; set; }
-        public string Cidade { get; set; }
-        public string Estado { get; set; }
-        public string CEP { get; set; }
-    }
+
+
+
+
+
 }

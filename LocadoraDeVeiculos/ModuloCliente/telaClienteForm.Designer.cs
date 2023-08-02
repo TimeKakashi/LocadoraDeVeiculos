@@ -39,18 +39,18 @@
             label9 = new Label();
             label10 = new Label();
             label11 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            textBox6 = new TextBox();
-            textBox7 = new TextBox();
-            textBox8 = new TextBox();
-            textBox9 = new TextBox();
-            textBox10 = new TextBox();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
+            txtNome = new TextBox();
+            txtEmail = new TextBox();
+            txtTelefone = new TextBox();
+            txtCPF = new TextBox();
+            txtCNPJ = new TextBox();
+            txtCidade = new TextBox();
+            txtEstado = new TextBox();
+            txtBairro = new TextBox();
+            txtRua = new TextBox();
+            txtNumero = new TextBox();
+            rbtnPessoaFisica = new RadioButton();
+            rbtnPessoaJuridica = new RadioButton();
             button1 = new Button();
             button2 = new Button();
             SuspendLayout();
@@ -108,7 +108,6 @@
             label6.Size = new Size(45, 15);
             label6.TabIndex = 5;
             label6.Text = "Estado:";
-            label6.Click += label6_Click;
             // 
             // label7
             // 
@@ -155,97 +154,97 @@
             label11.TabIndex = 10;
             label11.Text = "Rua:";
             // 
-            // textBox1
+            // txtNome
             // 
-            textBox1.Location = new Point(85, 26);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(316, 23);
-            textBox1.TabIndex = 11;
+            txtNome.Location = new Point(85, 26);
+            txtNome.Name = "txtNome";
+            txtNome.Size = new Size(316, 23);
+            txtNome.TabIndex = 11;
             // 
-            // textBox2
+            // txtEmail
             // 
-            textBox2.Location = new Point(86, 70);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(315, 23);
-            textBox2.TabIndex = 12;
+            txtEmail.Location = new Point(86, 70);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(315, 23);
+            txtEmail.TabIndex = 12;
             // 
-            // textBox3
+            // txtTelefone
             // 
-            textBox3.Location = new Point(86, 113);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(147, 23);
-            textBox3.TabIndex = 13;
+            txtTelefone.Location = new Point(86, 113);
+            txtTelefone.Name = "txtTelefone";
+            txtTelefone.Size = new Size(147, 23);
+            txtTelefone.TabIndex = 13;
             // 
-            // textBox4
+            // txtCPF
             // 
-            textBox4.Location = new Point(86, 205);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(129, 23);
-            textBox4.TabIndex = 14;
+            txtCPF.Location = new Point(86, 205);
+            txtCPF.Name = "txtCPF";
+            txtCPF.Size = new Size(129, 23);
+            txtCPF.TabIndex = 14;
             // 
-            // textBox5
+            // txtCNPJ
             // 
-            textBox5.Location = new Point(278, 205);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(123, 23);
-            textBox5.TabIndex = 15;
+            txtCNPJ.Location = new Point(278, 205);
+            txtCNPJ.Name = "txtCNPJ";
+            txtCNPJ.Size = new Size(123, 23);
+            txtCNPJ.TabIndex = 15;
             // 
-            // textBox6
+            // txtCidade
             // 
-            textBox6.Location = new Point(264, 262);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(137, 23);
-            textBox6.TabIndex = 16;
+            txtCidade.Location = new Point(264, 262);
+            txtCidade.Name = "txtCidade";
+            txtCidade.Size = new Size(137, 23);
+            txtCidade.TabIndex = 16;
             // 
-            // textBox7
+            // txtEstado
             // 
-            textBox7.Location = new Point(85, 262);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(109, 23);
-            textBox7.TabIndex = 17;
+            txtEstado.Location = new Point(85, 262);
+            txtEstado.Name = "txtEstado";
+            txtEstado.Size = new Size(109, 23);
+            txtEstado.TabIndex = 17;
             // 
-            // textBox8
+            // txtBairro
             // 
-            textBox8.Location = new Point(86, 304);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(315, 23);
-            textBox8.TabIndex = 18;
+            txtBairro.Location = new Point(86, 304);
+            txtBairro.Name = "txtBairro";
+            txtBairro.Size = new Size(315, 23);
+            txtBairro.TabIndex = 18;
             // 
-            // textBox9
+            // txtRua
             // 
-            textBox9.Location = new Point(86, 345);
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(315, 23);
-            textBox9.TabIndex = 19;
+            txtRua.Location = new Point(86, 345);
+            txtRua.Name = "txtRua";
+            txtRua.Size = new Size(315, 23);
+            txtRua.TabIndex = 19;
             // 
-            // textBox10
+            // txtNumero
             // 
-            textBox10.Location = new Point(85, 382);
-            textBox10.Name = "textBox10";
-            textBox10.Size = new Size(100, 23);
-            textBox10.TabIndex = 20;
+            txtNumero.Location = new Point(85, 382);
+            txtNumero.Name = "txtNumero";
+            txtNumero.Size = new Size(100, 23);
+            txtNumero.TabIndex = 20;
             // 
-            // radioButton1
+            // rbtnPessoaFisica
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(139, 155);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(93, 19);
-            radioButton1.TabIndex = 21;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Pessoa Física";
-            radioButton1.UseVisualStyleBackColor = true;
+            rbtnPessoaFisica.AutoSize = true;
+            rbtnPessoaFisica.Location = new Point(139, 155);
+            rbtnPessoaFisica.Name = "rbtnPessoaFisica";
+            rbtnPessoaFisica.Size = new Size(93, 19);
+            rbtnPessoaFisica.TabIndex = 21;
+            rbtnPessoaFisica.TabStop = true;
+            rbtnPessoaFisica.Text = "Pessoa Física";
+            rbtnPessoaFisica.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rbtnPessoaJuridica
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(278, 155);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(104, 19);
-            radioButton2.TabIndex = 22;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Pessoa Jurídica";
-            radioButton2.UseVisualStyleBackColor = true;
+            rbtnPessoaJuridica.AutoSize = true;
+            rbtnPessoaJuridica.Location = new Point(278, 155);
+            rbtnPessoaJuridica.Name = "rbtnPessoaJuridica";
+            rbtnPessoaJuridica.Size = new Size(104, 19);
+            rbtnPessoaJuridica.TabIndex = 22;
+            rbtnPessoaJuridica.TabStop = true;
+            rbtnPessoaJuridica.Text = "Pessoa Jurídica";
+            rbtnPessoaJuridica.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -276,18 +275,18 @@
             ClientSize = new Size(413, 467);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(radioButton2);
-            Controls.Add(radioButton1);
-            Controls.Add(textBox10);
-            Controls.Add(textBox9);
-            Controls.Add(textBox8);
-            Controls.Add(textBox7);
-            Controls.Add(textBox6);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(rbtnPessoaJuridica);
+            Controls.Add(rbtnPessoaFisica);
+            Controls.Add(txtNumero);
+            Controls.Add(txtRua);
+            Controls.Add(txtBairro);
+            Controls.Add(txtEstado);
+            Controls.Add(txtCidade);
+            Controls.Add(txtCNPJ);
+            Controls.Add(txtCPF);
+            Controls.Add(txtTelefone);
+            Controls.Add(txtEmail);
+            Controls.Add(txtNome);
             Controls.Add(label11);
             Controls.Add(label10);
             Controls.Add(label9);
@@ -318,18 +317,18 @@
         private Label label9;
         private Label label10;
         private Label label11;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
-        private TextBox textBox6;
-        private TextBox textBox7;
-        private TextBox textBox8;
-        private TextBox textBox9;
-        private TextBox textBox10;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
+        private TextBox txtNome;
+        private TextBox txtEmail;
+        private TextBox txtTelefone;
+        private TextBox txtCPF;
+        private TextBox txtCNPJ;
+        private TextBox txtCidade;
+        private TextBox txtEstado;
+        private TextBox txtBairro;
+        private TextBox txtRua;
+        private TextBox txtNumero;
+        private RadioButton rbtnPessoaFisica;
+        private RadioButton rbtnPessoaJuridica;
         private Button button1;
         private Button button2;
     }
