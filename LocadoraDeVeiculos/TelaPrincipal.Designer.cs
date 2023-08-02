@@ -51,8 +51,10 @@
             btnFiltrar = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripLabel1 = new ToolStripLabel();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
+            statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -75,7 +77,7 @@
             // funcionáriosToolStripMenuItem
             // 
             funcionáriosToolStripMenuItem.Name = "funcionáriosToolStripMenuItem";
-            funcionáriosToolStripMenuItem.Size = new Size(180, 22);
+            funcionáriosToolStripMenuItem.Size = new Size(142, 22);
             funcionáriosToolStripMenuItem.Text = "Funcionários";
             funcionáriosToolStripMenuItem.Click += funcionáriosToolStripMenuItem_Click;
             // 
@@ -83,7 +85,7 @@
             // 
             automóveisToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gruposDeAutomóveisToolStripMenuItem });
             automóveisToolStripMenuItem.Name = "automóveisToolStripMenuItem";
-            automóveisToolStripMenuItem.Size = new Size(180, 22);
+            automóveisToolStripMenuItem.Size = new Size(142, 22);
             automóveisToolStripMenuItem.Text = "Automóveis";
             automóveisToolStripMenuItem.Click += automóveisToolStripMenuItem_Click;
             // 
@@ -106,7 +108,7 @@
             // 
             clientesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { condutoresToolStripMenuItem });
             clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            clientesToolStripMenuItem.Size = new Size(180, 22);
+            clientesToolStripMenuItem.Size = new Size(142, 22);
             clientesToolStripMenuItem.Text = "Clientes";
             clientesToolStripMenuItem.Click += clientesToolStripMenuItem_Click;
             // 
@@ -121,28 +123,28 @@
             // 
             aluguéisToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { taxasEServiçosToolStripMenuItem, cuponsEParceirosToolStripMenuItem, preçosToolStripMenuItem, parceiroToolStripMenuItem });
             aluguéisToolStripMenuItem.Name = "aluguéisToolStripMenuItem";
-            aluguéisToolStripMenuItem.Size = new Size(180, 22);
+            aluguéisToolStripMenuItem.Size = new Size(142, 22);
             aluguéisToolStripMenuItem.Text = "Aluguéis";
             aluguéisToolStripMenuItem.Click += aluguéisToolStripMenuItem_Click;
             // 
             // taxasEServiçosToolStripMenuItem
             // 
             taxasEServiçosToolStripMenuItem.Name = "taxasEServiçosToolStripMenuItem";
-            taxasEServiçosToolStripMenuItem.Size = new Size(180, 22);
+            taxasEServiçosToolStripMenuItem.Size = new Size(175, 22);
             taxasEServiçosToolStripMenuItem.Text = "Taxas e Serviços";
             taxasEServiçosToolStripMenuItem.Click += taxasEServiçosToolStripMenuItem_Click;
             // 
             // cuponsEParceirosToolStripMenuItem
             // 
             cuponsEParceirosToolStripMenuItem.Name = "cuponsEParceirosToolStripMenuItem";
-            cuponsEParceirosToolStripMenuItem.Size = new Size(180, 22);
-            cuponsEParceirosToolStripMenuItem.Text = "Cupom";
+            cuponsEParceirosToolStripMenuItem.Size = new Size(175, 22);
+            cuponsEParceirosToolStripMenuItem.Text = "Cupons e Parceiros";
             cuponsEParceirosToolStripMenuItem.Click += cuponsEParceirosToolStripMenuItem_Click;
             // 
             // preçosToolStripMenuItem
             // 
             preçosToolStripMenuItem.Name = "preçosToolStripMenuItem";
-            preçosToolStripMenuItem.Size = new Size(180, 22);
+            preçosToolStripMenuItem.Size = new Size(175, 22);
             preçosToolStripMenuItem.Text = "Preços";
             preçosToolStripMenuItem.Click += preçosToolStripMenuItem_Click;
             // 
@@ -174,6 +176,7 @@
             // 
             // statusStrip1
             // 
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
             statusStrip1.Location = new Point(0, 322);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(716, 22);
@@ -243,6 +246,12 @@
             toolStripLabel1.Size = new Size(118, 28);
             toolStripLabel1.Text = "Locadora de Veiculos";
             // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(33, 17);
+            toolStripStatusLabel1.Text = "Erros";
+            // 
             // TelaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -257,6 +266,8 @@
             menuStrip1.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
@@ -287,6 +298,6 @@
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripLabel toolStripLabel1;
         private Panel panelRegistros;
-        private ToolStripMenuItem parceiroToolStripMenuItem;
+        private ToolStripStatusLabel toolStripStatusLabel1;
     }
 }

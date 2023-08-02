@@ -20,6 +20,7 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloPlanoCobranca
             planoBuilder.Property(p => p.PrecoKm).HasColumnType("decimal(8,2)").IsRequired(false);
             planoBuilder.Property(p => p.KmDisponivel).IsRequired(false);
             planoBuilder.Property(p => p.Plano).HasConversion<int>().IsRequired();
+            planoBuilder.HasOne(p => p.GrupoAutomovel).WithMany().IsRequired();
         }
     }
 }

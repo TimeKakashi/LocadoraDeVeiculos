@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 {
     /// <inheritdoc />
-    public partial class ArrumandoTabelas : Migration
+    public partial class ArrumandoTabela : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,6 +26,18 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TBGrupoAutomovel",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(100)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TBGrupoAutomovel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TBPlanoCobranca",
                 columns: table => new
                 {
@@ -33,28 +45,16 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                     Plano = table.Column<int>(type: "int", nullable: false),
                     ValorDiaria = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     PrecoKm = table.Column<decimal>(type: "decimal(8,2)", nullable: true),
-                    KmDisponivel = table.Column<int>(type: "int", nullable: true)
+                    KmDisponivel = table.Column<int>(type: "int", nullable: true),
+                    GrupoAutomovelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TBPlanoCobranca", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TBGrupoAutomovel",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(100)", nullable: false),
-                    PlanoCobrancaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TBGrupoAutomovel", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TBGrupoAutomovel_TBPlanoCobranca",
-                        column: x => x.PlanoCobrancaId,
-                        principalTable: "TBPlanoCobranca",
+                        name: "FK_TBPlanoCobranca_TBGrupoAutomovel_GrupoAutomovelId",
+                        column: x => x.GrupoAutomovelId,
+                        principalTable: "TBGrupoAutomovel",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -77,9 +77,9 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TBGrupoAutomovel_PlanoCobrancaId",
-                table: "TBGrupoAutomovel",
-                column: "PlanoCobrancaId");
+                name: "IX_TBPlanoCobranca_GrupoAutomovelId",
+                table: "TBPlanoCobranca",
+                column: "GrupoAutomovelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Veiculo_GrupoAutomovelId",
@@ -94,13 +94,13 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 name: "TBFuncionario");
 
             migrationBuilder.DropTable(
+                name: "TBPlanoCobranca");
+
+            migrationBuilder.DropTable(
                 name: "Veiculo");
 
             migrationBuilder.DropTable(
                 name: "TBGrupoAutomovel");
-
-            migrationBuilder.DropTable(
-                name: "TBPlanoCobranca");
         }
     }
 }

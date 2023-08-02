@@ -6,10 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca
+namespace LocadoraDeVeiculos.Dominio.ModuloCliente
 {
-    public interface IRepositorioPlanoCobranca : IRepositorioBase<PlanoCobranca>
+    public interface IValidadorCliente : IValidador<Cliente>
     {
-        void Editar(PlanoCobranca registro);
     }
 }

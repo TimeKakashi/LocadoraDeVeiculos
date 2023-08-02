@@ -10,9 +10,7 @@
 
   <ItemGroup>
     <Folder Include="ModuloAutomovel\" />
-    <Folder Include="ModuloCliente\" />
     <Folder Include="ModuloCondutor\" />
-    <Folder Include="ModuloPlanoCobranca\" />
     <Folder Include="ModuloTaxaServico\" />
     <Folder Include="ModuloCupom\" />
   </ItemGroup>

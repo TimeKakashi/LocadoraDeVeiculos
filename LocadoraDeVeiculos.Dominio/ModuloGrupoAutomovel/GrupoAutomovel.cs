@@ -14,11 +14,30 @@ namespace LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel
     {
         public string Nome { get; set; }
         public List<Veiculo> Veiculos { get; set; } = new List<Veiculo>();
-        public PlanoCobranca PlanoCobranca { get; set; }
-        
+        public GrupoAutomovel(string nome)
+        {
+            Nome = nome;
+        }
+        public GrupoAutomovel()
+        {
+            
+        }
         public override void Atualizar(GrupoAutomovel registro)
         {
             throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return this.Nome;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is GrupoAutomovel grupo &&
+                   Id == grupo.Id &&
+                   Nome == grupo.Nome;
+                   
         }
     }
 }
