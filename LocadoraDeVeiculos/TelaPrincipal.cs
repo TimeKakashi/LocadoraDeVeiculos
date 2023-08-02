@@ -1,6 +1,8 @@
+using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
@@ -17,6 +19,8 @@ namespace LocadoraDeVeiculos
     {
         private static TelaPrincipal telaPrincipal;
 
+        private IRepositorioCliente repositorioCliente;
+       
         private IRepositorioFuncionario repositorioFuncionario;
         private IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
 
@@ -49,6 +53,7 @@ namespace LocadoraDeVeiculos
 
             repositorioFuncionario = new RepositorioFuncionarioOrm(dbContext);
             reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovel(dbContext);
+            
         }
         public static TelaPrincipal Instancia
         {
