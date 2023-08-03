@@ -91,7 +91,13 @@ namespace LocadoraDeVeiculos.ModuloCliente
             txtCPF.Enabled = !rbtnPessoaJuridica.Checked;
         }
 
-        private void btnGravar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             this.cliente = ObterCliente();
 
@@ -101,20 +107,15 @@ namespace LocadoraDeVeiculos.ModuloCliente
             {
                 string erro = resultado.Errors[0].Message;
 
-                // Exibir mensagem de erro ou tratar de acordo com a necessidade
-                // ...
+                DialogResult = DialogResult.None;
+
+                TelaPrincipal.Instancia.AtualizarRodape(erro);
             }
             else
             {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
         }
     }
 
