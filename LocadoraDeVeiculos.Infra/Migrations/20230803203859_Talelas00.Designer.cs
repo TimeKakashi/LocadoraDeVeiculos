@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 {
     [DbContext(typeof(LocadoraDeVeiculosDbContext))]
-    [Migration("20230803164639_adicionandotabelas")]
-    partial class adicionandotabelas
+    [Migration("20230803203859_Talelas00")]
+    partial class Talelas00
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,8 +31,12 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("GrupoAutomovelId")
+                    b.Property<Guid>("GrupoAutomovelId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Modelo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -173,15 +177,8 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloAutomovel.Veiculo", b =>
                 {
-                    b.HasOne("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", null)
-                        .WithMany("Veiculos")
-                        .HasForeignKey("GrupoAutomovelId");
-                });
-
-            modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca.PlanoCobranca", b =>
-                {
                     b.HasOne("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", "GrupoAutomovel")
-                        .WithMany()
+                        .WithMany("Veiculos")
                         .HasForeignKey("GrupoAutomovelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -189,8 +186,22 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                     b.Navigation("GrupoAutomovel");
                 });
 
+            modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca.PlanoCobranca", b =>
+                {
+                    b.HasOne("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", "GrupoAutomovel")
+                        .WithMany("Planos")
+                        .HasForeignKey("GrupoAutomovelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_TBPlanoCobranca_TBGrupoAutomovel");
+
+                    b.Navigation("GrupoAutomovel");
+                });
+
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", b =>
                 {
+                    b.Navigation("Planos");
+
                     b.Navigation("Veiculos");
                 });
 #pragma warning restore 612, 618

@@ -16,7 +16,7 @@ namespace LocadoraDeVeiculos.Dominio.Compartilhado
 
         bool Existe(T registro);
 
-        List<T> SelecionarTodos();
+        List<T> SelecionarTodos(bool Insercao = false, bool Insercao2 = false);
 
         T SelecionarPorId(Guid id);
     }

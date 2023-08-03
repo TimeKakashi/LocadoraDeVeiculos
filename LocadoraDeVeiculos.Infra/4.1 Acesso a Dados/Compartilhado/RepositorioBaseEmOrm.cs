@@ -50,7 +50,7 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado
             return registros.Find(id);
         }
 
-        public virtual List<T> SelecionarTodos()
+        public virtual List<T> SelecionarTodos(bool Insercao = false, bool Insercao2 = false)
         {
             return registros.ToList();
         }

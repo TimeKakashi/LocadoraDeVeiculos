@@ -14,6 +14,8 @@ namespace LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel
     {
         public string Nome { get; set; }
         public List<Veiculo> Veiculos { get; set; } = new List<Veiculo>();
+        public List<PlanoCobranca> Planos { get; set; } = new List<PlanoCobranca>();
+
         public GrupoAutomovel(string nome)
         {
             Nome = nome;

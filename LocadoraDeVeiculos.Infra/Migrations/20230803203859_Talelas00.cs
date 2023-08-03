@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 {
     /// <inheritdoc />
-    public partial class tabela : Migration
+    public partial class Talelas00 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -86,7 +86,7 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 {
                     table.PrimaryKey("PK_TBPlanoCobranca", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TBPlanoCobranca_TBGrupoAutomovel_GrupoAutomovelId",
+                        name: "FK_TBPlanoCobranca_TBGrupoAutomovel",
                         column: x => x.GrupoAutomovelId,
                         principalTable: "TBGrupoAutomovel",
                         principalColumn: "Id",
@@ -98,7 +98,8 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    GrupoAutomovelId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GrupoAutomovelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,7 +108,8 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                         name: "FK_Veiculo_TBGrupoAutomovel_GrupoAutomovelId",
                         column: x => x.GrupoAutomovelId,
                         principalTable: "TBGrupoAutomovel",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

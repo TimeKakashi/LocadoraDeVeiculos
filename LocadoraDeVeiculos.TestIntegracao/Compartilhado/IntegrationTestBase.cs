@@ -5,12 +5,18 @@ using Microsoft.EntityFrameworkCore;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
 using FizzWare.NBuilder;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel;
+using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloPlanoCobranca;
 
 namespace LocadoraDeVeiculos.TestIntegracao.Compartilhado
 {
     public class IntegrationTestBase
     {
         protected IRepositorioFuncionario repositorioFuncionario;
+        protected IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
+        protected IRepositorioPlanoCobranca repositorioPlanoCobranca;
 
         public IntegrationTestBase()
         {
@@ -24,9 +30,13 @@ namespace LocadoraDeVeiculos.TestIntegracao.Compartilhado
 
             var dbContext = new LocadoraDeVeiculosDbContext(optionsBuilder.Options);
 
+            repositorioPlanoCobranca = new RepositorioPlanoCobrancaOrm(dbContext);
+            reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovel(dbContext);
             repositorioFuncionario = new RepositorioFuncionarioOrm(dbContext);
 
+            BuilderSetup.SetCreatePersistenceMethod<GrupoAutomovel>(reposisotiroGrupoAutomovel.Inserir);
             BuilderSetup.SetCreatePersistenceMethod<Funcionario>(repositorioFuncionario.Inserir);
+            BuilderSetup.SetCreatePersistenceMethod<PlanoCobranca>(repositorioPlanoCobranca.Inserir);
         }
 
         protected static void LimparTabelas()
@@ -38,6 +48,8 @@ namespace LocadoraDeVeiculos.TestIntegracao.Compartilhado
             string sqlLimpezaTabela =
                 @"
                 DELETE FROM [DBO].[TBFUNCIONARIO];
+                DELETE FROM [DBO].[TBGRUPOAUTOMOVEL];
+                DELETE FROM [DBO].[TBPLANOCOBRANCA];
                  ";
             SqlCommand comando = new SqlCommand(sqlLimpezaTabela, sqlConnection);
 

@@ -28,14 +28,18 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("GrupoAutomovelId")
+                    b.Property<Guid>("GrupoAutomovelId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Modelo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("GrupoAutomovelId");
 
-                    b.ToTable("Veiculo", (string)null);
+                    b.ToTable("Veiculo");
                 });
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloCliente.Cliente", b =>
@@ -170,15 +174,8 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloAutomovel.Veiculo", b =>
                 {
-                    b.HasOne("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", null)
-                        .WithMany("Veiculos")
-                        .HasForeignKey("GrupoAutomovelId");
-                });
-
-            modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca.PlanoCobranca", b =>
-                {
                     b.HasOne("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", "GrupoAutomovel")
-                        .WithMany()
+                        .WithMany("Veiculos")
                         .HasForeignKey("GrupoAutomovelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -186,8 +183,22 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                     b.Navigation("GrupoAutomovel");
                 });
 
+            modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca.PlanoCobranca", b =>
+                {
+                    b.HasOne("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", "GrupoAutomovel")
+                        .WithMany("Planos")
+                        .HasForeignKey("GrupoAutomovelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_TBPlanoCobranca_TBGrupoAutomovel");
+
+                    b.Navigation("GrupoAutomovel");
+                });
+
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", b =>
                 {
+                    b.Navigation("Planos");
+
                     b.Navigation("Veiculos");
                 });
 #pragma warning restore 612, 618
