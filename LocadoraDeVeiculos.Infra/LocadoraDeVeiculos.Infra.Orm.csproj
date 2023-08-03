@@ -31,4 +31,10 @@
     <ProjectReference Include="..\LocadoraDeVeiculos.Dominio\LocadoraDeVeiculos.Dominio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="jsconfig1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

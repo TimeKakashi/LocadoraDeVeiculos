@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ModuloAutomovel\appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ModuloCliente\" />
     <Folder Include="ModuloCondutor\" />
     <Folder Include="ModuloCupom\" />

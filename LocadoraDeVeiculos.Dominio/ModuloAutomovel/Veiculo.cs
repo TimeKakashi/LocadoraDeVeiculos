@@ -11,6 +11,12 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAutomovel
     public class Veiculo : EntidadeBase<Veiculo>
     {
         public string Modelo { get; set; }
+        public string Marca { get; set; }
+        public string Cor { get; set; }
+        public decimal Kilometragem { get; set; }
+        public string Placa { get; set; }
+        public EnumCombusteivel EnumCombusteivel { get; set; }
+        public int CapacidadeEmLitros { get; set; }
         public GrupoAutomovel GrupoAutomovel { get; set; }
 
         public Veiculo(string modelo)
@@ -27,4 +33,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAutomovel
             throw new NotImplementedException();
         }
     }
+
+
 }
