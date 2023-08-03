@@ -22,7 +22,10 @@ namespace LocadoraDeVeiculos.ModuloCliente
         {
             InitializeComponent();
             rbtnPessoaFisica.Checked = true;
+            rbtnPessoaFisica.CheckedChanged += rbtnPessoaFisica_CheckedChanged;
+            rbtnPessoaJuridica.CheckedChanged += rbtnPessoaJuridica_CheckedChanged;
         }
+
 
         public void ArrumaTela(Cliente cliente)
         {

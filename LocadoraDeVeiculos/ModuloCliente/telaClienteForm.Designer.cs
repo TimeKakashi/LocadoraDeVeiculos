@@ -184,6 +184,7 @@
             // 
             // txtCNPJ
             // 
+            txtCNPJ.Enabled = false;
             txtCNPJ.Location = new Point(278, 205);
             txtCNPJ.Name = "txtCNPJ";
             txtCNPJ.Size = new Size(123, 23);
