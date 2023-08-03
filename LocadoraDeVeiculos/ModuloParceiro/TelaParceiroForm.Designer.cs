@@ -43,6 +43,7 @@
             // 
             // btnGravar
             // 
+            btnGravar.DialogResult = DialogResult.OK;
             btnGravar.Location = new Point(194, 117);
             btnGravar.Name = "btnGravar";
             btnGravar.Size = new Size(85, 34);
