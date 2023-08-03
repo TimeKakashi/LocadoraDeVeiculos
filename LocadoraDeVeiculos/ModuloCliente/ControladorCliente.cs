@@ -21,19 +21,20 @@ namespace LocadoraDeVeiculos.ModuloCliente
             this.repositorioCliente = repositorioCliente;
             this.servicoCliente = servicoCliente;
 
-          
+            
             if (listagemClienteControl == null)
-                this.listagemClienteControl = new TabelaCliente();
+            {
+                listagemClienteControl = new TabelaCliente();
+            }
 
             this.listagemClienteControl = listagemClienteControl;
 
             CarregarItens();
         }
 
-       
 
 
-    public override string ToolTipInserir => "Inserir Cliente";
+        public override string ToolTipInserir => "Inserir Cliente";
         public override string ToolTipEditar => "Editar Cliente";
         public override string ToolTipExcluir => "Excluir Cliente";
         public override string ToolTipFiltrar => "Filtrar Cliente";
