@@ -35,7 +35,7 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 
                     b.HasIndex("GrupoAutomovelId");
 
-                    b.ToTable("Veiculo");
+                    b.ToTable("Veiculo", (string)null);
                 });
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloCliente.Cliente", b =>

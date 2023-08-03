@@ -146,14 +146,15 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao
         [TestMethod]
         public void Deve_editar_funcionario_com_o_mesmo_nome()
         {
+            Guid id = Guid.NewGuid();
             //arrange
             repositorioFuncionarioMock.Setup(x => x.SelecionarPorNome("jae"))
                  .Returns(() =>
                  {
-                     return new Funcionario("jae", 100, DateTime.Today);
+                     return new Funcionario(id, "jae", 100, DateTime.Today);
                  });
 
-            var outroFuncionario = new Funcionario("jae", 100, DateTime.Today);
+            var outroFuncionario = new Funcionario(id, "jae", 100, DateTime.Today);
 
             //action
             var resultado = servicoFuncionario.Editar(outroFuncionario);

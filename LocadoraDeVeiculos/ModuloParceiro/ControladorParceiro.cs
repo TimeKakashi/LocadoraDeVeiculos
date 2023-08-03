@@ -58,7 +58,9 @@ namespace LocadoraDeVeiculos.ModuloParceiro
                 return;
             }
             TelaParceiroForm telaParceiroForm = new TelaParceiroForm();
-            telaParceiroForm.ShowDialog();
+
+            telaParceiroForm.ConfigurarParceiro(parceiro);
+
             telaParceiroForm.onGravarRegistro += servicoParceiro.Editar;
 
             DialogResult result = telaParceiroForm.ShowDialog();
@@ -86,6 +88,17 @@ namespace LocadoraDeVeiculos.ModuloParceiro
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
                 return;
+            }
+
+            DialogResult result = MessageBox.Show($"Deseja excluir o parceiro {parceiro.Nome}?",
+                    "Exclusão de parceiro",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Exclamation);
+
+            if (result == DialogResult.OK)
+            {
+                servicoParceiro.Excluir(parceiro);
+                CarregarItens();
             }
         }
 
