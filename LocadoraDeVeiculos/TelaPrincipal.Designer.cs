@@ -44,7 +44,7 @@
             panel1 = new Panel();
             panelRegistros = new Panel();
             statusStrip1 = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            labelRodaPe = new ToolStripStatusLabel();
             toolStrip1 = new ToolStrip();
             btnInserir = new ToolStripButton();
             btnEditar = new ToolStripButton();
@@ -77,7 +77,7 @@
             // funcionáriosToolStripMenuItem
             // 
             funcionáriosToolStripMenuItem.Name = "funcionáriosToolStripMenuItem";
-            funcionáriosToolStripMenuItem.Size = new Size(180, 22);
+            funcionáriosToolStripMenuItem.Size = new Size(142, 22);
             funcionáriosToolStripMenuItem.Text = "Funcionários";
             funcionáriosToolStripMenuItem.Click += funcionáriosToolStripMenuItem_Click;
             // 
@@ -85,7 +85,7 @@
             // 
             automóveisToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gruposDeAutomóveisToolStripMenuItem });
             automóveisToolStripMenuItem.Name = "automóveisToolStripMenuItem";
-            automóveisToolStripMenuItem.Size = new Size(180, 22);
+            automóveisToolStripMenuItem.Size = new Size(142, 22);
             automóveisToolStripMenuItem.Text = "Automóveis";
             automóveisToolStripMenuItem.Click += automóveisToolStripMenuItem_Click;
             // 
@@ -108,7 +108,7 @@
             // 
             clientesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { condutoresToolStripMenuItem });
             clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            clientesToolStripMenuItem.Size = new Size(180, 22);
+            clientesToolStripMenuItem.Size = new Size(142, 22);
             clientesToolStripMenuItem.Text = "Clientes";
             clientesToolStripMenuItem.Click += clientesToolStripMenuItem_Click;
             // 
@@ -123,35 +123,35 @@
             // 
             aluguéisToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { taxasEServiçosToolStripMenuItem, cuponsEParceirosToolStripMenuItem, preçosToolStripMenuItem, parceiroToolStripMenuItem });
             aluguéisToolStripMenuItem.Name = "aluguéisToolStripMenuItem";
-            aluguéisToolStripMenuItem.Size = new Size(180, 22);
+            aluguéisToolStripMenuItem.Size = new Size(142, 22);
             aluguéisToolStripMenuItem.Text = "Aluguéis";
             aluguéisToolStripMenuItem.Click += aluguéisToolStripMenuItem_Click;
             // 
             // taxasEServiçosToolStripMenuItem
             // 
             taxasEServiçosToolStripMenuItem.Name = "taxasEServiçosToolStripMenuItem";
-            taxasEServiçosToolStripMenuItem.Size = new Size(180, 22);
+            taxasEServiçosToolStripMenuItem.Size = new Size(157, 22);
             taxasEServiçosToolStripMenuItem.Text = "Taxas e Serviços";
             taxasEServiçosToolStripMenuItem.Click += taxasEServiçosToolStripMenuItem_Click;
             // 
             // cuponsEParceirosToolStripMenuItem
             // 
             cuponsEParceirosToolStripMenuItem.Name = "cuponsEParceirosToolStripMenuItem";
-            cuponsEParceirosToolStripMenuItem.Size = new Size(180, 22);
+            cuponsEParceirosToolStripMenuItem.Size = new Size(157, 22);
             cuponsEParceirosToolStripMenuItem.Text = "Cupom";
             cuponsEParceirosToolStripMenuItem.Click += cuponsEParceirosToolStripMenuItem_Click;
             // 
             // preçosToolStripMenuItem
             // 
             preçosToolStripMenuItem.Name = "preçosToolStripMenuItem";
-            preçosToolStripMenuItem.Size = new Size(180, 22);
+            preçosToolStripMenuItem.Size = new Size(157, 22);
             preçosToolStripMenuItem.Text = "Preços";
             preçosToolStripMenuItem.Click += preçosToolStripMenuItem_Click;
             // 
             // parceiroToolStripMenuItem
             // 
             parceiroToolStripMenuItem.Name = "parceiroToolStripMenuItem";
-            parceiroToolStripMenuItem.Size = new Size(180, 22);
+            parceiroToolStripMenuItem.Size = new Size(157, 22);
             parceiroToolStripMenuItem.Text = "Parceiro";
             parceiroToolStripMenuItem.Click += parceiroToolStripMenuItem_Click;
             // 
@@ -176,18 +176,18 @@
             // 
             // statusStrip1
             // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
+            statusStrip1.Items.AddRange(new ToolStripItem[] { labelRodaPe });
             statusStrip1.Location = new Point(0, 322);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(716, 22);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // labelRodaPe
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(33, 17);
-            toolStripStatusLabel1.Text = "Erros";
+            labelRodaPe.Name = "labelRodaPe";
+            labelRodaPe.Size = new Size(33, 17);
+            labelRodaPe.Text = "Erros";
             // 
             // toolStrip1
             // 
@@ -298,7 +298,7 @@
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripLabel toolStripLabel1;
         private Panel panelRegistros;
-        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripStatusLabel labelRodaPe;
         private ToolStripMenuItem parceiroToolStripMenuItem;
     }
 }

@@ -66,7 +66,7 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
             {
                 string erro = resultado.Errors[0].Message;
 
-                //TelaPrincipalForm.Instancia.AtualizarRodape(erro);
+                TelaPrincipal.Instancia.AtualizarRodape(erro);
 
                 DialogResult = DialogResult.None;
             }

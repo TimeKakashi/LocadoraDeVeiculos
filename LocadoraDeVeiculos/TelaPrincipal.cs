@@ -229,13 +229,15 @@ namespace LocadoraDeVeiculos
             }
 
             controlador.Excluir();
+
+
         }
 
         public void AtualizarRodape(string erro)
         {
-            toolStripLabel1.Text = erro;
+            labelRodaPe.Text = erro;
         }
 
-        
+
     }
 }

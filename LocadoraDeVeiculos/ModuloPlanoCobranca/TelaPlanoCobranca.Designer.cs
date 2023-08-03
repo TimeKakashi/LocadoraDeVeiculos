@@ -71,6 +71,7 @@
             // txKmDisponiveis
             // 
             txKmDisponiveis.AccessibleRole = AccessibleRole.None;
+            txKmDisponiveis.Enabled = false;
             txKmDisponiveis.Location = new Point(106, 164);
             txKmDisponiveis.Name = "txKmDisponiveis";
             txKmDisponiveis.Size = new Size(195, 23);
@@ -97,6 +98,7 @@
             // txPrecoKm
             // 
             txPrecoKm.AccessibleName = "txPrecoKm";
+            txPrecoKm.Enabled = false;
             txPrecoKm.Location = new Point(106, 121);
             txPrecoKm.Name = "txPrecoKm";
             txPrecoKm.Size = new Size(195, 23);
@@ -134,6 +136,7 @@
             cbTipoPlano.Name = "cbTipoPlano";
             cbTipoPlano.Size = new Size(195, 23);
             cbTipoPlano.TabIndex = 3;
+            cbTipoPlano.SelectedValueChanged += cbTipoPlano_SelectedValueChanged;
             // 
             // cbGrupo
             // 
