@@ -1,20 +1,24 @@
+using LocadoraDeVeiculos.Aplicacao.ModuloAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
 using LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloPlanoCobranca;
+using LocadoraDeVeiculos.ModuloAutomovel;
 using LocadoraDeVeiculos.ModuloCliente;
 using LocadoraDeVeiculos.ModuloFuncionario;
 using LocadoraDeVeiculos.ModuloGrupoAutomovel;
@@ -34,6 +38,7 @@ namespace LocadoraDeVeiculos
         private IRepositorioPlanoCobranca repositorioPlanoCobranca;
         private IRepositorioParceiro repositorioParceiro;
         private IRepositorioCliente repositorioCliente;
+        private IRepositorioAutomovel repositorioAutomovel;
         private TabelaCliente TabelaCliente;
 
 
@@ -69,6 +74,7 @@ namespace LocadoraDeVeiculos
             repositorioPlanoCobranca = new RepositorioPlanoCobrancaOrm(dbContext);
             repositorioCliente = new RepositorioClienteOrm(dbContext);
             repositorioParceiro = new RepositorioParceiroOrm(dbContext);
+            repositorioAutomovel = new RepositorioAutomovel(dbContext);
         }
         public static TelaPrincipal Instancia
         {
@@ -95,6 +101,7 @@ namespace LocadoraDeVeiculos
             btnEditar.Enabled = controlador.EditarHabilitado;
             btnExcluir.Enabled = controlador.ExcluirHabilitado;
             btnFiltrar.Enabled = controlador.VisualizarHabilitado;
+            btnCombustivel.Enabled = controlador.AtualizarValoresCombustivel;
         }
 
         private void ConfigurarToolTips(ControladorBase controlador)
@@ -103,6 +110,7 @@ namespace LocadoraDeVeiculos
             btnEditar.ToolTipText = controlador.ToolTipEditar;
             btnExcluir.ToolTipText = controlador.ToolTipExcluir;
             btnFiltrar.ToolTipText = controlador.ToolTipFiltrar;
+            btnCombustivel.ToolTipText = controlador.ToolTipCombustivel;
         }
 
         private void ConfigurarTabela(ControladorBase controlador)
@@ -126,7 +134,13 @@ namespace LocadoraDeVeiculos
 
         private void automóveisToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var validadorAutomoveis = new ValidadorAutomovel();
 
+            var servicoAutomovel = new ServicoAutomovel(repositorioAutomovel, validadorAutomoveis);
+
+            controlador = new ControladorAutomovel(repositorioAutomovel, reposisotiroGrupoAutomovel ,servicoAutomovel);
+
+            ConfigurarTelaPrincipal(controlador);
         }
 
         private void gruposDeAutomóveisToolStripMenuItem_Click(object sender, EventArgs e)
@@ -238,6 +252,9 @@ namespace LocadoraDeVeiculos
             labelRodaPe.Text = erro;
         }
 
+        private void btnCombustivel_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

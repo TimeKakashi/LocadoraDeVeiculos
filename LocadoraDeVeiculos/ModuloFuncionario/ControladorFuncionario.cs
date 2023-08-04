@@ -40,6 +40,9 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
 
         public override string ToolTipPdf => "Gerar Pdf";
 
+        public override string ToolTipCombustivel => "Atualizar Valores Combustível";
+
+
         public override void Inserir()
         {
             telaFuncionarioForm telaFuncionario = new telaFuncionarioForm();

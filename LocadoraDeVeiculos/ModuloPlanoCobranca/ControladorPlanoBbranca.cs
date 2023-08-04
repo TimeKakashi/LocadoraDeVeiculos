@@ -43,6 +43,9 @@ namespace LocadoraDeVeiculos.ModuloPlanoCobranca
 
         public override string ToolTipPdf => "Gerar Pdf Plano de Cobranca";
 
+        public override string ToolTipCombustivel => "Atualizar Valores Combustível";
+
+
         public override void Inserir()
         {
             TelaPlanoCobranca telaPlano = new TelaPlanoCobranca(reposisotiroGrupoAutomovel.SelecionarTodos()) ;

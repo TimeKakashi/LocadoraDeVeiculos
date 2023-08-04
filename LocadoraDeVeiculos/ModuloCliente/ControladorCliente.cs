@@ -32,13 +32,12 @@ namespace LocadoraDeVeiculos.ModuloCliente
             CarregarItens();
         }
 
-
-
         public override string ToolTipInserir => "Inserir Cliente";
         public override string ToolTipEditar => "Editar Cliente";
         public override string ToolTipExcluir => "Excluir Cliente";
         public override string ToolTipFiltrar => "Filtrar Cliente";
         public override string ToolTipPdf => "Gerar PDF";
+        public override string ToolTipCombustivel => "Atualizar Valores Combustível";
 
         public override void Inserir()
         {

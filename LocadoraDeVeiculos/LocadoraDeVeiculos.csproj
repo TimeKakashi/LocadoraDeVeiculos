@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ModuloAutomovel\" />
     <Folder Include="ModuloCondutor\" />
     <Folder Include="ModuloTaxaServico\" />
     <Folder Include="ModuloCupom\" />
