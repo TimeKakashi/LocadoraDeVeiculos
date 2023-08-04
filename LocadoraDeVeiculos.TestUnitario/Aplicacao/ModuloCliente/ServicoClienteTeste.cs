@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocadoraDeVeiculos.TestUnitario.Aplicacao
+namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCliente
 {
     [TestClass]
     public class ServicoClienteTest
@@ -99,7 +99,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao
         [TestMethod]
         public void Nao_Deve_Editar_Cliente_Com_Informacoes_Invalidas()
         {
-            var clienteInvalido = new  Cliente(Cliente.TipoCliente.PessoaFisica, "João", "999999999", "email@teste.com", "Centro", "Cidade", "UF", "123", "Rua das Flores", "111.222.333-44");
+            var clienteInvalido = new Cliente(Cliente.TipoCliente.PessoaFisica, "João", "999999999", "email@teste.com", "Centro", "Cidade", "UF", "123", "Rua das Flores", "111.222.333-44");
 
             validadorClienteMock.Setup(x => x.Validate(It.IsAny<Cliente>()))
                 .Returns(new ValidationResult(new List<ValidationFailure>
@@ -313,8 +313,8 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao
             resultado.Should().BeFailure();
         }
 
-     
-     
+
+
 
         [TestMethod]
         public void Deve_Tentar_Excluir_Cliente_E_Capturar_Erro_Caso_Ocorra_Falha_No_Banco_PessoaJuridica()

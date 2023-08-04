@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,11 @@ namespace LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel
         public GrupoAutomovel(string nome)
         {
             Nome = nome;
+        }
+
+        public GrupoAutomovel(string nome, Guid id) : this(nome)
+        {
+            this.Id = id;
         }
         public GrupoAutomovel()
         {

@@ -11,8 +11,8 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel
     public class ServicoGrupoAutomovel : ServicoBase<GrupoAutomovel>
     {
         IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
-        ValidadorGrupoAutomovel validadorGrupo;
-        public ServicoGrupoAutomovel(IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, ValidadorGrupoAutomovel validadorGrupo)
+        IValidadorGrupoAutomovel validadorGrupo;
+        public ServicoGrupoAutomovel(IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, IValidadorGrupoAutomovel validadorGrupo)
         {
             this.reposisotiroGrupoAutomovel = reposisotiroGrupoAutomovel;
             this.validadorGrupo = validadorGrupo;

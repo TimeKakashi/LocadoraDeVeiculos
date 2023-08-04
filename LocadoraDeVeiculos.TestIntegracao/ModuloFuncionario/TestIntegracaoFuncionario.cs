@@ -59,11 +59,9 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloFuncionario
         [TestMethod]
         public void DeveSelecionarPorId()
         {
-            var giud = new Guid();
+            var funcionario = Builder<Funcionario>.CreateNew().Persist();
 
-            var funcionario = Builder<Funcionario>.CreateNew().With(x => x.Nome == "Pedro" && x.Id == giud).Persist();
-
-            var funcEncontrado = repositorioFuncionario.SelecionarPorId(giud);
+            var funcEncontrado = repositorioFuncionario.SelecionarPorId(funcionario.Id);
 
             funcEncontrado.Should().Be(funcionario);
         }
