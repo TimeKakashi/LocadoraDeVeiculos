@@ -33,6 +33,9 @@ namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
 
         public override string ToolTipPdf => "Gerar pdf do Grupo de Automovel";
 
+        public override string ToolTipCombustivel => "Atualizar Valores Combustível";
+
+
         public override void CarregarItens()
         {
             tabelaGrupoAutomovel.AtualizarRegistros(reposisotiroGrupoAutomovel.SelecionarTodos());

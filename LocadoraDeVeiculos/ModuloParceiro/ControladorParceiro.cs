@@ -41,6 +41,9 @@ namespace LocadoraDeVeiculos.ModuloParceiro
 
         public override string ToolTipPdf => "Gerar Pdf";
 
+        public override string ToolTipCombustivel => "Atualizar Valores Combustível";
+
+
         public override void CarregarItens()
         {
             var listaParceiro = repositorioParceiro.SelecionarTodos();

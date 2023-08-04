@@ -12,7 +12,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel
     {
         IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
         IValidadorGrupoAutomovel validadorGrupo;
-        public ServicoGrupoAutomovel(IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, IValidadorGrupoAutomovel validadorGrupo)
+        public ServicoGrupoAutomovel(IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel,IValidadorGrupoAutomovel validadorGrupo)
         {
             this.reposisotiroGrupoAutomovel = reposisotiroGrupoAutomovel;
             this.validadorGrupo = validadorGrupo;

@@ -39,7 +39,7 @@ namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
             {
                 string erro = resultado.Errors[0].Message;
 
-                //TelaPrincipal.Instancia.AtualizarRodape(erro);
+                TelaPrincipal.Instancia.AtualizarRodape(erro);
 
                 DialogResult = DialogResult.None;
             }

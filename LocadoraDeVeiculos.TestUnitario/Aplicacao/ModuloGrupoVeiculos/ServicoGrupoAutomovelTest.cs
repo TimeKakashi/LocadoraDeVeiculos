@@ -189,7 +189,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloGrupoVeiculos
 
 
         [TestMethod]
-        public void Nao_deve_excluir_funcionario_caso_ele_esteja_relacionada_com_materia() //cenário 3
+        public void Nao_deve_excluir_funcionario_caso_ele_esteja_relacionada_com_materia()
         {
             repositorioGrupoAutomovel.Setup(x => x.Existe(grupoAutomovel))
                .Returns(() =>

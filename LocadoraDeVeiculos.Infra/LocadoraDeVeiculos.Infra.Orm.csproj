@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="4.1 Acesso a Dados\ModuloAutomovel\" />
     <Folder Include="4.1 Acesso a Dados\ModuloCondutor\" />
     <Folder Include="4.1 Acesso a Dados\ModuloCupom\" />
     <Folder Include="4.1 Acesso a Dados\ModuloTaxaServico\" />
@@ -29,6 +28,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LocadoraDeVeiculos.Dominio\LocadoraDeVeiculos.Dominio.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="jsconfig1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
