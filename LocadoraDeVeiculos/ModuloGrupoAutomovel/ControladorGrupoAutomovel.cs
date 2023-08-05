@@ -1,7 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Compartilhado;
-using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 
 namespace LocadoraDeVeiculos.ModuloGrupoAutomovel

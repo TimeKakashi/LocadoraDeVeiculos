@@ -1,11 +1,4 @@
-﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LocadoraDeVeiculos.Compartilhado
+﻿namespace LocadoraDeVeiculos.Compartilhado
 {
     public abstract class ControladorBase
     {
@@ -14,7 +7,7 @@ namespace LocadoraDeVeiculos.Compartilhado
         public abstract string ToolTipExcluir { get; }
         public abstract string ToolTipFiltrar { get; }
         public abstract string ToolTipPdf { get; }
-        public abstract string ToolTipCombustivel { get;  }
+        public abstract string ToolTipCombustivel { get; }
 
         public virtual bool InserirHabilitado { get { return true; } }
         public virtual bool EditarHabilitado { get { return true; } }

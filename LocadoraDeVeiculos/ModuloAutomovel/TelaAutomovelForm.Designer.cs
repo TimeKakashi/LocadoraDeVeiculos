@@ -63,6 +63,7 @@
             txtFoto.Location = new Point(131, 41);
             txtFoto.Name = "txtFoto";
             txtFoto.Size = new Size(125, 93);
+            txtFoto.SizeMode = PictureBoxSizeMode.StretchImage;
             txtFoto.TabIndex = 0;
             txtFoto.TabStop = false;
             // 
@@ -115,7 +116,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(94, 396);
+            label5.Location = new Point(88, 389);
             label5.Name = "label5";
             label5.Size = new Size(26, 15);
             label5.TabIndex = 6;
@@ -155,7 +156,7 @@
             // 
             // txCor
             // 
-            txCor.Location = new Point(131, 383);
+            txCor.Location = new Point(131, 386);
             txCor.Name = "txCor";
             txCor.Size = new Size(187, 23);
             txCor.TabIndex = 12;

@@ -20,7 +20,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAutomovel
         public bool EmUso { get; set; }
         public Veiculo()
         {
-            
+
         }
 
         public Veiculo(string modelo)
@@ -63,7 +63,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAutomovel
         }
     }
 
-   
+
 
 
 }

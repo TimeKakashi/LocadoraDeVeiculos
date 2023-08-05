@@ -1,7 +1,6 @@
 ﻿using FluentResults;
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
-using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using Serilog;
 using System.Data.SqlClient;

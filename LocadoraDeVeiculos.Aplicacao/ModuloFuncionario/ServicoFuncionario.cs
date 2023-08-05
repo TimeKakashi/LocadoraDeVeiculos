@@ -24,7 +24,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
 
             List<string> erros = ValidarRegistro(funcionario);
 
-            if(erros.Count > 0)
+            if (erros.Count > 0)
                 return Result.Fail(erros);
 
             try
@@ -124,7 +124,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
             if (NomeDuplicado(funcionario))
                 erros.Add($"Esse nome: '{funcionario.Nome}' já está em uso!");
 
-            foreach(string erro in erros)
+            foreach (string erro in erros)
                 Log.Warning(erro);
 
             return erros;

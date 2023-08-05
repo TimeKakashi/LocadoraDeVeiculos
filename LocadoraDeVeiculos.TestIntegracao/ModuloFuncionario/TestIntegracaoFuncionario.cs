@@ -1,13 +1,7 @@
 ﻿using FizzWare.NBuilder;
-using FizzWare.NBuilder.Dates;
 using FluentAssertions;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.TestIntegracao.Compartilhado;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.TestIntegracao.ModuloFuncionario
 {

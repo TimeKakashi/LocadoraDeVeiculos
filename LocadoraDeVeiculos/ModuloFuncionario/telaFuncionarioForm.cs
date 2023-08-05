@@ -1,17 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
-using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LocadoraDeVeiculos.ModuloFuncionario
 {
@@ -42,7 +31,7 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
             var data = txData.Value;
             decimal salario;
 
-           
+
 
             if (!decimal.TryParse(txSalario.Text, out salario))
             {

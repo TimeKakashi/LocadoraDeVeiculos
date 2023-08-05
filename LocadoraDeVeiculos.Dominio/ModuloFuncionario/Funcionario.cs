@@ -1,11 +1,4 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
-using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloFuncionario
 {
@@ -17,7 +10,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloFuncionario
 
         public Funcionario()
         {
-            
+
         }
         public Funcionario(string nome, decimal salario, DateTime data)
         {

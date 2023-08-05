@@ -1,16 +1,8 @@
 ﻿using FluentResults;
-using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Compartilhado;
-using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
-using LocadoraDeVeiculos.ModuloFuncionario;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.ModuloPlanoCobranca
 {
@@ -48,7 +40,7 @@ namespace LocadoraDeVeiculos.ModuloPlanoCobranca
 
         public override void Inserir()
         {
-            TelaPlanoCobranca telaPlano = new TelaPlanoCobranca(reposisotiroGrupoAutomovel.SelecionarTodos()) ;
+            TelaPlanoCobranca telaPlano = new TelaPlanoCobranca(reposisotiroGrupoAutomovel.SelecionarTodos());
 
             telaPlano.onGravarRegistro += servicoPlanoCobranca.Inserir;
 

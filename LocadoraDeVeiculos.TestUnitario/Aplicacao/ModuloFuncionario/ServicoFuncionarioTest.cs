@@ -1,12 +1,11 @@
 ﻿using FluentAssertions;
 using FluentResults;
+using FluentResults.Extensions.FluentAssertions;
+using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
-using Moq;
-using FluentResults.Extensions.FluentAssertions;
-using System.Net.Http.Headers;
-using FluentValidation.Results;
 using LocadoraDeVeiculos.TestUnitario.Compartilhado;
+using Moq;
 
 namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloFuncionario
 {

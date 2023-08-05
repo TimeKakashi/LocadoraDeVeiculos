@@ -153,7 +153,7 @@
             btnCadastrar.Name = "btnCadastrar";
             btnCadastrar.Size = new Size(75, 38);
             btnCadastrar.TabIndex = 3;
-            btnCadastrar.Text = "button1";
+            btnCadastrar.Text = "Cadastrar";
             btnCadastrar.UseVisualStyleBackColor = true;
             btnCadastrar.Click += btnCadastrar_Click;
             // 
@@ -164,7 +164,7 @@
             button2.Name = "button2";
             button2.Size = new Size(75, 38);
             button2.TabIndex = 4;
-            button2.Text = "button2";
+            button2.Text = "Cancelar";
             button2.UseVisualStyleBackColor = true;
             // 
             // TelaPlanoCobranca

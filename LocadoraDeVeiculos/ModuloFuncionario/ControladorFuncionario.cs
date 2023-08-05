@@ -2,13 +2,6 @@
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
-using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
-using System;
-using System.Collections.Generic;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.ModuloFuncionario
 {
@@ -113,12 +106,12 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
         public override UserControl ObterTabela()
         {
             if (tabelaFuncionario == null)
-                tabelaFuncionario=  new TabelaFuncionario();
+                tabelaFuncionario = new TabelaFuncionario();
 
-                return tabelaFuncionario;
+            return tabelaFuncionario;
         }
 
-        public override string ObterTipoCadastro() => "Cadastro de Funcionário";        
+        public override string ObterTipoCadastro() => "Cadastro de Funcionário";
 
         private Funcionario ObterItemSelecionado()
         {

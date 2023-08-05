@@ -1,7 +1,3 @@
-using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-
 namespace LocadoraDeVeiculos
 {
     internal static class Program
@@ -16,7 +12,7 @@ namespace LocadoraDeVeiculos
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-           
+
 
             Application.Run(new TelaPrincipal());
         }

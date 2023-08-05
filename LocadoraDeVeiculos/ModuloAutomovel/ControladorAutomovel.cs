@@ -2,9 +2,7 @@
 using LocadoraDeVeiculos.Aplicacao.ModuloAutomovel;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
-using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
-using LocadoraDeVeiculos.ModuloFuncionario;
 
 namespace LocadoraDeVeiculos.ModuloAutomovel
 {
@@ -15,7 +13,7 @@ namespace LocadoraDeVeiculos.ModuloAutomovel
         private TabelaAutomovel tabelaAutomovel;
         private ServicoAutomovel servicoAutomovel;
 
-        public ControladorAutomovel(IRepositorioAutomovel repositorioAutomovel,IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel ,ServicoAutomovel servicoAutomovel)
+        public ControladorAutomovel(IRepositorioAutomovel repositorioAutomovel, IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, ServicoAutomovel servicoAutomovel)
         {
             this.repositorioAutomovel = repositorioAutomovel;
             this.reposisotiroGrupoAutomovel = reposisotiroGrupoAutomovel;
@@ -23,6 +21,8 @@ namespace LocadoraDeVeiculos.ModuloAutomovel
 
             if (tabelaAutomovel == null)
                 tabelaAutomovel = new TabelaAutomovel();
+
+            CarregarItens();
         }
 
         public override string ToolTipInserir => "Inserir Veiculo";

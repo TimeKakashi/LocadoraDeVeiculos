@@ -1,7 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
-using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using Serilog;
 
@@ -54,19 +53,20 @@ namespace LocadoraDeVeiculos.ModuloAutomovel
             else
                 veiculo.Kilometragem = -1;
 
-            veiculo.Placa = txPlaca.Text;
+            veiculo.Placa = txPlaca.Text.ToUpper();
 
             veiculo.CapacidadeEmLitros = Convert.ToInt32(txCapacidade.Value);
 
             veiculo.Cor = txCor.Text;
 
-            veiculo.EnumCombusteivel = (EnumCombusteivel)cbCombustivel.SelectedItem;
+            if (cbCombustivel.SelectedItem != null)
+                veiculo.EnumCombusteivel = (EnumCombusteivel)cbCombustivel.SelectedItem;
 
             veiculo.Marca = txMarca.Text;
 
             veiculo.GrupoAutomovel = (GrupoAutomovel)cbGrupo.SelectedItem;
 
-            veiculo.EmUso = false; 
+            veiculo.EmUso = false;
 
             if (txtFoto.Image != null)
                 veiculo.Imagem = veiculo.ConverterImagemParaArrayByte(txtFoto.Image);

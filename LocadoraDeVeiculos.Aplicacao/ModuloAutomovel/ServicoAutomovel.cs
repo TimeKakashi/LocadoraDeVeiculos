@@ -1,7 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
-using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using Serilog;
 using System.Data.SqlClient;
 

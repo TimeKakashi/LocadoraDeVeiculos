@@ -9,7 +9,7 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado
     {
         public LocadoraDeVeiculosDbContext(DbContextOptions options) : base(options)
         {
-            
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

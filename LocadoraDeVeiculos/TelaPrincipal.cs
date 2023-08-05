@@ -138,7 +138,7 @@ namespace LocadoraDeVeiculos
 
             var servicoAutomovel = new ServicoAutomovel(repositorioAutomovel, validadorAutomoveis);
 
-            controlador = new ControladorAutomovel(repositorioAutomovel, reposisotiroGrupoAutomovel ,servicoAutomovel);
+            controlador = new ControladorAutomovel(repositorioAutomovel, reposisotiroGrupoAutomovel, servicoAutomovel);
 
             ConfigurarTelaPrincipal(controlador);
         }

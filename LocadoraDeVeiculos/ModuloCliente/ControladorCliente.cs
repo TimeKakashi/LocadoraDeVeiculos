@@ -2,11 +2,6 @@
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.ModuloCliente
 {
@@ -21,7 +16,7 @@ namespace LocadoraDeVeiculos.ModuloCliente
             this.repositorioCliente = repositorioCliente;
             this.servicoCliente = servicoCliente;
 
-            
+
             if (listagemClienteControl == null)
             {
                 listagemClienteControl = new TabelaCliente();
@@ -106,7 +101,7 @@ namespace LocadoraDeVeiculos.ModuloCliente
         {
             if (listagemClienteControl == null)
                 listagemClienteControl = new TabelaCliente();
-            
+
             return listagemClienteControl;
         }
 

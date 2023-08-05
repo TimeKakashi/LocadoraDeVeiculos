@@ -1,14 +1,14 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
-using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
+﻿using FizzWare.NBuilder;
+using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
+using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
-using FizzWare.NBuilder;
-using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel;
-using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloPlanoCobranca;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace LocadoraDeVeiculos.TestIntegracao.Compartilhado
 {

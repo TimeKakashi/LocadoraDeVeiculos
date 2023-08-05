@@ -1,13 +1,11 @@
 ﻿using FluentAssertions;
 using FluentResults;
-using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
-using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
-using Moq;
 using FluentResults.Extensions.FluentAssertions;
 using FluentValidation.Results;
-using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
-using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
+using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.TestUnitario.Compartilhado;
+using Moq;
 
 namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloGrupoVeiculos
 {

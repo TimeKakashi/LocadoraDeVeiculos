@@ -18,13 +18,13 @@ namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
         {
             this.grupoAutomovel = grupo;
 
-            if(!insercao)
+            if (!insercao)
                 txNome.Text = grupo.Nome;
         }
 
         public GrupoAutomovel ObterGrupo()
         {
-           grupoAutomovel.Nome = txNome.Text;
+            grupoAutomovel.Nome = txNome.Text;
 
             return grupoAutomovel;
         }

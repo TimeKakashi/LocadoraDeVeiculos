@@ -1,11 +1,6 @@
 ﻿using LocadoraDeVeiculos.Dominio.ModuloCliente;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente
 {
@@ -26,10 +21,10 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente
 
             clienteBuilder.Property(c => c.CPF).HasColumnType("varchar(14)");
 
-      
+
             clienteBuilder.Property(c => c.CNPJ).HasColumnType("varchar(18)");
 
-           
+
             clienteBuilder.Property(c => c.Tipo)
                 .HasConversion(
                     tipoCliente => tipoCliente.ToString(),
