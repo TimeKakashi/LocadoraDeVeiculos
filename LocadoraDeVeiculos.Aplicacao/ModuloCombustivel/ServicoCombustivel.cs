@@ -1,9 +1,9 @@
 ﻿using FluentResults;
-using LocadoraDeVeiculos.Dominio.Combustivel;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using Serilog;
 using FluentValidation.Results;
-
+using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
+using System.Security.Cryptography.X509Certificates;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloCombustivel
 {
@@ -16,44 +16,49 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCombustivel
             this.repositorioCombustivelJson = repositorioCombustivelJson;
             this.validadorCombustivel = validadorCombustivel;
         }
-        public Result EditarValores(List<decimal> combustiveis)
+        public Result EditarValores(List<Combustivel> combustiveis)
         {
             Log.Debug("Tentando editar cliente...");
 
-            List<string> erros = ValidarCliente(combustivel);
+            var erros = new List<string>();
+
+            foreach(var item in combustiveis)
+            {
+                if(ValidarCombustivel(item).Count() > 0)
+                    foreach(var item2 in ValidarCombustivel(item))
+                    { erros.Add(item2.ToString());}
+            }
+
 
             if (erros.Count > 0)
                 return Result.Fail(erros);
 
             try
             {
-                repositorioCombustivelJson.EditarValores(combustivel);
+                repositorioCombustivelJson.EditarValores(combustiveis);
 
-                Log.Debug("Cliente {ClienteId} editado com sucesso", combustivel.Id);
+                Log.Debug("Combustivel editado com sucesso");
 
                 return Result.Ok();
             }
             catch (Exception exc)
             {
-                string msgErro = "Falha ao tentar editar cliente.";
+                string msgErro = "Falha ao tentar editar combsutivel.";
 
-                Log.Error(exc, msgErro + "{@c}", combustivel);
+                Log.Error(exc, msgErro + "{@c}", combustiveis);
 
                 return Result.Fail(msgErro);
             }
         }
 
-        private List<string> ValidarCliente(Combustivel combustivel)
+        private List<string> ValidarCombustivel(Combustivel combustivel)
         {
-            ValidationResult resultValidation = validadorCliente.Validate(combustivel);
+            ValidationResult resultValidation = validadorCombustivel.Validate(combustivel);
 
             var erros = new List<string>();
 
             if (resultValidation != null)
                 erros.AddRange(resultValidation.Errors.Select(e => e.ErrorMessage));
-
-            if (NomeDuplicado(combustivel))
-                erros.Add($"Esse nome: '{combustivel.Nome}' já está em uso!");
 
             foreach (string erro in erros)
                 Log.Warning(erro);

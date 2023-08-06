@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocadoraDeVeiculos.Dominio.Combustivel
+namespace LocadoraDeVeiculos.Dominio.ModuloCombustivel
 {
-    public class Gas : Combustivel
+    public class Gasolina : Combustivel
     {
-        public Gas(decimal valor)
+        public Gasolina(decimal valor)
         {
             this.valor = valor;
-            this.nome = "Gas";
+            this.nome = "Gasolina";
         }
     }
 }

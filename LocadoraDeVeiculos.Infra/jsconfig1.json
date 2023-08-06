@@ -1,8 +1,18 @@
 {
-  "ValoresCombustivel": {
-    "Gasolina": 5,
-    "Disel": 4,
-    "Gas": 4,
-    "Alcool": 3
+  "gasolina" : {
+    "valor": 5,
+    "nome": "Gasolina"
+  },
+  "alcool" : {
+    "valor": 4,
+    "nome": "Alcool"
+  },
+  "gas" : {
+    "valor": 2,
+    "nome": "Gás"
+  },
+  "disel" : {
+    "valor": 4,
+    "nome": "Disel"
   }
 }

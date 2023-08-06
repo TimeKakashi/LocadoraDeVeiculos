@@ -1,10 +1,6 @@
-﻿using LocadoraDeVeiculos.Dominio.Combustivel;
-using LocadoraDeVeiculos.Dominio.Compartilhado;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
+using System.Net;
 
 namespace LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON
 {
@@ -22,7 +18,18 @@ namespace LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON
             ctx.gas.valor = listaValores[2].valor;
             ctx.disel.valor = listaValores[3].valor;
 
-            ctx.CarregarArquivo();
+            ctx.GravarTarefasEmArquivo();
+        }
+
+        public List<Combustivel> SelecionarTodos()
+        {
+            return new List<Combustivel>
+            {
+                ctx.gasolina,
+                ctx.alcool,
+                ctx.gas,
+                ctx.disel
+            };
         }
     }
 }

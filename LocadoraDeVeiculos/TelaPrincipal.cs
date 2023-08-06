@@ -1,12 +1,15 @@
 using LocadoraDeVeiculos.Aplicacao.ModuloAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
+using LocadoraDeVeiculos.Aplicacao.ModuloCombustivel;
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
 using LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Compartilhado;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
+using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
@@ -18,6 +21,7 @@ using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloPlanoCobranca;
+using LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON;
 using LocadoraDeVeiculos.ModuloAutomovel;
 using LocadoraDeVeiculos.ModuloCliente;
 using LocadoraDeVeiculos.ModuloFuncionario;
@@ -39,8 +43,10 @@ namespace LocadoraDeVeiculos
         private IRepositorioParceiro repositorioParceiro;
         private IRepositorioCliente repositorioCliente;
         private IRepositorioAutomovel repositorioAutomovel;
+        private IRepositorioCombustivelJson repositorioCombustivelJson;
         private TabelaCliente TabelaCliente;
 
+        private static JsonContext jsonContext = new JsonContext(true);
 
         private ControladorBase controlador;
         public TelaPrincipal()
@@ -75,6 +81,8 @@ namespace LocadoraDeVeiculos
             repositorioCliente = new RepositorioClienteOrm(dbContext);
             repositorioParceiro = new RepositorioParceiroOrm(dbContext);
             repositorioAutomovel = new RepositorioAutomovel(dbContext);
+            repositorioCombustivelJson = new RepositorioCombustivel(jsonContext);
+
         }
         public static TelaPrincipal Instancia
         {
@@ -138,7 +146,12 @@ namespace LocadoraDeVeiculos
 
             var servicoAutomovel = new ServicoAutomovel(repositorioAutomovel, validadorAutomoveis);
 
-            controlador = new ControladorAutomovel(repositorioAutomovel, reposisotiroGrupoAutomovel, servicoAutomovel);
+            var validadorCombsutivel = new ValidadorCombustivel();
+
+            var servicoCombustivel = new ServicoCombustivel(repositorioCombustivelJson, validadorCombsutivel);
+
+            controlador = new ControladorAutomovel(repositorioAutomovel, reposisotiroGrupoAutomovel,
+                servicoAutomovel, repositorioCombustivelJson, servicoCombustivel);
 
             ConfigurarTelaPrincipal(controlador);
         }

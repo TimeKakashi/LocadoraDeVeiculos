@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocadoraDeVeiculos.Dominio.Combustivel
+namespace LocadoraDeVeiculos.Dominio.ModuloCombustivell
 {
     public class Alcool : Combustivel
     {

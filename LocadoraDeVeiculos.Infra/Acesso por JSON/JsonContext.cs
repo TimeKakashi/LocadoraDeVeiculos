@@ -7,13 +7,14 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
-using LocadoraDeVeiculos.Dominio.Combustivel;
+using LocadoraDeVeiculos.Dominio.ModuloCombustivell;
+using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
 
 namespace LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON
 {
     public class JsonContext
     {
-        public const string NOME_ARQUIVO = "4.Infra\\jsconfig1.json";
+        public const string NOME_ARQUIVO = "jsconfig1.json";
 
         public Gasolina gasolina;
         public Disel disel;

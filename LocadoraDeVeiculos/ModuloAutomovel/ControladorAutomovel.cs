@@ -1,6 +1,8 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Aplicacao.ModuloAutomovel;
+using LocadoraDeVeiculos.Aplicacao.ModuloCombustivel;
 using LocadoraDeVeiculos.Compartilhado;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 
@@ -9,15 +11,22 @@ namespace LocadoraDeVeiculos.ModuloAutomovel
     public class ControladorAutomovel : ControladorBase
     {
         private IRepositorioAutomovel repositorioAutomovel;
-        IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
+        private IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
+        private IRepositorioCombustivelJson repositorioCombustivelJson;
+
+        private ServicoCombustivel servicoCombustivel;
         private TabelaAutomovel tabelaAutomovel;
         private ServicoAutomovel servicoAutomovel;
 
-        public ControladorAutomovel(IRepositorioAutomovel repositorioAutomovel, IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, ServicoAutomovel servicoAutomovel)
+        public ControladorAutomovel(IRepositorioAutomovel repositorioAutomovel, IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel,
+            ServicoAutomovel servicoAutomovel, IRepositorioCombustivelJson repositorioCombustivelJson, ServicoCombustivel servicoCombustivel)
         {
             this.repositorioAutomovel = repositorioAutomovel;
             this.reposisotiroGrupoAutomovel = reposisotiroGrupoAutomovel;
             this.servicoAutomovel = servicoAutomovel;
+
+            this.repositorioCombustivelJson = repositorioCombustivelJson;
+            this.servicoCombustivel = servicoCombustivel;
 
             if (tabelaAutomovel == null)
                 tabelaAutomovel = new TabelaAutomovel();
@@ -127,7 +136,15 @@ namespace LocadoraDeVeiculos.ModuloAutomovel
 
         public override void ArrumarPrecos()
         {
-            TelaCombustivelForm telaCombustivel = new TelaCombustivelForm();
+            TelaCombustivelForm telaCombustivel = new TelaCombustivelForm(repositorioCombustivelJson.SelecionarTodos());
+
+            telaCombustivel.ArrumaTela();
+
+            telaCombustivel.onGravarRegistro += servicoCombustivel.EditarValores;
+
+            if (telaCombustivel.ShowDialog() == DialogResult.OK)
+                MessageBox.Show("Valores modificados com sucesso!");
         }
     }
+    
 }

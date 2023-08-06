@@ -1,6 +1,6 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
 
-namespace LocadoraDeVeiculos.Dominio.Combustivel
+namespace LocadoraDeVeiculos.Dominio.ModuloCombustivel
 {
     public class Combustivel : EntidadeBase<Combustivel>
     {

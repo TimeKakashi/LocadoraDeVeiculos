@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocadoraDeVeiculos.Dominio.Combustivel
+namespace LocadoraDeVeiculos.Dominio.ModuloCombustivel
 {
     public class Disel : Combustivel
     {
