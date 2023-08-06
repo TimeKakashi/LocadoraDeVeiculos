@@ -7,10 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="4.2 Massa de Dados\**" />
+    <EmbeddedResource Remove="4.2 Massa de Dados\**" />
+    <None Remove="4.2 Massa de Dados\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="4.1 Acesso a Dados\ModuloCondutor\" />
     <Folder Include="4.1 Acesso a Dados\ModuloCupom\" />
     <Folder Include="4.1 Acesso a Dados\ModuloTaxaServico\" />
-    <Folder Include="4.2 Massa de Dados\" />
     <Folder Include="4.3 PDF\" />
   </ItemGroup>
 

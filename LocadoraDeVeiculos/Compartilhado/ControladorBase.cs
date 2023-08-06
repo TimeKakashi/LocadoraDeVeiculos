@@ -23,5 +23,6 @@
         public abstract UserControl ObterTabela();
         public abstract string ObterTipoCadastro();
         public abstract void CarregarItens();
+        public virtual void ArrumarPrecos() { }
     }
 }

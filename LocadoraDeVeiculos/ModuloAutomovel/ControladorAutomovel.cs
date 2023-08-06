@@ -124,5 +124,10 @@ namespace LocadoraDeVeiculos.ModuloAutomovel
 
             return repositorioAutomovel.SelecionarPorId(id);
         }
+
+        public override void ArrumarPrecos()
+        {
+            TelaCombustivelForm telaCombustivel = new TelaCombustivelForm();
+        }
     }
 }

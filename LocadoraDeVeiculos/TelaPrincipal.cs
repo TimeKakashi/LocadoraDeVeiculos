@@ -254,7 +254,13 @@ namespace LocadoraDeVeiculos
 
         private void btnCombustivel_Click(object sender, EventArgs e)
         {
+            if (controlador == null)
+            {
+                MessageBox.Show("Selecione uma area primerio!");
+                return;
+            }
 
+            controlador.ArrumarPrecos();
         }
     }
 }
