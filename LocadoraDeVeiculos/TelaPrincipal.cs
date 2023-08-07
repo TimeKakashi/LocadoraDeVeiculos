@@ -1,10 +1,12 @@
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
+using LocadoraDeVeiculos.Aplicacao.ModuloCupom;
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
 using LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
+using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
@@ -16,6 +18,7 @@ using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.ModuloCliente;
+using LocadoraDeVeiculos.ModuloCupom;
 using LocadoraDeVeiculos.ModuloFuncionario;
 using LocadoraDeVeiculos.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.ModuloParceiro;
@@ -34,6 +37,7 @@ namespace LocadoraDeVeiculos
         private IRepositorioPlanoCobranca repositorioPlanoCobranca;
         private IRepositorioParceiro repositorioParceiro;
         private IRepositorioCliente repositorioCliente;
+        private IRepositorioCupom repositorioCupom;
         private TabelaCliente TabelaCliente;
 
 
@@ -69,6 +73,7 @@ namespace LocadoraDeVeiculos
             repositorioPlanoCobranca = new RepositorioPlanoCobrancaOrm(dbContext);
             repositorioCliente = new RepositorioClienteOrm(dbContext);
             repositorioParceiro = new RepositorioParceiroOrm(dbContext);
+            repositorioCupom = new RepositorioCupomOrm(dbContext);
         }
         public static TelaPrincipal Instancia
         {
@@ -190,7 +195,13 @@ namespace LocadoraDeVeiculos
 
         private void cuponsEParceirosToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var validadorCupom = new ValidadorCupom();
 
+            var servicoCupom = new ServicoCupom(repositorioParceiro, validadorCupom);
+
+            controlador = new ControladorCupom(repositorioCupom, servicoCupom);
+
+            ConfigurarTelaPrincipal(controlador);
         }
 
         private void preçosToolStripMenuItem_Click(object sender, EventArgs e)

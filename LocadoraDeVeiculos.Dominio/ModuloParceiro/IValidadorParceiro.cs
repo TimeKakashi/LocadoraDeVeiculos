@@ -1,4 +1,5 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloParceiro
 {
     public interface IValidadorParceiro : IValidador<Parceiro>
     {
+        
     }
 }

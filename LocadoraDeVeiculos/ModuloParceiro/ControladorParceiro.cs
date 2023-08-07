@@ -50,7 +50,7 @@ namespace LocadoraDeVeiculos.ModuloParceiro
 
         public override void Editar()
         {
-            Parceiro parceiro = ObterParceiroSelecionado();
+           Parceiro parceiro = ObterParceiroSelecionado();
 
             if (parceiro == null) 
             {

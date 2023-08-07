@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LocadoraDeVeiculos.Dominio.ModuloCupom;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,5 +20,6 @@ namespace LocadoraDeVeiculos.Dominio.Compartilhado
         List<T> SelecionarTodos();
 
         T SelecionarPorId(Guid id);
+        void Editar(Cupom registro);
     }
 }

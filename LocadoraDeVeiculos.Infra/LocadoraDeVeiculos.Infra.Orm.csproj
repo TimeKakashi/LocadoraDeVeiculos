@@ -9,8 +9,6 @@
   <ItemGroup>
     <Folder Include="4.1 Acesso a Dados\ModuloAutomovel\" />
     <Folder Include="4.1 Acesso a Dados\ModuloCondutor\" />
-    <Folder Include="4.1 Acesso a Dados\ModuloCupom\" />
-    <Folder Include="4.1 Acesso a Dados\ModuloTaxaServico\" />
     <Folder Include="4.2 Massa de Dados\" />
     <Folder Include="4.3 PDF\" />
   </ItemGroup>

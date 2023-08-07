@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloParceiro
 {
-    public class MapeadorParceiro : IEntityTypeConfiguration<Parceiro>
+    public class MapeadorParceiroOrm : IEntityTypeConfiguration<Parceiro>
     {
         public void Configure(EntityTypeBuilder<Parceiro> parceiroBuilder) 
         {
