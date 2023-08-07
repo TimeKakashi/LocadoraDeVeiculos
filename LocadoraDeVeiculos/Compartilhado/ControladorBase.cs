@@ -1,4 +1,5 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +29,10 @@ namespace LocadoraDeVeiculos.Compartilhado
         public abstract UserControl ObterTabela();
         public abstract string ObterTipoCadastro();
         public abstract void CarregarItens();
+
+        public override Cliente ObterItemSelecionado()
+        {
+            return listagemClienteControl.ObterClienteSelecionado();
+        }
     }
 }

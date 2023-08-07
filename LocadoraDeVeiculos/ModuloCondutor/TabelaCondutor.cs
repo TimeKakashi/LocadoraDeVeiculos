@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LocadoraDeVeiculos.Dominio.ModuloCondutor;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,16 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         public TabelaCondutor()
         {
             InitializeComponent();
+        }
+
+        internal void AtualizarRegistros(List<Condutor> listaCondutor)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal object ObterIdSelecionado()
+        {
+            throw new NotImplementedException();
         }
     }
 }

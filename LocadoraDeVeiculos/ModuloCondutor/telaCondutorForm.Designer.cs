@@ -35,16 +35,16 @@
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
-            radioButton1 = new RadioButton();
-            comboBox1 = new ComboBox();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            dateTimePicker1 = new DateTimePicker();
+            cmbClientes = new ComboBox();
+            txtCPF = new TextBox();
+            txtNome = new TextBox();
+            txtEmail = new TextBox();
+            txtTelefone = new TextBox();
+            txtCNH = new TextBox();
+            dtpValidadeCNH = new DateTimePicker();
             button1 = new Button();
             button2 = new Button();
+            chkClienteCondutor = new CheckBox();
             SuspendLayout();
             // 
             // label1
@@ -110,68 +110,56 @@
             label7.TabIndex = 6;
             label7.Text = "Telefone:";
             // 
-            // radioButton1
+            // cmbClientes
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(89, 68);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(125, 19);
-            radioButton1.TabIndex = 7;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Cliente é Condutor";
-            radioButton1.UseVisualStyleBackColor = true;
+            cmbClientes.FormattingEnabled = true;
+            cmbClientes.Location = new Point(79, 39);
+            cmbClientes.Name = "cmbClientes";
+            cmbClientes.Size = new Size(303, 23);
+            cmbClientes.TabIndex = 8;
             // 
-            // comboBox1
+            // txtCPF
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(79, 39);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(303, 23);
-            comboBox1.TabIndex = 8;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            txtCPF.Location = new Point(263, 220);
+            txtCPF.Name = "txtCPF";
+            txtCPF.Size = new Size(119, 23);
+            txtCPF.TabIndex = 9;
             // 
-            // textBox1
+            // txtNome
             // 
-            textBox1.Location = new Point(263, 220);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(119, 23);
-            textBox1.TabIndex = 9;
+            txtNome.Location = new Point(79, 110);
+            txtNome.Name = "txtNome";
+            txtNome.Size = new Size(303, 23);
+            txtNome.TabIndex = 10;
             // 
-            // textBox2
+            // txtEmail
             // 
-            textBox2.Location = new Point(79, 110);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(303, 23);
-            textBox2.TabIndex = 10;
+            txtEmail.Location = new Point(79, 163);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(303, 23);
+            txtEmail.TabIndex = 11;
             // 
-            // textBox3
+            // txtTelefone
             // 
-            textBox3.Location = new Point(79, 163);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(303, 23);
-            textBox3.TabIndex = 11;
+            txtTelefone.Location = new Point(79, 220);
+            txtTelefone.Name = "txtTelefone";
+            txtTelefone.Size = new Size(141, 23);
+            txtTelefone.TabIndex = 12;
             // 
-            // textBox4
+            // txtCNH
             // 
-            textBox4.Location = new Point(79, 220);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(141, 23);
-            textBox4.TabIndex = 12;
+            txtCNH.Location = new Point(79, 269);
+            txtCNH.Name = "txtCNH";
+            txtCNH.Size = new Size(141, 23);
+            txtCNH.TabIndex = 13;
             // 
-            // textBox5
+            // dtpValidadeCNH
             // 
-            textBox5.Location = new Point(79, 269);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(141, 23);
-            textBox5.TabIndex = 13;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.CustomFormat = "DD/MM/YYYY";
-            dateTimePicker1.Location = new Point(79, 316);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(141, 23);
-            dateTimePicker1.TabIndex = 14;
+            dtpValidadeCNH.CustomFormat = "DD/MM/YYYY";
+            dtpValidadeCNH.Location = new Point(79, 316);
+            dtpValidadeCNH.Name = "dtpValidadeCNH";
+            dtpValidadeCNH.Size = new Size(141, 23);
+            dtpValidadeCNH.TabIndex = 14;
             // 
             // button1
             // 
@@ -195,21 +183,31 @@
             button2.Text = "Cancelar";
             button2.UseVisualStyleBackColor = true;
             // 
+            // chkClienteCondutor
+            // 
+            chkClienteCondutor.AutoSize = true;
+            chkClienteCondutor.Location = new Point(94, 68);
+            chkClienteCondutor.Name = "chkClienteCondutor";
+            chkClienteCondutor.Size = new Size(126, 19);
+            chkClienteCondutor.TabIndex = 17;
+            chkClienteCondutor.Text = "Cliente é Condutor";
+            chkClienteCondutor.UseVisualStyleBackColor = true;
+            // 
             // telaCondutorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(397, 396);
+            Controls.Add(chkClienteCondutor);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(comboBox1);
-            Controls.Add(radioButton1);
+            Controls.Add(dtpValidadeCNH);
+            Controls.Add(txtCNH);
+            Controls.Add(txtTelefone);
+            Controls.Add(txtEmail);
+            Controls.Add(txtNome);
+            Controls.Add(txtCPF);
+            Controls.Add(cmbClientes);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -232,15 +230,15 @@
         private Label label5;
         private Label label6;
         private Label label7;
-        private RadioButton radioButton1;
-        private ComboBox comboBox1;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
-        private DateTimePicker dateTimePicker1;
+        private ComboBox cmbClientes;
+        private TextBox txtCPF;
+        private TextBox txtNome;
+        private TextBox txtEmail;
+        private TextBox txtTelefone;
+        private TextBox txtCNH;
+        private DateTimePicker dtpValidadeCNH;
         private Button button1;
         private Button button2;
+        private CheckBox chkClienteCondutor;
     }
 }

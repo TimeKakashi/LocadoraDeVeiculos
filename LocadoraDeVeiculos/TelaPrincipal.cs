@@ -187,5 +187,10 @@ namespace LocadoraDeVeiculos
 
             controlador.Excluir();
         }
+
+        internal void AtualizarRodape(string erro)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -15,28 +15,39 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
         public string CPF { get; set; }
         public string CNH { get; set; }
         public DateTime ValidadeCNH { get; set; }
-        public Cliente Cliente { get; set; }
+        public string Telefone { get; set; }
+        public string Email { get; set; }
+        public Guid ClienteId { get; set; } // Adicionando um campo para o ID do cliente associado
 
         public Condutor()
         {
             Id = Guid.NewGuid();
         }
 
-        public Condutor(string nome, string cpf, string cnh, DateTime validadeCNH, Cliente cliente)
+        public Condutor(string nome, string cpf, string cnh, DateTime validadeCNH, string telefone, string email, Guid clienteId)
         {
             Id = Guid.NewGuid();
             Nome = nome;
             CPF = cpf;
             CNH = cnh;
             ValidadeCNH = validadeCNH;
-            Cliente = cliente;
+            Telefone = telefone;
+            Email = email;
+            ClienteId = clienteId;
         }
 
         public override void Atualizar(Condutor registro)
         {
-            throw new NotImplementedException();
+            Nome = registro.Nome;
+            CPF = registro.CPF;
+            CNH = registro.CNH;
+            ValidadeCNH = registro.ValidadeCNH;
+            Telefone = registro.Telefone;
+            Email = registro.Email;
+            ClienteId = registro.ClienteId;
         }
     }
+
 
 
 }
