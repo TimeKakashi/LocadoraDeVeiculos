@@ -71,11 +71,11 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             grid.Columns.AddRange(colunas);
         }
 
-        public void AtualizarRegistros(List<Condutor> listaCondutores)
+        public void AtualizarRegistros(List<Condutor> listaCondutor)
         {
             grid.Rows.Clear();
 
-            foreach (Condutor c in listaCondutores)
+            foreach (Condutor c in listaCondutor)
             {
                 grid.Rows.Add(c.Id,
                               c.Nome,

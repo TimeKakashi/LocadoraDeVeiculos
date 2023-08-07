@@ -50,6 +50,7 @@ namespace LocadoraDeVeiculos
         private IRepositorioCondutor repositorioCondutor;
         private List<Cliente> listaClientes;
         private TabelaCliente TabelaCliente;
+        private TabelaCondutor tabelaCondutor;
 
         private static JsonContext jsonContext = new JsonContext(true);
 
@@ -211,7 +212,7 @@ namespace LocadoraDeVeiculos
 
             var servicoCondutor = new ServicoCondutor(repositorioCondutor, validadorCondutor);
 
-            controlador = new ControladorCondutor(repositorioCondutor, repositorioCliente, servicoCondutor, listaClientes);
+            controlador = new ControladorCondutor(repositorioCondutor, repositorioCliente,  servicoCondutor, listaClientes, tabelaCondutor);
 
             ConfigurarTelaPrincipal(controlador);
         }

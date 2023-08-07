@@ -19,7 +19,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         private TabelaCondutor tabelaCondutor;
         private List<Cliente> listaClientes;
 
-        public ControladorCondutor(IRepositorioCondutor repositorioCondutor, IRepositorioCliente repositorioCliente, ServicoCondutor servicoCondutor, List<Cliente> listaClientes)
+        public ControladorCondutor(IRepositorioCondutor repositorioCondutor, IRepositorioCliente repositorioCliente, ServicoCondutor servicoCondutor, List<Cliente> listaClientes, TabelaCondutor tabelaCondutor)
         {
             this.repositorioCondutor = repositorioCondutor;
             this.repositorioCliente = repositorioCliente;
@@ -27,7 +27,13 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             this.listaClientes = listaClientes;
 
             if (tabelaCondutor == null)
-                tabelaCondutor = new TabelaCondutor();
+            {
+                this.tabelaCondutor = new TabelaCondutor();
+            }
+            else
+            {
+                this.tabelaCondutor = tabelaCondutor;
+            }
 
             CarregarItens();
         }
@@ -37,7 +43,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         public override string ToolTipExcluir => "Excluir Condutor";
         public override string ToolTipFiltrar => "Filtrar Condutor";
         public override string ToolTipPdf => "Gerar Pdf";
-        public override string ToolTipCombustivel => throw new NotImplementedException();
+        public override string ToolTipCombustivel =>"Combustivel";
 
         public override void Inserir()
         {
@@ -114,9 +120,6 @@ namespace LocadoraDeVeiculos.ModuloCondutor
 
         public override UserControl ObterTabela()
         {
-            if (tabelaCondutor == null)
-                tabelaCondutor = new TabelaCondutor();
-
             return tabelaCondutor;
         }
 
@@ -125,27 +128,27 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         private Condutor ObterItemSelecionado()
         {
             var id = tabelaCondutor.ObterIdSelecionado();
-
             return repositorioCondutor.SelecionarPorId(id);
         }
 
         public override void CarregarItens()
         {
-            var listaCondutor = repositorioCondutor.SelecionarTodos();
-
-            tabelaCondutor.AtualizarRegistros(listaCondutor);
+            if (repositorioCondutor != null && repositorioCliente != null)
+            {
+                var listaCondutor = repositorioCondutor.SelecionarTodos();
+                tabelaCondutor.AtualizarRegistros(listaCondutor);
+            }
         }
 
         private Cliente ObterClienteRelacionado()
         {
             var idClienteRelacionado = tabelaCondutor.ObterIdSelecionado();
-
             var clienteRelacionado = repositorioCliente.SelecionarPorId((Guid)idClienteRelacionado);
-
             return clienteRelacionado;
         }
-
     }
+
+
 
 
 
