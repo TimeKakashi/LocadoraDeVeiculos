@@ -19,9 +19,10 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         private TabelaCondutor tabelaCondutor;
         private List<Cliente> listaClientes;
 
-        public ControladorCondutor(IRepositorioCondutor repositorioCondutor, ServicoCondutor servicoCondutor, List<Cliente> listaClientes)
+        public ControladorCondutor(IRepositorioCondutor repositorioCondutor, IRepositorioCliente repositorioCliente, ServicoCondutor servicoCondutor, List<Cliente> listaClientes)
         {
             this.repositorioCondutor = repositorioCondutor;
+            this.repositorioCliente = repositorioCliente;
             this.servicoCondutor = servicoCondutor;
             this.listaClientes = listaClientes;
 
