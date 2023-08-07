@@ -23,6 +23,19 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAutomovel
 
         }
 
+        public Veiculo(string modelo, string marca, string cor, byte[] imagem, decimal kilometragem, string placa, EnumCombusteivel enumCombusteivel, int capacidadeEmLitros, GrupoAutomovel grupoAutomovel, bool emUso) : this(modelo)
+        {
+            Marca = marca;
+            Cor = cor;
+            Imagem = imagem;
+            Kilometragem = kilometragem;
+            Placa = placa;
+            EnumCombusteivel = enumCombusteivel;
+            CapacidadeEmLitros = capacidadeEmLitros;
+            GrupoAutomovel = grupoAutomovel;
+            EmUso = emUso;
+        }
+
         public Veiculo(string modelo)
         {
             this.Modelo = modelo;
