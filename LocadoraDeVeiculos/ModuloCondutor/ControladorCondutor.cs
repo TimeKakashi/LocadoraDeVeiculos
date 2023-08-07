@@ -1,5 +1,8 @@
 ﻿using FluentResults;
+using LocadoraDeVeiculos.Aplicacao.ModuloCondutor;
 using LocadoraDeVeiculos.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
+using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +14,16 @@ namespace LocadoraDeVeiculos.ModuloCondutor
     public class ControladorCondutor : ControladorBase
     {
         private IRepositorioCondutor repositorioCondutor;
+        private IRepositorioCliente repositorioCliente;
         private ServicoCondutor servicoCondutor;
         private TabelaCondutor tabelaCondutor;
+        private List<Cliente> listaClientes;
 
-        public ControladorCondutor(IRepositorioCondutor repositorioCondutor, ServicoCondutor servicoCondutor)
+        public ControladorCondutor(IRepositorioCondutor repositorioCondutor, ServicoCondutor servicoCondutor, List<Cliente> listaClientes)
         {
             this.repositorioCondutor = repositorioCondutor;
             this.servicoCondutor = servicoCondutor;
+            this.listaClientes = listaClientes;
 
             if (tabelaCondutor == null)
                 tabelaCondutor = new TabelaCondutor();
@@ -26,20 +32,22 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         }
 
         public override string ToolTipInserir => "Inserir Condutor";
-
         public override string ToolTipEditar => "Editar Condutor";
-
         public override string ToolTipExcluir => "Excluir Condutor";
-
         public override string ToolTipFiltrar => "Filtrar Condutor";
-
         public override string ToolTipPdf => "Gerar Pdf";
+        public override string ToolTipCombustivel => throw new NotImplementedException();
 
         public override void Inserir()
         {
-            telaCondutorForm telaCondutor = new telaCondutorForm();
+            var telaCondutor = new telaCondutorForm(listaClientes);
+            telaCondutor.ReceberClienteRelacionado(ObterClienteRelacionado());
 
-            telaCondutor.onGravarRegistro += servicoCondutor.Inserir;
+            telaCondutor.OnGravarRegistro += (condutor) =>
+            {
+                Result resultado = servicoCondutor.Inserir(condutor);
+                return resultado;
+            };
 
             DialogResult result = telaCondutor.ShowDialog();
 
@@ -49,7 +57,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
 
         public override void Editar()
         {
-            Condutor condutor = ObterItemSelecionado();
+            var condutor = ObterItemSelecionado();
 
             if (condutor == null)
             {
@@ -57,9 +65,14 @@ namespace LocadoraDeVeiculos.ModuloCondutor
                 return;
             }
 
-            telaCondutorForm telaCondutor = new telaCondutorForm();
+            var telaCondutor = new telaCondutorForm(listaClientes);
             telaCondutor.ArrumaTela(condutor);
-            telaCondutor.onGravarRegistro += servicoCondutor.Editar;
+
+            telaCondutor.OnGravarRegistro += (condutorEditado) =>
+            {
+                Result resultado = servicoCondutor.Editar(condutorEditado);
+                return resultado;
+            };
 
             DialogResult result = telaCondutor.ShowDialog();
 
@@ -121,6 +134,18 @@ namespace LocadoraDeVeiculos.ModuloCondutor
 
             tabelaCondutor.AtualizarRegistros(listaCondutor);
         }
+
+        private Cliente ObterClienteRelacionado()
+        {
+            var idClienteRelacionado = tabelaCondutor.ObterIdSelecionado();
+
+            var clienteRelacionado = repositorioCliente.SelecionarPorId((Guid)idClienteRelacionado);
+
+            return clienteRelacionado;
+        }
+
     }
+
+
 
 }

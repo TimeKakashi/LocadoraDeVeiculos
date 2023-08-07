@@ -26,10 +26,14 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             chkClienteCondutor.Checked = true;
             chkClienteCondutor.CheckedChanged += chkClienteCondutor_CheckedChanged;
 
-            // Preencher a ComboBox de clientes com a lista fornecida
+            
             cmbClientes.DataSource = listaClientes;
             cmbClientes.DisplayMember = "Nome";
             cmbClientes.ValueMember = "Id";
+        }
+
+        public telaCondutorForm()
+        {
         }
 
         public void ArrumaTela(Condutor condutor, bool inserir = false)

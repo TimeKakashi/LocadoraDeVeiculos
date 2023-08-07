@@ -19,10 +19,12 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
             RuleFor(c => c.Nome).NotEmpty().NotNull().MinimumLength(4);
             RuleFor(c => c.CNH).NotEmpty().NotNull();
             RuleFor(c => c.ValidadeCNH).NotEmpty().NotNull();
-            RuleFor(c => c.Tipo).NotNull().IsInEnum();
-            RuleFor(c => c.CPF).NotEmpty().NotNull().When(c => c.Tipo == Condutor.TipoCondutor.PessoaFisica);
+            RuleFor(c => c.Telefone).NotEmpty().NotNull();
+            RuleFor(c => c.Email).NotEmpty().NotNull().EmailAddress();
+            RuleFor(c => c.CPF).NotEmpty().NotNull();
         }
     }
+
 
 
 }

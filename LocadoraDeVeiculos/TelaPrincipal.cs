@@ -1,6 +1,7 @@
 using LocadoraDeVeiculos.Aplicacao.ModuloAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
 using LocadoraDeVeiculos.Aplicacao.ModuloCombustivel;
+using LocadoraDeVeiculos.Aplicacao.ModuloCondutor;
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
@@ -10,6 +11,7 @@ using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
+using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
@@ -24,6 +26,7 @@ using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON;
 using LocadoraDeVeiculos.ModuloAutomovel;
 using LocadoraDeVeiculos.ModuloCliente;
+using LocadoraDeVeiculos.ModuloCondutor;
 using LocadoraDeVeiculos.ModuloFuncionario;
 using LocadoraDeVeiculos.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.ModuloParceiro;
@@ -45,10 +48,14 @@ namespace LocadoraDeVeiculos
         private IRepositorioAutomovel repositorioAutomovel;
         private IRepositorioCombustivelJson repositorioCombustivelJson;
         private TabelaCliente TabelaCliente;
+        private IRepositorioCondutor repositorioCondutor;
+        
 
         private static JsonContext jsonContext = new JsonContext(true);
 
         private ControladorBase controlador;
+        private List<Cliente> listaClientes;
+
         public TelaPrincipal()
         {
             InitializeComponent();
@@ -202,8 +209,15 @@ namespace LocadoraDeVeiculos
 
         private void condutoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var validadorCondutor = new ValidadorCondutor(repositorioCliente);
 
+            var servicoCondutor = new ServicoCondutor(repositorioCondutor, validadorCondutor);
+
+            controlador = new ControladorCondutor(repositorioCondutor, servicoCondutor, listaClientes);
+
+            ConfigurarTelaPrincipal(controlador);
         }
+
 
         private void aluguéisToolStripMenuItem_Click(object sender, EventArgs e)
         {
