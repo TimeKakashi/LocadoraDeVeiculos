@@ -5,7 +5,7 @@
 namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 {
     /// <inheritdoc />
-    public partial class AdicionandoTabelas : Migration
+    public partial class AdicionandoTabelasNovas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

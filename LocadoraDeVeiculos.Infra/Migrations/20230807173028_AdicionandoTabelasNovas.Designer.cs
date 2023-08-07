@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 {
     [DbContext(typeof(LocadoraDeVeiculosDbContext))]
-    [Migration("20230804205341_AdicionandoTabelas")]
-    partial class AdicionandoTabelas
+    [Migration("20230807173028_AdicionandoTabelasNovas")]
+    partial class AdicionandoTabelasNovas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
