@@ -19,6 +19,8 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
         public string Email { get; set; }
         public Guid ClienteId { get; set; } // Adicionando um campo para o ID do cliente associado
 
+        public Cliente Cliente { get; set; } // Propriedade de navegação para o cliente associado
+
         public Condutor()
         {
             Id = Guid.NewGuid();
@@ -47,6 +49,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
             ClienteId = registro.ClienteId;
         }
     }
+
 
 
 

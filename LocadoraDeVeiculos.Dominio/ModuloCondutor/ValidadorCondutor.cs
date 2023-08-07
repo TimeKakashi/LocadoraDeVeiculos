@@ -11,6 +11,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
     public class ValidadorCondutor : AbstractValidator<Condutor>, IValidadorCondutor
     {
         private readonly IRepositorioCliente repositorioCliente;
+        private IRepositorioCondutor repositorioCondutor;
 
         public ValidadorCondutor(IRepositorioCliente repositorioCliente)
         {
@@ -22,6 +23,11 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
             RuleFor(c => c.Telefone).NotEmpty().NotNull();
             RuleFor(c => c.Email).NotEmpty().NotNull().EmailAddress();
             RuleFor(c => c.CPF).NotEmpty().NotNull();
+        }
+
+        public ValidadorCondutor(IRepositorioCondutor repositorioCondutor)
+        {
+            this.repositorioCondutor = repositorioCondutor;
         }
     }
 
