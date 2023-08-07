@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LocadoraDeVeiculos.Dominio.Compartilhado;
+﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloCliente
 {
@@ -26,14 +21,14 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
         public string Estado { get; set; }
         public string Email { get; set; }
 
-       
+
         public string CPF { get; set; }
 
-       
+
         public string CNPJ { get; set; }
         public Cliente()
         {
-            
+
         }
 
         public Cliente(TipoCliente tipo, string nome, string telefone, string email, string bairro, string cidade, string estado, string numero, string rua, string cpfOuCnpj)
@@ -64,7 +59,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
 
         public override void Atualizar(Cliente registro)
         {
-           
+
         }
     }
 

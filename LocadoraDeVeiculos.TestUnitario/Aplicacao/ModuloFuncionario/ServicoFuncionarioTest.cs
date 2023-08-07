@@ -1,14 +1,13 @@
 ﻿using FluentAssertions;
 using FluentResults;
+using FluentResults.Extensions.FluentAssertions;
+using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
-using Moq;
-using FluentResults.Extensions.FluentAssertions;
-using System.Net.Http.Headers;
-using FluentValidation.Results;
 using LocadoraDeVeiculos.TestUnitario.Compartilhado;
+using Moq;
 
-namespace LocadoraDeVeiculos.TestUnitario.Aplicacao
+namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloFuncionario
 {
     [TestClass]
 
@@ -92,7 +91,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao
         }
 
         [TestMethod]
-        public void Deve_editar_funcionario_caso_ele_for_valido() 
+        public void Deve_editar_funcionario_caso_ele_for_valido()
         {
             var funcionario1 = new Funcionario("jose", 1500, DateTime.Today);
 
@@ -103,7 +102,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao
         }
 
         [TestMethod]
-        public void Nao_deve_editar_funcionario_caso_ele_seja_invalido() 
+        public void Nao_deve_editar_funcionario_caso_ele_seja_invalido()
         {
             //arrange
             validadorMock.Setup(x => x.Validate(It.IsAny<Funcionario>()))
@@ -123,7 +122,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao
         }
 
         [TestMethod]
-        public void Nao_deve_editar_funcionario_caso_o_nome_ja_esteja_cadastrado() 
+        public void Nao_deve_editar_funcionario_caso_o_nome_ja_esteja_cadastrado()
         {
             //arrange
             repositorioFuncionarioMock.Setup(x => x.SelecionarPorNome("koe"))
@@ -167,7 +166,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao
 
         [TestMethod]
 
-        public void Deve_tratar_erro_caso_ocorra_falha_ao_tentar_editar_funcionario() 
+        public void Deve_tratar_erro_caso_ocorra_falha_ao_tentar_editar_funcionario()
         {
             repositorioFuncionarioMock.Setup(x => x.Editar(It.IsAny<Funcionario>()))
                 .Throws(() =>
@@ -185,44 +184,44 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao
         public void Deve_excluir_funcionario_caso_ele_esteja_cadastrada() //cenário 1
         {
             //arrange
-            var disciplina = new Funcionario("pedro", 100, DateTime.Today);
+            var func = new Funcionario("pedro", 100, DateTime.Today);
 
-            repositorioFuncionarioMock.Setup(x => x.Existe(disciplina))
+            repositorioFuncionarioMock.Setup(x => x.Existe(func))
                .Returns(() =>
                {
                    return true;
                });
 
-            var resultado = servicoFuncionario.Excluir(disciplina);
+            var resultado = servicoFuncionario.Excluir(func);
 
             //assert 
             resultado.Should().BeSuccess();
-            repositorioFuncionarioMock.Verify(x => x.Excluir(disciplina), Times.Once());
+            repositorioFuncionarioMock.Verify(x => x.Excluir(func), Times.Once());
         }
 
         [TestMethod]
         public void Nao_deve_excluir_funcionario_caso_ele_nao_esteja_cadastrada() //cenário 2
         {
-            var disciplina = new Funcionario("pedro", 100, DateTime.Today);
+            var func = new Funcionario("pedro", 100, DateTime.Today);
 
-            repositorioFuncionarioMock.Setup(x => x.Existe(disciplina))
+            repositorioFuncionarioMock.Setup(x => x.Existe(func))
                .Returns(() =>
                {
                    return false;
                });
 
-            var resultado = servicoFuncionario.Excluir(disciplina);
+            var resultado = servicoFuncionario.Excluir(func);
 
             resultado.Should().BeFailure();
-            repositorioFuncionarioMock.Verify(x => x.Excluir(disciplina), Times.Never());
+            repositorioFuncionarioMock.Verify(x => x.Excluir(func), Times.Never());
         }
 
         [TestMethod]
         public void Nao_deve_excluir_funcionario_caso_ele_esteja_relacionada_com_materia() //cenário 3
         {
-            var disciplina = new Funcionario("pedro", 100, DateTime.Today);
+            var func = new Funcionario("pedro", 100, DateTime.Today);
 
-            repositorioFuncionarioMock.Setup(x => x.Existe(disciplina))
+            repositorioFuncionarioMock.Setup(x => x.Existe(func))
                .Returns(() =>
                {
                    return true;
@@ -234,7 +233,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao
                     return SqlExceptionCreator.NewSqlException(errorMessage: "FK_TBFuncionario_TBAluguel");
                 });
 
-            Result resultado = servicoFuncionario.Excluir(disciplina);
+            Result resultado = servicoFuncionario.Excluir(func);
 
             resultado.Should().BeFailure();
         }
@@ -242,16 +241,16 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao
         [TestMethod]
         public void Deve_tratar_erro_caso_ocorra_falha_ao_tentar_excluir_funcionario()
         {
-            var disciplina = new Funcionario("pedro", 100, DateTime.Today);
+            var func = new Funcionario("pedro", 100, DateTime.Today);
 
-            repositorioFuncionarioMock.Setup(x => x.Existe(disciplina))
+            repositorioFuncionarioMock.Setup(x => x.Existe(func))
               .Throws(() =>
               {
                   return SqlExceptionCreator.NewSqlException();
               });
 
             //action
-            Result resultado = servicoFuncionario.Excluir(disciplina);
+            Result resultado = servicoFuncionario.Excluir(func);
 
             //assert 
             resultado.Should().BeFailure();

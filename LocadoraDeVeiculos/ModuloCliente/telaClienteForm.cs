@@ -1,15 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LocadoraDeVeiculos.ModuloCliente
 {
@@ -21,6 +12,7 @@ namespace LocadoraDeVeiculos.ModuloCliente
         public telaClienteForm()
         {
             InitializeComponent();
+            this.ConfigurarDialog();
             rbtnPessoaFisica.Checked = true;
             rbtnPessoaFisica.CheckedChanged += rbtnPessoaFisica_CheckedChanged;
             rbtnPessoaJuridica.CheckedChanged += rbtnPessoaJuridica_CheckedChanged;

@@ -2,11 +2,6 @@
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.ModuloCliente
 {
@@ -21,7 +16,7 @@ namespace LocadoraDeVeiculos.ModuloCliente
             this.repositorioCliente = repositorioCliente;
             this.servicoCliente = servicoCliente;
 
-            
+
             if (listagemClienteControl == null)
             {
                 listagemClienteControl = new TabelaCliente();
@@ -32,13 +27,12 @@ namespace LocadoraDeVeiculos.ModuloCliente
             CarregarItens();
         }
 
-
-
         public override string ToolTipInserir => "Inserir Cliente";
         public override string ToolTipEditar => "Editar Cliente";
         public override string ToolTipExcluir => "Excluir Cliente";
         public override string ToolTipFiltrar => "Filtrar Cliente";
         public override string ToolTipPdf => "Gerar PDF";
+        public override string ToolTipCombustivel => "Atualizar Valores Combustível";
 
         public override void Inserir()
         {
@@ -107,7 +101,7 @@ namespace LocadoraDeVeiculos.ModuloCliente
         {
             if (listagemClienteControl == null)
                 listagemClienteControl = new TabelaCliente();
-            
+
             return listagemClienteControl;
         }
 

@@ -13,17 +13,17 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca
 
         public PlanoCobranca()
         {
-            
+
         }
 
-        public PlanoCobranca( planoCobranca plano, decimal valorDiaria, decimal precoKm)
+        public PlanoCobranca(planoCobranca plano, decimal valorDiaria, decimal precoKm)
         {
             Plano = plano;
             ValorDiaria = valorDiaria;
             PrecoKm = precoKm;
         }
 
-        public PlanoCobranca( planoCobranca plano, decimal valorDiaria, decimal precoKm, int kmDisponivel1, GrupoAutomovel grupo) : this(plano, valorDiaria, precoKm)
+        public PlanoCobranca(planoCobranca plano, decimal valorDiaria, decimal precoKm, int kmDisponivel1, GrupoAutomovel grupo) : this(plano, valorDiaria, precoKm)
         {
             KmDisponivel = kmDisponivel1;
         }

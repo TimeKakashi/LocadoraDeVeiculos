@@ -1,6 +1,5 @@
 ﻿using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
-using System.Security.Cryptography.X509Certificates;
 
 namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario
 {

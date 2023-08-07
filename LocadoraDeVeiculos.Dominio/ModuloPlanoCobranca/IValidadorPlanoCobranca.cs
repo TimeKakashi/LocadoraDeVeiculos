@@ -4,6 +4,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca
 {
     public interface IValidadorPlanoCobranca : IValidador<PlanoCobranca>
     {
-        
+
     }
 }

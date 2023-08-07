@@ -1,16 +1,6 @@
-﻿using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
-using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
+﻿using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
 using LocadoraDeVeiculos.Compartilhado;
-using LocadoraDeVeiculos.Dominio.Compartilhado;
-using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
-using LocadoraDeVeiculos.ModuloFuncionario;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LocadoraDeVeiculos.ModuloParceiro
 {
@@ -25,7 +15,7 @@ namespace LocadoraDeVeiculos.ModuloParceiro
             this.repositorioParceiro = repositorioParceiro;
             this.servicoParceiro = servicoParceiro;
 
-            if(tabelaParceiro == null)
+            if (tabelaParceiro == null)
                 tabelaParceiro = new TabelaParceiro();
 
             CarregarItens();
@@ -41,6 +31,9 @@ namespace LocadoraDeVeiculos.ModuloParceiro
 
         public override string ToolTipPdf => "Gerar Pdf";
 
+        public override string ToolTipCombustivel => "Atualizar Valores Combustível";
+
+
         public override void CarregarItens()
         {
             var listaParceiro = repositorioParceiro.SelecionarTodos();
@@ -52,7 +45,7 @@ namespace LocadoraDeVeiculos.ModuloParceiro
         {
             Parceiro parceiro = ObterParceiroSelecionado();
 
-            if (parceiro == null) 
+            if (parceiro == null)
             {
                 MessageBox.Show("Selecione um parceiro primeiro!", "Edição de parceiro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -81,7 +74,7 @@ namespace LocadoraDeVeiculos.ModuloParceiro
         {
             var parceiro = ObterParceiroSelecionado();
 
-            if (parceiro == null) 
+            if (parceiro == null)
             {
                 MessageBox.Show("Selecione um parceiro primeiro!",
                     "Exclusão de parceiro",
@@ -102,7 +95,7 @@ namespace LocadoraDeVeiculos.ModuloParceiro
             }
         }
 
-       
+
 
         public override void Inserir()
         {
@@ -127,6 +120,6 @@ namespace LocadoraDeVeiculos.ModuloParceiro
         }
 
         public override string ObterTipoCadastro() => "Cadastro de Parceiro";
-       
+
     }
 }

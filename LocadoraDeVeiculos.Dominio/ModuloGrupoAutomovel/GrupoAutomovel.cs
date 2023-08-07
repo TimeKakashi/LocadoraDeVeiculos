@@ -1,12 +1,6 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel
 {
@@ -20,9 +14,14 @@ namespace LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel
         {
             Nome = nome;
         }
+
+        public GrupoAutomovel(string nome, Guid id) : this(nome)
+        {
+            this.Id = id;
+        }
         public GrupoAutomovel()
         {
-            
+
         }
         public override void Atualizar(GrupoAutomovel registro)
         {
@@ -39,7 +38,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel
             return obj is GrupoAutomovel grupo &&
                    Id == grupo.Id &&
                    Nome == grupo.Nome;
-                   
+
         }
     }
 }

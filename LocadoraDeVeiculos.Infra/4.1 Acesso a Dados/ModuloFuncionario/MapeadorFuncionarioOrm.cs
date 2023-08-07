@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using Microsoft.EntityFrameworkCore;
-using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario
 {

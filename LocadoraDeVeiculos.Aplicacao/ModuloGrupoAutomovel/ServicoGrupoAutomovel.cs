@@ -1,18 +1,17 @@
 ﻿using FluentResults;
+using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using Serilog;
 using System.Data.SqlClient;
-using FluentValidation.Results;
-using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel
 {
     public class ServicoGrupoAutomovel : ServicoBase<GrupoAutomovel>
     {
         IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
-        ValidadorGrupoAutomovel validadorGrupo;
-        public ServicoGrupoAutomovel(IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, ValidadorGrupoAutomovel validadorGrupo)
+        IValidadorGrupoAutomovel validadorGrupo;
+        public ServicoGrupoAutomovel(IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, IValidadorGrupoAutomovel validadorGrupo)
         {
             this.reposisotiroGrupoAutomovel = reposisotiroGrupoAutomovel;
             this.validadorGrupo = validadorGrupo;

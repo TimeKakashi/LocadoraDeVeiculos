@@ -2,12 +2,7 @@
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using Serilog;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloCliente
 {

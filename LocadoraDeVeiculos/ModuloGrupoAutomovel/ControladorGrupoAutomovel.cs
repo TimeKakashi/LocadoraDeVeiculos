@@ -1,7 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Compartilhado;
-using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 
 namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
@@ -32,6 +31,9 @@ namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
         public override string ToolTipFiltrar => "Filtrar Grupo de Automovel";
 
         public override string ToolTipPdf => "Gerar pdf do Grupo de Automovel";
+
+        public override string ToolTipCombustivel => "Atualizar Valores Combustível";
+
 
         public override void CarregarItens()
         {

@@ -25,21 +25,48 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloAutomovel.Veiculo", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CapacidadeEmLitros")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Cor")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<int>("EmUso")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnumCombusteivel")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("GrupoAutomovelId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<byte[]>("Imagem")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<decimal>("Kilometragem")
+                        .HasColumnType("decimal(8,2)");
+
+                    b.Property<string>("Marca")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
                     b.Property<string>("Modelo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Placa")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("GrupoAutomovelId");
 
-                    b.ToTable("Veiculo");
+                    b.ToTable("TBAutomovel", (string)null);
                 });
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloCliente.Cliente", b =>
@@ -178,7 +205,8 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                         .WithMany("Veiculos")
                         .HasForeignKey("GrupoAutomovelId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_TBAutomovel_TBGrupoAutomovel");
 
                     b.Navigation("GrupoAutomovel");
                 });
