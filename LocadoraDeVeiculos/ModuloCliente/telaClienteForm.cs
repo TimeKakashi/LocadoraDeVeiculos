@@ -1,15 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LocadoraDeVeiculos.ModuloCliente
 {
@@ -21,8 +12,12 @@ namespace LocadoraDeVeiculos.ModuloCliente
         public telaClienteForm()
         {
             InitializeComponent();
+            this.ConfigurarDialog();
             rbtnPessoaFisica.Checked = true;
+            rbtnPessoaFisica.CheckedChanged += rbtnPessoaFisica_CheckedChanged;
+            rbtnPessoaJuridica.CheckedChanged += rbtnPessoaJuridica_CheckedChanged;
         }
+
 
         public void ArrumaTela(Cliente cliente)
         {
@@ -88,7 +83,13 @@ namespace LocadoraDeVeiculos.ModuloCliente
             txtCPF.Enabled = !rbtnPessoaJuridica.Checked;
         }
 
-        private void btnGravar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             this.cliente = ObterCliente();
 
@@ -98,20 +99,15 @@ namespace LocadoraDeVeiculos.ModuloCliente
             {
                 string erro = resultado.Errors[0].Message;
 
-                // Exibir mensagem de erro ou tratar de acordo com a necessidade
-                // ...
+                DialogResult = DialogResult.None;
+
+                TelaPrincipal.Instancia.AtualizarRodape(erro);
             }
             else
             {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
         }
     }
 

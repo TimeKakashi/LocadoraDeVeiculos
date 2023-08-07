@@ -1,11 +1,4 @@
-﻿using LocadoraDeVeiculos.Dominio.ModuloCupom;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LocadoraDeVeiculos.Dominio.Compartilhado
+﻿namespace LocadoraDeVeiculos.Dominio.Compartilhado
 {
     public interface IRepositorioBase<T> where T : EntidadeBase<T>
     {
@@ -17,7 +10,7 @@ namespace LocadoraDeVeiculos.Dominio.Compartilhado
 
         bool Existe(T registro);
 
-        List<T> SelecionarTodos();
+        List<T> SelecionarTodos(bool Insercao = false, bool Insercao2 = false);
 
         T SelecionarPorId(Guid id);
         void Editar(Cupom registro);

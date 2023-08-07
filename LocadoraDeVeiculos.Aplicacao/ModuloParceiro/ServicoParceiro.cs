@@ -2,12 +2,7 @@
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using Serilog;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloParceiro
 {
@@ -15,7 +10,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloParceiro
     {
         public IRepositorioParceiro repositorioParceiro;
         public IValidadorParceiro validadorParceiro;
-        public ServicoParceiro(IRepositorioParceiro repositorioParceiro, IValidadorParceiro validadorparceiro) 
+        public ServicoParceiro(IRepositorioParceiro repositorioParceiro, IValidadorParceiro validadorparceiro)
         {
             this.repositorioParceiro = repositorioParceiro;
             this.validadorParceiro = validadorparceiro;
@@ -27,7 +22,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloParceiro
 
             List<string> erros = ValidarRegistro(registro);
 
-            if (erros.Count() > 0) 
+            if (erros.Count() > 0)
                 return Result.Fail(erros);
 
             try
@@ -95,7 +90,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloParceiro
             List<string> erros = ValidarRegistro(registro);
 
             if (erros.Count() > 0)
-                return Result.Fail(erros); 
+                return Result.Fail(erros);
 
             try
             {
@@ -103,7 +98,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloParceiro
 
                 Log.Debug("Parceiro {ParceiroId} inserida com sucesso", registro.Id);
 
-                return Result.Ok(); 
+                return Result.Ok();
             }
             catch (Exception exc)
             {
@@ -111,7 +106,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloParceiro
 
                 Log.Error(exc, msgErro + "{@d}", registro);
 
-                return Result.Fail(msgErro); 
+                return Result.Fail(msgErro);
             }
         }
 
@@ -136,7 +131,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloParceiro
 
         }
 
-        private  bool NomeDuplicado(Parceiro registro)
+        private bool NomeDuplicado(Parceiro registro)
         {
             Parceiro parceiroEncontrado = repositorioParceiro.SelecionarPorNome(registro.Nome);
 

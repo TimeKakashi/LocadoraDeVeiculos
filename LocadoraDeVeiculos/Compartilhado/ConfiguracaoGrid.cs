@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LocadoraDeVeiculos.Compartilhado
+﻿namespace LocadoraDeVeiculos.Compartilhado
 {
-    public static  class ConfiguracaoGrid
+    public static class ConfiguracaoGrid
     {
         public static void ConfigurarGridSomenteLeitura(DataGridView grid)
         {

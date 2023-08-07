@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
-using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using Serilog;
 using System.Data.SqlClient;
@@ -11,12 +11,15 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca
     public class ServicoPlanoCobranca : ServicoBase<PlanoCobranca>
     {
         private IRepositorioPlanoCobranca repositorioPlanoCobranca;
+        private IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
+
         private ValidadorPlanoCobranca validadorPlano;
 
-        public ServicoPlanoCobranca(IRepositorioPlanoCobranca repositorioPlanoCobranca, ValidadorPlanoCobranca validadorPlano)
+        public ServicoPlanoCobranca(IRepositorioPlanoCobranca repositorioPlanoCobranca, IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, ValidadorPlanoCobranca validadorPlano)
         {
             this.repositorioPlanoCobranca = repositorioPlanoCobranca;
             this.validadorPlano = validadorPlano;
+            this.reposisotiroGrupoAutomovel = reposisotiroGrupoAutomovel;
         }
 
         public override Result Inserir(PlanoCobranca plano)
@@ -118,6 +121,11 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca
             ValidationResult resultValidation = validadorPlano.Validate(plano);
 
             var erros = new List<string>();
+
+            var grupo = reposisotiroGrupoAutomovel.SelecionarPorNome(plano.GrupoAutomovel.Nome);
+
+            if (grupo.Planos.Any(x => x.Plano == plano.Plano))
+                erros.Add($"Este Grupo de Automovel ja possui um {plano.Plano}");
 
             if (resultValidation != null)
                 erros.AddRange(resultValidation.Errors.Select(e => e.ErrorMessage));

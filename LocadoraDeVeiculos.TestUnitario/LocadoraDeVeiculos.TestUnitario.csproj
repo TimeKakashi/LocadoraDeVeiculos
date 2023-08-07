@@ -11,6 +11,10 @@
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.11.0" />
     <PackageReference Include="FluentResults.Extensions.FluentAssertions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
@@ -25,7 +29,6 @@
     <Folder Include="Dominio\ModuloCliente\" />
     <Folder Include="Dominio\ModuloCondutor\" />
     <Folder Include="Dominio\ModuloCupom\" />
-    <Folder Include="Dominio\ModuloFuncionario\" />
     <Folder Include="Dominio\ModuloGrupoAutomovel\" />
     <Folder Include="Dominio\ModuloParceiro\" />
     <Folder Include="Dominio\ModuloPlanoCobranca\" />
@@ -35,6 +38,7 @@
   <ItemGroup>
     <ProjectReference Include="..\LocadoraDeVeiculos.Aplicacao\LocadoraDeVeiculos.Aplicacao.csproj" />
     <ProjectReference Include="..\LocadoraDeVeiculos.Dominio\LocadoraDeVeiculos.Dominio.csproj" />
+    <ProjectReference Include="..\LocadoraDeVeiculos.Infra\LocadoraDeVeiculos.Infra.Orm.csproj" />
   </ItemGroup>
 
 </Project>

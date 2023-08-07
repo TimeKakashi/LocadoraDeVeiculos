@@ -1,0 +1,18 @@
+{
+  "gasolina" : {
+    "valor": 5,
+    "nome": "Gasolina"
+  },
+  "alcool" : {
+    "valor": 4,
+    "nome": "Alcool"
+  },
+  "gas" : {
+    "valor": 2,
+    "nome": "Gás"
+  },
+  "disel" : {
+    "valor": 4,
+    "nome": "Disel"
+  }
+}

@@ -9,6 +9,8 @@ namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
         public TelaGrupoAutomovelForm()
         {
             InitializeComponent();
+            this.ConfigurarDialog();
+
         }
 
         public event GravarRegistroDelegate<GrupoAutomovel> onGravarRegistro;
@@ -18,13 +20,13 @@ namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
         {
             this.grupoAutomovel = grupo;
 
-            if(!insercao)
+            if (!insercao)
                 txNome.Text = grupo.Nome;
         }
 
         public GrupoAutomovel ObterGrupo()
         {
-           grupoAutomovel.Nome = txNome.Text;
+            grupoAutomovel.Nome = txNome.Text;
 
             return grupoAutomovel;
         }
@@ -39,7 +41,7 @@ namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
             {
                 string erro = resultado.Errors[0].Message;
 
-                //TelaPrincipal.Instancia.AtualizarRodape(erro);
+                TelaPrincipal.Instancia.AtualizarRodape(erro);
 
                 DialogResult = DialogResult.None;
             }

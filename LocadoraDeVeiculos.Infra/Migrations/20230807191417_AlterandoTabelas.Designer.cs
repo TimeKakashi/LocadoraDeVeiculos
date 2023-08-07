@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 {
     [DbContext(typeof(LocadoraDeVeiculosDbContext))]
-    [Migration("20230802202625_tabela")]
-    partial class tabela
+    [Migration("20230807191417_AlterandoTabelas")]
+    partial class AlterandoTabelas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,17 +28,48 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloAutomovel.Veiculo", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("GrupoAutomovelId")
+                    b.Property<int>("CapacidadeEmLitros")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Cor")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<int>("EmUso")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnumCombusteivel")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("GrupoAutomovelId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("Imagem")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<decimal>("Kilometragem")
+                        .HasColumnType("decimal(8,2)");
+
+                    b.Property<string>("Marca")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Modelo")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Placa")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("GrupoAutomovelId");
 
-                    b.ToTable("Veiculo");
+                    b.ToTable("TBAutomovel", (string)null);
                 });
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloCliente.Cliente", b =>
@@ -94,6 +125,44 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TBCliente", (string)null);
+                });
+
+            modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloCondutor.Condutor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CNH")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("CPF")
+                        .IsRequired()
+                        .HasColumnType("varchar(14)");
+
+                    b.Property<Guid>("ClienteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime>("ValidadeCNH")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.ToTable("TBCondutor", (string)null);
                 });
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloFuncionario.Funcionario", b =>
@@ -173,24 +242,43 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloAutomovel.Veiculo", b =>
                 {
-                    b.HasOne("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", null)
+                    b.HasOne("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", "GrupoAutomovel")
                         .WithMany("Veiculos")
-                        .HasForeignKey("GrupoAutomovelId");
+                        .HasForeignKey("GrupoAutomovelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_TBAutomovel_TBGrupoAutomovel");
+
+                    b.Navigation("GrupoAutomovel");
+                });
+
+            modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloCondutor.Condutor", b =>
+                {
+                    b.HasOne("LocadoraDeVeiculos.Dominio.ModuloCliente.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
                 });
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca.PlanoCobranca", b =>
                 {
                     b.HasOne("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", "GrupoAutomovel")
-                        .WithMany()
+                        .WithMany("Planos")
                         .HasForeignKey("GrupoAutomovelId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_TBPlanoCobranca_TBGrupoAutomovel");
 
                     b.Navigation("GrupoAutomovel");
                 });
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", b =>
                 {
+                    b.Navigation("Planos");
+
                     b.Navigation("Veiculos");
                 });
 #pragma warning restore 612, 618

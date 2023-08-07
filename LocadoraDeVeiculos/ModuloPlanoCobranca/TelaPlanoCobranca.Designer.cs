@@ -71,6 +71,7 @@
             // txKmDisponiveis
             // 
             txKmDisponiveis.AccessibleRole = AccessibleRole.None;
+            txKmDisponiveis.Enabled = false;
             txKmDisponiveis.Location = new Point(106, 164);
             txKmDisponiveis.Name = "txKmDisponiveis";
             txKmDisponiveis.Size = new Size(195, 23);
@@ -97,6 +98,7 @@
             // txPrecoKm
             // 
             txPrecoKm.AccessibleName = "txPrecoKm";
+            txPrecoKm.Enabled = false;
             txPrecoKm.Location = new Point(106, 121);
             txPrecoKm.Name = "txPrecoKm";
             txPrecoKm.Size = new Size(195, 23);
@@ -129,14 +131,17 @@
             // 
             // cbTipoPlano
             // 
+            cbTipoPlano.DropDownStyle = ComboBoxStyle.DropDownList;
             cbTipoPlano.FormattingEnabled = true;
             cbTipoPlano.Location = new Point(106, 31);
             cbTipoPlano.Name = "cbTipoPlano";
             cbTipoPlano.Size = new Size(195, 23);
             cbTipoPlano.TabIndex = 3;
+            cbTipoPlano.SelectedValueChanged += cbTipoPlano_SelectedValueChanged;
             // 
             // cbGrupo
             // 
+            cbGrupo.DropDownStyle = ComboBoxStyle.DropDownList;
             cbGrupo.FormattingEnabled = true;
             cbGrupo.Location = new Point(155, 41);
             cbGrupo.Name = "cbGrupo";
@@ -150,7 +155,7 @@
             btnCadastrar.Name = "btnCadastrar";
             btnCadastrar.Size = new Size(75, 38);
             btnCadastrar.TabIndex = 3;
-            btnCadastrar.Text = "button1";
+            btnCadastrar.Text = "Cadastrar";
             btnCadastrar.UseVisualStyleBackColor = true;
             btnCadastrar.Click += btnCadastrar_Click;
             // 
@@ -161,7 +166,7 @@
             button2.Name = "button2";
             button2.Size = new Size(75, 38);
             button2.TabIndex = 4;
-            button2.Text = "button2";
+            button2.Text = "Cancelar";
             button2.UseVisualStyleBackColor = true;
             // 
             // TelaPlanoCobranca

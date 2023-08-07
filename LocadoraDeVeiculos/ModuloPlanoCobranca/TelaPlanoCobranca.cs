@@ -1,18 +1,7 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Compartilhado;
-using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace LocadoraDeVeiculos.ModuloPlanoCobranca
 {
@@ -27,10 +16,11 @@ namespace LocadoraDeVeiculos.ModuloPlanoCobranca
             InitializeComponent();
 
             EncherCbBoxGrupoAutomovel(grupoAutomovels);
+            this.ConfigurarDialog();
             EncherCBBoxTipoPlano();
         }
 
-        public void ArrumaTela(PlanoCobranca plano, bool Inserindo =  false)
+        public void ArrumaTela(PlanoCobranca plano, bool Inserindo = false)
         {
             this.plano = plano;
 
@@ -46,6 +36,35 @@ namespace LocadoraDeVeiculos.ModuloPlanoCobranca
             }
         }
 
+        private void ArrumarCamposDesabilitados()
+        {
+            if (plano.Plano == planoCobranca.Diaria)
+            {
+                txKmDisponiveis.Text = null;
+
+                txKmDisponiveis.Enabled = false;
+                txPrecoDiaria.Enabled = true;
+                txPrecoKm.Enabled = true;
+            }
+
+            else if (plano.Plano == planoCobranca.Controlado)
+            {
+                txKmDisponiveis.Enabled = true;
+                txPrecoDiaria.Enabled = true;
+                txPrecoKm.Enabled = true;
+            }
+
+            else if (plano.Plano == planoCobranca.Km_Livre)
+            {
+                txKmDisponiveis.Text = null;
+                txPrecoKm.Text = null;
+
+                txKmDisponiveis.Enabled = false;
+                txPrecoDiaria.Enabled = true;
+                txPrecoKm.Enabled = false;
+            }
+        }
+
         public PlanoCobranca ObterPlanoCobranca()
         {
             plano.Plano = (planoCobranca)cbTipoPlano.SelectedItem;
@@ -54,7 +73,7 @@ namespace LocadoraDeVeiculos.ModuloPlanoCobranca
             if (txPrecoKm.Text != "")
                 plano.PrecoKm = Convert.ToDecimal(txPrecoKm.Text);
 
-            if(txKmDisponiveis.Text != "")
+            if (txKmDisponiveis.Text != "")
                 plano.KmDisponivel = Convert.ToInt32(txKmDisponiveis.Text);
 
             plano.GrupoAutomovel = (GrupoAutomovel)cbGrupo.SelectedItem;
@@ -95,6 +114,13 @@ namespace LocadoraDeVeiculos.ModuloPlanoCobranca
 
             foreach (var grupo in Enum.GetValues(typeof(planoCobranca)))
                 cbTipoPlano.Items.Add(grupo);
+        }
+
+        private void cbTipoPlano_SelectedValueChanged(object sender, EventArgs e)
+        {
+            plano.Plano = (planoCobranca)cbTipoPlano.SelectedItem;
+
+            ArrumarCamposDesabilitados();
         }
     }
 }

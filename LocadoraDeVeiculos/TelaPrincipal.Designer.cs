@@ -44,7 +44,7 @@
             panel1 = new Panel();
             panelRegistros = new Panel();
             statusStrip1 = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            labelRodaPe = new ToolStripStatusLabel();
             toolStrip1 = new ToolStrip();
             btnInserir = new ToolStripButton();
             btnEditar = new ToolStripButton();
@@ -52,6 +52,7 @@
             btnFiltrar = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripLabel1 = new ToolStripLabel();
+            btnCombustivel = new ToolStripButton();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -100,7 +101,7 @@
             // planosDeCobrançaToolStripMenuItem
             // 
             planosDeCobrançaToolStripMenuItem.Name = "planosDeCobrançaToolStripMenuItem";
-            planosDeCobrançaToolStripMenuItem.Size = new Size(179, 22);
+            planosDeCobrançaToolStripMenuItem.Size = new Size(180, 22);
             planosDeCobrançaToolStripMenuItem.Text = "Planos de Cobrança";
             planosDeCobrançaToolStripMenuItem.Click += planosDeCobrançaToolStripMenuItem_Click;
             // 
@@ -130,28 +131,28 @@
             // taxasEServiçosToolStripMenuItem
             // 
             taxasEServiçosToolStripMenuItem.Name = "taxasEServiçosToolStripMenuItem";
-            taxasEServiçosToolStripMenuItem.Size = new Size(180, 22);
+            taxasEServiçosToolStripMenuItem.Size = new Size(157, 22);
             taxasEServiçosToolStripMenuItem.Text = "Taxas e Serviços";
             taxasEServiçosToolStripMenuItem.Click += taxasEServiçosToolStripMenuItem_Click;
             // 
             // cuponsEParceirosToolStripMenuItem
             // 
             cuponsEParceirosToolStripMenuItem.Name = "cuponsEParceirosToolStripMenuItem";
-            cuponsEParceirosToolStripMenuItem.Size = new Size(180, 22);
+            cuponsEParceirosToolStripMenuItem.Size = new Size(157, 22);
             cuponsEParceirosToolStripMenuItem.Text = "Cupom";
             cuponsEParceirosToolStripMenuItem.Click += cuponsEParceirosToolStripMenuItem_Click;
             // 
             // preçosToolStripMenuItem
             // 
             preçosToolStripMenuItem.Name = "preçosToolStripMenuItem";
-            preçosToolStripMenuItem.Size = new Size(180, 22);
+            preçosToolStripMenuItem.Size = new Size(157, 22);
             preçosToolStripMenuItem.Text = "Preços";
             preçosToolStripMenuItem.Click += preçosToolStripMenuItem_Click;
             // 
             // parceiroToolStripMenuItem
             // 
             parceiroToolStripMenuItem.Name = "parceiroToolStripMenuItem";
-            parceiroToolStripMenuItem.Size = new Size(180, 22);
+            parceiroToolStripMenuItem.Size = new Size(157, 22);
             parceiroToolStripMenuItem.Text = "Parceiro";
             parceiroToolStripMenuItem.Click += parceiroToolStripMenuItem_Click;
             // 
@@ -176,22 +177,22 @@
             // 
             // statusStrip1
             // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
+            statusStrip1.Items.AddRange(new ToolStripItem[] { labelRodaPe });
             statusStrip1.Location = new Point(0, 322);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(716, 22);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // labelRodaPe
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(33, 17);
-            toolStripStatusLabel1.Text = "Erros";
+            labelRodaPe.Name = "labelRodaPe";
+            labelRodaPe.Size = new Size(33, 17);
+            labelRodaPe.Text = "Erros";
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, btnFiltrar, toolStripSeparator1, toolStripLabel1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, btnFiltrar, btnCombustivel, toolStripSeparator1, toolStripLabel1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(716, 31);
@@ -252,6 +253,16 @@
             toolStripLabel1.Size = new Size(118, 28);
             toolStripLabel1.Text = "Locadora de Veiculos";
             // 
+            // btnCombustivel
+            // 
+            btnCombustivel.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnCombustivel.Image = Properties.Resources.charger_FILL0_wght400_GRAD0_opsz24;
+            btnCombustivel.ImageTransparentColor = Color.Magenta;
+            btnCombustivel.Name = "btnCombustivel";
+            btnCombustivel.Size = new Size(23, 28);
+            btnCombustivel.Text = "toolStripButton1";
+            btnCombustivel.Click += btnCombustivel_Click;
+            // 
             // TelaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -298,7 +309,8 @@
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripLabel toolStripLabel1;
         private Panel panelRegistros;
-        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripStatusLabel labelRodaPe;
         private ToolStripMenuItem parceiroToolStripMenuItem;
+        private ToolStripButton btnCombustivel;
     }
 }

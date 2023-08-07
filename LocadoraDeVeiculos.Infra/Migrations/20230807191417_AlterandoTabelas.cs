@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 {
     /// <inheritdoc />
-    public partial class tabela : Migration
+    public partial class AlterandoTabelas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,6 +72,57 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TBCondutor",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(100)", nullable: false),
+                    CPF = table.Column<string>(type: "varchar(14)", nullable: false),
+                    CNH = table.Column<string>(type: "varchar(20)", nullable: false),
+                    ValidadeCNH = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Telefone = table.Column<string>(type: "varchar(20)", nullable: false),
+                    Email = table.Column<string>(type: "varchar(100)", nullable: false),
+                    ClienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TBCondutor", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TBCondutor_TBCliente_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "TBCliente",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TBAutomovel",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Modelo = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Marca = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Cor = table.Column<string>(type: "varchar(50)", nullable: false),
+                    Imagem = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Kilometragem = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    Placa = table.Column<string>(type: "varchar(10)", nullable: false),
+                    EnumCombusteivel = table.Column<int>(type: "int", nullable: false),
+                    CapacidadeEmLitros = table.Column<int>(type: "int", nullable: false),
+                    GrupoAutomovelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EmUso = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TBAutomovel", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TBAutomovel_TBGrupoAutomovel",
+                        column: x => x.GrupoAutomovelId,
+                        principalTable: "TBGrupoAutomovel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TBPlanoCobranca",
                 columns: table => new
                 {
@@ -86,38 +137,26 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 {
                     table.PrimaryKey("PK_TBPlanoCobranca", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TBPlanoCobranca_TBGrupoAutomovel_GrupoAutomovelId",
+                        name: "FK_TBPlanoCobranca_TBGrupoAutomovel",
                         column: x => x.GrupoAutomovelId,
                         principalTable: "TBGrupoAutomovel",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Veiculo",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    GrupoAutomovelId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Veiculo", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Veiculo_TBGrupoAutomovel_GrupoAutomovelId",
-                        column: x => x.GrupoAutomovelId,
-                        principalTable: "TBGrupoAutomovel",
-                        principalColumn: "Id");
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_TBAutomovel_GrupoAutomovelId",
+                table: "TBAutomovel",
+                column: "GrupoAutomovelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TBCondutor_ClienteId",
+                table: "TBCondutor",
+                column: "ClienteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TBPlanoCobranca_GrupoAutomovelId",
                 table: "TBPlanoCobranca",
-                column: "GrupoAutomovelId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Veiculo_GrupoAutomovelId",
-                table: "Veiculo",
                 column: "GrupoAutomovelId");
         }
 
@@ -125,7 +164,10 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TBCliente");
+                name: "TBAutomovel");
+
+            migrationBuilder.DropTable(
+                name: "TBCondutor");
 
             migrationBuilder.DropTable(
                 name: "TBFuncionario");
@@ -137,7 +179,7 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 name: "TBPlanoCobranca");
 
             migrationBuilder.DropTable(
-                name: "Veiculo");
+                name: "TBCliente");
 
             migrationBuilder.DropTable(
                 name: "TBGrupoAutomovel");
