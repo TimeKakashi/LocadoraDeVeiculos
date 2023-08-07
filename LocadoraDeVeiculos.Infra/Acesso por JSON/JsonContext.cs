@@ -14,7 +14,7 @@ namespace LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON
 {
     public class JsonContext
     {
-        public const string NOME_ARQUIVO = "jsconfig1.json";
+        public const string NOME_ARQUIVO = "jsonCombustiveis.json";
 
         public Gasolina gasolina;
         public Disel disel;
@@ -29,8 +29,8 @@ namespace LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON
         {
             if (File.Exists(NOME_ARQUIVO) == false)
             {
-                //File.Create(NOME_ARQUIVO);
-                File.Create("").ToString();
+                Serilog.Log.Error("Arquivo json nao existe!");
+                return;
             }
 
             CarregarArquivo();
