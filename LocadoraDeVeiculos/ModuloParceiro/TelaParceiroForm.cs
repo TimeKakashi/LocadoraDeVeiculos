@@ -13,6 +13,8 @@ namespace LocadoraDeVeiculos.ModuloParceiro
         public TelaParceiroForm()
         {
             InitializeComponent();
+            this.ConfigurarDialog();
+
 
         }
         public Parceiro ObterParceiro()

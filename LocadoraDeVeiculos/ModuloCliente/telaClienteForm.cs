@@ -12,6 +12,7 @@ namespace LocadoraDeVeiculos.ModuloCliente
         public telaClienteForm()
         {
             InitializeComponent();
+            this.ConfigurarDialog();
             rbtnPessoaFisica.Checked = true;
             rbtnPessoaFisica.CheckedChanged += rbtnPessoaFisica_CheckedChanged;
             rbtnPessoaJuridica.CheckedChanged += rbtnPessoaJuridica_CheckedChanged;

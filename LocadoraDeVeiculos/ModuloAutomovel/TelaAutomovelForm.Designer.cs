@@ -163,6 +163,7 @@
             // 
             // cbCombustivel
             // 
+            cbCombustivel.DropDownStyle = ComboBoxStyle.DropDownList;
             cbCombustivel.FormattingEnabled = true;
             cbCombustivel.Location = new Point(131, 430);
             cbCombustivel.Name = "cbCombustivel";

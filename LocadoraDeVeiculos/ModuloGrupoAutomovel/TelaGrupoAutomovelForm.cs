@@ -9,6 +9,8 @@ namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
         public TelaGrupoAutomovelForm()
         {
             InitializeComponent();
+            this.ConfigurarDialog();
+
         }
 
         public event GravarRegistroDelegate<GrupoAutomovel> onGravarRegistro;

@@ -171,7 +171,7 @@ namespace LocadoraDeVeiculos
         {
             var validadorPlano = new ValidadorPlanoCobranca();
 
-            var servicoPlano = new ServicoPlanoCobranca(repositorioPlanoCobranca, validadorPlano);
+            var servicoPlano = new ServicoPlanoCobranca(repositorioPlanoCobranca,reposisotiroGrupoAutomovel ,validadorPlano);
 
             controlador = new ControladorPlanoBbranca(servicoPlano, repositorioPlanoCobranca, reposisotiroGrupoAutomovel);
 

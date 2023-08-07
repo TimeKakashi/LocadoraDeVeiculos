@@ -16,6 +16,7 @@ namespace LocadoraDeVeiculos.ModuloPlanoCobranca
             InitializeComponent();
 
             EncherCbBoxGrupoAutomovel(grupoAutomovels);
+            this.ConfigurarDialog();
             EncherCBBoxTipoPlano();
         }
 

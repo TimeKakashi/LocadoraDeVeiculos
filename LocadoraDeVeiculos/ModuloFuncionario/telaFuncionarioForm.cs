@@ -11,6 +11,8 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
         public telaFuncionarioForm()
         {
             InitializeComponent();
+            this.ConfigurarDialog();
+
         }
 
         public void ArrumaTela(Funcionario funcionario, bool inserir = false)

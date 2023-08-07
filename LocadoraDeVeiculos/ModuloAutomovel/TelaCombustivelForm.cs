@@ -14,6 +14,7 @@ namespace LocadoraDeVeiculos.ModuloAutomovel
         public TelaCombustivelForm(List<Combustivel> combustivels)
         {
             InitializeComponent();
+            this.ConfigurarDialog();
             this.combustivels = combustivels;
         }
 

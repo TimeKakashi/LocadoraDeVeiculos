@@ -131,6 +131,7 @@
             // 
             // cbTipoPlano
             // 
+            cbTipoPlano.DropDownStyle = ComboBoxStyle.DropDownList;
             cbTipoPlano.FormattingEnabled = true;
             cbTipoPlano.Location = new Point(106, 31);
             cbTipoPlano.Name = "cbTipoPlano";
@@ -140,6 +141,7 @@
             // 
             // cbGrupo
             // 
+            cbGrupo.DropDownStyle = ComboBoxStyle.DropDownList;
             cbGrupo.FormattingEnabled = true;
             cbGrupo.Location = new Point(155, 41);
             cbGrupo.Name = "cbGrupo";

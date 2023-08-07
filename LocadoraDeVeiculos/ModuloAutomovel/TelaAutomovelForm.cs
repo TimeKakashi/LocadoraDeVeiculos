@@ -14,6 +14,7 @@ namespace LocadoraDeVeiculos.ModuloAutomovel
         public TelaAutomovelForm(List<GrupoAutomovel> listGrupoAutomovel)
         {
             InitializeComponent();
+            this.ConfigurarDialog();
             EncherComboBox(listGrupoAutomovel);
         }
 
