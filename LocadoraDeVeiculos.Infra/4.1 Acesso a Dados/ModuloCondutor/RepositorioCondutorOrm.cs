@@ -40,7 +40,6 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCondutor
             condutorRegistrado.ValidadeCNH = registro.ValidadeCNH;
             condutorRegistrado.Telefone = registro.Telefone;
             condutorRegistrado.Email = registro.Email;
-            condutorRegistrado.ClienteId = registro.ClienteId;
 
             dbContext.SaveChanges();
         }
