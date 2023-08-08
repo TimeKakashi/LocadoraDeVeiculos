@@ -61,6 +61,11 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
         {
 
         }
+
+        public override string ToString()
+        {
+            return Nome;
+        }
     }
 
 

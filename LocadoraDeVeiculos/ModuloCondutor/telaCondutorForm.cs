@@ -19,21 +19,30 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         public event GravarRegistroDelegate<Condutor> OnGravarRegistro;
         private Condutor condutor;
         private Cliente clienteRelacionado;
+        private List<Cliente> listaClinte;
 
         public telaCondutorForm(List<Cliente> listaClientes)
         {
             InitializeComponent();
             chkClienteCondutor.Checked = true;
             chkClienteCondutor.CheckedChanged += chkClienteCondutor_CheckedChanged;
+            this.listaClinte = listaClientes;
 
-            
-            cmbClientes.DataSource = listaClientes;
-            cmbClientes.DisplayMember = "Nome";
-            cmbClientes.ValueMember = "Id";
+            PopularComboBox(listaClientes);
         }
 
         public telaCondutorForm()
         {
+        }
+
+        public void PopularComboBox(List<Cliente> clientes)
+        {
+            cmbClientes.Items.Clear();
+
+            foreach(var item in clientes)
+            {
+                cmbClientes.Items.Add(item);
+            }
         }
 
         public void ArrumaTela(Condutor condutor, bool inserir = false)
@@ -46,11 +55,11 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             }
             else
             {
-                
-                chkClienteCondutor.Checked = (clienteRelacionado?.Id == condutor.ClienteId);
-               
 
-          
+                chkClienteCondutor.Checked = (clienteRelacionado?.Id == condutor.ClienteId);
+
+
+
                 if (chkClienteCondutor.Checked)
                 {
                     txtNome.Text = clienteRelacionado.Nome;
@@ -73,7 +82,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
 
         private void chkClienteCondutor_CheckedChanged(object sender, EventArgs e)
         {
-           
+
             if (chkClienteCondutor.Checked)
             {
                 txtNome.Text = clienteRelacionado.Nome;
@@ -106,7 +115,41 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public Condutor ObterCondutor()
+        {
+            string nome = txtNome.Text;
+            string email = txtEmail.Text;
+            string telefone = txtTelefone.Text;
+            string cpf = txtCPF.Text;
+            string cnh = txtCNH.Text;
+            DateTime validadeCNH = dtpValidadeCNH.Value;
+
+            if (chkClienteCondutor.Checked)
+            {
+
+                nome = clienteRelacionado.Nome;
+                email = clienteRelacionado.Email;
+                telefone = clienteRelacionado.Telefone;
+                cpf = clienteRelacionado.CPF;
+            }
+
+            condutor.Nome = nome;
+            condutor.Email = email;
+            condutor.Telefone = telefone;
+            condutor.CPF = cpf;
+            condutor.CNH = cnh;
+            condutor.ValidadeCNH = validadeCNH;
+
+            return condutor;
+        }
+
+
+        public void ReceberClienteRelacionado(Cliente cliente)
+        {
+            clienteRelacionado = cliente;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
             this.condutor = ObterCondutor();
 
@@ -125,40 +168,6 @@ namespace LocadoraDeVeiculos.ModuloCondutor
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-        }
-
-        public Condutor ObterCondutor()
-        {
-            string nome = txtNome.Text;
-            string email = txtEmail.Text;
-            string telefone = txtTelefone.Text;
-            string cpf = txtCPF.Text;
-            string cnh = txtCNH.Text;
-            DateTime validadeCNH = dtpValidadeCNH.Value;
-
-            if (chkClienteCondutor.Checked)
-            {
-                
-                nome = clienteRelacionado.Nome;
-                email = clienteRelacionado.Email;
-                telefone = clienteRelacionado.Telefone;
-                cpf = clienteRelacionado.CPF;
-            }
-
-            condutor.Nome = nome;
-            condutor.Email = email;
-            condutor.Telefone = telefone;
-            condutor.CPF = cpf;
-            condutor.CNH = cnh;
-            condutor.ValidadeCNH = validadeCNH;
-
-            return condutor;
-        }
-
-       
-        public void ReceberClienteRelacionado(Cliente cliente)
-        {
-            clienteRelacionado = cliente;
         }
     }
 
