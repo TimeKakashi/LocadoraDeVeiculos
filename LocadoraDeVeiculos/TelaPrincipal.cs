@@ -57,6 +57,7 @@ namespace LocadoraDeVeiculos
         private IRepositorioCombustivelJson repositorioCombustivelJson;
         private IRepositorioCondutor repositorioCondutor;
         private IRepositorioTaxaServico repositorioTaxaServico;
+        private IReposi
         private List<Cliente> listaClientes;
         private TabelaCliente TabelaCliente;
         private TabelaCondutor tabelaCondutor;
@@ -102,6 +103,7 @@ namespace LocadoraDeVeiculos
             repositorioAutomovel = new RepositorioAutomovel(dbContext);
             repositorioTaxaServico = new RepositorioTaxaServicoOrm(dbContext);
             repositorioCombustivelJson = new RepositorioCombustivel(jsonContext);
+            
 
         }
         public static TelaPrincipal Instancia

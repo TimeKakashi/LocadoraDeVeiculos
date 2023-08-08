@@ -18,6 +18,7 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCupom
             cupomBuilder.Property(f => f.Nome).IsRequired(true).ValueGeneratedNever();
             cupomBuilder.Property(f => f.Valor).HasColumnType("varchar(100)").IsRequired();
             cupomBuilder.Property(f => f.DataDeValidade).IsRequired();
+
             cupomBuilder.HasOne(c => c.Parceiro).WithMany().IsRequired().HasConstraintName("FK_TBCupom_TBParceiro").OnDelete(DeleteBehavior.NoAction);
         }
     }
