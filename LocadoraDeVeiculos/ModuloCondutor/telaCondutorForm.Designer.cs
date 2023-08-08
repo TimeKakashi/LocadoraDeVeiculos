@@ -117,6 +117,7 @@
             cmbClientes.Name = "cmbClientes";
             cmbClientes.Size = new Size(303, 23);
             cmbClientes.TabIndex = 8;
+            cmbClientes.SelectedIndexChanged += cmbClientes_SelectedIndexChanged;
             // 
             // txtCPF
             // 
@@ -193,6 +194,7 @@
             chkClienteCondutor.TabIndex = 17;
             chkClienteCondutor.Text = "Cliente é Condutor";
             chkClienteCondutor.UseVisualStyleBackColor = true;
+            chkClienteCondutor.CheckedChanged += chkClienteCondutor_CheckedChanged;
             // 
             // telaCondutorForm
             // 

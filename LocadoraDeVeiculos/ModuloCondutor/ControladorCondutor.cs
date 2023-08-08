@@ -50,11 +50,8 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             var telaCondutor = new telaCondutorForm(repositorioCliente.SelecionarTodos());
             telaCondutor.ReceberClienteRelacionado(ObterClienteRelacionado());
 
-            telaCondutor.OnGravarRegistro += (condutor) =>
-            {
-                Result resultado = servicoCondutor.Inserir(condutor);
-                return resultado;
-            };
+            telaCondutor.OnGravarRegistro += servicoCondutor.Inserir;
+           
 
             DialogResult result = telaCondutor.ShowDialog();
 

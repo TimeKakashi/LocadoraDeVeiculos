@@ -24,7 +24,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         public telaCondutorForm(List<Cliente> listaClientes)
         {
             InitializeComponent();
-            chkClienteCondutor.Checked = true;
+            chkClienteCondutor.Checked = false;
             chkClienteCondutor.CheckedChanged += chkClienteCondutor_CheckedChanged;
             this.listaClinte = listaClientes;
 
@@ -39,7 +39,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         {
             cmbClientes.Items.Clear();
 
-            foreach(var item in clientes)
+            foreach (var item in clientes)
             {
                 cmbClientes.Items.Add(item);
             }
@@ -79,16 +79,20 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             txtCNH.Text = condutor.CNH;
             dtpValidadeCNH.Value = condutor.ValidadeCNH;
         }
+        private void cmbClientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (chkClienteCondutor.Checked)
+            {
+                clienteRelacionado = cmbClientes.SelectedItem as Cliente;
+                PreencherCamposClienteRelacionado();
+            }
+        }
 
         private void chkClienteCondutor_CheckedChanged(object sender, EventArgs e)
         {
-
-            if (chkClienteCondutor.Checked)
+            if (chkClienteCondutor.Checked && clienteRelacionado != null)
             {
-                txtNome.Text = clienteRelacionado.Nome;
-                txtEmail.Text = clienteRelacionado.Email;
-                txtTelefone.Text = clienteRelacionado.Telefone;
-                txtCPF.Text = clienteRelacionado.CPF;
+                PreencherCamposClienteRelacionado();
 
                 txtNome.Enabled = false;
                 txtEmail.Enabled = false;
@@ -97,11 +101,6 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             }
             else
             {
-                txtNome.Text = "";
-                txtEmail.Text = "";
-                txtTelefone.Text = "";
-                txtCPF.Text = "";
-
                 txtNome.Enabled = true;
                 txtEmail.Enabled = true;
                 txtTelefone.Enabled = true;
@@ -109,28 +108,43 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+
+        private void PreencherCamposClienteRelacionado()
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            txtNome.Text = clienteRelacionado.Nome;
+            txtEmail.Text = clienteRelacionado.Email;
+            txtTelefone.Text = clienteRelacionado.Telefone;
+            txtCPF.Text = clienteRelacionado.CPF;
         }
 
         public Condutor ObterCondutor()
         {
-            string nome = txtNome.Text;
-            string email = txtEmail.Text;
-            string telefone = txtTelefone.Text;
-            string cpf = txtCPF.Text;
-            string cnh = txtCNH.Text;
-            DateTime validadeCNH = dtpValidadeCNH.Value;
+            string nome;
+            string email;
+            string telefone;
+            string cpf;
+            string cnh;
+            DateTime validadeCNH;
+
+            condutor = new Condutor(); // Inicializa o objeto condutor
 
             if (chkClienteCondutor.Checked)
             {
-
                 nome = clienteRelacionado.Nome;
                 email = clienteRelacionado.Email;
                 telefone = clienteRelacionado.Telefone;
                 cpf = clienteRelacionado.CPF;
+                cnh = txtCNH.Text;
+                validadeCNH = dtpValidadeCNH.Value;
+            }
+            else
+            {
+                nome = txtNome.Text;
+                email = txtEmail.Text;
+                telefone = txtTelefone.Text;
+                cpf = txtCPF.Text;
+                cnh = txtCNH.Text;
+                validadeCNH = dtpValidadeCNH.Value;
             }
 
             condutor.Nome = nome;
@@ -144,10 +158,6 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         }
 
 
-        public void ReceberClienteRelacionado(Cliente cliente)
-        {
-            clienteRelacionado = cliente;
-        }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -169,6 +179,30 @@ namespace LocadoraDeVeiculos.ModuloCondutor
                 this.Close();
             }
         }
+
+
+
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+
+
+
+
+        public void ReceberClienteRelacionado(Cliente cliente)
+        {
+            clienteRelacionado = cliente;
+        }
+
+       
+
+      
+
+
     }
 
 

@@ -147,6 +147,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCondutor
                 return false;
         }
 
+
         private bool VerificarCondutorRelacionadoAluguel(Condutor condutor)
         {
             // Implemente a lógica para verificar se o condutor está relacionado a um aluguel
