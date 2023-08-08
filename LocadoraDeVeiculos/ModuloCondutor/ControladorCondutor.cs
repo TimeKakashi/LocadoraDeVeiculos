@@ -48,6 +48,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         public override void Inserir()
         {
             var telaCondutor = new telaCondutorForm(repositorioCliente.SelecionarTodos());
+
             telaCondutor.ReceberClienteRelacionado(ObterClienteRelacionado());
 
             telaCondutor.OnGravarRegistro += (condutor) =>

@@ -38,16 +38,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
             ClienteId = clienteId;
         }
 
-        public override void Atualizar(Condutor registro)
-        {
-            Nome = registro.Nome;
-            CPF = registro.CPF;
-            CNH = registro.CNH;
-            ValidadeCNH = registro.ValidadeCNH;
-            Telefone = registro.Telefone;
-            Email = registro.Email;
-            ClienteId = registro.ClienteId;
-        }
+      
     }
 
 

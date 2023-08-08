@@ -57,11 +57,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
             }
         }
 
-        public override void Atualizar(Cliente registro)
-        {
-
-        }
-
         public override string ToString()
         {
             return Nome;

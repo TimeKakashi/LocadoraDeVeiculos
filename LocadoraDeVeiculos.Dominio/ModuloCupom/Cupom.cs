@@ -17,16 +17,9 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
 
         public string Nome { get; set; }
         public decimal Valor { get; set; }
-
         public DateTime DataDeValidade;
         public Parceiro Parceiro { get; set; }
-        
-
-        public override void Atualizar(Cupom registro)
-        {
-           
-
-        }
+      
         public Cupom () 
         {
 
@@ -43,7 +36,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
             this.Valor = valor;
             this.DataDeValidade = dataDeValidade;
             this.Parceiro = parceiro;
-
         }
     }
 }

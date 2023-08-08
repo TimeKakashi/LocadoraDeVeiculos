@@ -45,11 +45,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAutomovel
         {
             this.GrupoAutomovel = grupo;
         }
-        public override void Atualizar(Veiculo registro)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public Image ConverterArrBytesParaImagem(byte[] arrayBytes)
         {
             using (var imageStream = new MemoryStream(arrayBytes))

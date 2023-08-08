@@ -13,9 +13,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloTaxaServico
         public decimal Preco { get; set; }
         public string Plano { get; set; }
 
-       
-
-
         public TaxaServico()
         {
         }
@@ -24,10 +21,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloTaxaServico
         {
             Nome = nome;
         }
-        public override void Atualizar(TaxaServico registro)
-        {
-            Nome = registro.Nome;
-        }
+        
 
         public TaxaServico(Guid id, string nome) : this(nome)
         {

@@ -7,9 +7,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCombustivel
         public string nome;
         public decimal valor { get; set; }
 
-        public override void Atualizar(Combustivel registro)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
