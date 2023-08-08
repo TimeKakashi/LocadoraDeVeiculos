@@ -16,11 +16,19 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxaServico
     {
         public IRepositorioTaxaServico repositorioTaxaServico;
         public IValidadorTaxaServico validadorTaxaServico;
+        private IRepositorioTaxaServico repositorioTaxaServico1;
+        private ValidadorTaxaServico validadorTaxaServico1;
 
         public ServicoTaxaServico(IRepositorioTaxaServico repositorioTaxaServico, IValidadorTaxaServico validadorTaxaServico) 
         {   
             this.repositorioTaxaServico = repositorioTaxaServico;
             this.validadorTaxaServico=validadorTaxaServico;
+        }
+
+        public ServicoTaxaServico(IRepositorioTaxaServico repositorioTaxaServico1, ValidadorTaxaServico validadorTaxaServico1)
+        {
+            this.repositorioTaxaServico1 = repositorioTaxaServico1;
+            this.validadorTaxaServico1 = validadorTaxaServico1;
         }
 
         public override Result Editar(TaxaServico registro)

@@ -160,6 +160,32 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                     b.ToTable("TBCondutor", (string)null);
                 });
 
+            modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloCupom.Cupom", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DataDeValidade")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ParceiroId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Valor")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParceiroId");
+
+                    b.ToTable("TBCupom", (string)null);
+                });
+
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloFuncionario.Funcionario", b =>
                 {
                     b.Property<Guid>("Id")
@@ -235,6 +261,27 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                     b.ToTable("TBPlanoCobranca", (string)null);
                 });
 
+            modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloTaxaServico.TaxaServico", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Plano")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal(18 , 2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TBTaxaServico", (string)null);
+                });
+
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloAutomovel.Veiculo", b =>
                 {
                     b.HasOne("LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel.GrupoAutomovel", "GrupoAutomovel")
@@ -256,6 +303,18 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                         .IsRequired();
 
                     b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloCupom.Cupom", b =>
+                {
+                    b.HasOne("LocadoraDeVeiculos.Dominio.ModuloParceiro.Parceiro", "Parceiro")
+                        .WithMany()
+                        .HasForeignKey("ParceiroId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_TBCupom_TBParceiro");
+
+                    b.Navigation("Parceiro");
                 });
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca.PlanoCobranca", b =>

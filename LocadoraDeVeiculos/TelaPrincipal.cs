@@ -7,6 +7,7 @@ using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
 using LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca;
+using LocadoraDeVeiculos.Aplicacao.ModuloTaxaServico;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
@@ -18,6 +19,7 @@ using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
+using LocadoraDeVeiculos.Dominio.ModuloTaxaServico;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente;
@@ -26,6 +28,7 @@ using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloPlanoCobranca;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloTaxaServico;
 using LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON;
 using LocadoraDeVeiculos.ModuloAutomovel;
 using LocadoraDeVeiculos.ModuloCliente;
@@ -35,6 +38,7 @@ using LocadoraDeVeiculos.ModuloFuncionario;
 using LocadoraDeVeiculos.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.ModuloParceiro;
 using LocadoraDeVeiculos.ModuloPlanoCobranca;
+using LocadoraDeVeiculos.ModuloTaxaServico;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -52,10 +56,11 @@ namespace LocadoraDeVeiculos
         private IRepositorioAutomovel repositorioAutomovel;
         private IRepositorioCombustivelJson repositorioCombustivelJson;
         private IRepositorioCondutor repositorioCondutor;
+        private IRepositorioTaxaServico repositorioTaxaServico;
         private List<Cliente> listaClientes;
         private TabelaCliente TabelaCliente;
         private TabelaCondutor tabelaCondutor;
-        private TabelaCupom tabelaCupom;
+        
 
         private static JsonContext jsonContext = new JsonContext(true);
 
@@ -95,6 +100,7 @@ namespace LocadoraDeVeiculos
             repositorioCupom = new RepositorioCupomOrm(dbContext);
             repositorioParceiro = new RepositorioParceiroOrm(dbContext);
             repositorioAutomovel = new RepositorioAutomovel(dbContext);
+            repositorioTaxaServico = new RepositorioTaxaServicoOrm(dbContext);
             repositorioCombustivelJson = new RepositorioCombustivel(jsonContext);
 
         }
@@ -233,7 +239,13 @@ namespace LocadoraDeVeiculos
 
         private void taxasEServiçosToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var validadorTaxaServico = new ValidadorTaxaServico();
 
+            var servicoTaxaServico = new ServicoTaxaServico(repositorioTaxaServico, validadorTaxaServico);
+
+            controlador = new ControladorTaxaServico(repositorioTaxaServico, servicoTaxaServico);
+
+            ConfigurarTelaPrincipal(controlador);
         }
 
         private void cuponsEParceirosToolStripMenuItem_Click(object sender, EventArgs e)

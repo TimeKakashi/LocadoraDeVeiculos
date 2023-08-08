@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 {
     /// <inheritdoc />
-    public partial class AlterandoTabelas : Migration
+    public partial class teste : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,8 +25,8 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                     Cidade = table.Column<string>(type: "varchar(50)", nullable: false),
                     Estado = table.Column<string>(type: "varchar(2)", nullable: false),
                     Email = table.Column<string>(type: "varchar(100)", nullable: false),
-                    CPF = table.Column<string>(type: "varchar(14)", nullable: false),
-                    CNPJ = table.Column<string>(type: "varchar(18)", nullable: false)
+                    CPF = table.Column<string>(type: "varchar(14)", nullable: true),
+                    CNPJ = table.Column<string>(type: "varchar(18)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -69,6 +69,20 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TBParceiro", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TBTaxaServico",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Plano = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TBTaxaServico", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -144,6 +158,26 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TBCupom",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Valor = table.Column<string>(type: "varchar(100)", nullable: false),
+                    ParceiroId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DataDeValidade = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TBCupom", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TBCupom_TBParceiro",
+                        column: x => x.ParceiroId,
+                        principalTable: "TBParceiro",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_TBAutomovel_GrupoAutomovelId",
                 table: "TBAutomovel",
@@ -153,6 +187,11 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 name: "IX_TBCondutor_ClienteId",
                 table: "TBCondutor",
                 column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TBCupom_ParceiroId",
+                table: "TBCupom",
+                column: "ParceiroId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TBPlanoCobranca_GrupoAutomovelId",
@@ -170,16 +209,22 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 name: "TBCondutor");
 
             migrationBuilder.DropTable(
-                name: "TBFuncionario");
+                name: "TBCupom");
 
             migrationBuilder.DropTable(
-                name: "TBParceiro");
+                name: "TBFuncionario");
 
             migrationBuilder.DropTable(
                 name: "TBPlanoCobranca");
 
             migrationBuilder.DropTable(
+                name: "TBTaxaServico");
+
+            migrationBuilder.DropTable(
                 name: "TBCliente");
+
+            migrationBuilder.DropTable(
+                name: "TBParceiro");
 
             migrationBuilder.DropTable(
                 name: "TBGrupoAutomovel");

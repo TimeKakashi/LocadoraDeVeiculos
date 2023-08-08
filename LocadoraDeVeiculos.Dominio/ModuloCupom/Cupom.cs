@@ -13,20 +13,18 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
 {
     public class Cupom : EntidadeBase<Cupom>
     {
-        private object registro;
+        
 
         public string Nome { get; set; }
         public decimal Valor { get; set; }
 
         public DateTime DataDeValidade;
-        public object Parceiro { get; internal set; }
+        public Parceiro Parceiro { get; set; }
+        
 
         public override void Atualizar(Cupom registro)
         {
-            this.Nome = registro.Nome;
-            this.Valor = registro.Valor;
-            this.DataDeValidade = registro.DataDeValidade;
-            this.Parceiro = registro.Parceiro;
+           
 
         }
         public Cupom () 

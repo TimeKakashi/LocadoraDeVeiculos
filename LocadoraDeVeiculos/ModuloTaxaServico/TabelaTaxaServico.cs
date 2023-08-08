@@ -49,7 +49,7 @@ namespace LocadoraDeVeiculos.ModuloTaxaServico
             foreach (TaxaServico f in listaTaxaServico)
             {
                 grid.Rows.Add(f.Nome,
-                              f.Preço
+                              f.Preco
                               );
             }
         }

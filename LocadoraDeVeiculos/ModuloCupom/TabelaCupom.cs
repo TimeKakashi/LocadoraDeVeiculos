@@ -1,6 +1,5 @@
 ﻿using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCupom;
-using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +14,6 @@ namespace LocadoraDeVeiculos.ModuloCupom
 {
     public partial class TabelaCupom : UserControl
     {
-        
         public TabelaCupom()
         {
             InitializeComponent();
@@ -70,7 +68,5 @@ namespace LocadoraDeVeiculos.ModuloCupom
         {
             return grid.SelecionarId();
         }
-
-        
     }
 }

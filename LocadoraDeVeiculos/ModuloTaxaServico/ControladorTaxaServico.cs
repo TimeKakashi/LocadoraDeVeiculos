@@ -42,6 +42,8 @@ namespace LocadoraDeVeiculos.ModuloTaxaServico
 
         public override string ToolTipPdf => "Gerar Pdf";
 
+        public override string ToolTipCombustivel => "Tipo de combustivel!";
+
         public override void CarregarItens()
         {
             var listaTaxaServico = repositorioTaxaServico.SelecionarTodos();

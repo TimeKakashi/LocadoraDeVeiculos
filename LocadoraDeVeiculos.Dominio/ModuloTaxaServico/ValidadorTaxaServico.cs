@@ -13,7 +13,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloTaxaServico
         public ValidadorTaxaServico()
         {
             RuleFor(f => f.Nome).NotEmpty().NotNull().MinimumLength(4);
-            RuleFor(f => f.Preço).NotEmpty().NotNull().GreaterThan(0);
+            RuleFor(f => f.Preco).NotEmpty().NotNull().GreaterThan(0);
         }
     }
 }

@@ -19,15 +19,7 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCupom
         {
 
         }
-        public override void Editar(Cupom registro)
-        {
-            Cupom cupomEncontrado = registros.FirstOrDefault(x => x.Id == registro.Id);
-
-            cupomEncontrado.Nome = registro.Nome;
-
-            dbContext.SaveChanges();
-
-        }
+        
 
         public Cupom SelecionarPorNome(string nome)
         {

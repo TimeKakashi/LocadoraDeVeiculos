@@ -28,31 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            grid = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView1
+            // grid
             // 
-            dataGridView1.BackgroundColor = SystemColors.ControlDarkDark;
-            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(349, 279);
-            dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            grid.Dock = DockStyle.Fill;
+            grid.Location = new Point(0, 0);
+            grid.Name = "grid";
+            grid.RowTemplate.Height = 25;
+            grid.Size = new Size(315, 282);
+            grid.TabIndex = 0;
             // 
             // TabelaCupom
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(dataGridView1);
+            Controls.Add(grid);
             Name = "TabelaCupom";
-            Size = new Size(349, 279);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Size = new Size(315, 282);
+            ((System.ComponentModel.ISupportInitialize)grid).EndInit();
             ResumeLayout(false);
         }
 

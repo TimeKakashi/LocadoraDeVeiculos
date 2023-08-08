@@ -18,7 +18,7 @@ namespace LocadoraDeVeiculos.ModuloCupom
     {
         public event GravarRegistroDelegate<Cupom> onGravarRegistro;
 
-        private Cupom cupom;
+        public Cupom cupom;
 
         public TelaCupomForm()
         {
@@ -38,7 +38,6 @@ namespace LocadoraDeVeiculos.ModuloCupom
             cupom.Valor = Convert.ToDecimal(txtValor.Text);
             cupom.DataDeValidade = txtDataDeValidade.Value;
             cupom.Parceiro = (Parceiro)txtParceiro.SelectedItem;
-
             return cupom;
         }
 

@@ -11,13 +11,14 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCupom
 {
     public class MapeadorCupomOrm : IEntityTypeConfiguration<Cupom>
     {
-        public void Configure(EntityTypeBuilder<Cupom> cupomBuilderr)
+        public void Configure(EntityTypeBuilder<Cupom> cupomBuilder)
         {
-            cupomBuilderr.ToTable("TBCupom");
-
-            cupomBuilderr.Property(p => p.Id).IsRequired().ValueGeneratedNever();
-
-            cupomBuilderr.Property(p => p.Nome).HasColumnType("varchar(100)").IsRequired();
+            cupomBuilder.ToTable("TBCupom");
+            cupomBuilder.Property(f => f.Id).IsRequired().ValueGeneratedNever();
+            cupomBuilder.Property(f => f.Nome).IsRequired(true).ValueGeneratedNever();
+            cupomBuilder.Property(f => f.Valor).HasColumnType("varchar(100)").IsRequired();
+            cupomBuilder.Property(f => f.DataDeValidade).IsRequired();
+            cupomBuilder.HasOne(c => c.Parceiro).WithMany().IsRequired().HasConstraintName("FK_TBCupom_TBParceiro").OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
