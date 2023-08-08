@@ -4,6 +4,7 @@ using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,11 +17,17 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
 
         public string Nome { get; set; }
         public decimal Valor { get; set; }
-        public DateTime DataDeValidade { get; set; }
-        public Parceiro parceiro { get; set; }
+
+        public DateTime DataDeValidade;
+        public object Parceiro { get; internal set; }
+
         public override void Atualizar(Cupom registro)
         {
-            Nome = registro.Nome;
+            this.Nome = registro.Nome;
+            this.Valor = registro.Valor;
+            this.DataDeValidade = registro.DataDeValidade;
+            this.Parceiro = registro.Parceiro;
+
         }
         public Cupom () 
         {
@@ -32,9 +39,13 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
             this.Nome = nome;
         }
         
-        public Cupom(string Nome)
+        public Cupom(string nome,decimal valor, DateTime dataDeValidade, Parceiro parceiro)
         {
-            this.Nome = Nome;
+            this.Nome = nome;
+            this.Valor = valor;
+            this.DataDeValidade = dataDeValidade;
+            this.Parceiro = parceiro;
+
         }
     }
 }

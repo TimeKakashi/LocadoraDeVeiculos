@@ -8,14 +8,12 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloTaxaServico
 {
-    public class ValidadorTaxaServico : AbstractValidator<TaxaServico>, IValidadorTaxaServico
+    public class ValidadorTaxaServico : AbstractValidator<TaxaServico>
     {
         public ValidadorTaxaServico()
         {
-            RuleFor(x => x.Nome)
-                .NotEmpty()
-                .NotNull()
-                .MinimumLength(4);
+            RuleFor(f => f.Nome).NotEmpty().NotNull().MinimumLength(4);
+            RuleFor(f => f.Preço).NotEmpty().NotNull().GreaterThan(0);
         }
     }
 }

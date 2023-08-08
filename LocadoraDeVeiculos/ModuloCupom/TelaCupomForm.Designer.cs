@@ -36,7 +36,7 @@
             txtDataDeValidade = new DateTimePicker();
             txtParceiro = new ComboBox();
             txtValor = new TextBox();
-            button1 = new Button();
+            btnGravar = new Button();
             button2 = new Button();
             SuspendLayout();
             // 
@@ -105,18 +105,20 @@
             txtValor.Size = new Size(88, 23);
             txtValor.TabIndex = 16;
             // 
-            // button1
+            // btnGravar
             // 
-            button1.Location = new Point(180, 227);
-            button1.Name = "button1";
-            button1.Size = new Size(86, 42);
-            button1.TabIndex = 17;
-            button1.Text = "Gravar";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnGravar.DialogResult = DialogResult.OK;
+            btnGravar.Location = new Point(180, 227);
+            btnGravar.Name = "btnGravar";
+            btnGravar.Size = new Size(86, 42);
+            btnGravar.TabIndex = 17;
+            btnGravar.Text = "Gravar";
+            btnGravar.UseVisualStyleBackColor = true;
+            btnGravar.Click += button1_Click;
             // 
             // button2
             // 
+            button2.DialogResult = DialogResult.Cancel;
             button2.Location = new Point(281, 227);
             button2.Name = "button2";
             button2.Size = new Size(86, 42);
@@ -130,7 +132,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(389, 293);
             Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnGravar);
             Controls.Add(txtValor);
             Controls.Add(txtParceiro);
             Controls.Add(txtDataDeValidade);
@@ -139,7 +141,10 @@
             Controls.Add(label1);
             Controls.Add(txtNome);
             Controls.Add(label2);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "TelaCupomForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro de Cupom";
             ResumeLayout(false);
             PerformLayout();
@@ -155,7 +160,7 @@
         private DateTimePicker txtDataDeValidade;
         private ComboBox txtParceiro;
         private TextBox txtValor;
-        private Button button1;
+        private Button btnGravar;
         private Button button2;
     }
 }

@@ -30,15 +30,15 @@ namespace LocadoraDeVeiculos.ModuloCupom
             txtNome.Text = cupom.Nome;
             txtDataDeValidade.Value = cupom.DataDeValidade;
             txtValor.Text = cupom.Valor.ToString();
-            txtParceiro.SelectedItem = cupom.parceiro;
+            txtParceiro.SelectedItem = cupom.Parceiro;
         }
         private Cupom ObterCupom()
         {
             cupom.Nome = txtNome.Text;
             cupom.Valor = Convert.ToDecimal(txtValor.Text);
             cupom.DataDeValidade = txtDataDeValidade.Value;
-            cupom.parceiro = (Parceiro)txtParceiro.SelectedItem;
-            
+            cupom.Parceiro = (Parceiro)txtParceiro.SelectedItem;
+
             return cupom;
         }
 

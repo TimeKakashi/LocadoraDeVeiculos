@@ -6,20 +6,25 @@ namespace LocadoraDeVeiculos.Dominio.ModuloParceiro
     {
         public string Nome { get; set; }
 
-        public override void Atualizar(Parceiro registro)
+        
+        public Parceiro() 
         {
-            Nome = registro.Nome;
-        }
-        public Parceiro() { }
 
-        public Parceiro(Guid id, string nome) : this(nome)
+        }
+        public Parceiro(string Nome)
+        {
+            this.Nome = Nome;
+        }
+
+        public Parceiro(Guid id, string nome)
         {
             Id = id;
         }
 
-        public Parceiro(string Nome)
+        
+        public override void Atualizar(Parceiro registro)
         {
-            this.Nome = Nome;
+            Nome = registro.Nome;
         }
 
     }

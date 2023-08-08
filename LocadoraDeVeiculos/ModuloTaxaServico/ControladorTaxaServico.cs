@@ -1,8 +1,11 @@
-﻿using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
+﻿using LocadoraDeVeiculos.Aplicacao.ModuloCupom;
+using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
 using LocadoraDeVeiculos.Aplicacao.ModuloTaxaServico;
 using LocadoraDeVeiculos.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaServico;
+using LocadoraDeVeiculos.ModuloCupom;
 using LocadoraDeVeiculos.ModuloParceiro;
 using System;
 using System.Collections.Generic;
@@ -88,24 +91,20 @@ namespace LocadoraDeVeiculos.ModuloTaxaServico
 
         public override void Inserir()
         {
-            TelaParceiroForm telaParceiroForm = new TelaParceiroForm();
+            TelaTaxaServicoForm telaTaxaServicoForm = new TelaTaxaServicoForm();
 
             telaTaxaServicoForm.onGravarRegistro += servicoTaxaServico.Inserir;
 
-            telaTaxaServicoForm.ConfigurarTaxaServico(new Parceiro());
+            telaTaxaServicoForm.ConfigurarTaxaServico(new TaxaServico());
 
             DialogResult result = telaTaxaServicoForm.ShowDialog();
 
-            if (result == DialogResult.OK) 
+            if (result == DialogResult.OK)
                 CarregarItens();
         }
 
+      
         public override UserControl ObterTabela()
-        {
-            return ObterTabela(tabelaTaxaServico);
-        }
-
-        public override UserControl ObterTabela(UserControl tabelaTaxaServico)
         {
             if (tabelaTaxaServico == null)
                 tabelaTaxaServico = new TabelaTaxaServico();

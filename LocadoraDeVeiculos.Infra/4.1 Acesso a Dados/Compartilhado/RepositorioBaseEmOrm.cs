@@ -1,4 +1,5 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using Microsoft.EntityFrameworkCore;
 
 namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado
@@ -50,5 +51,9 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado
             return registros.ToList();
         }
 
+        public void Editar(Cupom registro)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -12,10 +12,11 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
     {
         public ValidadorCupom() 
         {
-            RuleFor(x => x.Nome)
-                .NotEmpty()
-                .NotNull()
-                .MinimumLength(4);
+            RuleFor(f => f.Nome).NotEmpty().NotNull().MinimumLength(4);
+            RuleFor(f => f.Valor).NotEmpty().NotNull().GreaterThan(0);
+            RuleFor(f => f.DataDeValidade).NotEmpty().NotNull();
+            RuleFor(f => f.Parceiro).NotEmpty().NotNull();
         }
+        
     }
 }

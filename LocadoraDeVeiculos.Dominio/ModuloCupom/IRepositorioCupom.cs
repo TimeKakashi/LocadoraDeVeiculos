@@ -15,6 +15,5 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
         Cupom SelecionarPorNome(string nome);
 
         void Editar(Cupom registro);
-        TaxaServico SelecionarPorNome(Guid nome);
     }
 }

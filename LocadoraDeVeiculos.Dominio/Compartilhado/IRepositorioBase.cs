@@ -1,4 +1,6 @@
-﻿namespace LocadoraDeVeiculos.Dominio.Compartilhado
+﻿using LocadoraDeVeiculos.Dominio.ModuloCupom;
+
+namespace LocadoraDeVeiculos.Dominio.Compartilhado
 {
     public interface IRepositorioBase<T> where T : EntidadeBase<T>
     {

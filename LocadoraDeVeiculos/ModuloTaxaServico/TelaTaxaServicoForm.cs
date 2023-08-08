@@ -23,10 +23,34 @@ namespace LocadoraDeVeiculos.ModuloTaxaServico
             InitializeComponent();
         }
 
-        public  void ConfigurarTaxaServico(TaxaServico taxaServico)
+        public void ConfigurarTaxaServico(TaxaServico taxaServico)
         {
             this.taxaServico = taxaServico;
             txtNome.Text = taxaServico.Nome;
         }
+        private TaxaServico ObterTaxaServico()
+        {
+            taxaServico.Nome = txtNome.Text;
+
+            return taxaServico;
+        }
+
+        private void btnGravarServico_Click(object sender, EventArgs e)
+        {
+            this.taxaServico = ObterTaxaServico();
+
+            Result resultado = onGravarRegistro(taxaServico);
+
+            if (resultado.IsFailed)
+            {
+                string erro = resultado.Errors[0].Message;
+
+                TelaPrincipal.Instancia.AtualizarRodape(erro);
+
+                DialogResult = DialogResult.None;
+            }
+        }
+
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCupom;
+using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using Serilog;
 using System;
@@ -143,6 +144,19 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCupom
             }
 
             return erros;
+
+        }
+        protected override bool NomeDuplicado (Cupom cupom)
+        {
+            Cupom cupomEncontrado = repositorioCupom.SelecionarPorNome(cupom.Nome);
+            if (cupomEncontrado != null &&
+            cupomEncontrado.Id != cupom.Id &&
+                cupomEncontrado.Nome == cupom.Nome)
+            {
+                return true;
+            }
+            else
+                return false;
         }
     }
 }

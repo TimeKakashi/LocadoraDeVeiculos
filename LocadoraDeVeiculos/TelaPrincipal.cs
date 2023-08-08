@@ -2,6 +2,7 @@ using LocadoraDeVeiculos.Aplicacao.ModuloAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
 using LocadoraDeVeiculos.Aplicacao.ModuloCombustivel;
 using LocadoraDeVeiculos.Aplicacao.ModuloCondutor;
+using LocadoraDeVeiculos.Aplicacao.ModuloCupom;
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
@@ -12,6 +13,7 @@ using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
+using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
@@ -19,6 +21,7 @@ using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCupom;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloParceiro;
@@ -27,6 +30,7 @@ using LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON;
 using LocadoraDeVeiculos.ModuloAutomovel;
 using LocadoraDeVeiculos.ModuloCliente;
 using LocadoraDeVeiculos.ModuloCondutor;
+using LocadoraDeVeiculos.ModuloCupom;
 using LocadoraDeVeiculos.ModuloFuncionario;
 using LocadoraDeVeiculos.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.ModuloParceiro;
@@ -51,10 +55,13 @@ namespace LocadoraDeVeiculos
         private List<Cliente> listaClientes;
         private TabelaCliente TabelaCliente;
         private TabelaCondutor tabelaCondutor;
+        private TabelaCupom tabelaCupom;
 
         private static JsonContext jsonContext = new JsonContext(true);
 
         private ControladorBase controlador;
+        private IRepositorioCupom repositorioCupom;
+
         public TelaPrincipal()
         {
             InitializeComponent();
@@ -85,6 +92,7 @@ namespace LocadoraDeVeiculos
             reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovel(dbContext);
             repositorioPlanoCobranca = new RepositorioPlanoCobrancaOrm(dbContext);
             repositorioCliente = new RepositorioClienteOrm(dbContext);
+            repositorioCupom = new RepositorioCupomOrm(dbContext);
             repositorioParceiro = new RepositorioParceiroOrm(dbContext);
             repositorioAutomovel = new RepositorioAutomovel(dbContext);
             repositorioCombustivelJson = new RepositorioCombustivel(jsonContext);

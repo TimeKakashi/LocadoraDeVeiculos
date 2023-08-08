@@ -32,12 +32,12 @@
             button2 = new Button();
             radioButton1 = new RadioButton();
             radioButton2 = new RadioButton();
-            textBox1 = new TextBox();
+            txtNome = new TextBox();
             textBox2 = new TextBox();
             panel1 = new Panel();
+            label3 = new Label();
             label1 = new Label();
             label2 = new Label();
-            label3 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -52,6 +52,7 @@
             // 
             // button2
             // 
+            button2.DialogResult = DialogResult.Cancel;
             button2.Location = new Point(379, 196);
             button2.Name = "button2";
             button2.Size = new Size(86, 42);
@@ -81,12 +82,12 @@
             radioButton2.Text = "Cobrança Diaria";
             radioButton2.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // txtNome
             // 
-            textBox1.Location = new Point(80, 31);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(249, 23);
-            textBox1.TabIndex = 4;
+            txtNome.Location = new Point(80, 31);
+            txtNome.Name = "txtNome";
+            txtNome.Size = new Size(249, 23);
+            txtNome.TabIndex = 4;
             // 
             // textBox2
             // 
@@ -104,6 +105,15 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(249, 69);
             panel1.TabIndex = 6;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(3, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(96, 15);
+            label3.TabIndex = 9;
+            label3.Text = "Plano de Calculo";
             // 
             // label1
             // 
@@ -123,16 +133,7 @@
             label2.TabIndex = 8;
             label2.Text = "Nome :";
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(3, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(96, 15);
-            label3.TabIndex = 9;
-            label3.Text = "Plano de Calculo";
-            // 
-            // TelaTaxaServico
+            // TelaTaxaServicoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -141,10 +142,10 @@
             Controls.Add(label1);
             Controls.Add(panel1);
             Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(txtNome);
             Controls.Add(button2);
             Controls.Add(button1);
-            Name = "TelaTaxaServico";
+            Name = "TelaTaxaServicoForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro de Taxa e Serviço.";
             panel1.ResumeLayout(false);
@@ -159,7 +160,7 @@
         private Button button2;
         private RadioButton radioButton1;
         private RadioButton radioButton2;
-        private TextBox textBox1;
+        private TextBox txtNome;
         private TextBox textBox2;
         private Panel panel1;
         private Label label1;

@@ -1,6 +1,6 @@
 ﻿using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCupom;
-using LocadoraDeVeiculos.Dominio.ModuloParceiro;
+using LocadoraDeVeiculos.Dominio.ModuloTaxaServico;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,12 +11,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LocadoraDeVeiculos.ModuloCupom
+namespace LocadoraDeVeiculos.ModuloTaxaServico
 {
-    public partial class TabelaCupom : UserControl
+    public partial class TabelaTaxaServico : UserControl
     {
-        
-        public TabelaCupom()
+        public TabelaTaxaServico()
         {
             InitializeComponent();
             ConfigurarColunas();
@@ -24,7 +23,7 @@ namespace LocadoraDeVeiculos.ModuloCupom
             ConfiguracaoGrid.ConfigurarGridZebrado(grid);
         }
 
-        private void ConfigurarColunas()
+        private void ConfigurarColunas() 
         {
             DataGridViewColumn[] colunas = new DataGridViewColumn[]
             {
@@ -35,42 +34,31 @@ namespace LocadoraDeVeiculos.ModuloCupom
         },
         new DataGridViewTextBoxColumn()
         {
-            Name = "Valor",
-            HeaderText = "Valor"
-        },
-        new DataGridViewTextBoxColumn()
-        {
-            Name = "Data de Validade",
-            HeaderText = "Data de Validade"
-        },
-        new DataGridViewTextBoxColumn()
-        {
-            Name = "Parceiro",
-            HeaderText = "Parceiro"
-        }
+            Name = "Preço",
+            HeaderText = "Preço"
+        }   
             };
+
 
             grid.Columns.AddRange(colunas);
         }
-        public void AtualizarRegistros(List<Cupom> listaCupom)
+        public void AtualizarRegistros(List<TaxaServico> listaTaxaServico)
         {
             grid.Rows.Clear();
 
-            foreach (Cupom f in listaCupom)
+            foreach (TaxaServico f in listaTaxaServico)
             {
                 grid.Rows.Add(f.Nome,
-                              f.Valor,
-                              f.DataDeValidade,
-                              f.Parceiro
+                              f.Preço
                               );
             }
         }
-
         public Guid ObterIdSelecionado()
         {
             return grid.SelecionarId();
         }
 
-        
     }
+
+    
 }

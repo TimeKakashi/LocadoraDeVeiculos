@@ -42,9 +42,11 @@ namespace LocadoraDeVeiculos.ModuloCupom
 
         public override string ToolTipPdf => "Gerar Pdf";
 
+        public override string ToolTipCombustivel => throw new NotImplementedException();
+
         public override void CarregarItens()
         {
-            var listaCupom = IRepositorioCupom.SelecionarTodos();
+            var listaCupom = repositorioCupom.SelecionarTodos();
 
             tabelaCupom.AtualizarRegistros(listaCupom);
         }
@@ -71,28 +73,61 @@ namespace LocadoraDeVeiculos.ModuloCupom
 
         private Cupom ObterCupomSelecionado()
         {
-            Guid id = tabelaCupom.ObteridSelecionado();
+            Guid id = tabelaCupom.ObterIdSelecionado();
             var cupom = repositorioCupom.SelecionarPorId(id);
+            return cupom;
         }
 
         public override void Excluir()
         {
-            throw new NotImplementedException();
+            var cupom = ObterCupomSelecionado();
+
+            if (cupom == null) 
+            {
+                MessageBox.Show("Selecione um cupom primeiro!",
+                    "Exclusão de cupom",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
+            DialogResult result = MessageBox.Show($"Deseja excluir o cupom {cupom.Nome}?",
+                    "Exclusão de cupom",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Exclamation);
+
+            if (result == DialogResult.OK)
+            {
+                servicoCupom.Excluir(cupom);
+                CarregarItens();
+            }
+
         }
 
         public override void Inserir()
         {
-            throw new NotImplementedException();
+            TelaCupomForm telaCupomForm = new TelaCupomForm();
+
+            telaCupomForm.onGravarRegistro += servicoCupom.Inserir;
+
+            telaCupomForm.ConfigurarCupom(new Cupom());
+
+            DialogResult result = telaCupomForm.ShowDialog();
+
+            if (result == DialogResult.OK)
+                CarregarItens();
         }
 
         public override UserControl ObterTabela()
         {
-            throw new NotImplementedException();
+            if(tabelaCupom == null)
+                tabelaCupom = new TabelaCupom();
+
+            return tabelaCupom;
+                    
         }
 
-        public override string ObterTipoCadastro()
-        {
-            throw new NotImplementedException();
-        }
+        public override string ObterTipoCadastro() => "Cadastro de cupom";
+
+
     }
 }

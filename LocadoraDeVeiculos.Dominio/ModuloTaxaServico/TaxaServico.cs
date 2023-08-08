@@ -10,6 +10,8 @@ namespace LocadoraDeVeiculos.Dominio.ModuloTaxaServico
     public class TaxaServico : EntidadeBase<TaxaServico>
     {
         public string Nome { get; set; }
+        public decimal Preço { get; set; }
+
         public override void Atualizar(TaxaServico registro)
         {
             Nome = registro.Nome;
@@ -23,6 +25,10 @@ namespace LocadoraDeVeiculos.Dominio.ModuloTaxaServico
         public TaxaServico(string nome)
         {
             Nome = nome;
+        }
+
+        public TaxaServico()
+        {
         }
     }
 }

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCupom
 {
-    public interface IRepositorioCupom : IRepositorioBase<Cupom>
+    public class RepositorioCupomOrm : RepositorioBaseEmOrm<Cupom>, IRepositorioCupom
     {
         public RepositorioCupomOrm(LocadoraDeVeiculosDbContext dbContext) : base(dbContext)
         {
@@ -21,17 +21,17 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCupom
         }
         public override void Editar(Cupom registro)
         {
-            Cupom parceiroEncontrado = registros.FirstOrDefault(x => x.Nome == registro.Nome);
+            Cupom cupomEncontrado = registros.FirstOrDefault(x => x.Id == registro.Id);
 
-            parceiroEncontrado.Nome = registro.Nome;
+            cupomEncontrado.Nome = registro.Nome;
 
             dbContext.SaveChanges();
 
         }
+
         public Cupom SelecionarPorNome(string nome)
         {
-
-            return registros.FirstOrDefault(registros => registros.Nome == nome);
+            return registros.FirstOrDefault(x => x.Nome == nome);
         }
     }
 }
