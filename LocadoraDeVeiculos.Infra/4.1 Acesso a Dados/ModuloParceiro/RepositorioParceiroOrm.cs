@@ -3,13 +3,18 @@ using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
 
 namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloParceiro
 {
-    public class RepositorioParceiroOrm : RepositorioBaseEmOrm<Parceiro>, IRepositorioParceiro
+    public class RepositorioParceiro : RepositorioBaseEmOrm<Parceiro>, IRepositorioParceiro
     {
 
 
-        public RepositorioParceiroOrm(LocadoraDeVeiculosDbContext dbContext) : base(dbContext)
+        public RepositorioParceiro(LocadoraDeVeiculosDbContext dbContext) : base(dbContext)
         {
 
+        }
+        public Parceiro SelecionarPorNome(string nome)
+        {
+
+            return registros.FirstOrDefault(x => x.Nome == nome);
         }
 
         public override void Editar(Parceiro registro)
@@ -21,10 +26,6 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloParceiro
             dbContext.SaveChanges();
 
         }
-        public Parceiro SelecionarPorNome(string nome)
-        {
-
-            return registros.FirstOrDefault(registros => registros.Nome == nome);
-        }
+        
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloTaxaServico
 {
-    public class ValidadorTaxaServico : AbstractValidator<TaxaServico>
+    public class ValidadorTaxaServico : AbstractValidator<TaxaServico> , IValidadorTaxaServico
     {
         public ValidadorTaxaServico()
         {

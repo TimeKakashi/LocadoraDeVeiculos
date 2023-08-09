@@ -18,7 +18,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
         public string Nome { get; set; }
         public decimal Valor { get; set; }
 
-        public DateTime DataDeValidade;
+        public DateTime DataDeValidade { get; set; }
         public Parceiro Parceiro { get; set; }
         
 

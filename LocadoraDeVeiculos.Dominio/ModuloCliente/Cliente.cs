@@ -22,6 +22,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
         public string Email { get; set; }
 
 
+
         public string? CPF { get; set; }
 
 

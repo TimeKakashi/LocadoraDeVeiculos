@@ -20,7 +20,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloTaxaServico
         {
         }
 
-        public TaxaServico(string nome)
+        public TaxaServico(string nome, int v)
         {
             Nome = nome;
         }
@@ -29,7 +29,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloTaxaServico
             Nome = registro.Nome;
         }
 
-        public TaxaServico(Guid id, string nome) : this(nome)
+        public TaxaServico(Guid id, string nome) 
         {
             Id = id;
         }

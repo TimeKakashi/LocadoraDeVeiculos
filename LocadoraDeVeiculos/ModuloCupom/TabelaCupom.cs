@@ -25,7 +25,11 @@ namespace LocadoraDeVeiculos.ModuloCupom
         private void ConfigurarColunas()
         {
             DataGridViewColumn[] colunas = new DataGridViewColumn[]
-            {
+            { new DataGridViewTextBoxColumn()
+        {
+            Name = "Id",
+            HeaderText = "Id"
+        },
         new DataGridViewTextBoxColumn()
         {
             Name = "Nome",
@@ -56,7 +60,8 @@ namespace LocadoraDeVeiculos.ModuloCupom
 
             foreach (Cupom f in listaCupom)
             {
-                grid.Rows.Add(f.Nome,
+                grid.Rows.Add(f.Id,
+                              f.Nome,
                               f.Valor,
                               f.DataDeValidade,
                               f.Parceiro

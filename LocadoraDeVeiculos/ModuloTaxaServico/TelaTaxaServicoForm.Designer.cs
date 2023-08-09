@@ -30,25 +30,27 @@
         {
             button1 = new Button();
             button2 = new Button();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
+            PrecoFixo = new RadioButton();
+            CobrancaDiaria = new RadioButton();
             txtNome = new TextBox();
-            textBox2 = new TextBox();
-            panel1 = new Panel();
-            label3 = new Label();
+            txPreco = new TextBox();
+            gbRadioBTN = new Panel();
+            Plano = new Label();
             label1 = new Label();
             label2 = new Label();
-            panel1.SuspendLayout();
+            gbRadioBTN.SuspendLayout();
             SuspendLayout();
             // 
             // button1
             // 
+            button1.DialogResult = DialogResult.OK;
             button1.Location = new Point(287, 196);
             button1.Name = "button1";
             button1.Size = new Size(86, 42);
             button1.TabIndex = 0;
             button1.Text = "Gravar";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -60,27 +62,27 @@
             button2.Text = "Cancelar";
             button2.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // PrecoFixo
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(3, 47);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(80, 19);
-            radioButton1.TabIndex = 2;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Preço Fixo";
-            radioButton1.UseVisualStyleBackColor = true;
+            PrecoFixo.AutoSize = true;
+            PrecoFixo.Location = new Point(3, 47);
+            PrecoFixo.Name = "PrecoFixo";
+            PrecoFixo.Size = new Size(80, 19);
+            PrecoFixo.TabIndex = 2;
+            PrecoFixo.TabStop = true;
+            PrecoFixo.Text = "Preço Fixo";
+            PrecoFixo.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // CobrancaDiaria
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(103, 47);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(109, 19);
-            radioButton2.TabIndex = 3;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Cobrança Diaria";
-            radioButton2.UseVisualStyleBackColor = true;
+            CobrancaDiaria.AutoSize = true;
+            CobrancaDiaria.Location = new Point(103, 47);
+            CobrancaDiaria.Name = "CobrancaDiaria";
+            CobrancaDiaria.Size = new Size(109, 19);
+            CobrancaDiaria.TabIndex = 3;
+            CobrancaDiaria.TabStop = true;
+            CobrancaDiaria.Text = "Cobrança Diaria";
+            CobrancaDiaria.UseVisualStyleBackColor = true;
             // 
             // txtNome
             // 
@@ -89,31 +91,31 @@
             txtNome.Size = new Size(249, 23);
             txtNome.TabIndex = 4;
             // 
-            // textBox2
+            // txPreco
             // 
-            textBox2.Location = new Point(80, 70);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(83, 23);
-            textBox2.TabIndex = 5;
+            txPreco.Location = new Point(80, 70);
+            txPreco.Name = "txPreco";
+            txPreco.Size = new Size(83, 23);
+            txPreco.TabIndex = 5;
             // 
-            // panel1
+            // gbRadioBTN
             // 
-            panel1.Controls.Add(label3);
-            panel1.Controls.Add(radioButton1);
-            panel1.Controls.Add(radioButton2);
-            panel1.Location = new Point(80, 109);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(249, 69);
-            panel1.TabIndex = 6;
+            gbRadioBTN.Controls.Add(Plano);
+            gbRadioBTN.Controls.Add(PrecoFixo);
+            gbRadioBTN.Controls.Add(CobrancaDiaria);
+            gbRadioBTN.Location = new Point(80, 109);
+            gbRadioBTN.Name = "gbRadioBTN";
+            gbRadioBTN.Size = new Size(249, 69);
+            gbRadioBTN.TabIndex = 6;
             // 
-            // label3
+            // Plano
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(3, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(96, 15);
-            label3.TabIndex = 9;
-            label3.Text = "Plano de Calculo";
+            Plano.AutoSize = true;
+            Plano.Location = new Point(3, 0);
+            Plano.Name = "Plano";
+            Plano.Size = new Size(96, 15);
+            Plano.TabIndex = 9;
+            Plano.Text = "Plano de Calculo";
             // 
             // label1
             // 
@@ -140,16 +142,16 @@
             ClientSize = new Size(477, 267);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(panel1);
-            Controls.Add(textBox2);
+            Controls.Add(gbRadioBTN);
+            Controls.Add(txPreco);
             Controls.Add(txtNome);
             Controls.Add(button2);
             Controls.Add(button1);
             Name = "TelaTaxaServicoForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro de Taxa e Serviço.";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            gbRadioBTN.ResumeLayout(false);
+            gbRadioBTN.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -158,13 +160,13 @@
 
         private Button button1;
         private Button button2;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
+        private RadioButton PrecoFixo;
+        private RadioButton CobrancaDiaria;
         private TextBox txtNome;
-        private TextBox textBox2;
-        private Panel panel1;
+        private TextBox txPreco;
+        private Panel gbRadioBTN;
         private Label label1;
         private Label label2;
-        private Label label3;
+        private Label Plano;
     }
 }

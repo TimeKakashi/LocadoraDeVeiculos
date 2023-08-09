@@ -20,16 +20,24 @@ namespace LocadoraDeVeiculos.ModuloCupom
         private IRepositorioCupom repositorioCupom;
         private TabelaCupom tabelaCupom;
         private ServicoCupom servicoCupom;
+        private IRepositorioParceiro repositorioParceiro;
 
-        public ControladorCupom(IRepositorioCupom repositorioCupom, ServicoCupom servicoCupom)
+        public ControladorCupom(IRepositorioCupom repositorioCupom, ServicoCupom servicoCupom,IRepositorioParceiro repositorioParceiro)
         {
             this.repositorioCupom = repositorioCupom;
             this.servicoCupom = servicoCupom;
+            this.repositorioParceiro = repositorioParceiro;
 
             if (tabelaCupom == null)
                 tabelaCupom = new TabelaCupom();
 
             CarregarItens();
+        }
+
+        public ControladorCupom(IRepositorioCupom repositorioCupom, ServicoCupom servicoCupom)
+        {
+            this.repositorioCupom = repositorioCupom;
+            this.servicoCupom = servicoCupom;
         }
 
         public override string ToolTipInserir => "Inserir Cupom!";
@@ -42,7 +50,7 @@ namespace LocadoraDeVeiculos.ModuloCupom
 
         public override string ToolTipPdf => "Gerar Pdf";
 
-        public override string ToolTipCombustivel => throw new NotImplementedException();
+        public override string ToolTipCombustivel => "Tipo de combustivel!";
 
         public override void CarregarItens()
         {
@@ -60,7 +68,7 @@ namespace LocadoraDeVeiculos.ModuloCupom
                 MessageBox.Show("Selecione um Cupom primeiro!", "Edição de Cupom", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            TelaCupomForm telaCupomForm = new TelaCupomForm();
+            TelaCupomForm telaCupomForm = new TelaCupomForm(repositorioParceiro.SelecionarTodos());
             telaCupomForm.onGravarRegistro += servicoCupom.Editar;
             telaCupomForm.ConfigurarCupom(new Cupom());
             telaCupomForm.ShowDialog();
@@ -105,11 +113,11 @@ namespace LocadoraDeVeiculos.ModuloCupom
 
         public override void Inserir()
         {
-            TelaCupomForm telaCupomForm = new TelaCupomForm();
+            TelaCupomForm telaCupomForm = new TelaCupomForm(repositorioParceiro.SelecionarTodos());
 
             telaCupomForm.onGravarRegistro += servicoCupom.Inserir;
 
-            telaCupomForm.ConfigurarCupom(new Cupom());
+            telaCupomForm.ConfigurarCupom(new Cupom(),true);
 
             DialogResult result = telaCupomForm.ShowDialog();
 

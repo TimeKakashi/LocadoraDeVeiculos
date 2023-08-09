@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaServico;
 using System;
@@ -15,12 +16,14 @@ namespace LocadoraDeVeiculos.ModuloTaxaServico
 {
     public partial class TelaTaxaServicoForm : Form
     {
-        internal Func<TaxaServico, Result> onGravarRegistro;
+        public event GravarRegistroDelegate<TaxaServico> onGravarRegistro;
 
         private TaxaServico taxaServico;
+        private IRepositorioTaxaServico repositorioTaxaServico;
         public TelaTaxaServicoForm()
         {
             InitializeComponent();
+            this.repositorioTaxaServico = repositorioTaxaServico;
         }
 
         public void ConfigurarTaxaServico(TaxaServico taxaServico)
@@ -28,14 +31,32 @@ namespace LocadoraDeVeiculos.ModuloTaxaServico
             this.taxaServico = taxaServico;
             txtNome.Text = taxaServico.Nome;
         }
+
         private TaxaServico ObterTaxaServico()
         {
             taxaServico.Nome = txtNome.Text;
+            string plano = "";
 
+            if (gbRadioBTN.Controls.OfType<RadioButton>().SingleOrDefault(RadioButton => RadioButton.Checked) == null)
+            {
+                taxaServico = null;
+            }
+            else
+            {
+                plano = gbRadioBTN.Controls.OfType<RadioButton>().SingleOrDefault(RadioButton => RadioButton.Checked).Text;
+
+                if (plano == "Preço Fixo")
+                    taxaServico.Plano = "Preço Fixo";
+                else
+                    taxaServico.Plano = "Cobrança Diaria";
+
+            }
+            taxaServico.Preco = Convert.ToDecimal(txPreco.Text);
             return taxaServico;
         }
 
-        private void btnGravarServico_Click(object sender, EventArgs e)
+
+        private void button1_Click(object sender, EventArgs e)
         {
             this.taxaServico = ObterTaxaServico();
 
@@ -50,7 +71,5 @@ namespace LocadoraDeVeiculos.ModuloTaxaServico
                 DialogResult = DialogResult.None;
             }
         }
-
-
     }
 }

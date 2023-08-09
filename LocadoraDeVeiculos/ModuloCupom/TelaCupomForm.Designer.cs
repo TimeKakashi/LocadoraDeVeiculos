@@ -34,7 +34,7 @@
             label3 = new Label();
             label4 = new Label();
             txtDataDeValidade = new DateTimePicker();
-            txtParceiro = new ComboBox();
+            comboBoxListaParceiro = new ComboBox();
             txtValor = new TextBox();
             btnGravar = new Button();
             button2 = new Button();
@@ -90,13 +90,14 @@
             txtDataDeValidade.Size = new Size(249, 23);
             txtDataDeValidade.TabIndex = 14;
             // 
-            // txtParceiro
+            // comboBoxListaParceiro
             // 
-            txtParceiro.FormattingEnabled = true;
-            txtParceiro.Location = new Point(118, 158);
-            txtParceiro.Name = "txtParceiro";
-            txtParceiro.Size = new Size(148, 23);
-            txtParceiro.TabIndex = 15;
+            comboBoxListaParceiro.FormattingEnabled = true;
+            comboBoxListaParceiro.Location = new Point(118, 158);
+            comboBoxListaParceiro.Name = "comboBoxListaParceiro";
+            comboBoxListaParceiro.Size = new Size(148, 23);
+            comboBoxListaParceiro.TabIndex = 15;
+            comboBoxListaParceiro.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // txtValor
             // 
@@ -134,7 +135,7 @@
             Controls.Add(button2);
             Controls.Add(btnGravar);
             Controls.Add(txtValor);
-            Controls.Add(txtParceiro);
+            Controls.Add(comboBoxListaParceiro);
             Controls.Add(txtDataDeValidade);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -158,7 +159,7 @@
         private Label label3;
         private Label label4;
         private DateTimePicker txtDataDeValidade;
-        private ComboBox txtParceiro;
+        private ComboBox comboBoxListaParceiro;
         private TextBox txtValor;
         private Button btnGravar;
         private Button button2;

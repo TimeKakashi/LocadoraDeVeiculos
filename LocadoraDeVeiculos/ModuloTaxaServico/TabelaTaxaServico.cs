@@ -48,8 +48,10 @@ namespace LocadoraDeVeiculos.ModuloTaxaServico
 
             foreach (TaxaServico f in listaTaxaServico)
             {
-                grid.Rows.Add(f.Nome,
-                              f.Preco
+                grid.Rows.Add(f.Id, 
+                              f.Nome,
+                              f.Preco,
+                              f.Plano
                               );
             }
         }

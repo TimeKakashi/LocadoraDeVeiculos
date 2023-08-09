@@ -56,6 +56,7 @@ namespace LocadoraDeVeiculos
         private IRepositorioAutomovel repositorioAutomovel;
         private IRepositorioCombustivelJson repositorioCombustivelJson;
         private IRepositorioCondutor repositorioCondutor;
+        private IRepositorioCupom repositorioCupom;
         private IRepositorioTaxaServico repositorioTaxaServico;
         private List<Cliente> listaClientes;
         private TabelaCliente TabelaCliente;
@@ -65,8 +66,7 @@ namespace LocadoraDeVeiculos
         private static JsonContext jsonContext = new JsonContext(true);
 
         private ControladorBase controlador;
-        private IRepositorioCupom repositorioCupom;
-
+        
         public TelaPrincipal()
         {
             InitializeComponent();
@@ -97,10 +97,10 @@ namespace LocadoraDeVeiculos
             reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovel(dbContext);
             repositorioPlanoCobranca = new RepositorioPlanoCobrancaOrm(dbContext);
             repositorioCliente = new RepositorioClienteOrm(dbContext);
-            repositorioCupom = new RepositorioCupomOrm(dbContext);
-            repositorioParceiro = new RepositorioParceiroOrm(dbContext);
+            repositorioCupom = new RepositorioCupom(dbContext);
+            repositorioParceiro = new RepositorioParceiro(dbContext);
             repositorioAutomovel = new RepositorioAutomovel(dbContext);
-            repositorioTaxaServico = new RepositorioTaxaServicoOrm(dbContext);
+            repositorioTaxaServico = new RepositorioTaxaServico(dbContext);
             repositorioCombustivelJson = new RepositorioCombustivel(jsonContext);
 
         }
@@ -252,9 +252,9 @@ namespace LocadoraDeVeiculos
         {
             var validadorCupom = new ValidadorCupom();
 
-            var servicoCupom = new ServicoCupom(repositorioParceiro, validadorCupom);
+            var servicoCupom = new ServicoCupom(repositorioCupom, validadorCupom);
 
-            controlador = new ControladorCupom(repositorioCupom, servicoCupom);
+            controlador = new ControladorCupom(repositorioCupom, servicoCupom, repositorioParceiro);
 
             ConfigurarTelaPrincipal(controlador);
         }

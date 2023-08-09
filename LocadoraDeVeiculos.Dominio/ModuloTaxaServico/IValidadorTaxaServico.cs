@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloTaxaServico
 {
-    public class IValidadorTaxaServico : IValidador<TaxaServico>
+    public interface IValidadorTaxaServico : IValidador<TaxaServico>
     {
-        public ValidationResult Validate(TaxaServico registro)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
