@@ -108,6 +108,12 @@ namespace LocadoraDeVeiculos.ModuloAluguel
                 return;
             }
 
+            if (aluguel.Finalizado)
+            {
+                MessageBox.Show("Este aluguel já foi finalizado, nao é possivel Editalo");
+                return;
+            }
+
             TelaAluguelForm talaAluguel = new TelaAluguelForm(
                repositorioFuncionario.SelecionarTodos(),
                repositorioCliente.SelecionarTodos(true),
@@ -146,6 +152,12 @@ namespace LocadoraDeVeiculos.ModuloAluguel
                 return;
             }
 
+            if (aluguel.Finalizado)
+            {
+                MessageBox.Show("Este aluguel já foi finalizado, nao é possivel Excluir-lo");
+                return;
+            }
+
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o aluguel do cliente: {aluguel.Cliente} com o veiculo: {aluguel.Veiculo.Modelo}?", "Exclusão de aluguel",
                 MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Question);
@@ -181,6 +193,12 @@ namespace LocadoraDeVeiculos.ModuloAluguel
         public override void DevolucaoAluguel()
         {
             var aluguel = ObterAluguelSelecionado();
+
+            if (aluguel.Finalizado)
+            {
+                MessageBox.Show("Este aluguel já foi finalizado, nao é possivel finalizar novamente");
+                return;
+            }
 
             TelaDevolucaoForm telaDevolucao = new TelaDevolucaoForm(repositorioFuncionario.SelecionarTodos(),
                 repositorioCliente.SelecionarTodos(true),

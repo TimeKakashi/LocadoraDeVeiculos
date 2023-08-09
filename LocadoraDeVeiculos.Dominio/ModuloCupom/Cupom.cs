@@ -14,11 +14,8 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
 {
     public class Cupom : EntidadeBase<Cupom>
     {
-        
-
         public string Nome { get; set; }
         public decimal Valor { get; set; }
-
         public DateTime DataDeValidade { get; set; }
         public Parceiro Parceiro { get; set; }
       
@@ -47,7 +44,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
 
         public override bool Equals(object? obj)
         {
-            return obj is ModuloCondutor.Condutor cupom && Id == cupom.Id;
+            return obj is Condutor cupom && Id == cupom.Id;
         }
     }
 }
