@@ -23,6 +23,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LocadoraDeVeiculos.ModuloAluguel
 {
@@ -178,9 +179,10 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             aluguel.Cliente = (Cliente)cbCliente.SelectedItem;
             aluguel.GrupoAutomovel = (GrupoAutomovel)cbGrupoAutomoveis.SelectedItem;
             aluguel.PlanoCobranca = (PlanoCobranca)cbPlanoCobranca.SelectedItem;
-            aluguel.Cupom = ObterCupom(txCupom.Text);
             aluguel.Condutor = (Condutor)cbCondutor.SelectedItem;
             aluguel.Veiculo = (Veiculo)cbAutomovel.SelectedItem;
+
+            
 
             aluguel.DataLocacao = txDataLocacao.Value;
 
@@ -201,16 +203,13 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             labelValorTotal.Text = aluguel.Preco.ToString();
 
+            if (aluguel.Cliente != null)
+                if(aluguel.Cupom != null)
+                    aluguel.Cliente.CuponsUsados.Add(aluguel.Cupom);
+
             DesmarcarItens();
 
             return aluguel;
-        }
-
-        private Cupom? ObterCupom(string text)
-        {
-            Cupom cupom = onProcurarCupom(text);
-
-            return cupom;
         }
 
         private void btnCupom_Click(object sender, EventArgs e)
@@ -220,7 +219,8 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             if (string.IsNullOrEmpty(cupomtxt))
                 return;
 
-            aluguel.Cupom = ObterCupom(cupomtxt);
+            aluguel.Cupom = onProcurarCupom(cupomtxt);
+
         }
 
         private void DesmarcarItens()
@@ -270,6 +270,12 @@ namespace LocadoraDeVeiculos.ModuloAluguel
                 TelaPrincipal.Instancia.AtualizarRodape(erro);
 
                 DialogResult = DialogResult.None;
+
+                foreach(var item in resultado.Errors)
+                {
+                    if (item.Message == "Cupom ja utilizado anteriormente pelo cliente!")
+                        aluguel.Cliente.CuponsUsados.Remove(aluguel.Cupom);
+                }
             }
         }
 

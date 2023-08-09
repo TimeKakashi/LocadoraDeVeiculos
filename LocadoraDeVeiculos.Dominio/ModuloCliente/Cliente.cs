@@ -1,5 +1,7 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
+using LocadoraDeVeiculos.Dominio.ModuloCupom;
+using System.Net;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloCliente
 {
@@ -12,7 +14,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
         }
 
         public TipoCliente Tipo { get; private set; }
-
         public string Nome { get; set; }
         public string Telefone { get; set; }
         public string Bairro { get; set; }
@@ -22,12 +23,10 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
         public string Estado { get; set; }
         public string Email { get; set; }
         public List<Condutor> Condutores { get; set; } = new List<Condutor>();
-
-
+        public List<Cupom> CuponsUsados { get; set; } = new List<Cupom>();
         public string? CPF { get; set; }
-
-
         public string? CNPJ { get; set; }
+
         public Cliente()
         {
 

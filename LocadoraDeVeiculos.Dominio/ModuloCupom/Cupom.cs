@@ -1,4 +1,5 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 
@@ -10,6 +11,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
         public decimal Valor { get; set; }
         public DateTime DataDeValidade { get; set; }
         public Parceiro Parceiro { get; set; }
+        public List<Cliente> Clientes { get; set; } = new List<Cliente>();
       
         public Cupom () 
         {
@@ -36,7 +38,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
 
         public override bool Equals(object? obj)
         {
-            return obj is Condutor cupom && Id == cupom.Id;
+            return obj is Cupom cupom && Id == cupom.Id;
         }
     }
 }

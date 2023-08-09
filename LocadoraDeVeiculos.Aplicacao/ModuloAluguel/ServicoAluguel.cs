@@ -3,6 +3,7 @@ using LocadoraDeVeiculos.Aplicacao.Compartilhado;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAluguel;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
 using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using Serilog;
@@ -20,6 +21,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
         IRepositorioAluguel repositorioAluguel;
         IRepositorioCupom repositorioCupom;
         IRepositorioCombustivelJson repositorioCombustivelJson;
+        IRepositorioCliente repositorioCliente;
         IValidadorAluguel validadorAluguel;
 
 
@@ -41,6 +43,8 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
                 return Result.Fail(erros);
             try
             {
+                registro.Cliente.CuponsUsados.Add(registro.Cupom);
+
                 repositorioAluguel.Inserir(registro);
 
                 Log.Debug("Alguel inserido com sucesso!");
@@ -50,6 +54,9 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
             catch (Exception ex)
             {
                 string msg = "Falha ao tentar inserir um Aluguel!";
+
+                if(registro.Cliente.CuponsUsados.Contains(registro.Cupom))
+                    registro.Cliente.CuponsUsados.Remove(registro.Cupom);
 
                 Log.Error(ex, msg + "{@f}", registro);
 
@@ -65,6 +72,8 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
 
             if (erros.Count() > 0)
                 return Result.Fail(erros);
+
+
             try
             {
                 repositorioAluguel.Editar(registro);
@@ -133,6 +142,9 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
 
             if (validatonResult != null)
                 erros.AddRange(validatonResult.Errors.Select(x => x.ErrorMessage));
+
+            if (registro.Cliente.CuponsUsados.Contains(registro.Cupom))
+                erros.Add("Cupom ja utilizado anteriormente pelo cliente!");
 
             foreach (string erro in erros)
                 Log.Warning(erro);
