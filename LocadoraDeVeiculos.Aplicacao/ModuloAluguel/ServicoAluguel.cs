@@ -1,7 +1,9 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAluguel;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
+using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using Serilog;
@@ -18,13 +20,16 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
     {
         IRepositorioAluguel repositorioAluguel;
         IRepositorioCupom repositorioCupom;
+        IRepositorioCombustivelJson repositorioCombustivelJson;
         IValidadorAluguel validadorAluguel;
 
-        public ServicoAluguel(IRepositorioAluguel repositorioAluguel, IRepositorioCupom repositorioCupom, IValidadorAluguel validadorAluguel)
+
+        public ServicoAluguel(IRepositorioAluguel repositorioAluguel, IRepositorioCupom repositorioCupom,IRepositorioCombustivelJson repositorioCombustivelJson ,IValidadorAluguel validadorAluguel)
         {
             this.repositorioAluguel = repositorioAluguel;
             this.validadorAluguel = validadorAluguel;
             this.repositorioCupom = repositorioCupom;
+            this.repositorioCombustivelJson = repositorioCombustivelJson;
         }
 
         public override Result Inserir(Aluguel registro)
@@ -139,6 +144,25 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
         public Cupom? ProcurarCupom(string txt)
         {
             return repositorioCupom.SelecionarPorNome(txt);
+        }
+
+        public decimal PegarValorGasolina(string nomeGasosa)
+        {
+            List<Combustivel> combustivels = repositorioCombustivelJson.SelecionarTodos();
+
+            if (nomeGasosa == "Gasolina")
+                return combustivels[0].valor;
+
+            else if (nomeGasosa == "Alcool")
+                return combustivels[1].valor;
+
+            else if (nomeGasosa == "Gás")
+                return combustivels[2].valor;
+
+            else if (nomeGasosa == "Disel")
+                return combustivels[3].valor;
+
+            return 0;
         }
     }
 }

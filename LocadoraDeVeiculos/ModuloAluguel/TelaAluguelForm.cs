@@ -141,7 +141,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             if (!insercao)
             {
-                if(aluguel.Cupom.Valor != null)
+                if(aluguel.Cupom != null)
                     txCupom.Text = aluguel.Cupom.Valor.ToString();
 
                 txDataLocacao.Value = aluguel.DataLocacao;
@@ -234,7 +234,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             }
         }
 
-        private decimal ObterPreco(PlanoCobranca plano, Dominio.ModuloCupom.Cupom cupom, DateTime dataLocacao, DateTime dataDevolucaoPrevista, List<TaxaServico> taxasServico)
+        private decimal ObterPreco(PlanoCobranca plano, Cupom cupom, DateTime dataLocacao, DateTime dataDevolucaoPrevista, List<TaxaServico> taxasServico)
         {
             var quantiadeDias = dataDevolucaoPrevista.Day - dataLocacao.Day;
 

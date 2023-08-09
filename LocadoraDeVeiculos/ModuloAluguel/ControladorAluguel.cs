@@ -150,9 +150,6 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             CarregarItens();
         }
 
-        
-
-
         public override UserControl ObterTabela()
         {
             if (tabelaAluguel == null)
@@ -164,6 +161,24 @@ namespace LocadoraDeVeiculos.ModuloAluguel
         public override string ObterTipoCadastro()
         {
             return "Cadastro de Alugueis";
+        }
+
+        public override void DevolucaoAluguel()
+        {
+            var aluguel = ObterAluguelSelecionado();
+
+            TelaDevolucaoForm telaDevolucao = new TelaDevolucaoForm();
+
+            telaDevolucao.onPegarValorCombustivelNome += servicoAluguel.PegarValorGasolina;
+
+            telaDevolucao.onProcurarCupomNome += servicoAluguel.ProcurarCupom;
+
+            telaDevolucao.onGravarRegistro += servicoAluguel.Editar;
+
+            telaDevolucao.ArrumarTela(aluguel);
+
+            if (telaDevolucao.ShowDialog() == DialogResult.OK)
+                CarregarItens();
         }
     }
 }

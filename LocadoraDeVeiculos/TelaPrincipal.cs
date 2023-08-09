@@ -248,7 +248,7 @@ namespace LocadoraDeVeiculos
         {
             var validadorAluguel = new ValidadorAluguel();
 
-            var servicoAluguel = new ServicoAluguel(repositorioAluguel, repositorioCupom,validadorAluguel);
+            var servicoAluguel = new ServicoAluguel(repositorioAluguel, repositorioCupom, repositorioCombustivelJson,validadorAluguel);
 
             controlador = new ControladorAluguel(servicoAluguel, repositorioAluguel, repositorioFuncionario,
                 repositorioCliente, reposisotiroGrupoAutomovel, repositorioCupom, repositorioTaxaServico);

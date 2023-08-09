@@ -57,13 +57,13 @@
             labelValorTotal = new Label();
             btnCadastrar = new Button();
             button2 = new Button();
-            cbCupom = new ComboBox();
             txDataDevolucao = new DateTimePicker();
             label9 = new Label();
             cbNivelTanque = new ComboBox();
             label10 = new Label();
             txKmPercorrido = new TextBox();
             label11 = new Label();
+            txCupom = new TextBox();
             tabPage1.SuspendLayout();
             TabControlTaxa.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -162,6 +162,7 @@
             // cbFuncionario
             // 
             cbFuncionario.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbFuncionario.Enabled = false;
             cbFuncionario.FormattingEnabled = true;
             cbFuncionario.Location = new Point(140, 27);
             cbFuncionario.Name = "cbFuncionario";
@@ -171,6 +172,7 @@
             // cbCliente
             // 
             cbCliente.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbCliente.Enabled = false;
             cbCliente.FormattingEnabled = true;
             cbCliente.Location = new Point(140, 74);
             cbCliente.Name = "cbCliente";
@@ -180,6 +182,7 @@
             // cbGrupoAutomoveis
             // 
             cbGrupoAutomoveis.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbGrupoAutomoveis.Enabled = false;
             cbGrupoAutomoveis.FormattingEnabled = true;
             cbGrupoAutomoveis.Location = new Point(140, 119);
             cbGrupoAutomoveis.Name = "cbGrupoAutomoveis";
@@ -189,6 +192,7 @@
             // cbPlanoCobranca
             // 
             cbPlanoCobranca.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbPlanoCobranca.Enabled = false;
             cbPlanoCobranca.FormattingEnabled = true;
             cbPlanoCobranca.Location = new Point(140, 174);
             cbPlanoCobranca.Name = "cbPlanoCobranca";
@@ -197,6 +201,7 @@
             // 
             // txDataLocacao
             // 
+            txDataLocacao.Enabled = false;
             txDataLocacao.Format = DateTimePickerFormat.Short;
             txDataLocacao.Location = new Point(140, 221);
             txDataLocacao.Name = "txDataLocacao";
@@ -205,6 +210,7 @@
             // 
             // txDataPrevista
             // 
+            txDataPrevista.Enabled = false;
             txDataPrevista.Format = DateTimePickerFormat.Short;
             txDataPrevista.Location = new Point(442, 171);
             txDataPrevista.Name = "txDataPrevista";
@@ -252,6 +258,7 @@
             // 
             // ContainerTaxas
             // 
+            ContainerTaxas.Enabled = false;
             ContainerTaxas.FormattingEnabled = true;
             ContainerTaxas.Location = new Point(6, 6);
             ContainerTaxas.Name = "ContainerTaxas";
@@ -336,16 +343,6 @@
             button2.Text = "Cancelar";
             button2.UseVisualStyleBackColor = true;
             // 
-            // cbCupom
-            // 
-            cbCupom.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbCupom.Enabled = false;
-            cbCupom.FormattingEnabled = true;
-            cbCupom.Location = new Point(442, 221);
-            cbCupom.Name = "cbCupom";
-            cbCupom.Size = new Size(100, 23);
-            cbCupom.TabIndex = 33;
-            // 
             // txDataDevolucao
             // 
             txDataDevolucao.Format = DateTimePickerFormat.Short;
@@ -398,18 +395,26 @@
             label11.TabIndex = 38;
             label11.Text = "Km Percorrido";
             // 
+            // txCupom
+            // 
+            txCupom.Enabled = false;
+            txCupom.Location = new Point(442, 224);
+            txCupom.Name = "txCupom";
+            txCupom.Size = new Size(186, 23);
+            txCupom.TabIndex = 40;
+            // 
             // TelaDevolucaoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(653, 659);
+            Controls.Add(txCupom);
             Controls.Add(txKmPercorrido);
             Controls.Add(label11);
             Controls.Add(cbNivelTanque);
             Controls.Add(label10);
             Controls.Add(txDataDevolucao);
             Controls.Add(label9);
-            Controls.Add(cbCupom);
             Controls.Add(button2);
             Controls.Add(btnCadastrar);
             Controls.Add(labelValorTotal);
@@ -482,5 +487,6 @@
         private Label label11;
         private TabPage tabPage2;
         private CheckedListBox ContainerTaxasAdicionais;
+        private TextBox txCupom;
     }
 }
