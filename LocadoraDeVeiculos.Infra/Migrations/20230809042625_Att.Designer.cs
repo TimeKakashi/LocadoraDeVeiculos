@@ -4,6 +4,7 @@ using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 {
     [DbContext(typeof(LocadoraDeVeiculosDbContext))]
-    partial class LocadoraDeVeiculosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230809042625_Att")]
+    partial class Att
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +36,7 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                     b.Property<Guid>("CondutorId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CupomId")
+                    b.Property<Guid>("CupomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DataDevolucao")
@@ -200,9 +203,6 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                     b.Property<string>("CPF")
                         .IsRequired()
                         .HasColumnType("varchar(14)");
-
-                    b.Property<bool>("ClienteEhCondutor")
-                        .HasColumnType("bit");
 
                     b.Property<Guid>("ClienteId")
                         .HasColumnType("uniqueidentifier");
@@ -375,6 +375,7 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                         .WithMany()
                         .HasForeignKey("CupomId")
                         .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
                         .HasConstraintName("FK_TBAluguel_TBCupom");
 
                     b.HasOne("LocadoraDeVeiculos.Dominio.ModuloFuncionario.Funcionario", "Funcionario")

@@ -1,8 +1,10 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +12,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
 {
     public class Condutor : EntidadeBase<Condutor>
     {
-        public Guid Id { get; set; }
         public string Nome { get; set; }
         public string CPF { get; set; }
         public string CNH { get; set; }
@@ -34,15 +35,17 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
             Email = email;
         }
 
-        public override void Atualizar(Condutor registro)
+        public override string ToString()
         {
-            Nome = registro.Nome;
-            CPF = registro.CPF;
-            CNH = registro.CNH;
-            ValidadeCNH = registro.ValidadeCNH;
-            Telefone = registro.Telefone;
-            Email = registro.Email;
+            return Nome;
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Condutor condutor && Id == condutor.Id;
+        }
+
+
     }
 
 

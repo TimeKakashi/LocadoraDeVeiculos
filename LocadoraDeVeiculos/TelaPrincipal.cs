@@ -1,3 +1,4 @@
+using LocadoraDeVeiculos.Aplicacao.ModuloAluguel;
 using LocadoraDeVeiculos.Aplicacao.ModuloAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
 using LocadoraDeVeiculos.Aplicacao.ModuloCombustivel;
@@ -10,6 +11,7 @@ using LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Aplicacao.ModuloTaxaServico;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloAluguel;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
@@ -21,6 +23,7 @@ using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaServico;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloAluguel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCondutor;
@@ -31,6 +34,7 @@ using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloParceiro;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloTaxaServico;
 using LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON;
+using LocadoraDeVeiculos.ModuloAluguel;
 using LocadoraDeVeiculos.ModuloAutomovel;
 using LocadoraDeVeiculos.ModuloCliente;
 using LocadoraDeVeiculos.ModuloCondutor;
@@ -59,6 +63,8 @@ namespace LocadoraDeVeiculos
         private IRepositorioCondutor repositorioCondutor;
         private IRepositorioCupom repositorioCupom;
         private IRepositorioTaxaServico repositorioTaxaServico;
+        private IRepositorioAluguel repositorioAluguel;
+
         private List<Cliente> listaClientes;
         private TabelaCliente TabelaCliente;
         private TabelaCondutor tabelaCondutor;
@@ -94,6 +100,7 @@ namespace LocadoraDeVeiculos
                 dbContext.Database.Migrate();
             }
 
+            repositorioAluguel = new RepositorioAluguelOrm(dbContext);
             repositorioFuncionario = new RepositorioFuncionarioOrm(dbContext);
             reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovelOrm(dbContext);
             repositorioPlanoCobranca = new RepositorioPlanoCobrancaOrm(dbContext);
@@ -104,8 +111,8 @@ namespace LocadoraDeVeiculos
             repositorioTaxaServico = new RepositorioTaxaServicoOrm(dbContext);
             repositorioCombustivelJson = new RepositorioCombustivel(jsonContext);
             repositorioCondutor = new RepositorioCondutorOrm(dbContext);
-
         }
+
         public static TelaPrincipal Instancia
         {
             get
@@ -132,6 +139,7 @@ namespace LocadoraDeVeiculos
             btnExcluir.Enabled = controlador.ExcluirHabilitado;
             btnFiltrar.Enabled = controlador.VisualizarHabilitado;
             btnCombustivel.Enabled = controlador.AtualizarValoresCombustivel;
+            brnDevolucao.Enabled = controlador.DevolucaoHabilitado;
         }
 
         private void ConfigurarToolTips(ControladorBase controlador)
@@ -141,6 +149,8 @@ namespace LocadoraDeVeiculos
             btnExcluir.ToolTipText = controlador.ToolTipExcluir;
             btnFiltrar.ToolTipText = controlador.ToolTipFiltrar;
             btnCombustivel.ToolTipText = controlador.ToolTipCombustivel;
+            brnDevolucao.ToolTipText = controlador.TooTipDevolucao;
+
         }
 
         private void ConfigurarTabela(ControladorBase controlador)
@@ -236,7 +246,14 @@ namespace LocadoraDeVeiculos
 
         private void aluguéisToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var validadorAluguel = new ValidadorAluguel();
 
+            var servicoAluguel = new ServicoAluguel(repositorioAluguel, repositorioCupom, repositorioCombustivelJson,validadorAluguel);
+
+            controlador = new ControladorAluguel(servicoAluguel, repositorioAluguel, repositorioFuncionario,
+                repositorioCliente, reposisotiroGrupoAutomovel, repositorioCupom, repositorioTaxaServico);
+
+            ConfigurarTelaPrincipal(controlador);
         }
 
         private void taxasEServiçosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -316,5 +333,17 @@ namespace LocadoraDeVeiculos
 
             controlador.ArrumarPrecos();
         }
+
+        private void brnDevolucao_Click_1(object sender, EventArgs e)
+        {
+            if (controlador == null)
+            {
+                MessageBox.Show("Selecione uma area primerio!");
+                return;
+            }
+
+            controlador.DevolucaoAluguel();
+        }
     }
+    
 }

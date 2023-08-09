@@ -24,13 +24,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloFuncionario
             this.Id = id;
         }
 
-        public override void Atualizar(Funcionario registro)
-        {
-            this.Nome = registro.Nome;
-            this.DataEntrada = registro.DataEntrada;
-            this.Salario = registro.Salario;
-        }
-
         public override string ToString()
         {
             return this.Nome;

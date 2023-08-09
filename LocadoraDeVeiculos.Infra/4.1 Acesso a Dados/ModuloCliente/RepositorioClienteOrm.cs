@@ -1,5 +1,7 @@
 ﻿using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente
 {
@@ -7,6 +9,13 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente
     {
         public RepositorioClienteOrm(LocadoraDeVeiculosDbContext dbContext) : base(dbContext)
         {
+        }
+        public override List<Cliente> SelecionarTodos(bool Condutores = false, bool Insercao2 = false)
+        {
+            if (Condutores)
+                return registros.Include(x => x.Condutores).ToList();
+
+            return registros.ToList();
         }
 
         public Cliente SelecionarPorCPF(string cpf)

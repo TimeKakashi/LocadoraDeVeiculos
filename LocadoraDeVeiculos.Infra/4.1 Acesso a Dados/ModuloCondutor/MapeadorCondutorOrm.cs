@@ -24,11 +24,8 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCondutor
 
             // Relacionamento com a entidade Cliente
             condutorBuilder.HasOne(c => c.Cliente)
-                .WithMany()
-                .IsRequired()
-                .HasConstraintName("FK_Condutor_TBCliente")
-                .OnDelete(DeleteBehavior.NoAction);
-
+                .WithMany(c => c.Condutores)
+                .IsRequired();
         }
     }
 

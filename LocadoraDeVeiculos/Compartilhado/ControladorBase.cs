@@ -9,12 +9,15 @@
         public abstract string ToolTipPdf { get; }
         public abstract string ToolTipCombustivel { get; }
 
+        public  string TooTipDevolucao = "Devolução de Aluguel";
+
         public virtual bool InserirHabilitado { get { return true; } }
         public virtual bool EditarHabilitado { get { return true; } }
         public virtual bool ExcluirHabilitado { get { return true; } }
         public virtual bool VisualizarHabilitado { get { return false; } }
         public virtual bool GerarPdfHabilitado { get { return false; } }
         public virtual bool AtualizarValoresCombustivel { get { return false; } }
+        public virtual bool DevolucaoHabilitado { get { return false ; } }
 
         public abstract void Inserir();
         public abstract void Editar();
@@ -24,5 +27,6 @@
         public abstract string ObterTipoCadastro();
         public abstract void CarregarItens();
         public virtual void ArrumarPrecos() { }
+        public virtual void DevolucaoAluguel() { }
     }
 }

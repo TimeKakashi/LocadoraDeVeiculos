@@ -3,7 +3,8 @@
     public enum EnumCombusteivel
     {
         Gasolina = 1,
-        Disel = 2,
-        Etanol = 3
+        Alcool = 2,
+        Gas = 3,
+        Disel = 4
     }
 }
