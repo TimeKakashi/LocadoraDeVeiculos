@@ -117,6 +117,7 @@
             cmbClientes.Name = "cmbClientes";
             cmbClientes.Size = new Size(303, 23);
             cmbClientes.TabIndex = 8;
+            cmbClientes.SelectedValueChanged += cmbClientes_SelectedValueChanged;
             // 
             // txtCPF
             // 

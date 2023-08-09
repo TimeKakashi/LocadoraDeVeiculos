@@ -24,7 +24,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         public telaCondutorForm(List<Cliente> listaClientes)
         {
             InitializeComponent();
-            chkClienteCondutor.Checked = true;
+            chkClienteCondutor.Enabled = false;
             chkClienteCondutor.CheckedChanged += chkClienteCondutor_CheckedChanged;
             this.listaClinte = listaClientes;
 
@@ -39,7 +39,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         {
             cmbClientes.Items.Clear();
 
-            foreach(var item in clientes)
+            foreach (var item in clientes)
             {
                 cmbClientes.Items.Add(item);
             }
@@ -49,23 +49,21 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         {
             this.condutor = condutor;
 
-            if (inserir)
+            
+            if(!inserir)
             {
-                chkClienteCondutor.Checked = true;
-            }
-            else
-            {
-
-                chkClienteCondutor.Checked = (clienteRelacionado?.Id == condutor.ClienteId);
-
-
+                if (condutor.ClienteEhCondutor)
+                    chkClienteCondutor.Checked = true;
 
                 if (chkClienteCondutor.Checked)
                 {
-                    txtNome.Text = clienteRelacionado.Nome;
-                    txtEmail.Text = clienteRelacionado.Email;
-                    txtTelefone.Text = clienteRelacionado.Telefone;
-                    txtCPF.Text = clienteRelacionado.CPF;
+                    if(clienteRelacionado != null)
+                    {
+                        txtNome.Text = clienteRelacionado.Nome;
+                        txtEmail.Text = clienteRelacionado.Email;
+                        txtTelefone.Text = clienteRelacionado.Telefone;
+                        txtCPF.Text = clienteRelacionado.CPF;
+                    }
                 }
                 else
                 {
@@ -74,10 +72,12 @@ namespace LocadoraDeVeiculos.ModuloCondutor
                     txtTelefone.Text = "";
                     txtCPF.Text = "";
                 }
+
+                txtCNH.Text = condutor.CNH;
+                dtpValidadeCNH.Value = condutor.ValidadeCNH;
             }
 
-            txtCNH.Text = condutor.CNH;
-            dtpValidadeCNH.Value = condutor.ValidadeCNH;
+           
         }
 
         private void chkClienteCondutor_CheckedChanged(object sender, EventArgs e)
@@ -109,12 +109,6 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
         public Condutor ObterCondutor()
         {
             string nome = txtNome.Text;
@@ -124,6 +118,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             string cnh = txtCNH.Text;
             DateTime validadeCNH = dtpValidadeCNH.Value;
 
+
             if (chkClienteCondutor.Checked)
             {
 
@@ -131,6 +126,12 @@ namespace LocadoraDeVeiculos.ModuloCondutor
                 email = clienteRelacionado.Email;
                 telefone = clienteRelacionado.Telefone;
                 cpf = clienteRelacionado.CPF;
+                condutor.ClienteEhCondutor = true;
+            }
+
+            else
+            {
+                condutor.ClienteEhCondutor = false;
             }
 
             condutor.Nome = nome;
@@ -139,6 +140,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             condutor.CPF = cpf;
             condutor.CNH = cnh;
             condutor.ValidadeCNH = validadeCNH;
+            condutor.Cliente = this.clienteRelacionado;
 
             return condutor;
         }
@@ -168,6 +170,13 @@ namespace LocadoraDeVeiculos.ModuloCondutor
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+        }
+
+        private void cmbClientes_SelectedValueChanged(object sender, EventArgs e)
+        {
+            this.clienteRelacionado = (Cliente)cmbClientes.SelectedItem;
+
+            chkClienteCondutor.Enabled = true;
         }
     }
 

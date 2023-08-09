@@ -21,7 +21,6 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCondutor
             condutorBuilder.Property(c => c.ValidadeCNH).IsRequired();
             condutorBuilder.Property(c => c.Telefone).HasColumnType("varchar(20)").IsRequired();
             condutorBuilder.Property(c => c.Email).HasColumnType("varchar(100)").IsRequired();
-            condutorBuilder.Property(c => c.ClienteId).IsRequired();
 
             // Relacionamento com a entidade Cliente
             condutorBuilder.HasOne(c => c.Cliente)

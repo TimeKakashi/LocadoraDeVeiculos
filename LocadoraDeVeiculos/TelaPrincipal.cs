@@ -26,6 +26,7 @@ using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloAluguel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCondutor;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCupom;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel;
@@ -109,7 +110,7 @@ namespace LocadoraDeVeiculos
             repositorioAutomovel = new RepositorioAutomovel(dbContext);
             repositorioTaxaServico = new RepositorioTaxaServicoOrm(dbContext);
             repositorioCombustivelJson = new RepositorioCombustivel(jsonContext);
-        }
+            repositorioCondutor = new RepositorioCondutorOrm(dbContext);
 
         public static TelaPrincipal Instancia
         {

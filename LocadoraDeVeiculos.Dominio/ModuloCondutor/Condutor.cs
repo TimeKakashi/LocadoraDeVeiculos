@@ -17,25 +17,21 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
         public DateTime ValidadeCNH { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
-        public Guid ClienteId { get; set; } // Adicionando um campo para o ID do cliente associado
-
-        public Cliente Cliente { get; set; } // Propriedade de navegação para o cliente associado
+        public Cliente Cliente { get; set; }
+        public bool ClienteEhCondutor { get; set; }
 
         public Condutor()
         {
-            Id = Guid.NewGuid();
+            
         }
-
-        public Condutor(string nome, string cpf, string cnh, DateTime validadeCNH, string telefone, string email, Guid clienteId)
+        public Condutor(string nome, string cpf, string cnh, DateTime validadeCNH, string telefone, string email)
         {
-            Id = Guid.NewGuid();
             Nome = nome;
             CPF = cpf;
             CNH = cnh;
             ValidadeCNH = validadeCNH;
             Telefone = telefone;
             Email = email;
-            ClienteId = clienteId;
         }
 
       
