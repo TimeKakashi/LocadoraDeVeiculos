@@ -1,4 +1,5 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using Microsoft.Win32;
@@ -36,6 +37,16 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
             this.Valor = valor;
             this.DataDeValidade = dataDeValidade;
             this.Parceiro = parceiro;
+        }
+
+        public override string ToString()
+        {
+            return Nome;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is ModuloCondutor.Condutor cupom && Id == cupom.Id;
         }
     }
 }

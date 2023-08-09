@@ -16,8 +16,8 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
         public Cliente Cliente { get; set; }
         public GrupoAutomovel GrupoAutomovel { get; set; }
         public PlanoCobranca PlanoCobranca { get; set; }
-        public Cupom? Cupom { get; set; }
-        public Condutor Condutor { get; set; }
+        public ModuloCupom.Cupom? Cupom { get; set; }
+        public ModuloCondutor.Condutor Condutor { get; set; }
         public Veiculo Veiculo { get; set; }
         public DateTime DataLocacao { get; set; }
         public DateTime DataDevolucaoPrevista { get; set; }
@@ -34,7 +34,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
         }
         public Aluguel(
            Funcionario funcionario,Cliente cliente,GrupoAutomovel grupo,PlanoCobranca plano,Veiculo automovel,
-           Cupom cupom, DateTime dataLocacao, DateTime dataPrevisao) : this()
+           ModuloCupom.Cupom cupom, DateTime dataLocacao, DateTime dataPrevisao) : this()
         {
             Funcionario = funcionario;
             Cliente = cliente;
@@ -48,7 +48,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
 
         public Aluguel(
             Guid id,Funcionario funcionario, Cliente cliente, GrupoAutomovel grupo, PlanoCobranca plano,Veiculo automovel,
-            Cupom cupom, int kmAutomovel, DateTime dataLocacao, DateTime dataPrevisao) : 
+            ModuloCupom.Cupom cupom, int kmAutomovel, DateTime dataLocacao, DateTime dataPrevisao) : 
             this(funcionario, cliente, grupo, plano, automovel, cupom, dataLocacao, dataPrevisao)
         {
             Id = id;

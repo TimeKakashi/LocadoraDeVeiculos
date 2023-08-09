@@ -1,8 +1,10 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,7 +35,17 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
             Email = email;
         }
 
-      
+        public override string ToString()
+        {
+            return Nome;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Condutor condutor && Id == condutor.Id;
+        }
+
+
     }
 
 

@@ -29,8 +29,13 @@ namespace LocadoraDeVeiculos.ModuloAluguel
     public partial class TelaAluguelForm : Form
     {
 
+        public delegate Cupom progurarCupom(string txt);
+
         public event GravarRegistroDelegate<Aluguel> onGravarRegistro;
+        public event progurarCupom onProcurarCupom;
+
         private Aluguel aluguel;
+        private List<Cupom> listaCupom;
 
         public TelaAluguelForm(List<Funcionario> listFuncionario, List<Cliente> ListaCliente,
             List<GrupoAutomovel> ListagrupoAutomovels, List<TaxaServico> Listtaxas, List<Cupom> listCupom)
@@ -39,11 +44,9 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             this.ConfigurarDialog();
 
+            this.listaCupom = listaCupom;
+
             EncherComboBox(listFuncionario, ListaCliente, ListagrupoAutomovels, listCupom);
-
-            TaxaServico taxa = new TaxaServico("Ar", 200, "So Uma");
-
-            Listtaxas.Add(taxa);
 
             PopularContainerTaxas(Listtaxas);
         }
@@ -70,11 +73,9 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             EncherComboBoxCliente(listaCliente);
 
             EncherComboBoxGrupoAutomovel(listagrupoAutomovels);
-
-            EncherComboBoxCupom(listCupom);
         }
 
-        private void EncherComboBoxCondutor(List<Condutor> listCondutor)
+        private void EncherComboBoxCondutor(List<Dominio.ModuloCondutor.Condutor> listCondutor)
         {
             cbCondutor.Items.Clear();
 
@@ -134,23 +135,14 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             }
         }
 
-        private void EncherComboBoxCupom(List<Cupom> listCupom)
-        {
-            cbCupom.Items.Clear();
-
-            foreach (var item in listCupom)
-            {
-                cbCupom.Items.Add(item);
-            }
-        }
-
         public void ArrumaTela(Aluguel aluguel, bool insercao = false)
         {
             this.aluguel = aluguel;
 
             if (!insercao)
             {
-                cbCupom.SelectedItem = aluguel.Cupom;
+                if(aluguel.Cupom.Valor != null)
+                    txCupom.Text = aluguel.Cupom.Valor.ToString();
 
                 txDataLocacao.Value = aluguel.DataLocacao;
 
@@ -186,7 +178,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             aluguel.Cliente = (Cliente)cbCliente.SelectedItem;
             aluguel.GrupoAutomovel = (GrupoAutomovel)cbGrupoAutomoveis.SelectedItem;
             aluguel.PlanoCobranca = (PlanoCobranca)cbPlanoCobranca.SelectedItem;
-            aluguel.Cupom = (Cupom)cbCupom.SelectedItem;
+            aluguel.Cupom = ObterCupom(txCupom.Text);
             aluguel.Condutor = (Condutor)cbCondutor.SelectedItem;
             aluguel.Veiculo = (Veiculo)cbAutomovel.SelectedItem;
 
@@ -194,17 +186,55 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             aluguel.DataDevolucaoPrevista = txDataPrevista.Value;
 
-            foreach (TaxaServico item in ContainerTaxas.CheckedItems)
-                aluguel.TaxasServico.Add(item);
+            if (ContainerTaxas.CheckedItems.Count > 0)
+            {
+                foreach (TaxaServico item in ContainerTaxas.CheckedItems)
+                    aluguel.TaxasServico.Add(item);
+            }
+            else
+            {
+                aluguel.TaxasServico.Clear();
+            }
+
 
             aluguel.Preco = ObterPreco(aluguel.PlanoCobranca, aluguel.Cupom, aluguel.DataLocacao, aluguel.DataDevolucaoPrevista, aluguel.TaxasServico);
 
             labelValorTotal.Text = aluguel.Preco.ToString();
 
+            DesmarcarItens();
+
             return aluguel;
         }
 
-        private decimal ObterPreco(PlanoCobranca plano, Cupom cupom, DateTime dataLocacao, DateTime dataDevolucaoPrevista, List<TaxaServico> taxasServico)
+        private Cupom? ObterCupom(string text)
+        {
+            Cupom cupom = onProcurarCupom(text);
+
+            return cupom;
+        }
+
+        private void btnCupom_Click(object sender, EventArgs e)
+        {
+            string cupomtxt = txCupom.Text;
+
+            if (string.IsNullOrEmpty(cupomtxt))
+                return;
+
+            aluguel.Cupom = ObterCupom(cupomtxt);
+        }
+
+        private void DesmarcarItens()
+        {
+            for (int i = 0; i < ContainerTaxas.Items.Count; i++)
+            {
+                TaxaServico taxa = (TaxaServico)ContainerTaxas.Items[i];
+
+                if (!aluguel.TaxasServico.Contains(taxa))
+                    ContainerTaxas.SetItemChecked(i, false);
+            }
+        }
+
+        private decimal ObterPreco(PlanoCobranca plano, Dominio.ModuloCupom.Cupom cupom, DateTime dataLocacao, DateTime dataDevolucaoPrevista, List<TaxaServico> taxasServico)
         {
             var quantiadeDias = dataDevolucaoPrevista.Day - dataLocacao.Day;
 
@@ -213,7 +243,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             if (cupom != null)
                 valor -= cupom.Valor;
 
-            if(aluguel.TaxasServico.Count > 0)
+            if (aluguel.TaxasServico.Count > 0)
             {
                 foreach (var item in aluguel.TaxasServico)
                 {
@@ -277,5 +307,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             txKmAutomovel.Text = veiculo.Kilometragem.ToString();
         }
+
+      
     }
 }

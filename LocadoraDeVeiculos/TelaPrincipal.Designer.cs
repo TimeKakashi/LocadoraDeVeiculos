@@ -50,9 +50,10 @@
             btnEditar = new ToolStripButton();
             btnExcluir = new ToolStripButton();
             btnFiltrar = new ToolStripButton();
+            btnCombustivel = new ToolStripButton();
+            brnDevolucao = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripLabel1 = new ToolStripLabel();
-            btnCombustivel = new ToolStripButton();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -78,7 +79,7 @@
             // funcionáriosToolStripMenuItem
             // 
             funcionáriosToolStripMenuItem.Name = "funcionáriosToolStripMenuItem";
-            funcionáriosToolStripMenuItem.Size = new Size(180, 22);
+            funcionáriosToolStripMenuItem.Size = new Size(142, 22);
             funcionáriosToolStripMenuItem.Text = "Funcionários";
             funcionáriosToolStripMenuItem.Click += funcionáriosToolStripMenuItem_Click;
             // 
@@ -86,7 +87,7 @@
             // 
             automóveisToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gruposDeAutomóveisToolStripMenuItem });
             automóveisToolStripMenuItem.Name = "automóveisToolStripMenuItem";
-            automóveisToolStripMenuItem.Size = new Size(180, 22);
+            automóveisToolStripMenuItem.Size = new Size(142, 22);
             automóveisToolStripMenuItem.Text = "Automóveis";
             automóveisToolStripMenuItem.Click += automóveisToolStripMenuItem_Click;
             // 
@@ -101,7 +102,7 @@
             // planosDeCobrançaToolStripMenuItem
             // 
             planosDeCobrançaToolStripMenuItem.Name = "planosDeCobrançaToolStripMenuItem";
-            planosDeCobrançaToolStripMenuItem.Size = new Size(180, 22);
+            planosDeCobrançaToolStripMenuItem.Size = new Size(179, 22);
             planosDeCobrançaToolStripMenuItem.Text = "Planos de Cobrança";
             planosDeCobrançaToolStripMenuItem.Click += planosDeCobrançaToolStripMenuItem_Click;
             // 
@@ -109,7 +110,7 @@
             // 
             clientesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { condutoresToolStripMenuItem });
             clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            clientesToolStripMenuItem.Size = new Size(180, 22);
+            clientesToolStripMenuItem.Size = new Size(142, 22);
             clientesToolStripMenuItem.Text = "Clientes";
             clientesToolStripMenuItem.Click += clientesToolStripMenuItem_Click;
             // 
@@ -124,7 +125,7 @@
             // 
             aluguéisToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { taxasEServiçosToolStripMenuItem, cuponsEParceirosToolStripMenuItem, preçosToolStripMenuItem, parceiroToolStripMenuItem });
             aluguéisToolStripMenuItem.Name = "aluguéisToolStripMenuItem";
-            aluguéisToolStripMenuItem.Size = new Size(180, 22);
+            aluguéisToolStripMenuItem.Size = new Size(142, 22);
             aluguéisToolStripMenuItem.Text = "Aluguéis";
             aluguéisToolStripMenuItem.Click += aluguéisToolStripMenuItem_Click;
             // 
@@ -192,7 +193,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, btnFiltrar, btnCombustivel, toolStripSeparator1, toolStripLabel1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, btnFiltrar, btnCombustivel, brnDevolucao, toolStripSeparator1, toolStripLabel1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(716, 31);
@@ -242,6 +243,26 @@
             btnFiltrar.Size = new Size(28, 28);
             btnFiltrar.Text = "toolStripButton4";
             // 
+            // btnCombustivel
+            // 
+            btnCombustivel.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnCombustivel.Image = Properties.Resources.charger_FILL0_wght400_GRAD0_opsz24;
+            btnCombustivel.ImageTransparentColor = Color.Magenta;
+            btnCombustivel.Name = "btnCombustivel";
+            btnCombustivel.Size = new Size(23, 28);
+            btnCombustivel.Text = "toolStripButton1";
+            btnCombustivel.Click += btnCombustivel_Click;
+            // 
+            // brnDevolucao
+            // 
+            brnDevolucao.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            brnDevolucao.Image = Properties.Resources.keyboard_return_FILL0_wght400_GRAD0_opsz40__1_;
+            brnDevolucao.ImageTransparentColor = Color.Magenta;
+            brnDevolucao.Name = "brnDevolucao";
+            brnDevolucao.Size = new Size(23, 28);
+            brnDevolucao.Text = "toolStripButton1";
+            brnDevolucao.Click += brnDevolucao_Click_1;
+            // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
@@ -252,16 +273,6 @@
             toolStripLabel1.Name = "toolStripLabel1";
             toolStripLabel1.Size = new Size(118, 28);
             toolStripLabel1.Text = "Locadora de Veiculos";
-            // 
-            // btnCombustivel
-            // 
-            btnCombustivel.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnCombustivel.Image = Properties.Resources.charger_FILL0_wght400_GRAD0_opsz24;
-            btnCombustivel.ImageTransparentColor = Color.Magenta;
-            btnCombustivel.Name = "btnCombustivel";
-            btnCombustivel.Size = new Size(23, 28);
-            btnCombustivel.Text = "toolStripButton1";
-            btnCombustivel.Click += btnCombustivel_Click;
             // 
             // TelaPrincipal
             // 
@@ -312,5 +323,6 @@
         private ToolStripStatusLabel labelRodaPe;
         private ToolStripMenuItem parceiroToolStripMenuItem;
         private ToolStripButton btnCombustivel;
+        private ToolStripButton brnDevolucao;
     }
 }

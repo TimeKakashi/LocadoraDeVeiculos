@@ -3,6 +3,7 @@ using LocadoraDeVeiculos.Aplicacao.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAluguel;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
+using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -16,12 +17,14 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
     public class ServicoAluguel : ServicoBase<Aluguel>
     {
         IRepositorioAluguel repositorioAluguel;
+        IRepositorioCupom repositorioCupom;
         IValidadorAluguel validadorAluguel;
 
-        public ServicoAluguel(IRepositorioAluguel repositorioAluguel, IValidadorAluguel validadorAluguel)
+        public ServicoAluguel(IRepositorioAluguel repositorioAluguel, IRepositorioCupom repositorioCupom, IValidadorAluguel validadorAluguel)
         {
             this.repositorioAluguel = repositorioAluguel;
             this.validadorAluguel = validadorAluguel;
+            this.repositorioCupom = repositorioCupom;
         }
 
         public override Result Inserir(Aluguel registro)
@@ -80,11 +83,11 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
         {
             Log.Debug("Tentando excluir um aluguel...{@d}", registro);
 
-            if(registro.Finalizado == false)
+            if(registro.Finalizado == true)
             {
                 Log.Warning("Tentativa de exclusao de alguel em andamento!");
 
-                return Result.Fail("Veiculo tem um aluguel em andamento!");
+                return Result.Fail("Este aluguel ja foi finalizado eh nao eh possivel exclui-lo");
             }
 
             try
@@ -131,6 +134,11 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
                 Log.Warning(erro);
 
             return erros;
+        }
+
+        public Cupom? ProcurarCupom(string txt)
+        {
+            return repositorioCupom.SelecionarPorNome(txt);
         }
     }
 }

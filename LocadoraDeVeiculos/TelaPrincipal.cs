@@ -67,7 +67,7 @@ namespace LocadoraDeVeiculos
         private List<Cliente> listaClientes;
         private TabelaCliente TabelaCliente;
         private TabelaCondutor tabelaCondutor;
-        
+
 
         private static JsonContext jsonContext = new JsonContext(true);
 
@@ -139,6 +139,7 @@ namespace LocadoraDeVeiculos
             btnExcluir.Enabled = controlador.ExcluirHabilitado;
             btnFiltrar.Enabled = controlador.VisualizarHabilitado;
             btnCombustivel.Enabled = controlador.AtualizarValoresCombustivel;
+            brnDevolucao.Enabled = controlador.DevolucaoHabilitado;
         }
 
         private void ConfigurarToolTips(ControladorBase controlador)
@@ -148,6 +149,8 @@ namespace LocadoraDeVeiculos
             btnExcluir.ToolTipText = controlador.ToolTipExcluir;
             btnFiltrar.ToolTipText = controlador.ToolTipFiltrar;
             btnCombustivel.ToolTipText = controlador.ToolTipCombustivel;
+            brnDevolucao.ToolTipText = controlador.TooTipDevolucao;
+
         }
 
         private void ConfigurarTabela(ControladorBase controlador)
@@ -200,7 +203,7 @@ namespace LocadoraDeVeiculos
         {
             var validadorPlano = new ValidadorPlanoCobranca();
 
-            var servicoPlano = new ServicoPlanoCobranca(repositorioPlanoCobranca,reposisotiroGrupoAutomovel ,validadorPlano);
+            var servicoPlano = new ServicoPlanoCobranca(repositorioPlanoCobranca, reposisotiroGrupoAutomovel, validadorPlano);
 
             controlador = new ControladorPlanoBbranca(servicoPlano, repositorioPlanoCobranca, reposisotiroGrupoAutomovel);
 
@@ -235,7 +238,7 @@ namespace LocadoraDeVeiculos
 
             var servicoCondutor = new ServicoCondutor(repositorioCondutor, validadorCondutor);
 
-            controlador = new ControladorCondutor(repositorioCondutor, repositorioCliente,  servicoCondutor, listaClientes, tabelaCondutor);
+            controlador = new ControladorCondutor(repositorioCondutor, repositorioCliente, servicoCondutor, listaClientes, tabelaCondutor);
 
             ConfigurarTelaPrincipal(controlador);
         }
@@ -245,7 +248,7 @@ namespace LocadoraDeVeiculos
         {
             var validadorAluguel = new ValidadorAluguel();
 
-            var servicoAluguel = new ServicoAluguel(repositorioAluguel, validadorAluguel);
+            var servicoAluguel = new ServicoAluguel(repositorioAluguel, repositorioCupom,validadorAluguel);
 
             controlador = new ControladorAluguel(servicoAluguel, repositorioAluguel, repositorioFuncionario,
                 repositorioCliente, reposisotiroGrupoAutomovel, repositorioCupom, repositorioTaxaServico);
@@ -330,5 +333,17 @@ namespace LocadoraDeVeiculos
 
             controlador.ArrumarPrecos();
         }
+
+        private void brnDevolucao_Click_1(object sender, EventArgs e)
+        {
+            if (controlador == null)
+            {
+                MessageBox.Show("Selecione uma area primerio!");
+                return;
+            }
+
+            controlador.DevolucaoAluguel();
+        }
     }
+    
 }

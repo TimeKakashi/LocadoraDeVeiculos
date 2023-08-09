@@ -1,6 +1,9 @@
-﻿using LocadoraDeVeiculos.Aplicacao.ModuloAluguel;
+﻿using FluentResults;
+using LocadoraDeVeiculos.Aplicacao.ModuloAluguel;
+using LocadoraDeVeiculos.Aplicacao.ModuloAutomovel;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAluguel;
+using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
@@ -17,6 +20,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
         public override string ToolTipFiltrar => "Filtrar Alguel";
         public override string ToolTipPdf => "Gerar e Encaminhar Pdf por Email";
         public override string ToolTipCombustivel => "Atualizar Valores Combustível";
+        public override bool DevolucaoHabilitado => true;
 
         private TabelaAluguel tabelaAluguel;
         private ServicoAluguel servicoAluguel;
@@ -26,6 +30,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
         private IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
         private IRepositorioCupom repositorioCupom;
         private IRepositorioTaxaServico repositorioTaxaServico;
+
 
         public ControladorAluguel(ServicoAluguel servicoAluguel, IRepositorioAluguel repositorioAluguel)
         {
@@ -59,32 +64,93 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             tabelaAluguel.AtualizarRegistros(listaAutomovel);
         }
 
-        public override void Editar()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Excluir()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Inserir()
         {
-            TelaAluguelForm telaAutomovel = new TelaAluguelForm(
+            TelaAluguelForm talaAluguel = new TelaAluguelForm(
                 repositorioFuncionario.SelecionarTodos(),
                 repositorioCliente.SelecionarTodos(true),
                 reposisotiroGrupoAutomovel.SelecionarTodos(true, true),
                 repositorioTaxaServico.SelecionarTodos(), repositorioCupom.SelecionarTodos()
                 );
 
-            telaAutomovel.onGravarRegistro += servicoAluguel.Inserir;
+            talaAluguel.onGravarRegistro += servicoAluguel.Inserir;
 
-            telaAutomovel.ArrumaTela(new Aluguel(), true);
+            talaAluguel.onProcurarCupom += servicoAluguel.ProcurarCupom;
 
-            if (telaAutomovel.ShowDialog() == DialogResult.OK)
+            talaAluguel.ArrumaTela(new Aluguel(), true);
+
+            if (talaAluguel.ShowDialog() == DialogResult.OK)
                 CarregarItens();
         }
+
+        public override void Editar()
+        {
+            Aluguel aluguel = ObterAluguelSelecionado();
+
+            if (aluguel == null)
+            {
+                MessageBox.Show("Selecione um alguel primeiro!", "Edição de alguel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TelaAluguelForm talaAluguel = new TelaAluguelForm(
+               repositorioFuncionario.SelecionarTodos(),
+               repositorioCliente.SelecionarTodos(true),
+               reposisotiroGrupoAutomovel.SelecionarTodos(true, true),
+               repositorioTaxaServico.SelecionarTodos(), repositorioCupom.SelecionarTodos()
+               );
+
+            talaAluguel.ArrumaTela(aluguel, false);
+
+            talaAluguel.onGravarRegistro += servicoAluguel.Editar;
+
+            talaAluguel.onProcurarCupom += servicoAluguel.ProcurarCupom;
+
+            if (talaAluguel.ShowDialog() == DialogResult.OK)
+                CarregarItens();
+        }
+
+        private Aluguel ObterAluguelSelecionado()
+        {
+            var id = tabelaAluguel.ObterIdSelecionado();
+
+            return repositorioAluguel.SelecionarPorId(id);
+        }
+
+        public override void Excluir()
+        {
+            var aluguel = ObterAluguelSelecionado();
+
+            if (aluguel == null)
+            {
+                MessageBox.Show("Selecione um veiculo primeiro!",
+                    "Exclusão de veiculo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+
+                return;
+            }
+
+            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o aluguel do cliente: {aluguel.Cliente} com o veiculo: {aluguel.Veiculo.Modelo}?", "Exclusão de aluguel",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question);
+
+            if (opcaoEscolhida == DialogResult.OK)
+            {
+                Result result = servicoAluguel.Excluir(aluguel);
+
+                if (result.IsFailed)
+                {
+                    MessageBox.Show(result.Errors[0].Message, "Exclusão de aluguel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return;
+                }
+            }
+
+            CarregarItens();
+        }
+
+        
 
 
         public override UserControl ObterTabela()

@@ -70,6 +70,16 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAutomovel
                 return imagemStream.ToArray();
             }
         }
+
+        public override string ToString()
+        {
+            return Modelo;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Veiculo veiculo  && Id == veiculo.Id;
+        }
     }
 
 

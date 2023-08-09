@@ -1,6 +1,6 @@
 ﻿namespace LocadoraDeVeiculos.ModuloAluguel
 {
-    partial class TelaAluguelForm
+    partial class TelaDevolucaoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -50,15 +50,23 @@
             tabPage1 = new TabPage();
             ContainerTaxas = new CheckedListBox();
             TabControlTaxa = new TabControl();
+            tabPage2 = new TabPage();
+            ContainerTaxasAdicionais = new CheckedListBox();
             label5 = new Label();
             label6 = new Label();
             labelValorTotal = new Label();
-            button1 = new Button();
+            btnCadastrar = new Button();
             button2 = new Button();
-            btnCupom = new Button();
-            txCupom = new TextBox();
+            cbCupom = new ComboBox();
+            txDataDevolucao = new DateTimePicker();
+            label9 = new Label();
+            cbNivelTanque = new ComboBox();
+            label10 = new Label();
+            txKmPercorrido = new TextBox();
+            label11 = new Label();
             tabPage1.SuspendLayout();
             TabControlTaxa.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -100,7 +108,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(345, 224);
+            label7.Location = new Point(387, 224);
             label7.Name = "label7";
             label7.Size = new Size(47, 15);
             label7.TabIndex = 5;
@@ -168,7 +176,6 @@
             cbCliente.Name = "cbCliente";
             cbCliente.Size = new Size(186, 23);
             cbCliente.TabIndex = 15;
-            cbCliente.SelectedValueChanged += cbCliente_SelectedValueChanged;
             // 
             // cbGrupoAutomoveis
             // 
@@ -178,7 +185,6 @@
             cbGrupoAutomoveis.Name = "cbGrupoAutomoveis";
             cbGrupoAutomoveis.Size = new Size(186, 23);
             cbGrupoAutomoveis.TabIndex = 16;
-            cbGrupoAutomoveis.SelectedValueChanged += cbGrupoAutomoveis_SelectedValueChanged;
             // 
             // cbPlanoCobranca
             // 
@@ -224,7 +230,6 @@
             cbAutomovel.Name = "cbAutomovel";
             cbAutomovel.Size = new Size(186, 23);
             cbAutomovel.TabIndex = 24;
-            cbAutomovel.SelectedValueChanged += cbAutomovel_SelectedValueChanged;
             // 
             // txKmAutomovel
             // 
@@ -256,17 +261,36 @@
             // TabControlTaxa
             // 
             TabControlTaxa.Controls.Add(tabPage1);
-            TabControlTaxa.Location = new Point(65, 268);
+            TabControlTaxa.Controls.Add(tabPage2);
+            TabControlTaxa.Location = new Point(62, 363);
             TabControlTaxa.Name = "TabControlTaxa";
             TabControlTaxa.SelectedIndex = 0;
             TabControlTaxa.Size = new Size(533, 229);
             TabControlTaxa.TabIndex = 27;
             // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(ContainerTaxasAdicionais);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Size = new Size(525, 201);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Taxas Adicionais";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // ContainerTaxasAdicionais
+            // 
+            ContainerTaxasAdicionais.FormattingEnabled = true;
+            ContainerTaxasAdicionais.Location = new Point(3, 3);
+            ContainerTaxasAdicionais.Name = "ContainerTaxasAdicionais";
+            ContainerTaxasAdicionais.Size = new Size(494, 184);
+            ContainerTaxasAdicionais.TabIndex = 0;
+            // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(37, 514);
+            label5.Location = new Point(49, 612);
             label5.Name = "label5";
             label5.Size = new Size(177, 25);
             label5.TabIndex = 28;
@@ -276,7 +300,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(220, 514);
+            label6.Location = new Point(232, 612);
             label6.Name = "label6";
             label6.Size = new Size(0, 25);
             label6.TabIndex = 29;
@@ -286,59 +310,108 @@
             labelValorTotal.AutoSize = true;
             labelValorTotal.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             labelValorTotal.ForeColor = Color.Lime;
-            labelValorTotal.Location = new Point(220, 514);
+            labelValorTotal.Location = new Point(232, 612);
             labelValorTotal.Name = "labelValorTotal";
             labelValorTotal.Size = new Size(33, 25);
             labelValorTotal.TabIndex = 30;
             labelValorTotal.Text = "R$";
             // 
-            // button1
+            // btnCadastrar
             // 
-            button1.DialogResult = DialogResult.OK;
-            button1.Location = new Point(462, 509);
-            button1.Name = "button1";
-            button1.Size = new Size(80, 40);
-            button1.TabIndex = 31;
-            button1.Text = "Cadastrar";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnCadastrar.DialogResult = DialogResult.OK;
+            btnCadastrar.Location = new Point(474, 607);
+            btnCadastrar.Name = "btnCadastrar";
+            btnCadastrar.Size = new Size(80, 40);
+            btnCadastrar.TabIndex = 31;
+            btnCadastrar.Text = "Cadastrar";
+            btnCadastrar.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
             button2.DialogResult = DialogResult.Cancel;
-            button2.Location = new Point(548, 509);
+            button2.Location = new Point(560, 607);
             button2.Name = "button2";
             button2.Size = new Size(80, 40);
             button2.TabIndex = 32;
             button2.Text = "Cancelar";
             button2.UseVisualStyleBackColor = true;
             // 
-            // btnCupom
+            // cbCupom
             // 
-            btnCupom.Location = new Point(504, 216);
-            btnCupom.Name = "btnCupom";
-            btnCupom.Size = new Size(104, 30);
-            btnCupom.TabIndex = 34;
-            btnCupom.Text = "Aplicar Cupom";
-            btnCupom.UseVisualStyleBackColor = true;
-            btnCupom.Click += btnCupom_Click;
+            cbCupom.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbCupom.Enabled = false;
+            cbCupom.FormattingEnabled = true;
+            cbCupom.Location = new Point(442, 221);
+            cbCupom.Name = "cbCupom";
+            cbCupom.Size = new Size(100, 23);
+            cbCupom.TabIndex = 33;
             // 
-            // txCupom
+            // txDataDevolucao
             // 
-            txCupom.Location = new Point(398, 219);
-            txCupom.Name = "txCupom";
-            txCupom.Size = new Size(100, 23);
-            txCupom.TabIndex = 35;
+            txDataDevolucao.Format = DateTimePickerFormat.Short;
+            txDataDevolucao.Location = new Point(140, 274);
+            txDataDevolucao.Name = "txDataDevolucao";
+            txDataDevolucao.Size = new Size(186, 23);
+            txDataDevolucao.TabIndex = 35;
             // 
-            // TelaAluguelForm
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(42, 274);
+            label9.Name = "label9";
+            label9.Size = new Size(90, 15);
+            label9.TabIndex = 34;
+            label9.Text = "Data Devolução";
+            // 
+            // cbNivelTanque
+            // 
+            cbNivelTanque.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbNivelTanque.FormattingEnabled = true;
+            cbNivelTanque.Location = new Point(140, 323);
+            cbNivelTanque.Name = "cbNivelTanque";
+            cbNivelTanque.Size = new Size(186, 23);
+            cbNivelTanque.TabIndex = 37;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(39, 326);
+            label10.Name = "label10";
+            label10.Size = new Size(93, 15);
+            label10.TabIndex = 36;
+            label10.Text = "Nivel Do Tanque";
+            // 
+            // txKmPercorrido
+            // 
+            txKmPercorrido.Enabled = false;
+            txKmPercorrido.Location = new Point(442, 274);
+            txKmPercorrido.Name = "txKmPercorrido";
+            txKmPercorrido.Size = new Size(186, 23);
+            txKmPercorrido.TabIndex = 39;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(356, 277);
+            label11.Name = "label11";
+            label11.Size = new Size(83, 15);
+            label11.TabIndex = 38;
+            label11.Text = "Km Percorrido";
+            // 
+            // TelaDevolucaoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(653, 560);
-            Controls.Add(txCupom);
-            Controls.Add(btnCupom);
+            ClientSize = new Size(653, 659);
+            Controls.Add(txKmPercorrido);
+            Controls.Add(label11);
+            Controls.Add(cbNivelTanque);
+            Controls.Add(label10);
+            Controls.Add(txDataDevolucao);
+            Controls.Add(label9);
+            Controls.Add(cbCupom);
             Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnCadastrar);
             Controls.Add(labelValorTotal);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -362,10 +435,11 @@
             Controls.Add(label4);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "TelaAluguelForm";
+            Name = "TelaDevolucaoForm";
             Text = "Cadastro de Aluguel";
             tabPage1.ResumeLayout(false);
             TabControlTaxa.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -397,9 +471,16 @@
         private Label label5;
         private Label label6;
         private Label labelValorTotal;
-        private Button button1;
+        private Button btnCadastrar;
         private Button button2;
-        private Button btnCupom;
-        private TextBox txCupom;
+        private ComboBox cbCupom;
+        private DateTimePicker txDataDevolucao;
+        private Label label9;
+        private ComboBox cbNivelTanque;
+        private Label label10;
+        private TextBox txKmPercorrido;
+        private Label label11;
+        private TabPage tabPage2;
+        private CheckedListBox ContainerTaxasAdicionais;
     }
 }

@@ -33,6 +33,14 @@ namespace LocadoraDeVeiculos.Dominio.ModuloTaxaServico
             Id = id;
         }
 
+        public override string ToString()
+        {
+            return Nome;
+        }
 
+        public override bool Equals(object? obj)
+        {
+            return obj is TaxaServico taxa && Id == taxa.Id;
+        }
     }
 }
