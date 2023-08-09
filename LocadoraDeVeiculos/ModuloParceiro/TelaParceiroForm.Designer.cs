@@ -80,12 +80,14 @@
             Controls.Add(button2);
             Controls.Add(btnGravar);
             Controls.Add(txtNome);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
             Name = "TelaParceiroForm";
+            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "TelaParceiro";
+            Text = "Cadastro de Parceiros";
             ResumeLayout(false);
             PerformLayout();
         }

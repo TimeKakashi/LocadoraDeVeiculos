@@ -80,8 +80,14 @@
             Controls.Add(btnCadastarr);
             Controls.Add(label1);
             Controls.Add(txNome);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
+            MinimizeBox = false;
             Name = "TelaGrupoAutomovelForm";
-            Text = "TelaGrupoAutomovel";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Cadastro de Grupo de Automóveis";
             ResumeLayout(false);
             PerformLayout();
         }

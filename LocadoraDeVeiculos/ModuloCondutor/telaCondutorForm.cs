@@ -27,6 +27,8 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             chkClienteCondutor.Enabled = false;
             chkClienteCondutor.CheckedChanged += chkClienteCondutor_CheckedChanged;
             this.listaClinte = listaClientes;
+            dtpValidadeCNH.Format = DateTimePickerFormat.Custom;
+            dtpValidadeCNH.CustomFormat = "dd/MM/yyyy";
 
             PopularComboBox(listaClientes);
         }
@@ -49,15 +51,15 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         {
             this.condutor = condutor;
 
-            
-            if(!inserir)
+
+            if (!inserir)
             {
                 if (condutor.ClienteEhCondutor)
                     chkClienteCondutor.Checked = true;
 
                 if (chkClienteCondutor.Checked)
                 {
-                    if(clienteRelacionado != null)
+                    if (clienteRelacionado != null)
                     {
                         txtNome.Text = clienteRelacionado.Nome;
                         txtEmail.Text = clienteRelacionado.Email;
@@ -77,7 +79,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
                 dtpValidadeCNH.Value = condutor.ValidadeCNH;
             }
 
-           
+
         }
 
         private void chkClienteCondutor_CheckedChanged(object sender, EventArgs e)

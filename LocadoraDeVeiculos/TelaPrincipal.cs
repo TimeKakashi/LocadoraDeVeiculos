@@ -61,7 +61,7 @@ namespace LocadoraDeVeiculos
         private List<Cliente> listaClientes;
         private TabelaCliente TabelaCliente;
         private TabelaCondutor tabelaCondutor;
-        
+
 
         private static JsonContext jsonContext = new JsonContext(true);
 
@@ -193,7 +193,7 @@ namespace LocadoraDeVeiculos
         {
             var validadorPlano = new ValidadorPlanoCobranca();
 
-            var servicoPlano = new ServicoPlanoCobranca(repositorioPlanoCobranca,reposisotiroGrupoAutomovel ,validadorPlano);
+            var servicoPlano = new ServicoPlanoCobranca(repositorioPlanoCobranca, reposisotiroGrupoAutomovel, validadorPlano);
 
             controlador = new ControladorPlanoBbranca(servicoPlano, repositorioPlanoCobranca, reposisotiroGrupoAutomovel);
 
@@ -228,7 +228,7 @@ namespace LocadoraDeVeiculos
 
             var servicoCondutor = new ServicoCondutor(repositorioCondutor, validadorCondutor);
 
-            controlador = new ControladorCondutor(repositorioCondutor, repositorioCliente,  servicoCondutor, listaClientes, tabelaCondutor);
+            controlador = new ControladorCondutor(repositorioCondutor, repositorioCliente, servicoCondutor, listaClientes, tabelaCondutor);
 
             ConfigurarTelaPrincipal(controlador);
         }

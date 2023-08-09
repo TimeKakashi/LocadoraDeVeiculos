@@ -134,7 +134,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(7, 167);
+            label7.Location = new Point(13, 167);
             label7.Name = "label7";
             label7.Size = new Size(107, 15);
             label7.TabIndex = 8;
@@ -202,7 +202,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(38, 214);
+            label8.Location = new Point(43, 214);
             label8.Name = "label8";
             label8.Size = new Size(82, 15);
             label8.TabIndex = 18;
@@ -218,7 +218,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(76, 258);
+            label9.Location = new Point(85, 258);
             label9.Name = "label9";
             label9.Size = new Size(35, 15);
             label9.TabIndex = 20;
@@ -264,8 +264,14 @@
             Controls.Add(btnBuscar);
             Controls.Add(label1);
             Controls.Add(txtFoto);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
+            MinimizeBox = false;
             Name = "TelaAutomovelForm";
-            Text = "TelaAutomovelForm";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Cadastro de Automóveis";
             ((System.ComponentModel.ISupportInitialize)txtFoto).EndInit();
             ((System.ComponentModel.ISupportInitialize)txCapacidade).EndInit();
             ResumeLayout(false);
