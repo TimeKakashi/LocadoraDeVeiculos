@@ -27,17 +27,16 @@ namespace LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca
         {
             KmDisponivel = kmDisponivel1;
         }
-
-        public override void Atualizar(PlanoCobranca registro)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public override bool Equals(object obj)
         {
-            return obj is PlanoCobranca grupo &&
-                   Id == grupo.Id;
-
+            return obj is PlanoCobranca grupo && Id == grupo.Id;
         }
+
+        public override string ToString()
+        {
+            return Plano.ToString();
+        }
+
     }
 }

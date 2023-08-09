@@ -23,11 +23,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel
         {
 
         }
-        public override void Atualizar(GrupoAutomovel registro)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public override string ToString()
         {
             return this.Nome;

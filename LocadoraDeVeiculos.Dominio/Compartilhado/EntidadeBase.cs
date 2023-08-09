@@ -11,6 +11,5 @@ namespace LocadoraDeVeiculos.Dominio.Compartilhado
             Id = SequentialGuidGenerator.Instance.NewGuid();
         }
 
-        public abstract void Atualizar(T registro);
     }
 }

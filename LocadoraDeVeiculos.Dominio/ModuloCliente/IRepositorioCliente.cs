@@ -7,6 +7,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
         Cliente SelecionarPorNome(string nome);
         Cliente SelecionarPorCPF(string cpf);
         Cliente SelecionarPorCNPJ(string cnpj);
+        List<Cliente> SelecionarTodos(bool Condutores = false, bool inutil = false);
     }
 
 }

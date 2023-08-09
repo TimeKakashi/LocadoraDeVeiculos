@@ -51,6 +51,7 @@
             btnExcluir = new ToolStripButton();
             btnFiltrar = new ToolStripButton();
             btnCombustivel = new ToolStripButton();
+            brnDevolucao = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripLabel1 = new ToolStripLabel();
             menuStrip1.SuspendLayout();
@@ -192,7 +193,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, btnFiltrar, btnCombustivel, toolStripSeparator1, toolStripLabel1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, btnFiltrar, btnCombustivel, brnDevolucao, toolStripSeparator1, toolStripLabel1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(716, 31);
@@ -244,13 +245,15 @@
             // 
             // btnCombustivel
             // 
-            btnCombustivel.DisplayStyle = ToolStripItemDisplayStyle.Image;
             btnCombustivel.Image = Properties.Resources.charger_FILL0_wght400_GRAD0_opsz24;
-            btnCombustivel.ImageTransparentColor = Color.Magenta;
             btnCombustivel.Name = "btnCombustivel";
             btnCombustivel.Size = new Size(23, 28);
-            btnCombustivel.Text = "toolStripButton1";
-            btnCombustivel.Click += btnCombustivel_Click;
+            // 
+            // brnDevolucao
+            // 
+            brnDevolucao.Image = Properties.Resources.keyboard_return_FILL0_wght400_GRAD0_opsz40__1_;
+            brnDevolucao.Name = "brnDevolucao";
+            brnDevolucao.Size = new Size(23, 28);
             // 
             // toolStripSeparator1
             // 
@@ -314,5 +317,6 @@
         private ToolStripStatusLabel labelRodaPe;
         private ToolStripMenuItem parceiroToolStripMenuItem;
         private ToolStripButton btnCombustivel;
+        private ToolStripButton brnDevolucao;
     }
 }

@@ -1,5 +1,5 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
-using LocadoraDeVeiculos.Dominio.ModuloCupom;
+using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloCliente
 {
@@ -21,10 +21,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
         public string Cidade { get; set; }
         public string Estado { get; set; }
         public string Email { get; set; }
-        
-        public List<Cupom> Cupons { get; set;} = new List<Cupom>();
-
-
+        public List<Condutor> Condutores { get; set; } = new List<Condutor>();
 
 
         public string? CPF { get; set; }
@@ -61,11 +58,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
             {
                 throw new ArgumentException("Tipo de cliente inválido");
             }
-        }
-        
-        public override void Atualizar(Cliente registro)
-        {
-
         }
 
         public override string ToString()

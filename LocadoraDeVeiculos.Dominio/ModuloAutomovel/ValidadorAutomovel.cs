@@ -7,8 +7,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAutomovel
     {
         public ValidadorAutomovel()
         {
-            RuleFor(x => x.Imagem).NotNull().NotEmpty();
-
             RuleFor(x => x.GrupoAutomovel).NotEmpty().NotNull();
 
             RuleFor(x => x.Kilometragem).NotEmpty().NotNull().GreaterThanOrEqualTo(0);
@@ -30,6 +28,22 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAutomovel
             RuleFor(x => x.EnumCombusteivel).NotEmpty().NotNull();
 
             RuleFor(x => x.CapacidadeEmLitros).NotEmpty().GreaterThanOrEqualTo(30).NotNull();
+
+            RuleFor(a => a.Imagem)
+                .NotNull()
+                .WithMessage("Imagem é Obrigatoria!")
+                .Custom(ValidarTamanhoImagem);
+        }
+
+        private void ValidarTamanhoImagem(byte[] img, ValidationContext<Veiculo> ctx)
+        {
+            if (img.Length == 0)
+                return;
+
+            const int max2Mb = 2 * 1024 * 1024;
+
+            if (img.Length >= max2Mb)
+                ctx.AddFailure("A imagem passou do tamanho maximo, que eh 2mb");
         }
     }
 }
