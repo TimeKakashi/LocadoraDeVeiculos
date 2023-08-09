@@ -43,12 +43,9 @@ namespace LocadoraDeVeiculos.TestIntegracao.Compartilhado
             var dbContext = new LocadoraDeVeiculosDbContext(optionsBuilder.Options);
 
             repositorioPlanoCobranca = new RepositorioPlanoCobrancaOrm(dbContext);
-            reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovel(dbContext);
+            reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovelOrm(dbContext);
             repositorioFuncionario = new RepositorioFuncionarioOrm(dbContext);
-            repositorioAutomovel = new RepositorioAutomovel(dbContext);
-            repositorioCupom = new RepositorioCupom(dbContext);
-            repositorioParceiro = new RepositorioParceiro(dbContext);
-            repositorioTaxaServico = new RepositorioTaxaServico(dbContext);
+            repositorioAutomovel = new RepositorioAutomovelOrm(dbContext);
 
             BuilderSetup.SetCreatePersistenceMethod<Veiculo>(repositorioAutomovel.Inserir);
             BuilderSetup.SetCreatePersistenceMethod<GrupoAutomovel>(reposisotiroGrupoAutomovel.Inserir);

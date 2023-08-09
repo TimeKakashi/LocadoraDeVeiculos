@@ -56,7 +56,7 @@
             label2.Name = "label2";
             label2.Size = new Size(41, 15);
             label2.TabIndex = 1;
-            label2.Text = "Alcool";
+            label2.Text = "Álcool";
             // 
             // label9
             // 
@@ -70,11 +70,11 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(38, 201);
+            label4.Location = new Point(32, 201);
             label4.Name = "label4";
-            label4.Size = new Size(32, 15);
+            label4.Size = new Size(38, 15);
             label4.TabIndex = 3;
-            label4.Text = "Disel";
+            label4.Text = "Diesel";
             // 
             // txGasolina
             // 
@@ -140,8 +140,14 @@
             Controls.Add(label9);
             Controls.Add(label2);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
+            MinimizeBox = false;
             Name = "TelaCombustivelForm";
-            Text = "TelaCombustivelForm";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Preços de Combustível";
             ResumeLayout(false);
             PerformLayout();
         }

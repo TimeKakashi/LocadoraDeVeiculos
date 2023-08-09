@@ -41,7 +41,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(33, 51);
+            label1.Location = new Point(55, 51);
             label1.Name = "label1";
             label1.Size = new Size(40, 15);
             label1.TabIndex = 0;
@@ -52,14 +52,14 @@
             label2.AutoSize = true;
             label2.Location = new Point(33, 108);
             label2.Name = "label2";
-            label2.Size = new Size(62, 15);
+            label2.Size = new Size(59, 15);
             label2.TabIndex = 1;
-            label2.Text = "Adimissão";
+            label2.Text = "Admissão";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(35, 164);
+            label3.Location = new Point(53, 164);
             label3.Name = "label3";
             label3.Size = new Size(42, 15);
             label3.TabIndex = 2;
@@ -121,8 +121,14 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
+            MinimizeBox = false;
             Name = "telaFuncionarioForm";
-            Text = "telaFuncionarioForm";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Cadastro de Funcionário";
             ResumeLayout(false);
             PerformLayout();
         }

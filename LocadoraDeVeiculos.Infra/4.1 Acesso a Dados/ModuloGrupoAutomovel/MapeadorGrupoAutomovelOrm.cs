@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel
 {
-    public class MapeadorGrupoAutomovel : IEntityTypeConfiguration<GrupoAutomovel>
+    public class MapeadorGrupoAutomovelOrm : IEntityTypeConfiguration<GrupoAutomovel>
     {
         public void Configure(EntityTypeBuilder<GrupoAutomovel> grupoAutomovelBuild)
         {

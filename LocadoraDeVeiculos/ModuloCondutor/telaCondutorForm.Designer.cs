@@ -117,6 +117,7 @@
             cmbClientes.Name = "cmbClientes";
             cmbClientes.Size = new Size(303, 23);
             cmbClientes.TabIndex = 8;
+            cmbClientes.SelectedValueChanged += cmbClientes_SelectedValueChanged;
             // 
             // txtCPF
             // 
@@ -216,7 +217,13 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
+            MinimizeBox = false;
             Name = "telaCondutorForm";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro de Condutor";
             ResumeLayout(false);
             PerformLayout();

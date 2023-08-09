@@ -60,11 +60,6 @@ namespace LocadoraDeVeiculos.ModuloCondutor
             {
                 Name = "email",
                 HeaderText = "Email"
-            },
-            new DataGridViewTextBoxColumn()
-            {
-                Name = "clienteId",
-                HeaderText = "Cliente ID"
             }
             };
 
@@ -83,8 +78,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
                               c.CNH,
                               c.ValidadeCNH,
                               c.Telefone,
-                              c.Email,
-                              c.ClienteId
+                              c.Email
                               );
             }
         }

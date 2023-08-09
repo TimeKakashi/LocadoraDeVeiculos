@@ -179,8 +179,14 @@
             Controls.Add(cbGrupo);
             Controls.Add(panel);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
+            MinimizeBox = false;
             Name = "TelaPlanoCobranca";
-            Text = "TelaPlanoCobranca";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Plano de Cobrança";
             panel.ResumeLayout(false);
             panel.PerformLayout();
             ResumeLayout(false);

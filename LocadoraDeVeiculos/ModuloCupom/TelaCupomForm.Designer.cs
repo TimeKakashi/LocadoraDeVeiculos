@@ -142,9 +142,12 @@
             Controls.Add(label1);
             Controls.Add(txtNome);
             Controls.Add(label2);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
             Name = "TelaCupomForm";
+            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro de Cupom";
             ResumeLayout(false);
