@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using FluentValidation.Results;
 using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAluguel;
@@ -39,6 +40,10 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             this.ConfigurarDialog();
 
             EncherComboBox(listFuncionario, ListaCliente, ListagrupoAutomovels, listCupom);
+
+            TaxaServico taxa = new TaxaServico("Ar", 200, "So Uma");
+
+            Listtaxas.Add(taxa);
 
             PopularContainerTaxas(Listtaxas);
         }
@@ -201,12 +206,23 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
         private decimal ObterPreco(PlanoCobranca plano, Cupom cupom, DateTime dataLocacao, DateTime dataDevolucaoPrevista, List<TaxaServico> taxasServico)
         {
-            var quantiadeDias = dataDevolucaoPrevista - dataLocacao;
+            var quantiadeDias = dataDevolucaoPrevista.Day - dataLocacao.Day;
 
-            decimal valor = plano.ValorDiaria * quantiadeDias.Days;
+            decimal valor = plano.ValorDiaria * quantiadeDias;
 
             if (cupom != null)
                 valor -= cupom.Valor;
+
+            if(aluguel.TaxasServico.Count > 0)
+            {
+                foreach (var item in aluguel.TaxasServico)
+                {
+                    if (item.Plano == "Plano Diário")
+                        valor += item.Preco * quantiadeDias;
+                    else
+                        valor += item.Preco;
+                }
+            }
 
             return valor;
         }

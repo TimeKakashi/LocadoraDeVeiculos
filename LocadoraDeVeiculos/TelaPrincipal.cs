@@ -111,6 +111,7 @@ namespace LocadoraDeVeiculos
             repositorioTaxaServico = new RepositorioTaxaServicoOrm(dbContext);
             repositorioCombustivelJson = new RepositorioCombustivel(jsonContext);
             repositorioCondutor = new RepositorioCondutorOrm(dbContext);
+        }
 
         public static TelaPrincipal Instancia
         {

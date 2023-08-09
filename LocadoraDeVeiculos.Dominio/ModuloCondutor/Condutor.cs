@@ -10,7 +10,6 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
 {
     public class Condutor : EntidadeBase<Condutor>
     {
-        public Guid Id { get; set; }
         public string Nome { get; set; }
         public string CPF { get; set; }
         public string CNH { get; set; }
