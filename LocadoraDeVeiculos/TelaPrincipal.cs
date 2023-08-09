@@ -251,7 +251,8 @@ namespace LocadoraDeVeiculos
             var servicoAluguel = new ServicoAluguel(repositorioAluguel, repositorioCupom, repositorioCombustivelJson, validadorAluguel);
 
             controlador = new ControladorAluguel(servicoAluguel, repositorioAluguel, repositorioFuncionario,
-                repositorioCliente, reposisotiroGrupoAutomovel, repositorioCupom, repositorioTaxaServico);
+                repositorioCliente, reposisotiroGrupoAutomovel, repositorioCupom, repositorioTaxaServico,
+                repositorioCondutor, repositorioAutomovel, repositorioPlanoCobranca);
 
             ConfigurarTelaPrincipal(controlador);
         }
@@ -323,18 +324,7 @@ namespace LocadoraDeVeiculos
             labelRodaPe.Text = erro;
         }
 
-        private void btnCombustivel_Click(object sender, EventArgs e)
-        {
-            if (controlador == null)
-            {
-                MessageBox.Show("Selecione uma area primerio!");
-                return;
-            }
-
-            controlador.ArrumarPrecos();
-        }
-
-        private void brnDevolucao_Click_1(object sender, EventArgs e)
+        private void brnDevolucao_Click(object sender, EventArgs e)
         {
             if (controlador == null)
             {
@@ -343,6 +333,17 @@ namespace LocadoraDeVeiculos
             }
 
             controlador.DevolucaoAluguel();
+        }
+
+        private void btnCombustivel_Click_1(object sender, EventArgs e)
+        {
+            if (controlador == null)
+            {
+                MessageBox.Show("Selecione uma area primerio!");
+                return;
+            }
+
+            controlador.ArrumarPrecos();
         }
     }
 

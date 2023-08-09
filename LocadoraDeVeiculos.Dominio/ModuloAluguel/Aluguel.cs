@@ -16,8 +16,8 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
         public Cliente Cliente { get; set; }
         public GrupoAutomovel GrupoAutomovel { get; set; }
         public PlanoCobranca PlanoCobranca { get; set; }
-        public ModuloCupom.Cupom? Cupom { get; set; }
-        public ModuloCondutor.Condutor Condutor { get; set; }
+        public Cupom? Cupom { get; set; }
+        public Condutor Condutor { get; set; }
         public Veiculo Veiculo { get; set; }
         public DateTime DataLocacao { get; set; }
         public DateTime DataDevolucaoPrevista { get; set; }
