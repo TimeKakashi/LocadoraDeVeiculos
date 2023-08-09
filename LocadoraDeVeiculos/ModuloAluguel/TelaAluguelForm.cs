@@ -203,10 +203,6 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             labelValorTotal.Text = aluguel.Preco.ToString();
 
-            if (aluguel.Cliente != null)
-                if(aluguel.Cupom != null)
-                    aluguel.Cliente.CuponsUsados.Add(aluguel.Cupom);
-
             DesmarcarItens();
 
             return aluguel;
