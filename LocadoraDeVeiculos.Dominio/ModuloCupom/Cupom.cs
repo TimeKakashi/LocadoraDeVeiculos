@@ -1,4 +1,5 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using Microsoft.Win32;
@@ -20,7 +21,8 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
 
         public DateTime DataDeValidade { get; set; }
         public Parceiro Parceiro { get; set; }
-        
+        public Cliente Cliente { get; set; }
+
 
         public override void Atualizar(Cupom registro)
         {
