@@ -26,21 +26,26 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
 
             RuleFor(a => a.Veiculo).NotNull();
 
-            RuleFor(a => a.DataDevolucaoPrevista).NotNull().NotEmpty().GreaterThan(DateTime.Today);
+            RuleFor(a => a.DataDevolucaoPrevista).NotNull().NotEmpty().GreaterThan(a => a.DataLocacao);
+
+            When(a => a.Finalizado, () =>
+            {
+                RuleFor(a => a.KmPercorrido).GreaterThan(0).NotNull();
+            });
+
+            When(a => a.Finalizado, () =>
+            {
+                RuleFor(a => a.NivelTanque).NotEqual(new EnumNivelTanque()).NotNull();
+            });
+
+            When(a => a.Finalizado, () =>
+            {
+                RuleFor(a => a.DataDevolucao).GreaterThan(a => a.DataLocacao.AddDays(1)).WithMessage("A Data de Devolução deve ser maior que a Data de Locação").NotNull();
+            });
 
             When(a => a.Finalizado, () =>
             {
                 RuleFor(a => a.Preco).GreaterThan(0);
-            });
-
-            When(a => a.Finalizado, () =>
-            {
-                RuleFor(a => a.KmPercorrido).GreaterThan(0);
-            });
-
-            When(a => a.Finalizado, () =>
-            {
-                RuleFor(a => a.NivelTanque).NotEqual(new EnumNivelTanque());
             });
         }
     }

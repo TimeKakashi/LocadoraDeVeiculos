@@ -66,6 +66,11 @@ namespace LocadoraDeVeiculos.ModuloAluguel
         {
             Name = "ValorTotal",
             HeaderText = "Valor Total"
+        },
+        new DataGridViewTextBoxColumn()
+        {
+            Name = "Finalizado",
+            HeaderText = "Finaliado"
         }};
 
             grid.Columns.AddRange(colunas);
@@ -85,7 +90,8 @@ namespace LocadoraDeVeiculos.ModuloAluguel
                               a.DataLocacao,
                               a.DataDevolucaoPrevista,
                               a.DataDevolucao,
-                              a.Preco
+                              a.Preco,
+                              a.Finalizado
                               );
             }
         }

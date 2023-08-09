@@ -1,4 +1,5 @@
-﻿using LocadoraDeVeiculos.Compartilhado;
+﻿using FluentResults;
+using LocadoraDeVeiculos.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAluguel;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
@@ -43,15 +44,15 @@ namespace LocadoraDeVeiculos.ModuloAluguel
         {
 
             EncherComboBox(funcionarios, clientes, grupoAutomovels, cupoms, condutores, gruposAutomoveis, planosCobrancas, veiculos);
-            PopularContainerTaxas(taxaServicos);
             PopularContainerTaxasExtras(taxaServicos);
+            EncherComboBoxEnum();
         }
 
         private void PopularContainerTaxas(List<TaxaServico> listtaxas)
         {
             ContainerTaxas.Items.Clear();
 
-            foreach (var item in aluguel.TaxasServico)
+            foreach (var item in listtaxas)
             {
                 ContainerTaxas.Items.Add(item);
             }
@@ -72,7 +73,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             foreach (TaxaServico taxa in ContainerTaxasAdicionais.CheckedItems)
                 aluguel.TaxasServico.Add(taxa);
 
-            obterAluguel();
+            ObterAluguel();
         }
 
         private void EncherComboBox
@@ -97,7 +98,13 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             EncherComboBoxVeiculo(veiculos);
         }
+        public void EncherComboBoxEnum()
+        {
+            cbNivelTanque.Items.Clear();
 
+            foreach (var grupo in Enum.GetValues(typeof(EnumNivelTanque)))
+                cbNivelTanque.Items.Add(grupo);
+        }
         private void EncherComboBoxCondutor(List<Condutor> listCondutor)
         {
             cbCondutor.Items.Clear();
@@ -158,8 +165,51 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             }
         }
 
-        public Aluguel obterAluguel()
+        public Aluguel ObterAluguel()
         {
+            //aluguel.Funcionario = (Funcionario)cbFuncionario.SelectedItem;
+            //aluguel.Cliente = (Cliente)cbCliente.SelectedItem;
+            //aluguel.GrupoAutomovel = (GrupoAutomovel)cbGrupoAutomoveis.SelectedItem;
+            //aluguel.PlanoCobranca = (PlanoCobranca)cbPlanoCobranca.SelectedItem;
+            //aluguel.Cupom = ObterCupom(txCupom.Text);
+            //aluguel.Condutor = (Condutor)cbCondutor.SelectedItem;
+            //aluguel.Veiculo = (Veiculo)cbAutomovel.SelectedItem;
+
+            //aluguel.DataLocacao = txDataLocacao.Value;
+
+            //aluguel.DataDevolucaoPrevista = txDataPrevista.Value;
+
+            //aluguel.DataDevolucao = txDataDevolucao.Value;
+
+            //aluguel.NivelTanque = (EnumNivelTanque?)cbNivelTanque.SelectedItem;
+
+            //aluguel.KmPercorrido = Convert.ToInt32(txKmPercorrido);
+
+            //if (ContainerTaxas.Items.Count > 0)
+            //{
+            //    foreach (TaxaServico item in ContainerTaxas.CheckedItems)
+            //        aluguel.TaxasServico.Add(item);
+            //}
+
+            //if (ContainerTaxasAdicionais.CheckedItems.Count > 0)
+            //{
+            //    foreach (TaxaServico item in ContainerTaxasAdicionais.CheckedItems)
+            //        aluguel.TaxasServico.Add(item);
+            //}
+
+            //if (ContainerTaxasAdicionais.CheckedItems.Count <= 0 && ContainerTaxas.CheckedItems.Count <= 0)
+            //    aluguel.TaxasServico.Clear();
+
+
+            //aluguel.Preco = ObterPrecoFinal(aluguel.PlanoCobranca, aluguel.DataLocacao, aluguel.DataDevolucao, aluguel.DataDevolucaoPrevista, aluguel.Cupom, aluguel.TaxasServico, aluguel.KmPercorrido);
+
+            //labelValorTotal.Text = aluguel.Preco.ToString();
+
+            //aluguel.Finalizado = true;
+
+            //return aluguel;
+
+
             aluguel.Funcionario = (Funcionario)cbFuncionario.SelectedItem;
             aluguel.Cliente = (Cliente)cbCliente.SelectedItem;
             aluguel.GrupoAutomovel = (GrupoAutomovel)cbGrupoAutomoveis.SelectedItem;
@@ -176,28 +226,39 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             aluguel.NivelTanque = (EnumNivelTanque?)cbNivelTanque.SelectedItem;
 
-            aluguel.KmPercorrido = Convert.ToInt32(txKmPercorrido);
-
-            if (ContainerTaxas.Items.Count > 0)
+            if (int.TryParse(txKmPercorrido.Text, out int kmPercorrido))
             {
-                foreach (TaxaServico item in ContainerTaxas.CheckedItems)
-                    aluguel.TaxasServico.Add(item);
+                aluguel.KmPercorrido = kmPercorrido;
+            }
+            else
+            {
+                aluguel.KmPercorrido = null;
             }
 
-            if (ContainerTaxasAdicionais.CheckedItems.Count > 0)
+            aluguel.TaxasServico.Clear();
+
+            foreach (TaxaServico item in ContainerTaxas.CheckedItems)
             {
-                foreach (TaxaServico item in ContainerTaxasAdicionais.CheckedItems)
-                    aluguel.TaxasServico.Add(item);
+                aluguel.TaxasServico.Add(item);
             }
 
-            if (ContainerTaxasAdicionais.CheckedItems.Count <= 0 && ContainerTaxas.CheckedItems.Count <= 0)
-                aluguel.TaxasServico.Clear();
-
-
-            aluguel.Preco = ObterPrecoFinal(aluguel.PlanoCobranca, aluguel.DataLocacao, aluguel.DataDevolucao, aluguel.DataDevolucaoPrevista, aluguel.Cupom, aluguel.TaxasServico, aluguel.KmPercorrido);
+            foreach (TaxaServico item in ContainerTaxasAdicionais.CheckedItems)
+            {
+                aluguel.TaxasServico.Add(item);
+            }
+            try
+            {
+                aluguel.Preco = ObterPrecoFinal(aluguel.PlanoCobranca, aluguel.DataLocacao, aluguel.DataDevolucao, aluguel.DataDevolucaoPrevista, aluguel.Cupom, aluguel.TaxasServico, aluguel.KmPercorrido);
+            }
+            catch(Exception ex)
+            {
+                aluguel.Preco = 0;
+            }
 
             labelValorTotal.Text = aluguel.Preco.ToString();
 
+            aluguel.Finalizado = true;
+            
             return aluguel;
         }
 
@@ -232,6 +293,9 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             valorTotal += quantidadeLitrosUsados * valorCombustivel;
 
             valorTotal += valorDiariaMulta;
+
+            if (multa)
+                valorTotal *= 1.1m;
 
             return valorTotal;
         }
@@ -325,6 +389,8 @@ namespace LocadoraDeVeiculos.ModuloAluguel
         {
             this.aluguel = aluguel;
 
+            PopularContainerTaxas(aluguel.TaxasServico);
+
             if (aluguel.Cupom != null)
                 txCupom.Text = aluguel.Cupom.Valor.ToString();
 
@@ -346,6 +412,9 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             cbAutomovel.SelectedItem = aluguel.Veiculo;
 
+            if(aluguel.Preco != null)
+            labelValorTotal.Text = aluguel.Preco.ToString();
+
             for (int i = 0; i < ContainerTaxas.Items.Count; i++)
             {
                 TaxaServico taxa = (TaxaServico)ContainerTaxas.Items[i];
@@ -355,6 +424,22 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             }
         }
 
-      
+        private void btnCadastrar_Click(object sender, EventArgs e)
+        {
+            this.aluguel = ObterAluguel();
+
+            Result resultado = onGravarRegistro(aluguel);
+
+            if (resultado.IsFailed)
+            {
+                string erro = resultado.Errors[0].Message;
+
+                TelaPrincipal.Instancia.AtualizarRodape(erro);
+
+                DialogResult = DialogResult.None;
+
+                aluguel.Finalizado = false;
+            }
+        }
     }
 }
