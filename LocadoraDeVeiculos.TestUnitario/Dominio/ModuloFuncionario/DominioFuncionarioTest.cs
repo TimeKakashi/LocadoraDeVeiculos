@@ -19,7 +19,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloFuncionario
         [TestMethod]
         public void DeveCriarFuncionarioValido()
         {
-            var funcionario = new Funcionario("João Silva", 2500, new DateTime(2023, 8, 10));
+            var funcionario = new Funcionario("João Silva", 2500, new DateTime(2023, 8, 7));
 
             ValidationResult resultado = validadorFuncionario.Validate(funcionario);
             resultado.IsValid.Should().BeTrue();

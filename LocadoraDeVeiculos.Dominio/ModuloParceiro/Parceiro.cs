@@ -6,11 +6,10 @@ namespace LocadoraDeVeiculos.Dominio.ModuloParceiro
     {
         public string Nome { get; set; }
 
-        
-        public Parceiro() 
+        public Parceiro()
         {
-
         }
+
         public Parceiro(string Nome)
         {
             this.Nome = Nome;
@@ -19,6 +18,21 @@ namespace LocadoraDeVeiculos.Dominio.ModuloParceiro
         public Parceiro(Guid id, string nome)
         {
             Id = id;
+            Nome = nome;
+        }
+
+        public override string ToString()
+        {
+            return Nome; 
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is not Parceiro parceiro)
+                return false;
+
+            return Id == parceiro.Id && Nome == parceiro.Nome;
         }
     }
+
 }

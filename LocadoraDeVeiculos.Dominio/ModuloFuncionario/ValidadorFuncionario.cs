@@ -8,7 +8,13 @@ namespace LocadoraDeVeiculos.Dominio.ModuloFuncionario
         {
             RuleFor(f => f.Nome).NotEmpty().NotNull().MinimumLength(4);
             RuleFor(f => f.Salario).NotEmpty().NotNull().GreaterThan(0);
-            RuleFor(f => f.DataEntrada).NotEmpty().NotNull();
+            RuleFor(f => f.DataEntrada).NotEmpty().NotNull().Must(BeValidEntryDate);
+        }
+
+        private bool BeValidEntryDate(DateTime entryDate)
+        {
+            return entryDate <= DateTime.Today;
         }
     }
+
 }
