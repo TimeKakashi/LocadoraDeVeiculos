@@ -23,10 +23,10 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
         public DateTime DataDevolucaoPrevista { get; set; }
         public DateTime? DataDevolucao { get; set; }
         public List<TaxaServico> TaxasServico { get; set; } = new List<TaxaServico>();
-        public EnumNivelTanque NivelTanque { get; set; }
+        public EnumNivelTanque? NivelTanque { get; set; }
         public decimal Preco { get; set; }
         public bool Finalizado { get; set; }
-        public int KmPercorrido { get; set; }
+        public int? KmPercorrido { get; set; }
 
         public Aluguel()
         {

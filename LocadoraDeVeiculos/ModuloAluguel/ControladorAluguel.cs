@@ -1,24 +1,62 @@
-﻿using LocadoraDeVeiculos.Compartilhado;
+﻿using LocadoraDeVeiculos.Aplicacao.ModuloAluguel;
+using LocadoraDeVeiculos.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloAluguel;
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
+using LocadoraDeVeiculos.Dominio.ModuloCupom;
+using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
+using LocadoraDeVeiculos.Dominio.ModuloTaxaServico;
 
 namespace LocadoraDeVeiculos.ModuloAluguel
 {
     public class ControladorAluguel : ControladorBase
     {
-        public override string ToolTipInserir => throw new NotImplementedException();
+        public override string ToolTipInserir => "Inserir Alguel";
+        public override string ToolTipEditar => "Editar Alguel";
+        public override string ToolTipExcluir => "Excluir Alguel";
+        public override string ToolTipFiltrar => "Filtrar Alguel";
+        public override string ToolTipPdf => "Gerar e Encaminhar Pdf por Email";
+        public override string ToolTipCombustivel => "Atualizar Valores Combustível";
 
-        public override string ToolTipEditar => throw new NotImplementedException();
+        private TabelaAluguel tabelaAluguel;
+        private ServicoAluguel servicoAluguel;
+        private IRepositorioAluguel repositorioAluguel;
+        private IRepositorioFuncionario repositorioFuncionario;
+        private IRepositorioCliente repositorioCliente;
+        private IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
+        private IRepositorioCupom repositorioCupom;
+        private IRepositorioTaxaServico repositorioTaxaServico;
 
-        public override string ToolTipExcluir => throw new NotImplementedException();
+        public ControladorAluguel(ServicoAluguel servicoAluguel, IRepositorioAluguel repositorioAluguel)
+        {
+            this.servicoAluguel = servicoAluguel;
+            this.repositorioAluguel = repositorioAluguel;
+        }
 
-        public override string ToolTipFiltrar => throw new NotImplementedException();
+        public ControladorAluguel(ServicoAluguel servicoAluguel, IRepositorioAluguel repositorioAluguel,
+            IRepositorioFuncionario repositorioFuncionario, IRepositorioCliente repositorioCliente,
+            IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel,IRepositorioCupom repositorioCupom,
+            IRepositorioTaxaServico repositorioTaxaServico
+)
+            : this(servicoAluguel, repositorioAluguel)
+        {
+            this.repositorioFuncionario = repositorioFuncionario;
+            this.repositorioCliente = repositorioCliente;
+            this.reposisotiroGrupoAutomovel = reposisotiroGrupoAutomovel;
+            this.repositorioCupom = repositorioCupom;
+            this.repositorioTaxaServico = repositorioTaxaServico;
 
-        public override string ToolTipPdf => throw new NotImplementedException();
+            if (tabelaAluguel == null)
+                tabelaAluguel = new TabelaAluguel();
 
-        public override string ToolTipCombustivel => throw new NotImplementedException();
+            CarregarItens();
+        }
 
         public override void CarregarItens()
         {
-            throw new NotImplementedException();
+            var listaAutomovel = repositorioAluguel.SelecionarTodos();
+
+            tabelaAluguel.AtualizarRegistros(listaAutomovel);
         }
 
         public override void Editar()
@@ -33,17 +71,34 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
         public override void Inserir()
         {
-            throw new NotImplementedException();
+            TelaAluguelForm telaAutomovel = new TelaAluguelForm(
+                repositorioFuncionario.SelecionarTodos(),
+                repositorioCliente.SelecionarTodos(true),
+                reposisotiroGrupoAutomovel.SelecionarTodos(true, true),
+                repositorioTaxaServico.SelecionarTodos(), repositorioCupom.SelecionarTodos()
+                );
+
+            telaAutomovel.onGravarRegistro += servicoAluguel.Inserir;
+
+            telaAutomovel.ArrumaTela(new Aluguel(), true);
+
+            if (telaAutomovel.ShowDialog() == DialogResult.OK)
+                CarregarItens();
         }
+
 
         public override UserControl ObterTabela()
         {
-            throw new NotImplementedException();
+            if (tabelaAluguel == null)
+                tabelaAluguel = new TabelaAluguel();
+
+            return tabelaAluguel;
         }
 
         public override string ObterTipoCadastro()
         {
-            throw new NotImplementedException();
+            return "Cadastro de Alugueis";
         }
     }
 }
+

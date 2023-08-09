@@ -25,7 +25,7 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCondutor
 
             // Relacionamento com a entidade Cliente
             condutorBuilder.HasOne(c => c.Cliente)
-                .WithMany()
+                .WithMany(c => c.Condutores)
                 .HasForeignKey(c => c.ClienteId);
         }
     }
