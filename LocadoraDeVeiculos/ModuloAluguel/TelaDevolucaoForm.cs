@@ -167,49 +167,6 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
         public Aluguel ObterAluguel()
         {
-            //aluguel.Funcionario = (Funcionario)cbFuncionario.SelectedItem;
-            //aluguel.Cliente = (Cliente)cbCliente.SelectedItem;
-            //aluguel.GrupoAutomovel = (GrupoAutomovel)cbGrupoAutomoveis.SelectedItem;
-            //aluguel.PlanoCobranca = (PlanoCobranca)cbPlanoCobranca.SelectedItem;
-            //aluguel.Cupom = ObterCupom(txCupom.Text);
-            //aluguel.Condutor = (Condutor)cbCondutor.SelectedItem;
-            //aluguel.Veiculo = (Veiculo)cbAutomovel.SelectedItem;
-
-            //aluguel.DataLocacao = txDataLocacao.Value;
-
-            //aluguel.DataDevolucaoPrevista = txDataPrevista.Value;
-
-            //aluguel.DataDevolucao = txDataDevolucao.Value;
-
-            //aluguel.NivelTanque = (EnumNivelTanque?)cbNivelTanque.SelectedItem;
-
-            //aluguel.KmPercorrido = Convert.ToInt32(txKmPercorrido);
-
-            //if (ContainerTaxas.Items.Count > 0)
-            //{
-            //    foreach (TaxaServico item in ContainerTaxas.CheckedItems)
-            //        aluguel.TaxasServico.Add(item);
-            //}
-
-            //if (ContainerTaxasAdicionais.CheckedItems.Count > 0)
-            //{
-            //    foreach (TaxaServico item in ContainerTaxasAdicionais.CheckedItems)
-            //        aluguel.TaxasServico.Add(item);
-            //}
-
-            //if (ContainerTaxasAdicionais.CheckedItems.Count <= 0 && ContainerTaxas.CheckedItems.Count <= 0)
-            //    aluguel.TaxasServico.Clear();
-
-
-            //aluguel.Preco = ObterPrecoFinal(aluguel.PlanoCobranca, aluguel.DataLocacao, aluguel.DataDevolucao, aluguel.DataDevolucaoPrevista, aluguel.Cupom, aluguel.TaxasServico, aluguel.KmPercorrido);
-
-            //labelValorTotal.Text = aluguel.Preco.ToString();
-
-            //aluguel.Finalizado = true;
-
-            //return aluguel;
-
-
             aluguel.Funcionario = (Funcionario)cbFuncionario.SelectedItem;
             aluguel.Cliente = (Cliente)cbCliente.SelectedItem;
             aluguel.GrupoAutomovel = (GrupoAutomovel)cbGrupoAutomoveis.SelectedItem;
