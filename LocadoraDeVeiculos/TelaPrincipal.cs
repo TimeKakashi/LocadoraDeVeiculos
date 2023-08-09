@@ -95,12 +95,12 @@ namespace LocadoraDeVeiculos
             }
 
             repositorioFuncionario = new RepositorioFuncionarioOrm(dbContext);
-            reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovel(dbContext);
+            reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovelOrm(dbContext);
             repositorioPlanoCobranca = new RepositorioPlanoCobrancaOrm(dbContext);
             repositorioCliente = new RepositorioClienteOrm(dbContext);
             repositorioCupom = new RepositorioCupomOrm(dbContext);
             repositorioParceiro = new RepositorioParceiroOrm(dbContext);
-            repositorioAutomovel = new RepositorioAutomovel(dbContext);
+            repositorioAutomovel = new RepositorioAutomovelOrm(dbContext);
             repositorioTaxaServico = new RepositorioTaxaServicoOrm(dbContext);
             repositorioCombustivelJson = new RepositorioCombustivel(jsonContext);
             repositorioCondutor = new RepositorioCondutorOrm(dbContext);
