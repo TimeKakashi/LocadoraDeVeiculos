@@ -4,7 +4,6 @@ using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAluguel;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
-using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using Serilog;
 using System;

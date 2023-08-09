@@ -35,6 +35,127 @@ namespace LocadoraDeVeiculos.ModuloAluguel
         {
             InitializeComponent();
             this.ConfigurarDialog();
+
+        }
+
+        public TelaDevolucaoForm(List<Funcionario> funcionarios, List<Cliente> clientes, List<GrupoAutomovel> grupoAutomovels, List<TaxaServico> taxaServicos, List<Cupom> cupoms,
+            List<Condutor> condutores, List<GrupoAutomovel> gruposAutomoveis, List<PlanoCobranca> planosCobrancas, List<Veiculo> veiculos) : this()
+        {
+
+            EncherComboBox(funcionarios, clientes, grupoAutomovels, cupoms, condutores, gruposAutomoveis, planosCobrancas, veiculos);
+            PopularContainerTaxas(taxaServicos);
+            PopularContainerTaxasExtras(taxaServicos);
+        }
+
+        private void PopularContainerTaxas(List<TaxaServico> listtaxas)
+        {
+            ContainerTaxas.Items.Clear();
+
+            foreach (var item in aluguel.TaxasServico)
+            {
+                ContainerTaxas.Items.Add(item);
+            }
+        }
+
+        private void PopularContainerTaxasExtras(List<TaxaServico> taxas)
+        {
+            ContainerTaxasAdicionais.Items.Clear();
+
+            foreach (var item in taxas)
+            {
+                ContainerTaxas.Items.Add(item);
+            }
+        }
+
+        private void ContainerTaxasAdicionais_SelectedValueChanged(object sender, EventArgs e)
+        {
+            foreach (TaxaServico taxa in ContainerTaxasAdicionais.CheckedItems)
+                aluguel.TaxasServico.Add(taxa);
+
+            obterAluguel();
+        }
+
+        private void EncherComboBox
+           (
+           List<Funcionario> listFuncionario, List<Cliente> listaCliente,
+           List<GrupoAutomovel> listagrupoAutomovels, List<Cupom> listCupom, List<Condutor> listCondutor,
+           List<GrupoAutomovel> gruposAutomoveis, List<PlanoCobranca> planosCobrancas, List<Veiculo> veiculos
+            )
+        {
+
+            EcherComboBoxFuncionario(listFuncionario);
+
+            EncherComboBoxCliente(listaCliente);
+
+            EncherComboBoxGrupoAutomovel(listagrupoAutomovels);
+
+            EncherComboBoxCondutor(listCondutor);
+
+            EncherComboBoxGrupoAutomovel(gruposAutomoveis);
+
+            EncherComboBoxPlanoCobranca(planosCobrancas);
+
+            EncherComboBoxVeiculo(veiculos);
+        }
+
+        private void EncherComboBoxCondutor(List<Condutor> listCondutor)
+        {
+            cbCondutor.Items.Clear();
+
+            foreach (var item in listCondutor)
+            {
+                cbCondutor.Items.Add(item);
+            }
+        }
+
+        private void EncherComboBoxPlanoCobranca(List<PlanoCobranca> listPlanoCobranca)
+        {
+            cbPlanoCobranca.Items.Clear();
+
+            foreach (var item in listPlanoCobranca)
+            {
+                cbPlanoCobranca.Items.Add(item);
+            }
+        }
+
+        private void EncherComboBoxGrupoAutomovel(List<GrupoAutomovel> listagrupoAutomovels)
+        {
+            cbGrupoAutomoveis.Items.Clear();
+
+            foreach (var item in listagrupoAutomovels)
+            {
+                cbGrupoAutomoveis.Items.Add(item);
+            }
+        }
+
+        private void EncherComboBoxCliente(List<Cliente> listaCliente)
+        {
+            cbCliente.Items.Clear();
+
+            foreach (var item in listaCliente)
+            {
+                cbCliente.Items.Add(item);
+            }
+        }
+
+        private void EcherComboBoxFuncionario(List<Funcionario> listFuncionario)
+        {
+            cbFuncionario.Items.Clear();
+
+            foreach (var item in listFuncionario)
+            {
+                cbFuncionario.Items.Add(item);
+            }
+        }
+
+        private void EncherComboBoxVeiculo(List<Veiculo> listVeiculo)
+        {
+            cbAutomovel.Items.Clear();
+
+            foreach (var item in listVeiculo)
+            {
+                cbAutomovel.Items.Add(item);
+            }
         }
 
         public Aluguel obterAluguel()
@@ -57,7 +178,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             aluguel.KmPercorrido = Convert.ToInt32(txKmPercorrido);
 
-            if (ContainerTaxas.CheckedItems.Count > 0)
+            if (ContainerTaxas.Items.Count > 0)
             {
                 foreach (TaxaServico item in ContainerTaxas.CheckedItems)
                     aluguel.TaxasServico.Add(item);
@@ -233,5 +354,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
                     ContainerTaxas.SetItemChecked(i, true);
             }
         }
-    } 
+
+      
+    }
 }

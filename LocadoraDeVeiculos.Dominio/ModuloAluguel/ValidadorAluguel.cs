@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using System;
 using System.Collections.Generic;
 using System.Linq;

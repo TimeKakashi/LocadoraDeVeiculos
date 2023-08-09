@@ -292,6 +292,7 @@
             ContainerTaxasAdicionais.Name = "ContainerTaxasAdicionais";
             ContainerTaxasAdicionais.Size = new Size(494, 184);
             ContainerTaxasAdicionais.TabIndex = 0;
+            ContainerTaxasAdicionais.SelectedValueChanged += ContainerTaxasAdicionais_SelectedValueChanged;
             // 
             // label5
             // 
@@ -380,7 +381,6 @@
             // 
             // txKmPercorrido
             // 
-            txKmPercorrido.Enabled = false;
             txKmPercorrido.Location = new Point(442, 274);
             txKmPercorrido.Name = "txKmPercorrido";
             txKmPercorrido.Size = new Size(186, 23);
