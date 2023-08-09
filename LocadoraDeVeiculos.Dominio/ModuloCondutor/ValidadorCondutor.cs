@@ -17,13 +17,20 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCondutor
         {
             this.repositorioCliente = repositorioCliente;
 
-            RuleFor(c => c.Nome).NotEmpty().NotNull().MinimumLength(4);
-            RuleFor(c => c.CNH).NotEmpty().NotNull();
-            RuleFor(c => c.ValidadeCNH).NotEmpty().NotNull();
-            RuleFor(c => c.Telefone).NotEmpty().NotNull();
+            RuleFor(c => c.Nome).NotEmpty().NotNull().MinimumLength(3);
+            RuleFor(c => c.CNH).NotEmpty().NotNull().Length(11);
+            RuleFor(c => c.ValidadeCNH).NotEmpty().NotNull().Must(BeValidCNHDate).WithMessage("A data de validade da CNH deve ser válida.");
+            RuleFor(c => c.Telefone).NotEmpty().NotNull().Length(11);
             RuleFor(c => c.Email).NotEmpty().NotNull().EmailAddress();
-            RuleFor(c => c.CPF).NotEmpty().NotNull();
+            RuleFor(c => c.CPF).NotEmpty().NotNull().Length(11);
         }
+
+        private bool BeValidCNHDate(DateTime validade)
+        {
+            
+            return validade >= DateTime.Today;
+        }
+
 
         public ValidadorCondutor(IRepositorioCondutor repositorioCondutor)
         {
