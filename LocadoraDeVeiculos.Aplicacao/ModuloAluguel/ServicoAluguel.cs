@@ -17,18 +17,20 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
 {
     public class ServicoAluguel : ServicoBase<Aluguel>
     {
-        IRepositorioAluguel repositorioAluguel;
-        IRepositorioCupom repositorioCupom;
-        IRepositorioCombustivelJson repositorioCombustivelJson;
-        IValidadorAluguel validadorAluguel;
+        private IRepositorioAluguel repositorioAluguel;
+        private IRepositorioCupom repositorioCupom;
+        private IRepositorioCombustivelJson repositorioCombustivelJson;
+        private IValidadorAluguel validadorAluguel;
+        private IContextoPersistencia contextoPersistencia;
 
 
-        public ServicoAluguel(IRepositorioAluguel repositorioAluguel, IRepositorioCupom repositorioCupom,IRepositorioCombustivelJson repositorioCombustivelJson ,IValidadorAluguel validadorAluguel)
+        public ServicoAluguel(IRepositorioAluguel repositorioAluguel, IRepositorioCupom repositorioCupom,IRepositorioCombustivelJson repositorioCombustivelJson ,IValidadorAluguel validadorAluguel, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioAluguel = repositorioAluguel;
             this.validadorAluguel = validadorAluguel;
             this.repositorioCupom = repositorioCupom;
             this.repositorioCombustivelJson = repositorioCombustivelJson;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public override Result Inserir(Aluguel registro)
@@ -37,13 +39,19 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
 
             List<string> erros = ValidarRegistro(registro);
 
-            if (erros.Count > 0)
+            if (erros.Count() > 0) 
+            { 
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
             try
             {
                 repositorioAluguel.Inserir(registro);
 
-                Log.Debug("Alguel inserido com sucesso!");
+                contextoPersistencia.GravarDados();
+
+                Log.Debug("Aluguel {AluguelId} inserida com sucesso", registro.Id);
 
                 return Result.Ok();
             }
@@ -64,10 +72,16 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
             List<string> erros = ValidarRegistro(registro);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
             try
             {
                 repositorioAluguel.Editar(registro);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("veiculo {AlguelId} editado com sucesso", registro.Id);
 
@@ -107,12 +121,16 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
 
                 repositorioAluguel.Excluir(registro);
 
+                contextoPersistencia.GravarDados();
+
                 Log.Debug("veiculo {Alugelid} excluído com sucesso", registro.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro = "Falha ao tentar excluir veiculo";

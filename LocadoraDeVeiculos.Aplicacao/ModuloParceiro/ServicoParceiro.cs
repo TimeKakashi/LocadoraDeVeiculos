@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using Serilog;
 using System.Data.SqlClient;
@@ -10,10 +11,12 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloParceiro
     {
         public IRepositorioParceiro repositorioParceiro;
         public IValidadorParceiro validadorParceiro;
-        public ServicoParceiro(IRepositorioParceiro repositorioParceiro, IValidadorParceiro validadorparceiro)
+        private IContextoPersistencia contextoPersistencia;
+        public ServicoParceiro(IRepositorioParceiro repositorioParceiro, IValidadorParceiro validadorparceiro, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioParceiro = repositorioParceiro;
             this.validadorParceiro = validadorparceiro;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public override Result Editar(Parceiro registro)
@@ -23,11 +26,17 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloParceiro
             List<string> erros = ValidarRegistro(registro);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
 
             try
             {
                 repositorioParceiro.Editar(registro);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Parceiro {ParceiroId} editada com sucesso", registro.Id);
 
@@ -60,12 +69,16 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloParceiro
 
                 repositorioParceiro.Excluir(registro);
 
+                contextoPersistencia.GravarDados();
+
                 Log.Debug("Parceiro {ParceiroId} excluída com sucesso", registro.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro;
@@ -90,11 +103,17 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloParceiro
             List<string> erros = ValidarRegistro(registro);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
 
             try
             {
                 repositorioParceiro.Inserir(registro);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Parceiro {ParceiroId} inserida com sucesso", registro.Id);
 

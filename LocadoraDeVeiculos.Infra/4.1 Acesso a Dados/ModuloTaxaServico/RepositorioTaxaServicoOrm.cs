@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloTaxaServico
 {
-    public class RepositorioTaxaServico : RepositorioBaseEmOrm<TaxaServico> , IRepositorioTaxaServico
+    public class RepositorioTaxaServicoOrm : RepositorioBaseEmOrm<TaxaServico> , IRepositorioTaxaServico
     {
-        public RepositorioTaxaServico(LocadoraDeVeiculosDbContext dbContext) : base(dbContext)
+        public RepositorioTaxaServicoOrm(LocadoraDeVeiculosDbContext dbContext) : base(dbContext)
         {
 
         }

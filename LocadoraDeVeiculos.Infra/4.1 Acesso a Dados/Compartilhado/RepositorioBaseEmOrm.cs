@@ -18,22 +18,16 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado
         public virtual void Inserir(T novoRegistro)
         {
             registros.Add(novoRegistro);
-
-            dbContext.SaveChanges();
         }
 
         public virtual void Editar(T registro)
         {
             registros.Update(registro);
-
-            dbContext.SaveChanges();
         }
 
         public virtual void Excluir(T registro)
         {
             registros.Remove(registro);
-
-            dbContext.SaveChanges();
         }
 
         public virtual bool Existe(T registro)

@@ -9,12 +9,14 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCombustivel
 {
     public class ServicoCombustivel
     {
-        IRepositorioCombustivelJson repositorioCombustivelJson;
-        IValidadorCombustivel validadorCombustivel;
-        public ServicoCombustivel(IRepositorioCombustivelJson repositorioCombustivelJson, IValidadorCombustivel validadorCombustivel)
+        private IRepositorioCombustivelJson repositorioCombustivelJson;
+        private IValidadorCombustivel validadorCombustivel;
+        private IContextoPersistencia contextoPersistencia;
+        public ServicoCombustivel(IRepositorioCombustivelJson repositorioCombustivelJson, IValidadorCombustivel validadorCombustivel, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioCombustivelJson = repositorioCombustivelJson;
             this.validadorCombustivel = validadorCombustivel;
+            this.contextoPersistencia = contextoPersistencia;
         }
         public Result EditarValores(List<Combustivel> combustiveis)
         {
@@ -30,12 +32,18 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCombustivel
             }
 
 
-            if (erros.Count > 0)
+            if (erros.Count() > 0) 
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
 
             try
             {
                 repositorioCombustivelJson.EditarValores(combustiveis);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Combustivel editado com sucesso");
 

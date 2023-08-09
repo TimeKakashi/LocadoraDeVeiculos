@@ -10,6 +10,7 @@ using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
 using LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Aplicacao.ModuloTaxaServico;
 using LocadoraDeVeiculos.Compartilhado;
+using LocadoraDeVeiculos.Compartilhado.Ioc.cs;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAluguel;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
@@ -53,30 +54,22 @@ namespace LocadoraDeVeiculos
     {
         private static TelaPrincipal telaPrincipal;
 
-        private IRepositorioFuncionario repositorioFuncionario;
-        private IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
-        private IRepositorioPlanoCobranca repositorioPlanoCobranca;
-        private IRepositorioParceiro repositorioParceiro;
-        private IRepositorioCliente repositorioCliente;
-        private IRepositorioAutomovel repositorioAutomovel;
+        
         private IRepositorioCombustivelJson repositorioCombustivelJson;
-        private IRepositorioCondutor repositorioCondutor;
-        private IRepositorioCupom repositorioCupom;
-        private IRepositorioTaxaServico repositorioTaxaServico;
-        private IRepositorioAluguel repositorioAluguel;
-
-        private List<Cliente> listaClientes;
-        private TabelaCliente TabelaCliente;
-        private TabelaCondutor tabelaCondutor;
-
-
+       
         private static JsonContext jsonContext = new JsonContext(true);
 
         private ControladorBase controlador;
 
+        private IoC IoC;
+
         public TelaPrincipal()
         {
             InitializeComponent();
+
+            IoC = new IoC_LocadoraDeVeiculosLocator();
+
+            repositorioCombustivelJson = new RepositorioCombustivel(jsonContext);
 
             telaPrincipal = this;
 
@@ -100,17 +93,7 @@ namespace LocadoraDeVeiculos
                 dbContext.Database.Migrate();
             }
 
-            repositorioAluguel = new RepositorioAluguelOrm(dbContext);
-            repositorioFuncionario = new RepositorioFuncionarioOrm(dbContext);
-            reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovelOrm(dbContext);
-            repositorioPlanoCobranca = new RepositorioPlanoCobrancaOrm(dbContext);
-            repositorioCliente = new RepositorioClienteOrm(dbContext);
-            repositorioCupom = new RepositorioCupom(dbContext);
-            repositorioParceiro = new RepositorioParceiro(dbContext);
-            repositorioAutomovel = new RepositorioAutomovelOrm(dbContext);
-            repositorioTaxaServico = new RepositorioTaxaServico(dbContext);
-            repositorioCombustivelJson = new RepositorioCombustivel(jsonContext);
-            repositorioCondutor = new RepositorioCondutorOrm(dbContext);
+            
         }
 
         public static TelaPrincipal Instancia
@@ -163,120 +146,54 @@ namespace LocadoraDeVeiculos
 
         private void funcionáriosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var validadorFuncionario = new ValidadorFuncionario();
-
-            var servicoFuncionario = new ServicoFuncionario(repositorioFuncionario, validadorFuncionario);
-
-            controlador = new ControladorFuncionario(repositorioFuncionario, servicoFuncionario);
-
-            ConfigurarTelaPrincipal(controlador);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorFuncionario>());
         }
 
         private void automóveisToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var validadorAutomoveis = new ValidadorAutomovel();
-
-            var servicoAutomovel = new ServicoAutomovel(repositorioAutomovel, validadorAutomoveis);
-
-            var validadorCombsutivel = new ValidadorCombustivel();
-
-            var servicoCombustivel = new ServicoCombustivel(repositorioCombustivelJson, validadorCombsutivel);
-
-            controlador = new ControladorAutomovel(repositorioAutomovel, reposisotiroGrupoAutomovel,
-                servicoAutomovel, repositorioCombustivelJson, servicoCombustivel);
-
-            ConfigurarTelaPrincipal(controlador);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorAutomovel>());
         }
+
 
         private void gruposDeAutomóveisToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var validadorGrupo = new ValidadorGrupoAutomovel();
-
-            var servicoGrupo = new ServicoGrupoAutomovel(reposisotiroGrupoAutomovel, validadorGrupo);
-
-            controlador = new ControladorGrupoAutomovel(reposisotiroGrupoAutomovel, servicoGrupo);
-
-            ConfigurarTelaPrincipal(controlador);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorGrupoAutomovel>());
         }
 
         private void planosDeCobrançaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var validadorPlano = new ValidadorPlanoCobranca();
-
-            var servicoPlano = new ServicoPlanoCobranca(repositorioPlanoCobranca, reposisotiroGrupoAutomovel, validadorPlano);
-
-            controlador = new ControladorPlanoBbranca(servicoPlano, repositorioPlanoCobranca, reposisotiroGrupoAutomovel);
-
-            ConfigurarTelaPrincipal(controlador);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorPlanoCobranca>());
         }
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var validadorCliente = new ValidadorCliente();
-
-            var servicoCliente = new ServicoCliente(repositorioCliente, validadorCliente);
-
-            controlador = new ControladorCliente(repositorioCliente, TabelaCliente, servicoCliente);
-
-            ConfigurarTelaPrincipal(controlador);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorCliente>());
         }
         private void parceiroToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var validadorParceiro = new ValidadorParceiro();
-
-            var servicoParceiro = new ServicoParceiro(repositorioParceiro, validadorParceiro);
-
-            controlador = new ControladorParceiro(repositorioParceiro, servicoParceiro);
-
-            ConfigurarTelaPrincipal(controlador);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorParceiro>());
         }
 
 
         private void condutoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var validadorCondutor = new ValidadorCondutor(repositorioCondutor);
-
-            var servicoCondutor = new ServicoCondutor(repositorioCondutor, validadorCondutor);
-
-            controlador = new ControladorCondutor(repositorioCondutor, repositorioCliente, servicoCondutor, listaClientes, tabelaCondutor);
-
-            ConfigurarTelaPrincipal(controlador);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorCondutor>());
         }
 
 
         private void aluguéisToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var validadorAluguel = new ValidadorAluguel();
-
-            var servicoAluguel = new ServicoAluguel(repositorioAluguel, repositorioCupom, repositorioCombustivelJson, validadorAluguel);
-
-            controlador = new ControladorAluguel(servicoAluguel, repositorioAluguel, repositorioFuncionario,
-                repositorioCliente, reposisotiroGrupoAutomovel, repositorioCupom, repositorioTaxaServico,
-                repositorioCondutor, repositorioAutomovel, repositorioPlanoCobranca);
-
-            ConfigurarTelaPrincipal(controlador);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorAluguel>());
         }
 
         private void taxasEServiçosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var validadorTaxaServico = new ValidadorTaxaServico();
-
-            var servicoTaxaServico = new ServicoTaxaServico(repositorioTaxaServico, validadorTaxaServico);
-
-            controlador = new ControladorTaxaServico(repositorioTaxaServico, servicoTaxaServico);
-
-            ConfigurarTelaPrincipal(controlador);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorTaxaServico>());
         }
 
         private void cuponsEParceirosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var validadorCupom = new ValidadorCupom();
-
-            var servicoCupom = new ServicoCupom(repositorioCupom, validadorCupom);
-
-            controlador = new ControladorCupom(repositorioCupom, servicoCupom, repositorioParceiro);
-
-            ConfigurarTelaPrincipal(controlador);
+            ConfigurarTelaPrincipal(IoC.Get<ControladorCupom>());
         }
 
         private void preçosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -346,5 +263,4 @@ namespace LocadoraDeVeiculos
             controlador.ArrumarPrecos();
         }
     }
-
 }

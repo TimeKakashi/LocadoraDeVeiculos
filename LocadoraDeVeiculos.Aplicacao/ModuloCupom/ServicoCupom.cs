@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
@@ -19,11 +20,13 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCupom
         public IValidadorCupom validadorCupom;
         private IRepositorioParceiro repositorioParceiro;
         private ValidadorCupom validadorCupom1;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoCupom(IRepositorioCupom repositorioCupom, IValidadorCupom validadorcupom)
+        public ServicoCupom(IRepositorioCupom repositorioCupom, IValidadorCupom validadorcupom, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioCupom = repositorioCupom;
             this.validadorCupom = validadorcupom;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public ServicoCupom(IRepositorioParceiro repositorioParceiro, ValidadorCupom validadorCupom1)
@@ -39,11 +42,17 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCupom
             List<string> erros = ValidarRegistro(registro);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
 
             try
             {
                 repositorioCupom.Editar(registro);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Cupom {CupomId} editada com sucesso", registro.Id);
 
@@ -76,12 +85,16 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCupom
 
                 repositorioCupom.Excluir(registro);
 
+                contextoPersistencia.GravarDados();
+
                 Log.Debug("Cupom {CupomId} excluída com sucesso", registro.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro;
@@ -105,12 +118,18 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCupom
 
             List<string> erros = ValidarRegistro(registro);
 
-            if (erros.Count() > 0)
+            if (erros.Count() > 0) 
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
 
             try
             {
                 repositorioCupom.Inserir(registro);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Cupom {ParceiroId} inserida com sucesso", registro.Id);
 
