@@ -243,6 +243,18 @@
             btnFiltrar.Size = new Size(28, 28);
             btnFiltrar.Text = "toolStripButton4";
             // 
+            // btnCombustivel
+            // 
+            btnCombustivel.Image = Properties.Resources.charger_FILL0_wght400_GRAD0_opsz24;
+            btnCombustivel.Name = "btnCombustivel";
+            btnCombustivel.Size = new Size(23, 28);
+            // 
+            // brnDevolucao
+            // 
+            brnDevolucao.Image = Properties.Resources.keyboard_return_FILL0_wght400_GRAD0_opsz40__1_;
+            brnDevolucao.Name = "brnDevolucao";
+            brnDevolucao.Size = new Size(23, 28);
+            // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";

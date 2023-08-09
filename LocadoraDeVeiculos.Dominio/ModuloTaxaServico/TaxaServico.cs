@@ -17,7 +17,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloTaxaServico
         {
         }
 
-        public TaxaServico(string nome, int v)
+        public TaxaServico(string nome)
         {
             Nome = nome;
         }

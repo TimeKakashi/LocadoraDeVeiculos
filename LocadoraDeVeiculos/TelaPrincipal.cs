@@ -73,7 +73,7 @@ namespace LocadoraDeVeiculos
         private static JsonContext jsonContext = new JsonContext(true);
 
         private ControladorBase controlador;
-        
+
         public TelaPrincipal()
         {
             InitializeComponent();
@@ -105,10 +105,10 @@ namespace LocadoraDeVeiculos
             reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovelOrm(dbContext);
             repositorioPlanoCobranca = new RepositorioPlanoCobrancaOrm(dbContext);
             repositorioCliente = new RepositorioClienteOrm(dbContext);
-            repositorioCupom = new RepositorioCupomOrm(dbContext);
-            repositorioParceiro = new RepositorioParceiroOrm(dbContext);
+            repositorioCupom = new RepositorioCupom(dbContext);
+            repositorioParceiro = new RepositorioParceiro(dbContext);
             repositorioAutomovel = new RepositorioAutomovelOrm(dbContext);
-            repositorioTaxaServico = new RepositorioTaxaServicoOrm(dbContext);
+            repositorioTaxaServico = new RepositorioTaxaServico(dbContext);
             repositorioCombustivelJson = new RepositorioCombustivel(jsonContext);
             repositorioCondutor = new RepositorioCondutorOrm(dbContext);
         }
@@ -248,7 +248,7 @@ namespace LocadoraDeVeiculos
         {
             var validadorAluguel = new ValidadorAluguel();
 
-            var servicoAluguel = new ServicoAluguel(repositorioAluguel, repositorioCupom, repositorioCombustivelJson,validadorAluguel);
+            var servicoAluguel = new ServicoAluguel(repositorioAluguel, repositorioCupom, repositorioCombustivelJson, validadorAluguel);
 
             controlador = new ControladorAluguel(servicoAluguel, repositorioAluguel, repositorioFuncionario,
                 repositorioCliente, reposisotiroGrupoAutomovel, repositorioCupom, repositorioTaxaServico);
@@ -345,5 +345,5 @@ namespace LocadoraDeVeiculos
             controlador.DevolucaoAluguel();
         }
     }
-    
+
 }
