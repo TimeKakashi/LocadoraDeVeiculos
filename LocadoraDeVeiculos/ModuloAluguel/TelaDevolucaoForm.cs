@@ -24,6 +24,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
     public partial class TelaDevolucaoForm : Form
     {
         Aluguel aluguel;
+        private List<TaxaServico> taxas;
 
         public delegate Cupom procurarCombustivel(string txt);
         public delegate decimal pegarValorCombustivel(string txt);
@@ -42,9 +43,8 @@ namespace LocadoraDeVeiculos.ModuloAluguel
         public TelaDevolucaoForm(List<Funcionario> funcionarios, List<Cliente> clientes, List<GrupoAutomovel> grupoAutomovels, List<TaxaServico> taxaServicos, List<Cupom> cupoms,
             List<Condutor> condutores, List<GrupoAutomovel> gruposAutomoveis, List<PlanoCobranca> planosCobrancas, List<Veiculo> veiculos) : this()
         {
-
+            this.taxas = taxaServicos;
             EncherComboBox(funcionarios, clientes, grupoAutomovels, cupoms, condutores, gruposAutomoveis, planosCobrancas, veiculos);
-            PopularContainerTaxasExtras(taxaServicos);
             EncherComboBoxEnum();
         }
 
@@ -58,13 +58,24 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             }
         }
 
-        private void PopularContainerTaxasExtras(List<TaxaServico> taxas)
+        private void PopularContainerTaxasExtras(List<TaxaServico> taxas, List<TaxaServico> taxasJaSeleciodas)
         {
             ContainerTaxasAdicionais.Items.Clear();
 
-            foreach (var item in taxas)
+            foreach (TaxaServico item in taxas)
             {
-                ContainerTaxas.Items.Add(item);
+                if(taxasJaSeleciodas.Count > 0)
+                {
+                    foreach (TaxaServico taxa in taxasJaSeleciodas)
+                    {
+                        if (item == taxa)
+                            continue;
+                        else
+                            ContainerTaxasAdicionais.Items.Add(item);
+                    }
+                }
+                else
+                    ContainerTaxasAdicionais.Items.Add(item);
             }
         }
 
@@ -348,6 +359,8 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             PopularContainerTaxas(aluguel.TaxasServico);
 
+            PopularContainerTaxasExtras(taxas, aluguel.TaxasServico);
+
             if (aluguel.Cupom != null)
                 txCupom.Text = aluguel.Cupom.Valor.ToString();
 
@@ -370,7 +383,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             cbAutomovel.SelectedItem = aluguel.Veiculo;
 
             if(aluguel.Preco != null)
-            labelValorTotal.Text = aluguel.Preco.ToString();
+                labelValorTotal.Text = aluguel.Preco.ToString();
 
             for (int i = 0; i < ContainerTaxas.Items.Count; i++)
             {

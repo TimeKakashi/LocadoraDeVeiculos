@@ -203,10 +203,6 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             labelValorTotal.Text = aluguel.Preco.ToString();
 
-            if (aluguel.Cliente != null)
-                if(aluguel.Cupom != null)
-                    aluguel.Cliente.CuponsUsados.Add(aluguel.Cupom);
-
             DesmarcarItens();
 
             return aluguel;
@@ -270,12 +266,6 @@ namespace LocadoraDeVeiculos.ModuloAluguel
                 TelaPrincipal.Instancia.AtualizarRodape(erro);
 
                 DialogResult = DialogResult.None;
-
-                foreach(var item in resultado.Errors)
-                {
-                    if (item.Message == "Cupom ja utilizado anteriormente pelo cliente!")
-                        aluguel.Cliente.CuponsUsados.Remove(aluguel.Cupom);
-                }
             }
         }
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 {
     /// <inheritdoc />
-    public partial class att : Migration
+    public partial class Tabelas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -166,6 +166,30 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CupomCliente",
+                columns: table => new
+                {
+                    ClientesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CuponsUsadosId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CupomCliente", x => new { x.ClientesId, x.CuponsUsadosId });
+                    table.ForeignKey(
+                        name: "FK_CupomCliente_TBCliente_ClientesId",
+                        column: x => x.ClientesId,
+                        principalTable: "TBCliente",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CupomCliente_TBCupom_CuponsUsadosId",
+                        column: x => x.CuponsUsadosId,
+                        principalTable: "TBCupom",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TBAluguel",
                 columns: table => new
                 {
@@ -247,6 +271,11 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_CupomCliente_CuponsUsadosId",
+                table: "CupomCliente",
+                column: "CuponsUsadosId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TBAluguel_ClienteId",
                 table: "TBAluguel",
                 column: "ClienteId");
@@ -310,6 +339,9 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CupomCliente");
+
             migrationBuilder.DropTable(
                 name: "TBTaxaServico");
 

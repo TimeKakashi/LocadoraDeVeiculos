@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 {
     [DbContext(typeof(LocadoraDeVeiculosDbContext))]
-    [Migration("20230809194911_ArrumandoCupom")]
-    partial class ArrumandoCupom
+    [Migration("20230809220132_att2")]
+    partial class att2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -178,7 +178,7 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 
                     b.Property<string>("Estado")
                         .IsRequired()
-                        .HasColumnType("varchar(2)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Nome")
                         .IsRequired()

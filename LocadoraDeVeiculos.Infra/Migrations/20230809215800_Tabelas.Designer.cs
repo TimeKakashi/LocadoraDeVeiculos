@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeVeiculos.Infra.Orm.Migrations
 {
     [DbContext(typeof(LocadoraDeVeiculosDbContext))]
-    [Migration("20230809174638_att")]
-    partial class att
+    [Migration("20230809215800_Tabelas")]
+    partial class Tabelas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,21 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ClienteCupom", b =>
+                {
+                    b.Property<Guid>("ClientesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CuponsUsadosId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ClientesId", "CuponsUsadosId");
+
+                    b.HasIndex("CuponsUsadosId");
+
+                    b.ToTable("CupomCliente", (string)null);
+                });
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloAluguel.Aluguel", b =>
                 {
@@ -357,6 +372,21 @@ namespace LocadoraDeVeiculos.Infra.Orm.Migrations
                     b.HasIndex("AluguelId");
 
                     b.ToTable("TBTaxaServico", (string)null);
+                });
+
+            modelBuilder.Entity("ClienteCupom", b =>
+                {
+                    b.HasOne("LocadoraDeVeiculos.Dominio.ModuloCliente.Cliente", null)
+                        .WithMany()
+                        .HasForeignKey("ClientesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LocadoraDeVeiculos.Dominio.ModuloCupom.Cupom", null)
+                        .WithMany()
+                        .HasForeignKey("CuponsUsadosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("LocadoraDeVeiculos.Dominio.ModuloAluguel.Aluguel", b =>

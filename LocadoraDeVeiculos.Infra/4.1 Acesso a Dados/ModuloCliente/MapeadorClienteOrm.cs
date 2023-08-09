@@ -17,7 +17,7 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente
             clienteBuilder.Property(c => c.Rua).HasColumnType("varchar(100)").IsRequired();
             clienteBuilder.Property(c => c.Numero).HasColumnType("varchar(10)").IsRequired();
             clienteBuilder.Property(c => c.Cidade).HasColumnType("varchar(50)").IsRequired();
-            clienteBuilder.Property(c => c.Estado).HasColumnType("varchar(2)").IsRequired();
+            clienteBuilder.Property(c => c.Estado).HasColumnType("varchar(20)").IsRequired();
 
             clienteBuilder.Property(c => c.CPF).HasColumnType("varchar(14)").IsRequired(false);
             clienteBuilder.Property(c => c.CNPJ).HasColumnType("varchar(18)").IsRequired(false);
