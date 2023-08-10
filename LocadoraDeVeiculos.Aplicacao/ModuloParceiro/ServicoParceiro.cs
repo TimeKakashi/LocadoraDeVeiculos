@@ -92,6 +92,9 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloParceiro
             if (erros.Count() > 0)
                 return Result.Fail(erros);
 
+            if (NomeDuplicado(registro))
+                return Result.Fail($"Este nome '{registro.Nome}' já está sendo utilizado");
+
             try
             {
                 repositorioParceiro.Inserir(registro);
@@ -143,7 +146,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloParceiro
             }
 
             return false;
-
         }
+
     }
 }

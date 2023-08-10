@@ -30,8 +30,9 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxaServico
 
             List<string> erros = ValidarRegistro(registro);
 
-            if (erros.Count() > 0)
-                return Result.Fail(erros);
+            if (erros.Count > 0)
+                return Result.Fail(erros); 
+
 
             try
             {
