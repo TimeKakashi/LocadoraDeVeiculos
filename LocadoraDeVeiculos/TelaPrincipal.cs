@@ -86,7 +86,7 @@ namespace LocadoraDeVeiculos
                 dbContext.Database.Migrate();
             }
 
-            
+
         }
 
         public static TelaPrincipal Instancia
@@ -259,6 +259,17 @@ namespace LocadoraDeVeiculos
             }
 
             controlador.ArrumarPrecos();
+        }
+
+        private void ToolTipPdf_Click(object sender, EventArgs e)
+        {
+            if (controlador == null)
+            {
+                MessageBox.Show("Selecione uma area primerio!");
+                return;
+            }
+
+            controlador.GerarPdf();
         }
     }
 }
