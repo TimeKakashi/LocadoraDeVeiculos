@@ -1,4 +1,6 @@
 ﻿using FluentResults;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using LocadoraDeVeiculos.Aplicacao.ModuloAluguel;
 using LocadoraDeVeiculos.Aplicacao.ModuloAutomovel;
 using LocadoraDeVeiculos.Compartilhado;
@@ -11,7 +13,14 @@ using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaServico;
+using MimeKit;
+using MailKit.Net.Smtp;
+using System.Diagnostics;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
+using static System.Net.Mime.MediaTypeNames;
+using Document = iTextSharp.text.Document;
+using MailKit.Security;
 
 namespace LocadoraDeVeiculos.ModuloAluguel
 {
@@ -215,6 +224,84 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             if (telaDevolucao.ShowDialog() == DialogResult.OK)
                 CarregarItens();
         }
+        public override void GerarPdf()
+        {
+            Aluguel aluguelSelecionado = ObterAluguelSelecionado();
+
+            if (aluguelSelecionado != null)
+            {
+                string diretorioTemporario = Path.GetTempPath();
+                string caminhoArquivo = Path.Combine(diretorioTemporario, $"aluguel_{aluguelSelecionado.Id}.pdf");
+
+                Document doc = new Document();
+                PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(caminhoArquivo, FileMode.Create));
+
+                doc.Open();
+
+                doc.Add(new Paragraph($"ID do Aluguel: {aluguelSelecionado.Id}"));
+                doc.Add(new Paragraph($"Cliente: {aluguelSelecionado.Cliente.Nome}"));
+                doc.Add(new Paragraph($"Veículo: {aluguelSelecionado.Veiculo.Modelo}"));
+                doc.Add(new Paragraph($"Data de Início: {aluguelSelecionado.DataLocacao.ToShortDateString()}"));
+                doc.Add(new Paragraph($"Data de Término: {aluguelSelecionado.DataDevolucaoPrevista.ToShortDateString()}"));
+                doc.Add(new Paragraph($"Valor Total: {aluguelSelecionado.Preco.ToString("C")}"));
+                doc.Add(new Paragraph($"Km Percorrido: {aluguelSelecionado.KmPercorrido ?? 0}"));
+                doc.Add(new Paragraph($"Plano Cobrança: {aluguelSelecionado.PlanoCobranca.Plano}"));
+                doc.Close();
+
+                MessageBox.Show($"PDF do Aluguel {aluguelSelecionado.Id} gerado com sucesso! Caminho: {caminhoArquivo}");
+
+               
+                EnviarEmailComPdfAnexado(aluguelSelecionado, caminhoArquivo);
+            }
+        }
+
+        private void EnviarEmailComPdfAnexado(Aluguel aluguel, string caminhoPdf)
+        {
+            try
+            {
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Teste", "testeacademiadoprogramador@gmail.com"));
+                message.To.Add(new MailboxAddress(aluguel.Cliente.Nome, aluguel.Cliente.Email)); 
+                message.Subject = "PDF Do seu Aluguel";
+
+                var bodyBuilder = new BodyBuilder();
+                bodyBuilder.TextBody = "Vamos ver se funcionou";
+
+               
+                var pdfAttachment = new MimePart("application", "pdf")
+                {
+                    Content = new MimeContent(File.OpenRead(caminhoPdf)),
+                    ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                    ContentTransferEncoding = ContentEncoding.Base64,
+                    FileName = Path.GetFileName(caminhoPdf)
+                };
+
+                bodyBuilder.Attachments.Add(pdfAttachment);
+                message.Body = bodyBuilder.ToMessageBody();
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+                    client.Authenticate("testeacademiadoprogramador@gmail.com", "tpxxomzxbpiehhak"); 
+
+                    client.Send(message);
+
+                    client.Disconnect(true);
+                }
+
+
+                MessageBox.Show("E-mail enviado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao enviar o e-mail: " + ex.Message);
+            }
+        }
+
+
+
+
+
+
     }
 }
 
