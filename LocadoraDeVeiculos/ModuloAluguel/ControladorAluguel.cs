@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using iTextSharp.text.pdf;
 using LocadoraDeVeiculos.Aplicacao.ModuloAluguel;
 using LocadoraDeVeiculos.Aplicacao.ModuloAutomovel;
 using LocadoraDeVeiculos.Compartilhado;
@@ -11,7 +12,9 @@ using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaServico;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LocadoraDeVeiculos.ModuloAluguel
 {
@@ -214,6 +217,59 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             if (telaDevolucao.ShowDialog() == DialogResult.OK)
                 CarregarItens();
+        }
+        public override void GerarPdf()
+        {
+            Teste testeSelecionado = ObterTesteSelecionado();
+
+            if (testeSelecionado != null)
+            {
+                string diretorioTemporario = Path.GetTempPath();
+
+                string caminhoArquivo = Path.Combine(diretorioTemporario, "teste.pdf");
+
+                Document doc = new Document();
+
+                PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(caminhoArquivo, FileMode.Create));
+
+                doc.Open();
+
+                doc.Add(new Paragraph($"ID do Teste: {testeSelecionado.id}"));
+                doc.Add(new Paragraph($"Disciplina: {testeSelecionado.disciplina.nome}"));
+                doc.Add(new Paragraph($"Matéria: {testeSelecionado.materia.nome}"));
+                doc.Add(new Paragraph("Questões: \n--------------------------------------------------------------------------------------"));
+
+                string letra = string.Empty;
+
+                foreach (Questao questao in testeSelecionado.questoes)
+                {
+                    int contadorAlternativa = 0;
+                    doc.Add(new Paragraph($"Titulo: {questao.titulo} \n"));
+
+                    foreach (Alternativa alternativa in repositorioQuestoes.SelecionarAlternativas(questao))
+                    {
+
+                        if (contadorAlternativa == 0)
+                            letra = "A) ";
+                        else if (contadorAlternativa == 1)
+                            letra = "B) ";
+                        else if (contadorAlternativa == 2)
+                            letra = "C) ";
+                        else if (contadorAlternativa == 3)
+                            letra = "D) ";
+
+                        contadorAlternativa++;
+
+                        doc.Add(new Paragraph($"{letra} {alternativa.alternativa}"));
+                    }
+                    doc.Add(new Paragraph($"--------------------------------------------------------------------------------------"));
+                }
+
+
+                doc.Close();
+
+                MessageBox.Show("PDF do 'Teste' gerado com sucesso! \n'AppData/Local/Temp/teste.pdf'");
+            }
         }
     }
 }
