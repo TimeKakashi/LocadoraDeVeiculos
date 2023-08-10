@@ -130,10 +130,19 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel
 
                 string msgErro;
 
-                if (ex.InnerException.Message.Contains("FK_TBGrupoAutomovel_TBAutomovel"))
-                    msgErro = "Este grupo está relacionada com um automovel e não pode ser excluído";
-                else if (ex.InnerException.Message.Contains("FK_TBAlugueil_TBAutomovel"))
-                    msgErro = "Este grupo está relacionada com um aluguel e não pode ser excluído";
+                if(ex.InnerException != null)
+                {
+                    if (ex.InnerException.Message.Contains("FK_TBGrupoAutomovel_TBAutomovel"))
+                        msgErro = "Este grupo está relacionada com um automovel e não pode ser excluído";
+                    else if (ex.InnerException.Message.Contains("FK_TBAlugueil_TBAutomovel"))
+                        msgErro = "Este grupo está relacionada com um aluguel e não pode ser excluído";
+
+                    else
+                    {
+                        msgErro = "Falha ao tentar excluir grupo";
+                    }
+                }
+            
                 else
                     msgErro = "Falha ao tentar excluir grupo";
 

@@ -20,7 +20,8 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloAutomovel
             veiculoBuilder.Property(g => g.EmUso).HasConversion<int>().IsRequired();
             veiculoBuilder.Property(g => g.Imagem).IsRequired();
 
-            veiculoBuilder.HasOne(g => g.GrupoAutomovel).WithMany(g => g.Veiculos).HasConstraintName("FK_TBAutomovel_TBGrupoAutomovel");
+            veiculoBuilder.HasOne(g => g.GrupoAutomovel).WithMany(g => g.Veiculos).HasConstraintName("FK_TBAutomovel_TBGrupoAutomovel").OnDelete(DeleteBehavior.Restrict);
+            
         }
     }
 }

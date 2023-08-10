@@ -118,10 +118,16 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
 
                 string msgErro;
 
-                if (ex.InnerException.Message.Contains("FK_TBAluguel_TBFuncionario"))
-                    msgErro = "Este funcionario está relacionada com um aluguel e não pode ser excluído";
+                if(ex.InnerException != null)
+                {
+                    if (ex.InnerException.Message.Contains("FK_TBAluguel_TBFuncionario"))
+                        msgErro = "Este funcionario está relacionada com um aluguel e não pode ser excluído";
+                    else
+                        msgErro = "Falha ao tentar excluir funcionario";
+                }
                 else
                     msgErro = "Falha ao tentar excluir funcionario";
+
 
                 erros.Add(msgErro);
 

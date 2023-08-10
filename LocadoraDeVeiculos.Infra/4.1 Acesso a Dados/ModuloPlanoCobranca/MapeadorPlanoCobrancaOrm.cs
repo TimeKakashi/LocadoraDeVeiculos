@@ -15,7 +15,8 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloPlanoCobranca
             planoBuilder.Property(p => p.KmDisponivel).IsRequired(false);
             planoBuilder.Property(p => p.Plano).HasConversion<int>().IsRequired();
 
-            planoBuilder.HasOne(p => p.GrupoAutomovel).WithMany(g => g.Planos).IsRequired().HasConstraintName("FK_TBPlanoCobranca_TBGrupoAutomovel");
+            planoBuilder.HasOne(p => p.GrupoAutomovel).WithMany(g => g.Planos).IsRequired().HasConstraintName("FK_TBPlanoCobranca_TBGrupoAutomovel").OnDelete(DeleteBehavior.Restrict);
+            
         }
     }
 }

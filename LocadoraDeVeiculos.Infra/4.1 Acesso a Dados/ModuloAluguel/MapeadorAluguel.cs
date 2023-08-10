@@ -29,36 +29,36 @@ namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloAluguel
               .WithMany()
               .IsRequired()
               .HasConstraintName("FK_TBAluguel_TBFuncionario")
-              .OnDelete(DeleteBehavior.NoAction);
+              .OnDelete(DeleteBehavior.Restrict);
 
             aluguelBuilder.HasOne(a => a.Cliente)
                .WithMany()
                .IsRequired()
                .HasConstraintName("FK_TBAluguel_TBCliente")
-               .OnDelete(DeleteBehavior.NoAction);
+               .OnDelete(DeleteBehavior.Restrict);
 
             aluguelBuilder.HasOne(a => a.GrupoAutomovel)
                .WithMany()
                .IsRequired()
                .HasConstraintName("FK_TBAluguel_TBGrupoAutomovel")
-               .OnDelete(DeleteBehavior.NoAction);
+               .OnDelete(DeleteBehavior.Restrict);
 
             aluguelBuilder.HasOne(a => a.PlanoCobranca)
                .WithMany()
                .IsRequired()
                .HasConstraintName("FK_TBAluguel_TBPlanoCobranca")
-               .OnDelete(DeleteBehavior.NoAction);
+               .OnDelete(DeleteBehavior.Restrict);
 
             aluguelBuilder.HasOne(a => a.Veiculo)
                .WithMany()
                .IsRequired()
                .HasConstraintName("FK_TBAlugueil_TBAutomovel")
-               .OnDelete(DeleteBehavior.NoAction);
+               .OnDelete(DeleteBehavior.Restrict);
 
             aluguelBuilder.HasOne(a => a.Cupom)
                .WithMany()
                .HasConstraintName("FK_TBAluguel_TBCupom")
-               .OnDelete(DeleteBehavior.NoAction);
+               .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

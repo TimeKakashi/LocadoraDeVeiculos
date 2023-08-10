@@ -83,10 +83,18 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAutomovel
 
                 string msgErro;
 
-                if (ex.InnerException.Message.Contains("FK_TBAlugueil_TBAutomovel"))
-                    msgErro = "Este veiculo está relacionada com um Aluguel e não pode ser excluído";
+                if(ex.InnerException != null)
+                {
+                    if (ex.InnerException.Message.Contains("FK_TBAlugueil_TBAutomovel"))
+                        msgErro = "Este veiculo está relacionada com um Aluguel e não pode ser excluído";
+
+                    else
+                        msgErro = "Falha ao tentar excluir veiculo";
+                }
+                   
                 else
                     msgErro = "Falha ao tentar excluir veiculo";
+
 
                 erros.Add(msgErro);
 

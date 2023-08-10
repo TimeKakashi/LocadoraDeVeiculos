@@ -59,6 +59,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCliente
             Result resultado = servicoCliente.Inserir(clienteInvalido);
 
             resultado.Should().BeFailure();
+
             repositorioClienteMock.Verify(x => x.Inserir(clienteInvalido), Times.Never);
         }
 
