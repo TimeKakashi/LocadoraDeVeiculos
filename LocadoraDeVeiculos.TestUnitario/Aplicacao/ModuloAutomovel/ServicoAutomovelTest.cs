@@ -50,7 +50,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloAutomovel
             validadorAutomovelMock.Setup(x => x.Validate(It.IsAny<Veiculo>())).Returns(() =>
             {
                 var resultado = new ValidationResult();
-                resultado.Errors.Add(new ValidationFailure("Nome", "Numero de caracteres insuficientes!"));
+                resultado.Errors.Add(new ValidationFailure("Nome", "deve ter 3 letras no minimo!"));
                 return resultado;
             });
 

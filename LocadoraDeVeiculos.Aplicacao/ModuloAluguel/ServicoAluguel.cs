@@ -71,12 +71,21 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
 
             List<string> erros = ValidarRegistro(registro);
 
+           
+            if (VerificarFinalizado(registro))
+            {
+                Log.Warning("Tentativa de edicao de aluguel finalizado");
+                erros.Add("Nao eh possivel editar aluguel ja finalizado!");
+            }
+
             if (erros.Count() > 0)
             {
                 contextoPersistencia.DesfazerAlteracoes();
 
                 return Result.Fail(erros);
             }
+
+
             try
             {
                 repositorioAluguel.Editar(registro);
@@ -95,6 +104,15 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
 
                 return Result.Fail(msgErro);
             }
+        }
+
+        private bool VerificarFinalizado(Aluguel registro)
+        {
+            if (registro.Finalizado == true)
+                return true;
+
+            else
+                return false;
         }
 
         public override Result Excluir(Aluguel registro)

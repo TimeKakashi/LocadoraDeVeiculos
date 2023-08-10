@@ -8,6 +8,7 @@ using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using LocadoraDeVeiculos.TestUnitario.Compartilhado;
 using Moq;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,12 +32,18 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCupom
             mockValidadorCupom = new Mock<IValidadorCupom>();
             servicoCupom = new ServicoCupom(mockRepositorioCupom.Object, mockValidadorCupom.Object, ctx.Object);
         }
+        private Cupom cupom;
+
+        public ServicoCupomTeste()
+        {
+            this.cupom = new Cupom(Guid.NewGuid(), "Cupom", 10, DateTime.Now.AddDays(1), new Parceiro("Parceiro"));
+
+        }
 
         [TestMethod]
         public void DeveEditarCupomValido()
         {
             
-            var cupom = new Cupom(Guid.NewGuid(),"Cupom X", 10, DateTime.Now.AddDays(1), new Parceiro("Parceiro A"));
             mockRepositorioCupom.Setup(r => r.Editar(cupom));
             mockValidadorCupom.Setup(v => v.Validate(cupom)).Returns(new ValidationResult());
 
@@ -51,7 +58,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCupom
         public void NaoDeveEditarCupomComErroDeValidacao()
         {
             
-            var cupom = new Cupom(Guid.NewGuid(),"Cupom Y", 20, DateTime.Now.AddDays(1), new Parceiro("Parceiro B"));
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom", 20, DateTime.Now.AddDays(1), new Parceiro("Parceiro"));
             mockRepositorioCupom.Setup(r => r.Editar(cupom));
             mockValidadorCupom.Setup(v => v.Validate(cupom)).Returns(new ValidationResult(new List<ValidationFailure>
         {
@@ -70,7 +77,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCupom
         [TestMethod]
         public void DeveInserirCupomValido()
         {
-            var cupom = new Cupom(Guid.NewGuid(),"Cupom A", 5, DateTime.Now.AddDays(30), new Parceiro("Parceiro X"));
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom", 5, DateTime.Now.AddDays(30), new Parceiro("Parceiro"));
             mockRepositorioCupom.Setup(r => r.Inserir(cupom));
             mockValidadorCupom.Setup(v => v.Validate(cupom)).Returns(new ValidationResult());
 
@@ -82,11 +89,11 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCupom
         [TestMethod]
         public void NaoDeveInserirCupomComErroDeValidacao()
         {
-            var cupom = new Cupom(Guid.NewGuid(),"Cupom B", 10, DateTime.Now.AddDays(30), new Parceiro("Parceiro Y"));
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom", 10, DateTime.Now.AddDays(30), new Parceiro("Parceiro"));
             mockRepositorioCupom.Setup(r => r.Inserir(cupom));
             mockValidadorCupom.Setup(v => v.Validate(cupom)).Returns(new ValidationResult(new List<ValidationFailure>
         {
-            new ValidationFailure("Nome", "Nome inválido")
+            new ValidationFailure("Erro", "Nome errado")
         }));
 
             Result resultado = servicoCupom.Inserir(cupom);
@@ -97,8 +104,10 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCupom
         [TestMethod]
         public void NaoDeveInserirCupomComNomeDuplicado()
         {
-            var cupom = new Cupom(Guid.NewGuid(),"Cupom C", 15, DateTime.Now.AddDays(30), new Parceiro("Parceiro Z"));
-            mockRepositorioCupom.Setup(r => r.SelecionarPorNome(cupom.Nome)).Returns(new Cupom(Guid.NewGuid(),"Cupom C", 20, DateTime.Now.AddDays(30), new Parceiro("Parceiro W")));
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom", 15, DateTime.Now.AddDays(30), new Parceiro("Parceiro"));
+
+            mockRepositorioCupom.Setup(r => r.SelecionarPorNome(cupom.Nome)).Returns(new Cupom(Guid.NewGuid(),"Cupom", 20, DateTime.Now.AddDays(30), new Parceiro("Parceiro")));
+
             mockValidadorCupom.Setup(v => v.Validate(cupom)).Returns(new ValidationResult());
 
             Result resultado = servicoCupom.Inserir(cupom);
@@ -108,7 +117,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCupom
         [TestMethod]
         public void DeveExcluirCupomExistente()
         {
-            var cupom = new Cupom(Guid.NewGuid(),"Cupom X", 5, DateTime.Now.AddDays(30), new Parceiro("Parceiro A"));
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom", 5, DateTime.Now.AddDays(30), new Parceiro("Parceiro"));
             mockRepositorioCupom.Setup(r => r.Existe(cupom)).Returns(true);
 
             Result resultado = servicoCupom.Excluir(cupom);
@@ -119,7 +128,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCupom
         [TestMethod]
         public void NaoDeveExcluirCupomInexistente()
         {
-            var cupom = new Cupom(Guid.NewGuid(),"Cupom Y", 10, DateTime.Now.AddDays(30), new Parceiro("Parceiro B"));
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom", 10, DateTime.Now.AddDays(30), new Parceiro("Parceiro"));
             mockRepositorioCupom.Setup(r => r.Existe(cupom)).Returns(false);
 
             Result resultado = servicoCupom.Excluir(cupom);
@@ -130,7 +139,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCupom
         [TestMethod]
         public void NaoDeveExcluirCupomComRelacionamentoComAluguel()
         {
-            var cupom = new Cupom(Guid.NewGuid(),"Cupom Z", 15, DateTime.Now.AddDays(30), new Parceiro("Parceiro C"));
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom", 15, DateTime.Now.AddDays(30), new Parceiro("Parceiro"));
             mockRepositorioCupom.Setup(r => r.Existe(cupom)).Returns(true);
             mockRepositorioCupom.Setup(r => r.Excluir(cupom)).Throws(SqlExceptionCreator.NewSqlException(errorMessage: "FK_TBCupom_TBAluguel"));
 
@@ -142,7 +151,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCupom
         public void NaoDeveExcluirCupomNaoExistente()
         {
 
-            var cupom = new Cupom(Guid.NewGuid(),"Cupom W", 25, DateTime.Now.AddDays(1), new Parceiro("Parceiro D"));
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom", 25, DateTime.Now.AddDays(1), new Parceiro("Parceiro"));
             mockRepositorioCupom.Setup(r => r.Existe(cupom)).Returns(false);
 
 
@@ -154,7 +163,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCupom
         [TestMethod]
         public void NaoDeveEditarCupomInvalido()
         {
-            var cupom = new Cupom(Guid.NewGuid(),"Cupom Y", 15, DateTime.Now.AddDays(1), new Parceiro("Parceiro B"));
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom", -15, DateTime.Now.AddDays(1), new Parceiro("Parceiro"));
             mockValidadorCupom.Setup(v => v.Validate(cupom)).Returns(new ValidationResult(new List<ValidationFailure>
         {
             new ValidationFailure("Valor", "Valor deve ser maior que zero")
