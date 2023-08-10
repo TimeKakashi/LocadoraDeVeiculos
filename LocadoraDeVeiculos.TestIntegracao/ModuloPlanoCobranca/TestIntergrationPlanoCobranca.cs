@@ -39,6 +39,8 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloPlanoCobranca
 
             repositorioPlanoCobranca.Excluir(plano);
 
+            contextoPersistencia.GravarDados();
+
             repositorioPlanoCobranca.SelecionarPorId(plano.Id).Should().BeNull();
         }
 

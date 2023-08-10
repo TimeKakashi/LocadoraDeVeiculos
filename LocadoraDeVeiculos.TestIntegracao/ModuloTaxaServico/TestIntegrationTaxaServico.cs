@@ -42,6 +42,8 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloTaxaServico
 
             repositorioTaxaServico.Excluir(taxaServico);
 
+            contextoPersistencia.GravarDados();
+
             repositorioTaxaServico.SelecionarPorId(taxaServico.Id).Should().BeNull();
         }
 

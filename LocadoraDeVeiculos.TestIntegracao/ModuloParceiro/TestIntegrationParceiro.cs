@@ -30,6 +30,8 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloParceiro
 
             repositorioParceiro.Excluir(parceiro);
 
+            contextoPersistencia.GravarDados();
+
             repositorioParceiro.SelecionarPorId(parceiro.Id).Should().BeNull();
         }
 
