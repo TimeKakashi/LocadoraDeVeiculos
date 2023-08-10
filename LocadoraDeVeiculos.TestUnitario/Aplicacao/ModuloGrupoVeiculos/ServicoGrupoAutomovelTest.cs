@@ -191,7 +191,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloGrupoVeiculos
 
 
         [TestMethod]
-        public void Nao_deve_excluir_funcionario_caso_ele_esteja_relacionada_com_materia()
+        public void Nao_deve_excluir_funcionario_caso_ele_esteja_relacionada_com_veiculo()
         {
             repositorioGrupoAutomovel.Setup(x => x.Existe(grupoAutomovel))
                .Returns(() =>
@@ -203,6 +203,26 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloGrupoVeiculos
                 .Throws(() =>
                 {
                     return SqlExceptionCreator.NewSqlException(errorMessage: "FK_TBGrupoAutomovel_TBVeiculo");
+                });
+
+            Result resultado = servicoGrupoAutomovel.Excluir(grupoAutomovel);
+
+            resultado.Should().BeFailure();
+        }
+
+        [TestMethod]
+        public void Nao_deve_excluir_funcionario_caso_ele_esteja_relacionada_com_alguma_Entidade()
+        {
+            repositorioGrupoAutomovel.Setup(x => x.Existe(grupoAutomovel))
+               .Returns(() =>
+               {
+                   return true;
+               });
+
+            repositorioGrupoAutomovel.Setup(x => x.Excluir(It.IsAny<GrupoAutomovel>()))
+                .Throws(() =>
+                {
+                    return SqlExceptionCreator.NewSqlException(errorMessage: "ErroGeralMsm (Pregruica rech)");
                 });
 
             Result resultado = servicoGrupoAutomovel.Excluir(grupoAutomovel);

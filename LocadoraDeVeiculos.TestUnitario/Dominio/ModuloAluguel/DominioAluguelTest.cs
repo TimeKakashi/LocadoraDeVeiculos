@@ -87,7 +87,42 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloAluguel
             resultado.IsValid.Should().BeFalse();
         }
 
-        
+        [TestMethod]
+        public void DeveCalcularValorDoAluguelPeloPlanoDiario()
+        {
+            aluguel.Finalizado = true;
+            aluguel.DataLocacao = DateTime.Today;
+            aluguel.DataDevolucao = DateTime.Today.AddDays(5);
+
+            aluguel.KmPercorrido = 10;
+
+            decimal valor = (decimal)((5 * aluguel.PlanoCobranca.ValorDiaria) + (aluguel.KmPercorrido * aluguel.PlanoCobranca.PrecoKm));
+
+            valor.Should().Be(150);
+        }
+
+        [TestMethod]
+        public void DeveCalcularValorDoAluguelPeloPlanoControlado()
+        {
+            var planoD = new PlanoCobranca(planoCobranca.Controlado, 10, 10, 5);
+
+            aluguel.Finalizado = true;
+            aluguel.DataLocacao = DateTime.Today;
+            aluguel.DataDevolucao = DateTime.Today.AddDays(5);
+            aluguel.PlanoCobranca = planoD;
+
+            aluguel.KmPercorrido = 10;
+            int kmExtrapolado = 0;
+
+            if (aluguel.KmPercorrido > aluguel.PlanoCobranca.KmDisponivel)
+            {
+                kmExtrapolado = (int)(aluguel.KmPercorrido - aluguel.PlanoCobranca.KmDisponivel);
+            }
+
+            decimal valor = (decimal)((5 * aluguel.PlanoCobranca.ValorDiaria) + (kmExtrapolado * aluguel.PlanoCobranca.PrecoKm));
+
+            valor.Should().Be(100);
+        }
 
     }
 }

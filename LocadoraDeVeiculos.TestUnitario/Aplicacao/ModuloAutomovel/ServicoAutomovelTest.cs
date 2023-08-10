@@ -29,9 +29,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloAutomovel
             validadorAutomovelMock = new Mock<IValidadorAutomovel>();
             ctx = new Mock<IContextoPersistencia>();
 
-
             servicoAutomovel = new ServicoAutomovel(repositorioAutomovelMock.Object, validadorAutomovelMock.Object, ctx.Object);
-
             grupoAutomovel = new GrupoAutomovel("Esportivo");
             veiculo = new Veiculo("Spider", "Ferrari", "preto", new byte[100], 100, "MIY4565", EnumCombusteivel.Gasolina, 40, grupoAutomovel, false);
         }
