@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipal));
             menuStrip1 = new MenuStrip();
             exibirToolStripMenuItem = new ToolStripMenuItem();
             funcionáriosToolStripMenuItem = new ToolStripMenuItem();
@@ -51,10 +52,10 @@
             btnExcluir = new ToolStripButton();
             btnFiltrar = new ToolStripButton();
             btnCombustivel = new ToolStripButton();
+            ToolTipPdf = new ToolStripButton();
             brnDevolucao = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripLabel1 = new ToolStripLabel();
-            ToolTipPdf = new ToolStripButton();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -251,6 +252,16 @@
             btnCombustivel.Size = new Size(23, 28);
             btnCombustivel.Click += btnCombustivel_Click_1;
             // 
+            // ToolTipPdf
+            // 
+            ToolTipPdf.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            ToolTipPdf.Image = Properties.Resources.contract_FILL0_wght400_GRAD0_opsz24;
+            ToolTipPdf.ImageTransparentColor = Color.Magenta;
+            ToolTipPdf.Name = "ToolTipPdf";
+            ToolTipPdf.Size = new Size(23, 28);
+            ToolTipPdf.Text = "toolStripButton1";
+            ToolTipPdf.Click += ToolTipPdf_Click;
+            // 
             // brnDevolucao
             // 
             brnDevolucao.Image = Properties.Resources.keyboard_return_FILL0_wght400_GRAD0_opsz40__1_;
@@ -269,16 +280,6 @@
             toolStripLabel1.Size = new Size(118, 28);
             toolStripLabel1.Text = "Locadora de Veiculos";
             // 
-            // ToolTipPdf
-            // 
-            ToolTipPdf.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            ToolTipPdf.Image = Properties.Resources.contract_FILL0_wght400_GRAD0_opsz24;
-            ToolTipPdf.ImageTransparentColor = Color.Magenta;
-            ToolTipPdf.Name = "ToolTipPdf";
-            ToolTipPdf.Size = new Size(23, 28);
-            ToolTipPdf.Text = "toolStripButton1";
-            ToolTipPdf.Click += ToolTipPdf_Click;
-            // 
             // TelaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -287,9 +288,9 @@
             Controls.Add(panel1);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Name = "TelaPrincipal";
-            ShowIcon = false;
             Text = "Locadora de Veiculos";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();

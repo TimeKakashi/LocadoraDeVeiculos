@@ -147,9 +147,14 @@
             Controls.Add(txtNome);
             Controls.Add(button2);
             Controls.Add(button1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
+            MinimizeBox = false;
             Name = "TelaTaxaServicoForm";
+            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Cadastro de Taxa e Serviço.";
+            Text = "Cadastro de Taxa e Serviço";
             gbRadioBTN.ResumeLayout(false);
             gbRadioBTN.PerformLayout();
             ResumeLayout(false);

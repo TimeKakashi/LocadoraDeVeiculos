@@ -141,7 +141,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             if (!insercao)
             {
-                if(aluguel.Cupom != null)
+                if (aluguel.Cupom != null)
                     txCupom.Text = aluguel.Cupom.Valor.ToString();
 
                 txDataLocacao.Value = aluguel.DataLocacao;
@@ -308,6 +308,6 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             txKmAutomovel.Text = veiculo.Kilometragem.ToString();
         }
 
-      
+
     }
 }

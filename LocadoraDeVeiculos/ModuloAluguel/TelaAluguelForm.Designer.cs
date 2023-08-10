@@ -362,7 +362,13 @@
             Controls.Add(label4);
             Controls.Add(label2);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
+            MinimizeBox = false;
             Name = "TelaAluguelForm";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro de Aluguel";
             tabPage1.ResumeLayout(false);
             TabControlTaxa.ResumeLayout(false);
