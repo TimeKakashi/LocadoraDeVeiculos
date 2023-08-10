@@ -2,11 +2,13 @@
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCupom;
+using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaServico;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -91,7 +93,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxaServico
 
                 string msgErro;
 
-                if (ex.Message.Contains("FK_TBMateria_TBParceiro"))
+                if (ex.Message.Contains("FK_TaxaServico_TBAluguel"))
                     msgErro = "Esta TaxaServico está relacionada com um cliente e não pode ser excluída";
                 else
                     msgErro = "Falha ao tentar excluir taxaServico";
@@ -155,6 +157,20 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxaServico
             }
 
             return erros;
+        }
+
+        protected override bool NomeDuplicado(TaxaServico registro)
+        {
+            TaxaServico taxaEncontrada = repositorioTaxaServico.SelecionarPorNome(registro.Nome);
+
+            if (taxaEncontrada != null &&
+                taxaEncontrada.Id != registro.Id &&
+                taxaEncontrada.Nome == registro.Nome)
+            {
+                return true;
+            }
+            else
+                return false;
         }
     }
 }

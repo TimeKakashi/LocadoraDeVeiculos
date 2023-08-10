@@ -28,7 +28,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloTaxaServico
             Plano = plano;
         }
 
-        public TaxaServico(Guid id, string nome) 
+        public TaxaServico(Guid id, string nome, decimal preco, string plano) : this(nome, preco, plano) 
         {
             Id = id;
         }

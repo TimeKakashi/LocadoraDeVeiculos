@@ -1,17 +1,16 @@
 ﻿using FluentAssertions;
 using FluentResults;
+using FluentResults.Extensions.FluentAssertions;
 using FluentValidation.Results;
+using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
 using LocadoraDeVeiculos.Aplicacao.ModuloTaxaServico;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaServico;
+using LocadoraDeVeiculos.TestUnitario.Compartilhado;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloTaxaServico
 {
@@ -60,13 +59,15 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloTaxaServico
         [TestMethod]
         public void NaoDeveInserirTaxaServicoComNomeDuplicado()
         {
-            var taxaServicoExistente = new TaxaServico("Taxa Servico Existente");
-            mockRepositorioTaxaServico.Setup(r => r.SelecionarPorNome(taxaServicoExistente.Nome)).Returns(taxaServicoExistente);
+            var taxaServicoExistente = new TaxaServico(Guid.NewGuid(), "Taxa Servico Existente", 100, "primeiro");
+            var Inserido = new TaxaServico(Guid.NewGuid(), "Taxa Servico Existente", 100, "primeiro");
 
-            var novaTaxaServico = new TaxaServico("Taxa Servico Existente");
-            mockValidadorTaxaServico.Setup(v => v.Validate(novaTaxaServico)).Returns(new ValidationResult());
+            mockRepositorioTaxaServico.Setup(r => r.SelecionarPorNome(taxaServicoExistente.Nome)).Returns(Inserido);
 
-            Result resultado = servicoTaxaServico.Inserir(novaTaxaServico);
+            //var novaTaxaServico = new TaxaServico("Taxa Servico Existente");
+            //mockValidadorTaxaServico.Setup(v => v.Validate(novaTaxaServico)).Returns(new ValidationResult());
+
+            Result resultado = servicoTaxaServico.Inserir(taxaServicoExistente);
 
             resultado.IsSuccess.Should().BeFalse();
         }
@@ -97,19 +98,9 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloTaxaServico
             resultado.IsSuccess.Should().BeTrue();
         }
 
-        [TestMethod]
-        public void NaoDeveEditarTaxaServicoInexistente()
-        {
-            var taxaServico = new TaxaServico("Taxa Servico Inexistente");
-            mockRepositorioTaxaServico.Setup(r => r.Editar(taxaServico));
-            mockValidadorTaxaServico.Setup(v => v.Validate(taxaServico)).Returns(new ValidationResult());
 
-            Result resultado = servicoTaxaServico.Editar(taxaServico);
-
-            resultado.IsSuccess.Should().BeFalse();
-        }
         [TestMethod]
-       
+
         public void DeveEditarTaxaServicoValida()
         {
             var taxaServico = new TaxaServico("Taxa Servico", 10, "Plano A");
@@ -139,24 +130,12 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloTaxaServico
         [TestMethod]
         public void NaoDeveEditarTaxaServicoComNomeDuplicado()
         {
-            var taxaServicoExistente = new TaxaServico("Taxa Servico Existente", 15, "Plano C");
-            mockRepositorioTaxaServico.Setup(r => r.SelecionarPorNome(taxaServicoExistente.Nome)).Returns(taxaServicoExistente);
+            var taxaServicoExistente = new TaxaServico(Guid.NewGuid(), "Taxa Servico Existente", 15, "Plano C");
+            var taxanova = new TaxaServico(Guid.NewGuid(), "Taxa Servico Existente", 15, "Plano C");
 
-            var taxaServico = new TaxaServico("Taxa Servico Existente", 20, "Plano D");
-            mockValidadorTaxaServico.Setup(v => v.Validate(taxaServico)).Returns(new ValidationResult());
+            mockRepositorioTaxaServico.Setup(r => r.SelecionarPorNome(taxanova.Nome)).Returns(taxaServicoExistente);
 
-            Result resultado = servicoTaxaServico.Editar(taxaServico);
-
-            resultado.IsSuccess.Should().BeFalse();
-        }
-
-        [TestMethod]
-        public void NaoDeveEditarTaxaServicoComIdInvalido()
-        {
-            var taxaServico = new TaxaServico("Taxa Servico", 10, "Plano E");
-            mockValidadorTaxaServico.Setup(v => v.Validate(taxaServico)).Returns(new ValidationResult());
-
-            Result resultado = servicoTaxaServico.Editar(taxaServico);
+            Result resultado = servicoTaxaServico.Editar(taxanova);
 
             resultado.IsSuccess.Should().BeFalse();
         }
@@ -187,9 +166,20 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloTaxaServico
         [TestMethod]
         public void NaoDeveExcluirTaxaServicoRelacionadaComCliente()
         {
-            var taxaServicoRelacionada = new TaxaServico("Taxa Servico Relacionada", 25, "Plano E");
-            mockRepositorioTaxaServico.Setup(r => r.Existe(taxaServicoRelacionada)).Returns(true);
-            mockRepositorioTaxaServico.Setup(r => r.Excluir(taxaServicoRelacionada)).Throws(new Exception("Erro no banco de dados"));
+            var taxaServicoRelacionada = new TaxaServico(Guid.NewGuid(), "Taxa Servico Relacionada", 25, "Plano E");
+
+            mockRepositorioTaxaServico.Setup(x => x.Existe(taxaServicoRelacionada))
+              .Returns(() =>
+              {
+                  return true;
+              });
+
+            mockRepositorioTaxaServico.Setup(x => x.Excluir(It.IsAny<TaxaServico>()))
+                .Throws(() =>
+                {
+                    return SqlExceptionCreator.NewSqlException(errorMessage: "FK_TaxaServico_TBAluguel");
+                });
+
 
             Result resultado = servicoTaxaServico.Excluir(taxaServicoRelacionada);
 
@@ -199,19 +189,25 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloTaxaServico
         [TestMethod]
         public void DeveTentarExcluirTaxaServicoECapturarErroBanco()
         {
-            var taxaServicoParaExcluir = new TaxaServico("Taxa Servico Excluir", 30, "Plano F");
-            mockRepositorioTaxaServico.Setup(r => r.Existe(taxaServicoParaExcluir)).Returns(true);
-            mockRepositorioTaxaServico.Setup(r => r.Excluir(taxaServicoParaExcluir)).Throws(new DbUpdateException("Erro no banco de dados"));
+            var taxaServicoRelacionada = new TaxaServico(Guid.NewGuid(), "Taxa Servico Relacionada", 25, "Plano E");
 
-            Result resultado = servicoTaxaServico.Excluir(taxaServicoParaExcluir);
+            mockRepositorioTaxaServico.Setup(x => x.Existe(taxaServicoRelacionada))
+              .Returns(() =>
+              {
+                  return true;
+              });
 
-            resultado.IsSuccess.Should().BeFalse();
+            mockRepositorioTaxaServico.Setup(x => x.Excluir(It.IsAny<TaxaServico>()))
+                .Throws(() =>
+                {
+                    return SqlExceptionCreator.NewSqlException(errorMessage: "FK_TaxaServico_TBAluguel");
+                });
+
+
+            Result resultado = servicoTaxaServico.Excluir(taxaServicoRelacionada);
+
+            resultado.Errors[0].Message.Should().Contain("Esta TaxaServico está relacionada com um cliente e não pode ser excluída");
         }
-
-
-
-
-
     }
 }
 

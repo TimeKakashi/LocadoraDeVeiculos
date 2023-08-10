@@ -310,9 +310,6 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCliente
             resultado.Should().BeFailure();
         }
 
-
-
-
         [TestMethod]
         public void Deve_Tentar_Excluir_Cliente_E_Capturar_Erro_Caso_Ocorra_Falha_No_Banco_PessoaJuridica()
         {
