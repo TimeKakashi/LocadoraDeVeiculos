@@ -25,6 +25,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloGrupoVeiculos
 
             repositorioGrupoAutomovel = new Mock<IReposisotiroGrupoAutomovel>();
             validadorGrupo = new Mock<IValidadorGrupoAutomovel>();
+            contextoPersistencia = new Mock<IContextoPersistencia>();
 
             this.servicoGrupoAutomovel = new ServicoGrupoAutomovel(repositorioGrupoAutomovel.Object, validadorGrupo.Object, contextoPersistencia.Object);
         }

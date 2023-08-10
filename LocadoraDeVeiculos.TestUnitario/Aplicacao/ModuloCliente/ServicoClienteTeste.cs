@@ -23,6 +23,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCliente
         {
             repositorioClienteMock = new Mock<IRepositorioCliente>();
             validadorClienteMock = new Mock<IValidadorCliente>();
+            ctxPersistencia = new Mock<IContextoPersistencia>();
 
             servicoCliente = new ServicoCliente(repositorioClienteMock.Object, validadorClienteMock.Object, ctxPersistencia.Object);
 
