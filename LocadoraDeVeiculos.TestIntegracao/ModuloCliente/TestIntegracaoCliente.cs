@@ -40,7 +40,11 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloCliente
         [TestMethod]
         public void DeveExcluirCliente()
         {
+            var cliente = Builder<Cliente>.CreateNew().Persist();
+
             repositorioCliente.Excluir(cliente);
+
+            contextoPersistencia.GravarDados();
 
             repositorioCliente.SelecionarPorId(cliente.Id).Should().BeNull();
         }
@@ -48,9 +52,22 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloCliente
         [TestMethod]
         public void DeveSelecionarProId()
         {
+
+
             var item = repositorioCliente.SelecionarPorId(cliente.Id);
 
             item.Should().Be(cliente);
+        }
+
+        [TestMethod]
+        public void DeveSelecionarTodos()
+        {
+            var cliente2 = Builder<Cliente>.CreateNew().Persist();
+
+            var item = repositorioCliente.SelecionarTodos();
+
+            item[1].Should().Be(cliente2);
+
         }
     }
 }

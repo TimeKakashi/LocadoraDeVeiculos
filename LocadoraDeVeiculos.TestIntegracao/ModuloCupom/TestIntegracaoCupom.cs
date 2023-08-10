@@ -22,18 +22,20 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloCupom
         [TestMethod]
         public void Deve_inserir_cupom()
         {
-            var cupom2 = Builder<Cupom>.CreateNew().With(x => x.Parceiro = parceiro).Build();
+            var cupom = Builder<Cupom>.CreateNew().With(x => x.Parceiro = parceiro).Build();
 
-            repositorioCupom.Inserir(cupom2);
+            repositorioCupom.Inserir(cupom);
+
             contextoPersistencia.GravarDados();
 
-            repositorioCupom.SelecionarPorId(cupom2.Id).Should().Be(cupom2);
+            repositorioCupom.SelecionarPorId(cupom.Id).Should().Be(cupom);
         }
 
         [TestMethod]
         public void Deve_Editar_Cupom()
         {
             repositorioCupom.Editar(cupom);
+
             contextoPersistencia.GravarDados();
 
             repositorioCupom.SelecionarPorId(cupom.Id).Should().Be(cupom);
@@ -43,6 +45,9 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloCupom
         public void Deve_excluir_cupom()
         {
             repositorioCupom.Excluir(cupom);
+
+            contextoPersistencia.GravarDados();
+
 
             repositorioCupom.SelecionarPorId(cupom.Id).Should().BeNull();
         }
@@ -56,8 +61,8 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloCupom
 
             var lista = repositorioCupom.SelecionarTodos();
 
-            lista.Should().ContainInOrder(desconto1, desconto2, desconto3);
-            lista.Should().HaveCount(3);
+            lista.Should().ContainInOrder(cupom,desconto1, desconto2, desconto3);
+            lista.Should().HaveCount(4);
         }
 
 

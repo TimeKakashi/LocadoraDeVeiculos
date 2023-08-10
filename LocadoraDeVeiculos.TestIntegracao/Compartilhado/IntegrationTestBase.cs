@@ -96,6 +96,11 @@ namespace LocadoraDeVeiculos.TestIntegracao.Compartilhado
                 repositorioTaxaServico.Inserir(TaxaServico);
                 contextoPersistencia.GravarDados();
             });
+            BuilderSetup.SetCreatePersistenceMethod<Cliente>((Cliente) =>
+            {
+                repositorioCliente.Inserir(Cliente);
+                contextoPersistencia.GravarDados();
+            });
         }
 
         protected static void LimparTabelas()
@@ -106,10 +111,16 @@ namespace LocadoraDeVeiculos.TestIntegracao.Compartilhado
 
             string sqlLimpezaTabela =
                 @"
+                DELETE FROM [DBO].[TBALUGUEL];
                 DELETE FROM [DBO].[TBFUNCIONARIO];
                 DELETE FROM [DBO].[TBGRUPOAUTOMOVEL];
                 DELETE FROM [DBO].[TBPLANOCOBRANCA];
                 DELETE FROM [DBO].[TBAutomovel];
+                DELETE FROM [DBO].[TBCondutor];
+                DELETE FROM [DBO].[TBCLIENTE];
+                DELETE FROM [DBO].[TBTaxaServico];
+                DELETE FROM [DBO].[TBCUPOM];
+                DELETE FROM [DBO].[TBPARCEIRO];
                  ";
             SqlCommand comando = new SqlCommand(sqlLimpezaTabela, sqlConnection);
 
