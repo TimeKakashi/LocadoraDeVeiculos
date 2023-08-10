@@ -25,13 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dominio\ModuloAutomovel\" />
-    <Folder Include="Dominio\ModuloCliente\" />
-    <Folder Include="Dominio\ModuloCondutor\" />
-    <Folder Include="Dominio\ModuloCupom\" />
-    <Folder Include="Dominio\ModuloGrupoAutomovel\" />
-    <Folder Include="Dominio\ModuloParceiro\" />
-    <Folder Include="Dominio\ModuloPlanoCobranca\" />
     <Folder Include="Dominio\ModuloTaxaServico\" />
   </ItemGroup>
 
