@@ -117,7 +117,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCliente
 
                 string msgErro;
 
-                if (ex.Message.Contains("FK_TBCliente_TBAluguel"))
+                if (ex.Message.Contains("Aluguel"))
                     msgErro = "Este cliente está relacionado com um aluguel e não pode ser excluído";
                 else
                     msgErro = "Falha ao tentar excluir cliente";

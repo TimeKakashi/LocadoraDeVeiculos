@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Aplicacao\ModuloAluguel\" />
     <Folder Include="Dominio\ModuloTaxaServico\" />
   </ItemGroup>
 

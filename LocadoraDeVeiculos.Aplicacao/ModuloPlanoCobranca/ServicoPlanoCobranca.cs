@@ -4,6 +4,7 @@ using LocadoraDeVeiculos.Aplicacao.Compartilhado;
 using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
+using Org.BouncyCastle.Math.EC.Rfc7748;
 using Serilog;
 using System.Data.SqlClient;
 
@@ -104,6 +105,13 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca
                     Log.Warning("plano {planoId} não encontrado para excluir", plano.Id);
 
                     return Result.Fail("funcionario não encontrado");
+                }
+
+                if(plano.GrupoAutomovel.Veiculos.Count > 0)
+                {
+                    Log.Warning("Falha ao excluir plnao{p.id}", plano.Id);
+
+                    return Result.Fail("plano plano está ligado a um automovel e não é possível excluir");
                 }
 
                 repositorioPlanoCobranca.Excluir(plano);

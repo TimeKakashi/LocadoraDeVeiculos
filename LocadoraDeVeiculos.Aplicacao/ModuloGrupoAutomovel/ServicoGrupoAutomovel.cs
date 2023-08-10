@@ -100,6 +100,20 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel
                     return Result.Fail("grupo não encontrado");
                 }
 
+                if(registro.Veiculos.Count > 0)
+                {
+                    Log.Warning("Esse grupo possui um carro vinculado, não é possivel excluir", registro.Id);
+
+                    return Result.Fail("Esse grupo possui um carro vinculado, não é possivel excluir");
+                }
+
+                if (registro.Planos.Count > 0)
+                {
+                    Log.Warning("Esse grupo possui um plano vinculado, não é possivel excluir", registro.Id);
+
+                    return Result.Fail("Esse grupo possui um Plano de Cobranca vinculado, não é possivel excluir");
+                }
+
                 reposisotiroGrupoAutomovel.Excluir(registro);
 
                 contextoPersistencia.GravarDados();
