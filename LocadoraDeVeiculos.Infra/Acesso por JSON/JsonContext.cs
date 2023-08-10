@@ -9,10 +9,12 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using LocadoraDeVeiculos.Dominio.ModuloCombustivell;
 using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore;
 
 namespace LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON
 {
-    public class JsonContext
+    public class JsonContext : IContextoCombustivel
     {
         public const string NOME_ARQUIVO = "jsonCombustiveis.json";
 
@@ -73,6 +75,11 @@ namespace LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON
             opcoes.ReferenceHandler = ReferenceHandler.Preserve;
 
             return opcoes;
+        }
+
+        public void GravarDados()
+        {
+            GravarTarefasEmArquivo();
         }
     }
 }

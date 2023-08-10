@@ -1,5 +1,7 @@
 ﻿using FizzWare.NBuilder;
+using LocadoraDeVeiculos.Dominio.ModuloAluguel;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
+using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
@@ -7,7 +9,9 @@ using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaServico;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloAluguel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloAutomovel;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCupom;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel;
@@ -22,13 +26,15 @@ namespace LocadoraDeVeiculos.TestIntegracao.Compartilhado
 {
     public class IntegrationTestBase
     {
-        protected IRepositorioFuncionario repositorioFuncionario;
-        protected IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
-        protected IRepositorioPlanoCobranca repositorioPlanoCobranca;
-        protected IRepositorioAutomovel repositorioAutomovel;
-        protected IRepositorioCupom repositorioCupom;
-        protected IRepositorioParceiro repositorioParceiro;
-        protected IRepositorioTaxaServico repositorioTaxaServico;
+        protected IRepositorioFuncionario repositorioFuncionario;//
+        protected IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;//
+        protected IRepositorioPlanoCobranca repositorioPlanoCobranca;//
+        protected IRepositorioAutomovel repositorioAutomovel;//
+        protected IRepositorioCupom repositorioCupom;//
+        protected IRepositorioParceiro repositorioParceiro;//
+        protected IRepositorioTaxaServico repositorioTaxaServico;//
+        protected IRepositorioAluguel repositorioAluguel;//
+        protected IRepositorioCliente repositorioCliente;
 
         public IntegrationTestBase()
         {
@@ -46,6 +52,11 @@ namespace LocadoraDeVeiculos.TestIntegracao.Compartilhado
             reposisotiroGrupoAutomovel = new RepositorioGrupoAutomovelOrm(dbContext);
             repositorioFuncionario = new RepositorioFuncionarioOrm(dbContext);
             repositorioAutomovel = new RepositorioAutomovelOrm(dbContext);
+            repositorioAluguel = new RepositorioAluguelOrm(dbContext);
+            repositorioCupom = new RepositorioCupomOrm(dbContext);
+            repositorioParceiro = new RepositorioParceiroOrm(dbContext);
+            repositorioTaxaServico = new RepositorioTaxaServicoOrm(dbContext);
+            repositorioCliente = new RepositorioClienteOrm(dbContext);
 
             BuilderSetup.SetCreatePersistenceMethod<Veiculo>(repositorioAutomovel.Inserir);
             BuilderSetup.SetCreatePersistenceMethod<GrupoAutomovel>(reposisotiroGrupoAutomovel.Inserir);

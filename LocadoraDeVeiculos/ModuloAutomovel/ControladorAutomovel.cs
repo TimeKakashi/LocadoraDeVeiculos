@@ -27,11 +27,6 @@ namespace LocadoraDeVeiculos.ModuloAutomovel
 
             this.repositorioCombustivelJson = repositorioCombustivelJson;
             this.servicoCombustivel = servicoCombustivel;
-
-            if (tabelaAutomovel == null)
-                tabelaAutomovel = new TabelaAutomovel();
-
-            CarregarItens();
         }
 
         public override string ToolTipInserir => "Inserir Veiculo";
@@ -121,6 +116,8 @@ namespace LocadoraDeVeiculos.ModuloAutomovel
         {
             if (tabelaAutomovel == null)
                 tabelaAutomovel = new TabelaAutomovel();
+
+            CarregarItens();
 
             return tabelaAutomovel;
         }

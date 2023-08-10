@@ -27,11 +27,6 @@ namespace LocadoraDeVeiculos.ModuloCupom
             this.repositorioCupom = repositorioCupom;
             this.servicoCupom = servicoCupom;
             this.repositorioParceiro = repositorioParceiro;
-
-            if (tabelaCupom == null)
-                tabelaCupom = new TabelaCupom();
-
-            CarregarItens();
         }
 
         public ControladorCupom(IRepositorioCupom repositorioCupom, ServicoCupom servicoCupom)
@@ -129,6 +124,8 @@ namespace LocadoraDeVeiculos.ModuloCupom
         {
             if(tabelaCupom == null)
                 tabelaCupom = new TabelaCupom();
+
+            CarregarItens();
 
             return tabelaCupom;
                     

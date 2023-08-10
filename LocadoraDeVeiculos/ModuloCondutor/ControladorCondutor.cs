@@ -19,23 +19,11 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         private TabelaCondutor tabelaCondutor;
         private List<Cliente> listaClientes;
 
-        public ControladorCondutor(IRepositorioCondutor repositorioCondutor, IRepositorioCliente repositorioCliente, ServicoCondutor servicoCondutor, List<Cliente> listaClientes, TabelaCondutor tabelaCondutor)
+        public ControladorCondutor(IRepositorioCondutor repositorioCondutor, IRepositorioCliente repositorioCliente, ServicoCondutor servicoCondutor)
         {
             this.repositorioCondutor = repositorioCondutor;
             this.repositorioCliente = repositorioCliente;
-            this.servicoCondutor = servicoCondutor;
             this.listaClientes = listaClientes;
-
-            if (tabelaCondutor == null)
-            {
-                this.tabelaCondutor = new TabelaCondutor();
-            }
-            else
-            {
-                this.tabelaCondutor = tabelaCondutor;
-            }
-
-            CarregarItens();
         }
 
         public override string ToolTipInserir => "Inserir Condutor";
@@ -117,6 +105,11 @@ namespace LocadoraDeVeiculos.ModuloCondutor
 
         public override UserControl ObterTabela()
         {
+            if (tabelaCondutor == null)
+                tabelaCondutor = new TabelaCondutor();
+
+            CarregarItens();
+
             return tabelaCondutor;
         }
 

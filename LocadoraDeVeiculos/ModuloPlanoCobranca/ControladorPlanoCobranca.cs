@@ -17,11 +17,6 @@ namespace LocadoraDeVeiculos.ModuloPlanoCobranca
             this.servicoPlanoCobranca = servicoPlanoCobranca;
             this.repositorioPlanoCobranca = repositorioPlanoCobranca;
             this.reposisotiroGrupoAutomovel = reposisotiroGrupoAutomovel;
-
-            if (tabelaPlanoCobranca == null)
-                tabelaPlanoCobranca = new TabelaPlanoCobranca();
-
-            CarregarItens();
         }
 
 
@@ -109,6 +104,8 @@ namespace LocadoraDeVeiculos.ModuloPlanoCobranca
         {
             if (tabelaPlanoCobranca == null)
                 tabelaPlanoCobranca = new TabelaPlanoCobranca();
+
+            CarregarItens();
 
             return tabelaPlanoCobranca;
         }

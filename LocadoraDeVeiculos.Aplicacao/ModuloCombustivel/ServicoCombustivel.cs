@@ -4,6 +4,7 @@ using Serilog;
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
 using System.Security.Cryptography.X509Certificates;
+using LocadoraDeVeiculos.Dominio.ModuloCombustivell;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloCombustivel
 {
@@ -33,17 +34,11 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCombustivel
 
 
             if (erros.Count() > 0) 
-            {
-                contextoPersistencia.DesfazerAlteracoes();
-
                 return Result.Fail(erros);
-            }
 
             try
             {
                 repositorioCombustivelJson.EditarValores(combustiveis);
-
-                contextoPersistencia.GravarDados();
 
                 Log.Debug("Combustivel editado com sucesso");
 

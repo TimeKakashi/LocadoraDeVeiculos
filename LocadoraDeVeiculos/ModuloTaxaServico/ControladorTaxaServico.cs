@@ -26,11 +26,6 @@ namespace LocadoraDeVeiculos.ModuloTaxaServico
         {
             this.repositorioTaxaServico = repositorioTaxaServico;
             this.servicoTaxaServico = servicoTaxaServico;
-
-            if (tabelaTaxaServico == null)
-                tabelaTaxaServico = new TabelaTaxaServico();
-
-            CarregarItens();
         }
         public override string ToolTipInserir => "Inserir TaxaServico";
 
@@ -110,6 +105,8 @@ namespace LocadoraDeVeiculos.ModuloTaxaServico
         {
             if (tabelaTaxaServico == null)
                 tabelaTaxaServico = new TabelaTaxaServico();
+
+            CarregarItens();
 
             return tabelaTaxaServico;
         }

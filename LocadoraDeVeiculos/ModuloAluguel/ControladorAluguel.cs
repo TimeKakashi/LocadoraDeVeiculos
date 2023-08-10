@@ -55,11 +55,6 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             this.reposisotiroGrupoAutomovel = reposisotiroGrupoAutomovel;
             this.repositorioCupom = repositorioCupom;
             this.repositorioTaxaServico = repositorioTaxaServico;
-
-            if (tabelaAluguel == null)
-                tabelaAluguel = new TabelaAluguel();
-
-            CarregarItens();
         }
         public ControladorAluguel(ServicoAluguel servicoAluguel, IRepositorioAluguel repositorioAluguel, IRepositorioFuncionario repositorioFuncionario,
          IRepositorioCliente repositorioCliente, IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, IRepositorioCupom repositorioCupom,
@@ -181,6 +176,8 @@ namespace LocadoraDeVeiculos.ModuloAluguel
         {
             if (tabelaAluguel == null)
                 tabelaAluguel = new TabelaAluguel();
+
+            CarregarItens();
 
             return tabelaAluguel;
         }

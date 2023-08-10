@@ -1,4 +1,11 @@
-﻿using LocadoraDeVeiculos.Aplicacao.ModuloAluguel;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.IO;
+using Microsoft.Extensions.Configuration;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON;
+using LocadoraDeVeiculos.ModuloTaxaServico;
+using LocadoraDeVeiculos.Aplicacao.ModuloAluguel;
 using LocadoraDeVeiculos.Aplicacao.ModuloAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
 using LocadoraDeVeiculos.Aplicacao.ModuloCondutor;
@@ -8,7 +15,6 @@ using LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
 using LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Aplicacao.ModuloTaxaServico;
-using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAluguel;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
@@ -39,15 +45,10 @@ using LocadoraDeVeiculos.ModuloFuncionario;
 using LocadoraDeVeiculos.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.ModuloParceiro;
 using LocadoraDeVeiculos.ModuloPlanoCobranca;
-using LocadoraDeVeiculos.ModuloTaxaServico;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LocadoraDeVeiculos.Aplicacao.ModuloCombustivel;
+using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
+using LocadoraDeVeiculos.Dominio.ModuloCombustivell;
 
 namespace LocadoraDeVeiculos.Compartilhado.Ioc.cs
 {
@@ -100,12 +101,13 @@ namespace LocadoraDeVeiculos.Compartilhado.Ioc.cs
             servicos.AddTransient<ServicoCupom>();
             servicos.AddTransient<IValidadorCupom, ValidadorCupom>();
             servicos.AddTransient<IRepositorioCupom, RepositorioCupomOrm>();
+
             //Funcionario
             servicos.AddTransient<ControladorFuncionario>();
             servicos.AddTransient<ServicoFuncionario>();
             servicos.AddTransient<IValidadorFuncionario, ValidadorFuncionario>();
             servicos.AddTransient<IRepositorioFuncionario, RepositorioFuncionarioOrm>();
-            
+
             //AutomovelGrupo
             servicos.AddTransient<ControladorGrupoAutomovel>();
             servicos.AddTransient<ServicoGrupoAutomovel>();
@@ -130,8 +132,10 @@ namespace LocadoraDeVeiculos.Compartilhado.Ioc.cs
             servicos.AddTransient<IValidadorTaxaServico, ValidadorTaxaServico>();
             servicos.AddTransient<IRepositorioTaxaServico, RepositorioTaxaServicoOrm>();
 
-            servicos.AddTransient<IRepositorioCombustivelJson, RepositorioCombustivelJson>();
-
+            servicos.AddScoped<JsonContext>(); 
+            servicos.AddTransient<IRepositorioCombustivelJson, RepositorioCombustivel>();
+            servicos.AddTransient<IValidadorCombustivel, ValidadorCombustivel>();
+            servicos.AddTransient<ServicoCombustivel>();
 
             container = servicos.BuildServiceProvider();
         }

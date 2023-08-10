@@ -54,11 +54,6 @@ namespace LocadoraDeVeiculos
     {
         private static TelaPrincipal telaPrincipal;
 
-        
-        private IRepositorioCombustivelJson repositorioCombustivelJson;
-       
-        private static JsonContext jsonContext = new JsonContext(true);
-
         private ControladorBase controlador;
 
         private IoC IoC;
@@ -68,8 +63,6 @@ namespace LocadoraDeVeiculos
             InitializeComponent();
 
             IoC = new IoC_LocadoraDeVeiculosLocator();
-
-            repositorioCombustivelJson = new RepositorioCombustivel(jsonContext);
 
             telaPrincipal = this;
 
@@ -109,9 +102,14 @@ namespace LocadoraDeVeiculos
 
         public void ConfigurarTelaPrincipal(ControladorBase controlador)
         {
+            this.controlador = controlador;
+
             toolStripLabel1.Text = controlador.ObterTipoCadastro();
+
             ConfigurarToolTips(controlador);
+
             ConfigurarTabela(controlador);
+
             ConfigurarEstados(controlador);
         }
 
