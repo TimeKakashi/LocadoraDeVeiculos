@@ -21,7 +21,7 @@ namespace LocadoraDeVeiculos.ModuloCupom
         public Cupom cupom;
         public IRepositorioParceiro repositorioParceiro;
 
-        public TelaCupomForm(List<Parceiro>parceiros)
+        public TelaCupomForm(List<Parceiro> parceiros)
         {
             InitializeComponent();
             this.ConfigurarDialog();
@@ -29,10 +29,10 @@ namespace LocadoraDeVeiculos.ModuloCupom
         }
 
 
-        public void ConfigurarCupom(Cupom cupom,bool inserindo = false)
+        public void ConfigurarCupom(Cupom cupom, bool inserindo = false)
         {
             this.cupom = cupom;
-            if(!inserindo ) 
+            if (!inserindo)
             {
                 txtNome.Text = cupom.Nome;
                 txtDataDeValidade.Value = cupom.DataDeValidade;

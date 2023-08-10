@@ -51,7 +51,7 @@
             // 
             // txtNome
             // 
-            txtNome.Location = new Point(118, 22);
+            txtNome.Location = new Point(118, 19);
             txtNome.Name = "txtNome";
             txtNome.Size = new Size(249, 23);
             txtNome.TabIndex = 10;
@@ -59,7 +59,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(60, 64);
+            label1.Location = new Point(67, 64);
             label1.Name = "label1";
             label1.Size = new Size(39, 15);
             label1.TabIndex = 11;
@@ -77,7 +77,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(50, 161);
+            label4.Location = new Point(50, 156);
             label4.Name = "label4";
             label4.Size = new Size(56, 15);
             label4.TabIndex = 13;
@@ -85,7 +85,7 @@
             // 
             // txtDataDeValidade
             // 
-            txtDataDeValidade.Location = new Point(118, 108);
+            txtDataDeValidade.Location = new Point(118, 102);
             txtDataDeValidade.Name = "txtDataDeValidade";
             txtDataDeValidade.Size = new Size(249, 23);
             txtDataDeValidade.TabIndex = 14;
@@ -93,7 +93,7 @@
             // comboBoxListaParceiro
             // 
             comboBoxListaParceiro.FormattingEnabled = true;
-            comboBoxListaParceiro.Location = new Point(118, 158);
+            comboBoxListaParceiro.Location = new Point(118, 153);
             comboBoxListaParceiro.Name = "comboBoxListaParceiro";
             comboBoxListaParceiro.Size = new Size(148, 23);
             comboBoxListaParceiro.TabIndex = 15;
@@ -101,7 +101,7 @@
             // 
             // txtValor
             // 
-            txtValor.Location = new Point(118, 64);
+            txtValor.Location = new Point(118, 61);
             txtValor.Name = "txtValor";
             txtValor.Size = new Size(88, 23);
             txtValor.TabIndex = 16;
