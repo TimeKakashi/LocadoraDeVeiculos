@@ -207,7 +207,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             {
                 aluguel.Preco = ObterPrecoFinal(aluguel.PlanoCobranca, aluguel.DataLocacao, aluguel.DataDevolucao, aluguel.DataDevolucaoPrevista, aluguel.Cupom, aluguel.TaxasServico, aluguel.KmPercorrido);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 aluguel.Preco = 0;
             }
@@ -215,7 +215,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             labelValorTotal.Text = aluguel.Preco.ToString();
 
             aluguel.Finalizado = true;
-            
+
             return aluguel;
         }
 
@@ -369,8 +369,8 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
             cbAutomovel.SelectedItem = aluguel.Veiculo;
 
-            if(aluguel.Preco != null)
-            labelValorTotal.Text = aluguel.Preco.ToString();
+            if (aluguel.Preco != null)
+                labelValorTotal.Text = aluguel.Preco.ToString();
 
             for (int i = 0; i < ContainerTaxas.Items.Count; i++)
             {
