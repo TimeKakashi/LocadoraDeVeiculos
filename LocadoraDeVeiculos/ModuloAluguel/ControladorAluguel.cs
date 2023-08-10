@@ -260,9 +260,9 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             try
             {
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("Teste", "testeacademiadoprogramador@gmail.com"));
+                message.From.Add(new MailboxAddress("Locadora", "testeacademiadoprogramador@gmail.com"));
                 message.To.Add(new MailboxAddress(aluguel.Cliente.Nome, aluguel.Cliente.Email));
-                message.Subject = "PDF Do seu Aluguel";
+                message.Subject = "Informações da sua Locação";
 
                 var bodyBuilder = new BodyBuilder();
 
