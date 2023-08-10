@@ -20,6 +20,7 @@ using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using static System.Net.Mime.MediaTypeNames;
 using Document = iTextSharp.text.Document;
+using MailKit.Security;
 
 namespace LocadoraDeVeiculos.ModuloAluguel
 {
@@ -259,12 +260,12 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             try
             {
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("Seu Nome", "seu_email_de_envio@example.com"));
+                message.From.Add(new MailboxAddress("Teste", "testeacademiadoprogramador@gmail.com"));
                 message.To.Add(new MailboxAddress(aluguel.Cliente.Nome, aluguel.Cliente.Email)); 
-                message.Subject = "Assunto do E-mail";
+                message.Subject = "PDF Do seu Aluguel";
 
                 var bodyBuilder = new BodyBuilder();
-                bodyBuilder.TextBody = "Corpo do E-mail";
+                bodyBuilder.TextBody = "Vamos ver se funcionou";
 
                
                 var pdfAttachment = new MimePart("application", "pdf")
@@ -277,14 +278,16 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
                 bodyBuilder.Attachments.Add(pdfAttachment);
                 message.Body = bodyBuilder.ToMessageBody();
-
                 using (var client = new SmtpClient())
                 {
-                    client.Connect("seu_servidor_smtp", 587, false);
-                    client.Authenticate("seu_usuario", "sua_senha");
+                    client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+                    client.Authenticate("testeacademiadoprogramador@gmail.com", "tpxxomzxbpiehhak"); 
+
                     client.Send(message);
+
                     client.Disconnect(true);
                 }
+
 
                 MessageBox.Show("E-mail enviado com sucesso!");
             }
