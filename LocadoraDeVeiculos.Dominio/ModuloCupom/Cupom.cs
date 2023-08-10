@@ -19,16 +19,12 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
         public Cupom(Guid id, string nome, decimal valor, DateTime dataDeValidade, Parceiro parceiro)
         {
             this.Nome = nome;
-        }
-        
-        public Cupom(string nome,decimal valor, DateTime dataDeValidade, Parceiro parceiro)
-        {
-            this.Nome = nome;
+            this.Id = id;
             this.Valor = valor;
             this.DataDeValidade = dataDeValidade;
             this.Parceiro = parceiro;
         }
-
+        
         public override string ToString()
         {
             return Nome;
@@ -36,7 +32,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCupom
 
         public override bool Equals(object? obj)
         {
-            return obj is Condutor cupom && Id == cupom.Id;
+            return obj is Cupom cupom && Id == cupom.Id;
         }
     }
 }

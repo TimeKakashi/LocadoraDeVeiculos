@@ -30,7 +30,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloCondutor
             var condutor = new Condutor
             {
                 Nome = "João Silva",
-                CNH = "12345678901",
+                CNH = "1234567890",
                 ValidadeCNH = DateTime.Today.AddDays(30),
                 Telefone = "61987654321",
                 Email = "joao@example.com",

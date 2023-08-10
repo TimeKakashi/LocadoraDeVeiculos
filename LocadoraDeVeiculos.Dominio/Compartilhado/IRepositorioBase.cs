@@ -15,6 +15,6 @@ namespace LocadoraDeVeiculos.Dominio.Compartilhado
         List<T> SelecionarTodos(bool Insercao = false, bool Insercao2 = false);
 
         T SelecionarPorId(Guid id);
-        void Editar(Cupom registro);
+        
     }
 }
