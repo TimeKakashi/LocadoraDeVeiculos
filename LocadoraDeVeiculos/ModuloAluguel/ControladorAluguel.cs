@@ -261,13 +261,20 @@ namespace LocadoraDeVeiculos.ModuloAluguel
             {
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress("Teste", "testeacademiadoprogramador@gmail.com"));
-                message.To.Add(new MailboxAddress(aluguel.Cliente.Nome, aluguel.Cliente.Email)); 
+                message.To.Add(new MailboxAddress(aluguel.Cliente.Nome, aluguel.Cliente.Email));
                 message.Subject = "PDF Do seu Aluguel";
 
                 var bodyBuilder = new BodyBuilder();
-                bodyBuilder.TextBody = "Vamos ver se funcionou";
 
-               
+                if (aluguel.Finalizado)
+                {
+                    bodyBuilder.TextBody = "Obrigado por confiar na nossa Locadora! Seguem os dados finais.";
+                }
+                else
+                {
+                    bodyBuilder.TextBody = "Informações sobre a sua Locação!";
+                }
+
                 var pdfAttachment = new MimePart("application", "pdf")
                 {
                     Content = new MimeContent(File.OpenRead(caminhoPdf)),
@@ -278,16 +285,16 @@ namespace LocadoraDeVeiculos.ModuloAluguel
 
                 bodyBuilder.Attachments.Add(pdfAttachment);
                 message.Body = bodyBuilder.ToMessageBody();
+
                 using (var client = new SmtpClient())
                 {
                     client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-                    client.Authenticate("testeacademiadoprogramador@gmail.com", "tpxxomzxbpiehhak"); 
+                    client.Authenticate("testeacademiadoprogramador@gmail.com", "tpxxomzxbpiehhak");
 
                     client.Send(message);
 
                     client.Disconnect(true);
                 }
-
 
                 MessageBox.Show("E-mail enviado com sucesso!");
             }
@@ -296,6 +303,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
                 MessageBox.Show("Erro ao enviar o e-mail: " + ex.Message);
             }
         }
+
 
 
 
