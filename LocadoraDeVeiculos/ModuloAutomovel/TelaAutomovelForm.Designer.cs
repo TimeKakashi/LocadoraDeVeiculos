@@ -125,16 +125,16 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(20, 438);
+            label6.Location = new Point(9, 438);
             label6.Name = "label6";
-            label6.Size = new Size(100, 15);
+            label6.Size = new Size(116, 15);
             label6.TabIndex = 7;
-            label6.Text = "Tipo Combustivel";
+            label6.Text = "Tipo de Combustivel";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(13, 167);
+            label7.Location = new Point(18, 167);
             label7.Name = "label7";
             label7.Size = new Size(107, 15);
             label7.TabIndex = 8;

@@ -210,7 +210,7 @@
             btnInserir.ImageTransparentColor = Color.Magenta;
             btnInserir.Name = "btnInserir";
             btnInserir.Size = new Size(28, 28);
-            btnInserir.Text = "toolStripButton1";
+            btnInserir.Text = "Cadastrar";
             btnInserir.Click += btnInserir_Click;
             // 
             // btnEditar
@@ -221,7 +221,7 @@
             btnEditar.ImageTransparentColor = Color.Magenta;
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(28, 28);
-            btnEditar.Text = "toolStripButton2";
+            btnEditar.Text = "Editar";
             btnEditar.Click += btnEditar_Click;
             // 
             // btnExcluir
@@ -232,7 +232,7 @@
             btnExcluir.ImageTransparentColor = Color.Magenta;
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Size = new Size(28, 28);
-            btnExcluir.Text = "toolStripButton3";
+            btnExcluir.Text = "Excluir";
             btnExcluir.Click += btnExcluir_Click;
             // 
             // btnFiltrar
@@ -260,7 +260,7 @@
             ToolTipPdf.ImageTransparentColor = Color.Magenta;
             ToolTipPdf.Name = "ToolTipPdf";
             ToolTipPdf.Size = new Size(23, 28);
-            ToolTipPdf.Text = "toolStripButton1";
+            ToolTipPdf.Text = "PDF";
             ToolTipPdf.Click += ToolTipPdf_Click;
             // 
             // brnDevolucao
