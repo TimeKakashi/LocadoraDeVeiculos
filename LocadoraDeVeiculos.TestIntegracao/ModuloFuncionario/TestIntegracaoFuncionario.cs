@@ -35,6 +35,8 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloFuncionario
 
             repositorioFuncionario.Excluir(funcionario);
 
+            contextoPersistencia.GravarDados();
+
             repositorioFuncionario.SelecionarPorId(funcionario.Id).Should().BeNull();
         }
 

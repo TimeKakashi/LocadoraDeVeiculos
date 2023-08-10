@@ -23,8 +23,9 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloAutomovel
         {
             var veiculoBuilde = Builder<Veiculo>.CreateNew().With(x => x.Imagem = new byte[100]).With(x => x.GrupoAutomovel = grupoAutomovel).Build();
 
-
             repositorioAutomovel.Inserir(veiculoBuilde);
+
+            contextoPersistencia.GravarDados();
 
             repositorioAutomovel.SelecionarPorId(veiculo.Id).Should().Be(veiculoBuilde);
         }
@@ -41,6 +42,8 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloAutomovel
         public void DeveExcluirAutomovel()
         {
             repositorioAutomovel.Excluir(veiculo);
+
+            contextoPersistencia.GravarDados();
 
             repositorioAutomovel.SelecionarPorId(veiculo.Id).Should().BeNull();
         }

@@ -36,6 +36,8 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloGrupoAutomovel
 
             reposisotiroGrupoAutomovel.Excluir(grupo);
 
+            contextoPersistencia.GravarDados();
+
             reposisotiroGrupoAutomovel.SelecionarPorId(grupo.Id).Should().BeNull();
         }
 
