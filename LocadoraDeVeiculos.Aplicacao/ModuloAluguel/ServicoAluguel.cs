@@ -152,6 +152,10 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
             if (validatonResult != null)
                 erros.AddRange(validatonResult.Errors.Select(x => x.ErrorMessage));
 
+            if (registro.Condutor != null)
+                if (registro.Condutor.ValidadeCNH < DateTime.Today)
+                    erros.Add("A CNH do concutore está vencida!");
+
             foreach (string erro in erros)
                 Log.Warning(erro);
 
