@@ -114,7 +114,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca
 
                 return Result.Ok();
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
                 contextoPersistencia.DesfazerAlteracoes();
 

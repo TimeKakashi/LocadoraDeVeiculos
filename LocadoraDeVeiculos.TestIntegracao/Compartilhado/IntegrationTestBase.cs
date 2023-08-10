@@ -3,6 +3,7 @@ using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAluguel;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
+using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
@@ -13,6 +14,7 @@ using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloAluguel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloAutomovel;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCliente;
+using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCondutor;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCupom;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloFuncionario;
 using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloGrupoAutomovel;
@@ -37,6 +39,7 @@ namespace LocadoraDeVeiculos.TestIntegracao.Compartilhado
         protected IRepositorioTaxaServico repositorioTaxaServico;//
         protected IRepositorioAluguel repositorioAluguel;//
         protected IRepositorioCliente repositorioCliente;
+        protected IRepositorioCondutor repositorioCondutor;
 
         public IntegrationTestBase()
         {
@@ -60,6 +63,7 @@ namespace LocadoraDeVeiculos.TestIntegracao.Compartilhado
             repositorioParceiro = new RepositorioParceiroOrm(dbContext);
             repositorioTaxaServico = new RepositorioTaxaServicoOrm(dbContext);
             repositorioCliente = new RepositorioClienteOrm(dbContext);
+            repositorioCondutor = new RepositorioCondutorOrm(dbContext);
 
             BuilderSetup.SetCreatePersistenceMethod<Veiculo>((Veiculo) =>
             {
@@ -99,6 +103,15 @@ namespace LocadoraDeVeiculos.TestIntegracao.Compartilhado
             BuilderSetup.SetCreatePersistenceMethod<Cliente>((Cliente) =>
             {
                 repositorioCliente.Inserir(Cliente);
+                contextoPersistencia.GravarDados();
+            });
+            BuilderSetup.SetCreatePersistenceMethod<Aluguel>((Aluguel) =>
+            {
+                repositorioAluguel.Inserir(Aluguel);
+                contextoPersistencia.GravarDados();
+            }); BuilderSetup.SetCreatePersistenceMethod<Condutor>((Condutor) =>
+            {
+                repositorioCondutor.Inserir(Condutor);
                 contextoPersistencia.GravarDados();
             });
         }

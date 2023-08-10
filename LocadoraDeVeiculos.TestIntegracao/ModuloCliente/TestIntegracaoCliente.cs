@@ -52,8 +52,6 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloCliente
         [TestMethod]
         public void DeveSelecionarProId()
         {
-
-
             var item = repositorioCliente.SelecionarPorId(cliente.Id);
 
             item.Should().Be(cliente);

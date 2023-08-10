@@ -89,7 +89,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
 
         public override Result Excluir(Funcionario funcionario)
         {
-            Log.Debug("Tentando excluir disciplina...{@d}", funcionario);
+            Log.Debug("Tentando excluir funcionario...{@d}", funcionario);
 
             try
             {
@@ -104,13 +104,13 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
 
                 repositorioFuncionario.Excluir(funcionario);
 
-                contextoPersistencia.GravarDados();
-
                 Log.Debug("funcionario {funcionarioId} excluído com sucesso", funcionario.Id);
+
+                contextoPersistencia.GravarDados();
 
                 return Result.Ok();
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
                 contextoPersistencia.DesfazerAlteracoes();
 
@@ -118,7 +118,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
 
                 string msgErro;
 
-                if (ex.Message.Contains("FK_TBFuncionario_TBAluguel"))
+                if (ex.InnerException.Message.Contains("FK_TBAluguel_TBFuncionario"))
                     msgErro = "Este funcionario está relacionada com um aluguel e não pode ser excluído";
                 else
                     msgErro = "Falha ao tentar excluir funcionario";
@@ -129,6 +129,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
 
                 return Result.Fail(erros);
             }
+            
         }
 
         protected override List<string> ValidarRegistro(Funcionario funcionario)

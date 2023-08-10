@@ -75,7 +75,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAutomovel
 
                 return Result.Ok();
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
                 contextoPersistencia.DesfazerAlteracoes();
 

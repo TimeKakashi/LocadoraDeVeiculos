@@ -27,7 +27,7 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloAutomovel
 
             contextoPersistencia.GravarDados();
 
-            repositorioAutomovel.SelecionarPorId(veiculo.Id).Should().Be(veiculoBuilde);
+            repositorioAutomovel.SelecionarPorId(veiculoBuilde.Id).Should().Be(veiculoBuilde);
         }
 
         [TestMethod]

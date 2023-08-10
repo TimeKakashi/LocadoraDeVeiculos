@@ -85,7 +85,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloTaxaServico
 
                 return Result.Ok();
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
                 contextoPersistencia.DesfazerAlteracoes();
 

@@ -127,7 +127,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAluguel
 
                 return Result.Ok();
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
                 contextoPersistencia.DesfazerAlteracoes();
 

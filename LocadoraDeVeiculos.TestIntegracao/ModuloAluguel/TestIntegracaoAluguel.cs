@@ -56,6 +56,8 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloAluguel
 
             repositorioAluguel.Inserir(aluguel2);
 
+            contextoPersistencia.GravarDados();
+
             repositorioAluguel.SelecionarPorId(aluguel2.Id).Should().Be(aluguel2);
         }
 
@@ -64,6 +66,8 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloAluguel
         {
             repositorioAluguel.Editar(this.aluguel);
 
+            contextoPersistencia.GravarDados();
+
             repositorioAluguel.SelecionarPorId(aluguel.Id).Should().Be(aluguel);
         }
 
@@ -71,6 +75,8 @@ namespace LocadoraDeVeiculos.TestIntegracao.ModuloAluguel
         public void Deve_Excluir_Alguel()
         {
             repositorioAluguel.Excluir(this.aluguel);
+
+            contextoPersistencia.GravarDados();
 
             repositorioAluguel.SelecionarPorId(aluguel.Id).Should().BeNull();
         }

@@ -26,7 +26,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloCupom
         public void DeveCriarCupomValido()
         {
             var parceiro = new Parceiro("Parceiro A");
-            var cupom = new Cupom("Cupom X", 10, DateTime.Now.AddDays(7), parceiro);
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom X", 10, DateTime.Now.AddDays(7), parceiro);
 
             ValidationResult resultado = validadorCupom.Validate(cupom);
             resultado.IsValid.Should().BeTrue();
@@ -36,7 +36,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloCupom
         public void DeveFalharAoCriarCupomComNomeMenorQue4Caracteres()
         {
             var parceiro = new Parceiro("Parceiro A");
-            var cupom = new Cupom("ABC", 10, DateTime.Now.AddDays(7), parceiro);
+            var cupom = new Cupom(Guid.NewGuid(),"ABC", 10, DateTime.Now.AddDays(7), parceiro);
 
             ValidationResult resultado = validadorCupom.Validate(cupom);
             resultado.IsValid.Should().BeFalse();
@@ -46,7 +46,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloCupom
         public void DeveFalharAoCriarCupomComValorZero()
         {
             var parceiro = new Parceiro("Parceiro A");
-            var cupom = new Cupom("Cupom X", 0, DateTime.Now.AddDays(7), parceiro);
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom X", 0, DateTime.Now.AddDays(7), parceiro);
 
             ValidationResult resultado = validadorCupom.Validate(cupom);
             resultado.IsValid.Should().BeFalse();
@@ -56,7 +56,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloCupom
         public void DeveFalharAoCriarCupomComDataDeValidadeNula()
         {
             var parceiro = new Parceiro("Parceiro A");
-            var cupom = new Cupom("Cupom X", 10, DateTime.MinValue, parceiro);
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom X", 10, DateTime.MinValue, parceiro);
 
             ValidationResult resultado = validadorCupom.Validate(cupom);
             resultado.IsValid.Should().BeFalse();
@@ -65,7 +65,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloCupom
         [TestMethod]
         public void DeveFalharAoCriarCupomComParceiroNulo()
         {
-            var cupom = new Cupom("Cupom X", 10, DateTime.Now.AddDays(7), null);
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom X", 10, DateTime.Now.AddDays(7), null);
 
             ValidationResult resultado = validadorCupom.Validate(cupom);
             resultado.IsValid.Should().BeFalse();
@@ -74,7 +74,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloCupom
         public void DeveFalharAoCriarCupomComValorNegativo()
         {
             var parceiro = new Parceiro("Parceiro A");
-            var cupom = new Cupom("Cupom X", -10, DateTime.Now.AddDays(7), parceiro);
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom X", -10, DateTime.Now.AddDays(7), parceiro);
 
             ValidationResult resultado = validadorCupom.Validate(cupom);
             resultado.IsValid.Should().BeFalse();
@@ -84,7 +84,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloCupom
         public void DeveCriarCupomComNomeValido()
         {
             var parceiro = new Parceiro("Parceiro A");
-            var cupom = new Cupom("Cupom XYZ", 10, DateTime.Now.AddDays(7), parceiro);
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom XYZ", 10, DateTime.Now.AddDays(7), parceiro);
 
             ValidationResult resultado = validadorCupom.Validate(cupom);
             resultado.IsValid.Should().BeTrue();
@@ -94,7 +94,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloCupom
         {
             var parceiro = new Parceiro("Parceiro A");
             var dataPassada = DateTime.Now.AddDays(-1);
-            var cupom = new Cupom("Cupom X", 10, dataPassada, parceiro);
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom X", 10, dataPassada, parceiro);
 
             ValidationResult resultado = validadorCupom.Validate(cupom);
             resultado.IsValid.Should().BeFalse();
@@ -104,7 +104,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloCupom
         public void DeveCriarCupomComValorMaximo()
         {
             var parceiro = new Parceiro("Parceiro A");
-            var cupom = new Cupom("Cupom X", decimal.MaxValue, DateTime.Now.AddDays(7), parceiro);
+            var cupom = new Cupom(Guid.NewGuid(),"Cupom X", decimal.MaxValue, DateTime.Now.AddDays(7), parceiro);
 
             ValidationResult resultado = validadorCupom.Validate(cupom);
             resultado.IsValid.Should().BeTrue();
@@ -114,7 +114,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloCupom
         public void DeveFalharAoCriarCupomComNomeNulo()
         {
             var parceiro = new Parceiro("Parceiro A");
-            var cupom = new Cupom(null, 10, DateTime.Now.AddDays(7), parceiro);
+            var cupom = new Cupom(Guid.NewGuid(),null, 10, DateTime.Now.AddDays(7), parceiro);
 
             ValidationResult resultado = validadorCupom.Validate(cupom);
             resultado.IsValid.Should().BeFalse();
