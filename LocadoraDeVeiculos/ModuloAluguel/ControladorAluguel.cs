@@ -33,6 +33,7 @@ namespace LocadoraDeVeiculos.ModuloAluguel
         public override string ToolTipPdf => "Gerar e Encaminhar Pdf por Email";
         public override string ToolTipCombustivel => "Atualizar Valores Combustível";
         public override bool DevolucaoHabilitado => true;
+        public override bool GerarPdfHabilitado => true;
 
         private TabelaAluguel tabelaAluguel;
         private ServicoAluguel servicoAluguel;

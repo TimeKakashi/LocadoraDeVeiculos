@@ -244,6 +244,7 @@
             btnFiltrar.Name = "btnFiltrar";
             btnFiltrar.Size = new Size(28, 28);
             btnFiltrar.Text = "toolStripButton4";
+            btnFiltrar.Visible = false;
             // 
             // btnCombustivel
             // 
