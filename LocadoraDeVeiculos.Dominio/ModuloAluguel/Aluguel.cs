@@ -56,5 +56,107 @@ namespace LocadoraDeVeiculos.Dominio.ModuloAluguel
         {
             Id = id;
         }
+
+        public decimal CalcularValorPorPlanoDiario()
+        {
+            TimeSpan diferenca = (TimeSpan)(DataDevolucao - DataLocacao);
+            int diferencaDias = (int)diferenca.TotalDays;
+
+            return (decimal)((diferencaDias * PlanoCobranca.ValorDiaria) + (KmPercorrido * PlanoCobranca.PrecoKm));
+        }
+
+        public decimal CalcularValorPorPlanoControlado()
+        {
+            TimeSpan diferenca = (TimeSpan)(DataDevolucao - DataLocacao);
+            int diferencaDias = (int)diferenca.TotalDays;
+
+            int kmExtrapolado = 0;
+
+            if (KmPercorrido > PlanoCobranca.KmDisponivel)
+            {
+                kmExtrapolado = (int)(KmPercorrido - PlanoCobranca.KmDisponivel);
+            }
+
+            return (decimal)((diferencaDias * PlanoCobranca.ValorDiaria) + (kmExtrapolado * PlanoCobranca.PrecoKm));
+        }
+
+        public decimal CalcularValorParaPlanoLivre()
+        {
+            TimeSpan diferenca = (TimeSpan)(DataDevolucao - DataLocacao);
+            int diferencaDias = (int)diferenca.TotalDays;
+
+            return (decimal)(diferencaDias * PlanoCobranca.ValorDiaria);
+        }
+
+        public decimal CalcularValorPorPlano()
+        {
+            if (PlanoCobranca.Plano == planoCobranca.Diaria)
+                return CalcularValorPorPlanoDiario();
+
+            else if (PlanoCobranca.Plano == planoCobranca.Controlado)
+                return CalcularValorPorPlanoControlado();
+
+            else
+                return CalcularValorParaPlanoLivre();
+
+        }
+
+        public decimal CalcularValorMulta()
+        {
+            if (DataDevolucao > DataDevolucaoPrevista)
+            {
+                var qtdDiasAtrasados = (int)(DataDevolucao - DataDevolucaoPrevista)?.TotalDays;
+                decimal valorDiariaMulta = qtdDiasAtrasados * 50;
+
+                valorDiariaMulta += Preco * 0.1m;
+
+                return valorDiariaMulta;
+            }
+
+            return 0;
+        }
+
+        public decimal CalcularQuanidadeLitrosUsados()
+        {
+            decimal quantidadeLitrosUsados = 0;
+
+            if (NivelTanque == EnumNivelTanque.Vazio)
+            {
+                quantidadeLitrosUsados = Veiculo.CapacidadeEmLitros * 1;
+            }
+
+            else if (NivelTanque == EnumNivelTanque.Baixo)
+            {
+                quantidadeLitrosUsados = Veiculo.CapacidadeEmLitros * 0.25m;
+            }
+
+            else if (NivelTanque == EnumNivelTanque.Medio)
+            {
+                quantidadeLitrosUsados = Veiculo.CapacidadeEmLitros * 0.5m;
+            }
+
+            else if (NivelTanque == EnumNivelTanque.Alto)
+            {
+                quantidadeLitrosUsados = Veiculo.CapacidadeEmLitros * 0.75m;
+            }
+
+            else if (NivelTanque == EnumNivelTanque.Cheio)
+            {
+                quantidadeLitrosUsados = 0;
+            }
+
+            return quantidadeLitrosUsados;
+        }
+
+        public decimal CalcularValorTotalSemGasolina()
+        {
+            decimal valorTotal = 0;
+
+            valorTotal += CalcularValorPorPlano();
+
+            valorTotal += CalcularValorMulta();
+
+            return valorTotal;
+        }
     }
 }

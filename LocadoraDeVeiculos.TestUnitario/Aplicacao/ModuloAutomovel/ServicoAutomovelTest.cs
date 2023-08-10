@@ -50,7 +50,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloAutomovel
             validadorAutomovelMock.Setup(x => x.Validate(It.IsAny<Veiculo>())).Returns(() =>
             {
                 var resultado = new ValidationResult();
-                resultado.Errors.Add(new ValidationFailure("Nome", "deve ter 3 letras no minimo!"));
+                resultado.Errors.Add(new ValidationFailure("Modelo", "deve ter 3 letras no minimo!"));
                 return resultado;
             });
 
@@ -89,7 +89,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloAutomovel
                 .Returns(() =>
                 {
                     var resultado = new ValidationResult();
-                    resultado.Errors.Add(new ValidationFailure("Km", "Quantidade de km invalida"));
+                    resultado.Errors.Add(new ValidationFailure("Km", "Km invalido"));
                     return resultado;
                 });
 

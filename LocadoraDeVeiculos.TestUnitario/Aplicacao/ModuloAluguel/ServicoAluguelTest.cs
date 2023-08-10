@@ -115,6 +115,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloAluguel
             var resultado = servicoAluguel.Editar(aluguel);
 
             resultado.Should().BeFailure();
+            repositorioAluguel.Verify(x => x.Editar(aluguel), Times.Never);
         }
 
         [TestMethod]
@@ -178,7 +179,8 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloAluguel
             Result resultado = servicoAluguel.Excluir(aluguel);
 
             resultado.Should().BeFailure();
-        }
+            repositorioAluguel.Verify(x => x.Excluir(aluguel), Times.Never);
 
+        }
     }
 }

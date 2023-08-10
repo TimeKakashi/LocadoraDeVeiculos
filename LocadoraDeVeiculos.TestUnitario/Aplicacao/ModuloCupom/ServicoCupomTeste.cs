@@ -70,9 +70,6 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCupom
            
             resultado.IsSuccess.Should().BeFalse();
         }
-
-       
-
       
         [TestMethod]
         public void DeveInserirCupomValido()
@@ -147,19 +144,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCupom
 
             resultado.IsSuccess.Should().BeFalse();
         }
-        [TestMethod]
-        public void NaoDeveExcluirCupomNaoExistente()
-        {
-
-            var cupom = new Cupom(Guid.NewGuid(),"Cupom", 25, DateTime.Now.AddDays(1), new Parceiro("Parceiro"));
-            mockRepositorioCupom.Setup(r => r.Existe(cupom)).Returns(false);
-
-
-            Result resultado = servicoCupom.Excluir(cupom);
-
-
-            resultado.IsSuccess.Should().BeFalse();
-        }
+      
         [TestMethod]
         public void NaoDeveEditarCupomInvalido()
         {

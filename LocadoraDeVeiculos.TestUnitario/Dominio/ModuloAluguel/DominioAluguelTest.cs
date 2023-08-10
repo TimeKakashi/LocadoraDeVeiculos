@@ -96,7 +96,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloAluguel
 
             aluguel.KmPercorrido = 10;
 
-            decimal valor = (decimal)((5 * aluguel.PlanoCobranca.ValorDiaria) + (aluguel.KmPercorrido * aluguel.PlanoCobranca.PrecoKm));
+            decimal valor = aluguel.CalcularValorPorPlanoDiario();
 
             valor.Should().Be(150);
         }
@@ -114,15 +114,70 @@ namespace LocadoraDeVeiculos.TestUnitario.Dominio.ModuloAluguel
             aluguel.KmPercorrido = 10;
             int kmExtrapolado = 0;
 
-            if (aluguel.KmPercorrido > aluguel.PlanoCobranca.KmDisponivel)
-            {
-                kmExtrapolado = (int)(aluguel.KmPercorrido - aluguel.PlanoCobranca.KmDisponivel);
-            }
+            decimal valor = 0;
 
-            decimal valor = (decimal)((5 * aluguel.PlanoCobranca.ValorDiaria) + (kmExtrapolado * aluguel.PlanoCobranca.PrecoKm));
+            valor = aluguel.CalcularValorPorPlanoControlado();
 
             valor.Should().Be(100);
         }
 
+        [TestMethod]
+        public void DeveCalcularOValorDoAluguelParaPlanoLivre()
+        {
+            var planoD = new PlanoCobranca(planoCobranca.Controlado, 10, 10, 5);
+
+            aluguel.Finalizado = true;
+            aluguel.DataLocacao = DateTime.Today;
+            aluguel.DataDevolucao = DateTime.Today.AddDays(5);
+            aluguel.PlanoCobranca = planoD;
+
+            decimal valor = aluguel.CalcularValorParaPlanoLivre();
+
+            valor.Should().Be(50);
+        }
+
+        [TestMethod]
+        public void DeveCalcularValorDeMulta()
+        {
+            aluguel.DataDevolucaoPrevista = DateTime.Today;
+            aluguel.DataDevolucao = DateTime.Today.AddDays(5);
+
+            decimal valorMulta = aluguel.CalcularValorMulta();
+
+            valorMulta.Should().Be(290);
+        }
+
+        [TestMethod]
+        public void DeveCalcularQuantiadedeDeCombustivelUsada()
+        {
+            aluguel.NivelTanque = EnumNivelTanque.Medio;
+
+            aluguel.Veiculo.CapacidadeEmLitros = 50;
+
+            decimal QuantidadeCombustivel = aluguel.CalcularQuanidadeLitrosUsados();
+
+            QuantidadeCombustivel.Should().Be(25);
+        }
+
+        [TestMethod]
+
+        public void DeveCalcularValorTotal()
+        {
+            aluguel.NivelTanque = EnumNivelTanque.Medio;
+
+            aluguel.Veiculo.CapacidadeEmLitros = 50;
+
+            aluguel.DataDevolucaoPrevista = DateTime.Today;
+
+            aluguel.DataDevolucao = DateTime.Today.AddDays(5);
+
+            var planoD = new PlanoCobranca(planoCobranca.Controlado, 10, 10, 5);
+
+            aluguel.PlanoCobranca = planoD;
+
+            var resultado = aluguel.CalcularValorTotalSemGasolina();
+
+            resultado.Should().Be(330);
+        }
     }
 }
