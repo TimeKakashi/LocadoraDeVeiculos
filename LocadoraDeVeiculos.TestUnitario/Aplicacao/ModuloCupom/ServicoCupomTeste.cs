@@ -2,6 +2,7 @@
 using FluentResults;
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.ModuloCupom;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCupom;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using LocadoraDeVeiculos.TestUnitario.Compartilhado;
@@ -20,13 +21,15 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCupom
         private ServicoCupom servicoCupom;
         private Mock<IRepositorioCupom> mockRepositorioCupom;
         private Mock<IValidadorCupom> mockValidadorCupom;
+        private Mock<IContextoPersistencia> ctx;
 
         [TestInitialize]
         public void Inicializar()
         {
+            ctx = new Mock<IContextoPersistencia>();
             mockRepositorioCupom = new Mock<IRepositorioCupom>();
             mockValidadorCupom = new Mock<IValidadorCupom>();
-            servicoCupom = new ServicoCupom(mockRepositorioCupom.Object, mockValidadorCupom.Object);
+            servicoCupom = new ServicoCupom(mockRepositorioCupom.Object, mockValidadorCupom.Object, ctx.Object);
         }
 
         [TestMethod]

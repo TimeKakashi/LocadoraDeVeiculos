@@ -4,6 +4,7 @@ using FluentResults.Extensions.FluentAssertions;
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.ModuloAutomovel;
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
@@ -17,6 +18,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloAutomovel
     {
         private Mock<IRepositorioAutomovel> repositorioAutomovelMock;
         private Mock<IValidadorAutomovel> validadorAutomovelMock;
+        private Mock<IContextoPersistencia> ctx;
         private ServicoAutomovel servicoAutomovel;
         private Veiculo veiculo;
         private GrupoAutomovel grupoAutomovel;
@@ -25,8 +27,10 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloAutomovel
         {
             repositorioAutomovelMock = new Mock<IRepositorioAutomovel>();
             validadorAutomovelMock = new Mock<IValidadorAutomovel>();
+            ctx = new Mock<IContextoPersistencia>();
 
-            servicoAutomovel = new ServicoAutomovel(repositorioAutomovelMock.Object, validadorAutomovelMock.Object);
+
+            servicoAutomovel = new ServicoAutomovel(repositorioAutomovelMock.Object, validadorAutomovelMock.Object, ctx.Object);
 
             grupoAutomovel = new GrupoAutomovel("Esportivo");
             veiculo = new Veiculo("Spider", "Ferrari", "preto", new byte[100], 100, "MIY4565", EnumCombusteivel.Gasolina, 40, grupoAutomovel, false);

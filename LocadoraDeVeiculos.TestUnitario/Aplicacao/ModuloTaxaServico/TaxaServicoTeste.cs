@@ -2,6 +2,7 @@
 using FluentResults;
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.ModuloTaxaServico;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaServico;
 using Microsoft.EntityFrameworkCore;
 using Moq;
@@ -20,13 +21,15 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloTaxaServico
         private ServicoTaxaServico servicoTaxaServico;
         private Mock<IRepositorioTaxaServico> mockRepositorioTaxaServico;
         private Mock<IValidadorTaxaServico> mockValidadorTaxaServico;
+        private Mock<IContextoPersistencia> ctx;
 
         [TestInitialize]
         public void Inicializar()
         {
             mockRepositorioTaxaServico = new Mock<IRepositorioTaxaServico>();
             mockValidadorTaxaServico = new Mock<IValidadorTaxaServico>();
-            servicoTaxaServico = new ServicoTaxaServico(mockRepositorioTaxaServico.Object, mockValidadorTaxaServico.Object);
+            ctx = new Mock<IContextoPersistencia>();
+            servicoTaxaServico = new ServicoTaxaServico(mockRepositorioTaxaServico.Object, mockValidadorTaxaServico.Object, ctx.Object);
         }
         [TestMethod]
         public void DeveInserirTaxaServicoValida()

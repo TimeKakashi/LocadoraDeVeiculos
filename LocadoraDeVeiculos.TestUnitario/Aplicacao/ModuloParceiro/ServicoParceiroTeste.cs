@@ -2,6 +2,7 @@
 using FluentResults;
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.ModuloParceiro;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloParceiro;
 using LocadoraDeVeiculos.TestUnitario.Compartilhado;
 using Moq;
@@ -19,13 +20,16 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloParceiro
         private ServicoParceiro servicoParceiro;
         private Mock<IRepositorioParceiro> mockRepositorioParceiro;
         private Mock<IValidadorParceiro> mockValidadorParceiro;
+        private Mock<IContextoPersistencia> ctx;
+
 
         [TestInitialize]
         public void Inicializar()
         {
             mockRepositorioParceiro = new Mock<IRepositorioParceiro>();
             mockValidadorParceiro = new Mock<IValidadorParceiro>();
-            servicoParceiro = new ServicoParceiro(mockRepositorioParceiro.Object, mockValidadorParceiro.Object);
+            ctx = new Mock<IContextoPersistencia>();
+            servicoParceiro = new ServicoParceiro(mockRepositorioParceiro.Object, mockValidadorParceiro.Object, ctx.Object);
         }
         [TestMethod]
         public void DeveInserirParceiroValido()

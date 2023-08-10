@@ -3,6 +3,7 @@ using FluentResults;
 using FluentResults.Extensions.FluentAssertions;
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.ModuloFuncionario;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.TestUnitario.Compartilhado;
 using Moq;
@@ -15,6 +16,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloFuncionario
     {
         Mock<IRepositorioFuncionario> repositorioFuncionarioMock;
         Mock<IValidadorFuncionario> validadorMock;
+        Mock<IContextoPersistencia> ctx;
 
         private ServicoFuncionario servicoFuncionario;
         private Funcionario funcionario;
@@ -23,8 +25,9 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloFuncionario
         {
             repositorioFuncionarioMock = new Mock<IRepositorioFuncionario>();
             validadorMock = new Mock<IValidadorFuncionario>();
+            ctx = new Mock<IContextoPersistencia>();
 
-            servicoFuncionario = new ServicoFuncionario(repositorioFuncionarioMock.Object, validadorMock.Object);
+            servicoFuncionario = new ServicoFuncionario(repositorioFuncionarioMock.Object, validadorMock.Object, ctx.Object);
 
             funcionario = new Funcionario("Pedro", 1200, DateTime.Today);
         }
