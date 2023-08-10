@@ -3,11 +3,11 @@ using LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.Compartilhado;
 
 namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloParceiro
 {
-    public class RepositorioParceiro : RepositorioBaseEmOrm<Parceiro>, IRepositorioParceiro
+    public class RepositorioParceiroOrm : RepositorioBaseEmOrm<Parceiro>, IRepositorioParceiro
     {
 
 
-        public RepositorioParceiro(LocadoraDeVeiculosDbContext dbContext) : base(dbContext)
+        public RepositorioParceiroOrm(LocadoraDeVeiculosDbContext dbContext) : base(dbContext)
         {
 
         }

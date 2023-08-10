@@ -44,6 +44,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
             Estado = estado;
             Numero = numero;
             Rua = rua;
+            
 
             if (Tipo == TipoCliente.PessoaFisica)
             {
@@ -69,6 +70,7 @@ namespace LocadoraDeVeiculos.Dominio.ModuloCliente
             return obj is Cliente clinte &&
                 Id == clinte.Id;
         }
+       
     }
 
 

@@ -1,6 +1,7 @@
 ﻿using FluentResults;
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using Serilog;
 using System.Data.SqlClient;
@@ -9,12 +10,14 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel
 {
     public class ServicoGrupoAutomovel : ServicoBase<GrupoAutomovel>
     {
-        IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
-        IValidadorGrupoAutomovel validadorGrupo;
-        public ServicoGrupoAutomovel(IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, IValidadorGrupoAutomovel validadorGrupo)
+        private IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
+        private IValidadorGrupoAutomovel validadorGrupo;
+        private IContextoPersistencia contextoPersistencia;
+        public ServicoGrupoAutomovel(IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, IValidadorGrupoAutomovel validadorGrupo, IContextoPersistencia contextoPersistencia)
         {
             this.reposisotiroGrupoAutomovel = reposisotiroGrupoAutomovel;
             this.validadorGrupo = validadorGrupo;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public override Result Inserir(GrupoAutomovel registro)
@@ -23,12 +26,18 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel
 
             List<string> erros = ValidarRegistro(registro);
 
-            if (erros.Count > 0)
+            if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
 
             try
             {
                 reposisotiroGrupoAutomovel.Inserir(registro);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("grupo inserido com sucesso!");
 
@@ -50,11 +59,17 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel
             List<string> erros = ValidarRegistro(registro);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
 
             try
             {
                 reposisotiroGrupoAutomovel.Editar(registro);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Funcionario {grupoID} editado com sucesso", registro.Id);
 
@@ -87,12 +102,16 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloGrupoAutomovel
 
                 reposisotiroGrupoAutomovel.Excluir(registro);
 
+                contextoPersistencia.GravarDados();
+
                 Log.Debug("grupo {grupoID} excluído com sucesso", registro.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro;

@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace LocadoraDeVeiculos.Infra.Orm._4._1_Acesso_a_Dados.ModuloCupom
 {
-    public class RepositorioCupom : RepositorioBaseEmOrm<Cupom>, IRepositorioCupom
+    public class RepositorioCupomOrm : RepositorioBaseEmOrm<Cupom>, IRepositorioCupom
     {
-        public RepositorioCupom(LocadoraDeVeiculosDbContext dbContext) : base(dbContext)
+        public RepositorioCupomOrm(LocadoraDeVeiculosDbContext dbContext) : base(dbContext)
         {
 
         }

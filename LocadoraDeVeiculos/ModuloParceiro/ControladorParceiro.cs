@@ -14,11 +14,6 @@ namespace LocadoraDeVeiculos.ModuloParceiro
         {
             this.repositorioParceiro = repositorioParceiro;
             this.servicoParceiro = servicoParceiro;
-
-            if (tabelaParceiro == null)
-                tabelaParceiro = new TabelaParceiro();
-
-            CarregarItens();
         }
 
         public override string ToolTipInserir => "Inserir Parceiro";
@@ -115,6 +110,8 @@ namespace LocadoraDeVeiculos.ModuloParceiro
         {
             if (tabelaParceiro == null)
                 tabelaParceiro = new TabelaParceiro();
+
+            CarregarItens();
 
             return tabelaParceiro;
         }

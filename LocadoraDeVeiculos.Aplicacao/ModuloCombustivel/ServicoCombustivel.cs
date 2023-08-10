@@ -4,17 +4,20 @@ using Serilog;
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
 using System.Security.Cryptography.X509Certificates;
+using LocadoraDeVeiculos.Dominio.ModuloCombustivell;
 
 namespace LocadoraDeVeiculos.Aplicacao.ModuloCombustivel
 {
     public class ServicoCombustivel
     {
-        IRepositorioCombustivelJson repositorioCombustivelJson;
-        IValidadorCombustivel validadorCombustivel;
-        public ServicoCombustivel(IRepositorioCombustivelJson repositorioCombustivelJson, IValidadorCombustivel validadorCombustivel)
+        private IRepositorioCombustivelJson repositorioCombustivelJson;
+        private IValidadorCombustivel validadorCombustivel;
+        private IContextoPersistencia contextoPersistencia;
+        public ServicoCombustivel(IRepositorioCombustivelJson repositorioCombustivelJson, IValidadorCombustivel validadorCombustivel, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioCombustivelJson = repositorioCombustivelJson;
             this.validadorCombustivel = validadorCombustivel;
+            this.contextoPersistencia = contextoPersistencia;
         }
         public Result EditarValores(List<Combustivel> combustiveis)
         {
@@ -30,7 +33,7 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloCombustivel
             }
 
 
-            if (erros.Count > 0)
+            if (erros.Count() > 0) 
                 return Result.Fail(erros);
 
             try

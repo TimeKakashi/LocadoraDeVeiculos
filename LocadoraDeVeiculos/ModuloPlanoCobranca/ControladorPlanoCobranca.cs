@@ -6,13 +6,13 @@ using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 
 namespace LocadoraDeVeiculos.ModuloPlanoCobranca
 {
-    public class ControladorPlanoCobranca : ControladorBase
+    public class ControladorPlanoBbranca : ControladorBase
     {
         private ServicoPlanoCobranca servicoPlanoCobranca;
         private TabelaPlanoCobranca tabelaPlanoCobranca;
         private IRepositorioPlanoCobranca repositorioPlanoCobranca;
         private IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
-        public ControladorPlanoCobranca(ServicoPlanoCobranca servicoPlanoCobranca, IRepositorioPlanoCobranca repositorioPlanoCobranca, IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel)
+        public ControladorPlanoBbranca(ServicoPlanoCobranca servicoPlanoCobranca, IRepositorioPlanoCobranca repositorioPlanoCobranca, IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel)
         {
             this.servicoPlanoCobranca = servicoPlanoCobranca;
             this.repositorioPlanoCobranca = repositorioPlanoCobranca;

@@ -11,20 +11,10 @@ namespace LocadoraDeVeiculos.ModuloCliente
         private TabelaCliente listagemClienteControl;
         private ServicoCliente servicoCliente;
 
-        public ControladorCliente(IRepositorioCliente repositorioCliente, TabelaCliente listagemClienteControl, ServicoCliente servicoCliente)
+        public ControladorCliente(IRepositorioCliente repositorioCliente, ServicoCliente servicoCliente)
         {
             this.repositorioCliente = repositorioCliente;
             this.servicoCliente = servicoCliente;
-
-
-            if (listagemClienteControl == null)
-            {
-                listagemClienteControl = new TabelaCliente();
-            }
-
-            this.listagemClienteControl = listagemClienteControl;
-
-            CarregarItens();
         }
 
         public override string ToolTipInserir => "Inserir Cliente";
@@ -101,6 +91,8 @@ namespace LocadoraDeVeiculos.ModuloCliente
         {
             if (listagemClienteControl == null)
                 listagemClienteControl = new TabelaCliente();
+
+            CarregarItens();
 
             return listagemClienteControl;
         }

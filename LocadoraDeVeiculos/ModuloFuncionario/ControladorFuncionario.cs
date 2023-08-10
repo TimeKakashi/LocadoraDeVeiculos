@@ -16,11 +16,6 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
         {
             this.repositorioFuncionario = repositorioFuncionario;
             this.servicoFuncionario = servicoFuncionario;
-
-            if (tabelaFuncionario == null)
-                tabelaFuncionario = new TabelaFuncionario();
-
-            CarregarItens();
         }
 
         public override string ToolTipInserir => "Inserir Funcionario";
@@ -107,6 +102,8 @@ namespace LocadoraDeVeiculos.ModuloFuncionario
         {
             if (tabelaFuncionario == null)
                 tabelaFuncionario = new TabelaFuncionario();
+
+            CarregarItens();
 
             return tabelaFuncionario;
         }

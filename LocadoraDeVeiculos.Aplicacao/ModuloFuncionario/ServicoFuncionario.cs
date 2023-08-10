@@ -1,6 +1,7 @@
 ﻿using FluentResults;
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using Serilog;
 using System.Data.SqlClient;
@@ -11,11 +12,13 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
     {
         private IRepositorioFuncionario repositorioFuncionario;
         private IValidadorFuncionario validadorFuncionario;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoFuncionario(IRepositorioFuncionario repositorioFuncionario, IValidadorFuncionario validadorFuncionario)
+        public ServicoFuncionario(IRepositorioFuncionario repositorioFuncionario, IValidadorFuncionario validadorFuncionario, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioFuncionario = repositorioFuncionario;
             this.validadorFuncionario = validadorFuncionario;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public override Result Inserir(Funcionario funcionario)
@@ -24,12 +27,18 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
 
             List<string> erros = ValidarRegistro(funcionario);
 
-            if (erros.Count > 0)
+            if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
 
             try
             {
                 repositorioFuncionario.Inserir(funcionario);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Funcionario inserido com sucesso!");
 
@@ -52,11 +61,17 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
             List<string> erros = ValidarRegistro(funcionario);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
 
             try
             {
                 repositorioFuncionario.Editar(funcionario);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("Funcionario {FuncionarioId} editado com sucesso", funcionario.Id);
 
@@ -89,12 +104,16 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloFuncionario
 
                 repositorioFuncionario.Excluir(funcionario);
 
+                contextoPersistencia.GravarDados();
+
                 Log.Debug("funcionario {funcionarioId} excluído com sucesso", funcionario.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro;

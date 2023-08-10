@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloAutomovel;
 using Serilog;
 using System.Data.SqlClient;
@@ -8,13 +9,15 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAutomovel
 {
     public class ServicoAutomovel : ServicoBase<Veiculo>
     {
-        IRepositorioAutomovel repositorioAutomovel;
-        IValidadorAutomovel validadorAutomovel;
+        private IRepositorioAutomovel repositorioAutomovel;
+        private IValidadorAutomovel validadorAutomovel;
+        private IContextoPersistencia contextoPersistencia;
 
-        public ServicoAutomovel(IRepositorioAutomovel repositorioAutomovel, IValidadorAutomovel validadorAutomovel)
+        public ServicoAutomovel(IRepositorioAutomovel repositorioAutomovel, IValidadorAutomovel validadorAutomovel, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioAutomovel = repositorioAutomovel;
             this.validadorAutomovel = validadorAutomovel;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public override Result Editar(Veiculo registro)
@@ -24,10 +27,16 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAutomovel
             List<string> erros = ValidarRegistro(registro);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
             try
             {
                 repositorioAutomovel.Editar(registro);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("veiculo {veiculoID} editado com sucesso", registro.Id);
 
@@ -60,12 +69,16 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAutomovel
 
                 repositorioAutomovel.Excluir(registro);
 
+                contextoPersistencia.GravarDados();
+
                 Log.Debug("veiculo {veiculoId} excluído com sucesso", registro.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro;
@@ -89,11 +102,17 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloAutomovel
 
             List<string> erros = ValidarRegistro(registro);
 
-            if (erros.Count > 0)
+            if (erros.Count() > 0) 
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
             try
             {
                 repositorioAutomovel.Inserir(registro);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("veiculo inserido com sucesso!");
 

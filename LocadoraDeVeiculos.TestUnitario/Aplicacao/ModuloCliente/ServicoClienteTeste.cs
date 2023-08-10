@@ -2,6 +2,7 @@
 using FluentResults.Extensions.FluentAssertions;
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.ModuloCliente;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.TestUnitario.Compartilhado;
 using Moq;
@@ -13,6 +14,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCliente
     {
         private Mock<IRepositorioCliente> repositorioClienteMock;
         private Mock<IValidadorCliente> validadorClienteMock;
+        private Mock<IContextoPersistencia> ctxPersistencia;
 
         private ServicoCliente servicoCliente;
         private Cliente cliente;
@@ -22,7 +24,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloCliente
             repositorioClienteMock = new Mock<IRepositorioCliente>();
             validadorClienteMock = new Mock<IValidadorCliente>();
 
-            servicoCliente = new ServicoCliente(repositorioClienteMock.Object, validadorClienteMock.Object);
+            servicoCliente = new ServicoCliente(repositorioClienteMock.Object, validadorClienteMock.Object, ctxPersistencia.Object);
 
             cliente = new Cliente(Cliente.TipoCliente.PessoaFisica, "João", "999999999", "email@teste.com", "Centro", "Cidade", "UF", "123", "Rua das Flores", "111.222.333-44");
         }

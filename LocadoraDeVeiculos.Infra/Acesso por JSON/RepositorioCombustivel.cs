@@ -23,6 +23,8 @@ namespace LocadoraDeVeiculos.Infra.Orm.Acesso_por_JSON
 
         public List<Combustivel> SelecionarTodos()
         {
+            ctx.CarregarArquivo();
+
             return new List<Combustivel>
             {
                 ctx.gasolina,

@@ -1,6 +1,7 @@
 ﻿using FluentResults;
 using FluentValidation.Results;
 using LocadoraDeVeiculos.Aplicacao.Compartilhado;
+using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using Serilog;
@@ -12,14 +13,16 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca
     {
         private IRepositorioPlanoCobranca repositorioPlanoCobranca;
         private IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
+        private IContextoPersistencia contextoPersistencia;
 
         private ValidadorPlanoCobranca validadorPlano;
 
-        public ServicoPlanoCobranca(IRepositorioPlanoCobranca repositorioPlanoCobranca, IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, ValidadorPlanoCobranca validadorPlano)
+        public ServicoPlanoCobranca(IRepositorioPlanoCobranca repositorioPlanoCobranca, IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, ValidadorPlanoCobranca validadorPlano, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioPlanoCobranca = repositorioPlanoCobranca;
             this.validadorPlano = validadorPlano;
             this.reposisotiroGrupoAutomovel = reposisotiroGrupoAutomovel;
+            this.contextoPersistencia = contextoPersistencia;
         }
 
         public override Result Inserir(PlanoCobranca plano)
@@ -28,12 +31,18 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca
 
             List<string> erros = ValidarRegistro(plano);
 
-            if (erros.Count > 0)
+            if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
 
             try
             {
                 repositorioPlanoCobranca.Inserir(plano);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("plano inserido com sucesso!");
 
@@ -56,11 +65,17 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca
             List<string> erros = ValidarRegistro(plano);
 
             if (erros.Count() > 0)
+            {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 return Result.Fail(erros);
+            }
 
             try
             {
                 repositorioPlanoCobranca.Editar(plano);
+
+                contextoPersistencia.GravarDados();
 
                 Log.Debug("plano {planoId} editado com sucesso", plano.Id);
 
@@ -93,12 +108,16 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca
 
                 repositorioPlanoCobranca.Excluir(plano);
 
+                contextoPersistencia.GravarDados();
+
                 Log.Debug("plano {planoId} excluído com sucesso", plano.Id);
 
                 return Result.Ok();
             }
             catch (SqlException ex)
             {
+                contextoPersistencia.DesfazerAlteracoes();
+
                 List<string> erros = new List<string>();
 
                 string msgErro;

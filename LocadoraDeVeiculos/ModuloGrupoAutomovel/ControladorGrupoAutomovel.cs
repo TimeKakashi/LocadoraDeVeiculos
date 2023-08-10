@@ -15,11 +15,6 @@ namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
         {
             this.reposisotiroGrupoAutomovel = reposisotiroGrupoAutomovel;
             this.servicoGrupoAutomovel = servicoGrupoAutomovel;
-
-            if (tabelaGrupoAutomovel == null)
-                tabelaGrupoAutomovel = new TabelaGrupoAutomovel();
-
-            CarregarItens();
         }
 
         public override string ToolTipInserir => "Cadastrar Grupo de Automovel";
@@ -111,6 +106,8 @@ namespace LocadoraDeVeiculos.ModuloGrupoAutomovel
         {
             if (tabelaGrupoAutomovel == null)
                 tabelaGrupoAutomovel = new TabelaGrupoAutomovel();
+
+            CarregarItens();
 
             return tabelaGrupoAutomovel;
         }
