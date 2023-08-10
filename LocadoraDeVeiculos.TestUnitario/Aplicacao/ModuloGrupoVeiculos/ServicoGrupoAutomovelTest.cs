@@ -105,9 +105,9 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloGrupoVeiculos
         }
 
         [TestMethod]
-        public void DeveOcorrerTratamentoDeErroParaExessaoAoEditar()
+        public void DeveOcorrerTratamentoDeErroParaExcecaoAoEditar()
         {
-            repositorioGrupoAutomovel.Setup(x => x.Inserir(It.IsAny<GrupoAutomovel>()))
+            repositorioGrupoAutomovel.Setup(x => x.Editar(It.IsAny<GrupoAutomovel>()))
                 .Throws(() =>
                 {
                     return new Exception();
@@ -117,6 +117,7 @@ namespace LocadoraDeVeiculos.TestUnitario.Aplicacao.ModuloGrupoVeiculos
 
             resultado.Should().BeFailure();
         }
+
 
         [TestMethod]
         public void NaoDeveEditarCasoNomeJaEstejaSendoUsado()
