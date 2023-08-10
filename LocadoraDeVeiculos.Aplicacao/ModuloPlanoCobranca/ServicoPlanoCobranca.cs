@@ -15,9 +15,9 @@ namespace LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca
         private IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel;
         private IContextoPersistencia contextoPersistencia;
 
-        private ValidadorPlanoCobranca validadorPlano;
+        private IValidadorPlanoCobranca validadorPlano;
 
-        public ServicoPlanoCobranca(IRepositorioPlanoCobranca repositorioPlanoCobranca, IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, ValidadorPlanoCobranca validadorPlano, IContextoPersistencia contextoPersistencia)
+        public ServicoPlanoCobranca(IRepositorioPlanoCobranca repositorioPlanoCobranca, IReposisotiroGrupoAutomovel reposisotiroGrupoAutomovel, IValidadorPlanoCobranca validadorPlano, IContextoPersistencia contextoPersistencia)
         {
             this.repositorioPlanoCobranca = repositorioPlanoCobranca;
             this.validadorPlano = validadorPlano;
