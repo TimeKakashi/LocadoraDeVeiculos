@@ -54,6 +54,7 @@
             brnDevolucao = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripLabel1 = new ToolStripLabel();
+            ToolTipPdf = new ToolStripButton();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -193,7 +194,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, btnFiltrar, btnCombustivel, brnDevolucao, toolStripSeparator1, toolStripLabel1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, btnFiltrar, btnCombustivel, ToolTipPdf, brnDevolucao, toolStripSeparator1, toolStripLabel1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(716, 31);
@@ -268,6 +269,16 @@
             toolStripLabel1.Size = new Size(118, 28);
             toolStripLabel1.Text = "Locadora de Veiculos";
             // 
+            // ToolTipPdf
+            // 
+            ToolTipPdf.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            ToolTipPdf.Image = Properties.Resources.contract_FILL0_wght400_GRAD0_opsz24;
+            ToolTipPdf.ImageTransparentColor = Color.Magenta;
+            ToolTipPdf.Name = "ToolTipPdf";
+            ToolTipPdf.Size = new Size(23, 28);
+            ToolTipPdf.Text = "toolStripButton1";
+            ToolTipPdf.Click += ToolTipPdf_Click;
+            // 
             // TelaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -320,5 +331,6 @@
         private ToolStripMenuItem parceiroToolStripMenuItem;
         private ToolStripButton btnCombustivel;
         private ToolStripButton brnDevolucao;
+        private ToolStripButton ToolTipPdf;
     }
 }

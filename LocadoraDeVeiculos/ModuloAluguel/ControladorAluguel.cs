@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 using LocadoraDeVeiculos.Aplicacao.ModuloAluguel;
 using LocadoraDeVeiculos.Aplicacao.ModuloAutomovel;
@@ -12,9 +13,13 @@ using LocadoraDeVeiculos.Dominio.ModuloFuncionario;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Dominio.ModuloTaxaServico;
+using MimeKit;
+using MailKit.Net.Smtp;
+using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using static System.Net.Mime.MediaTypeNames;
+using Document = iTextSharp.text.Document;
 
 namespace LocadoraDeVeiculos.ModuloAluguel
 {
@@ -220,57 +225,80 @@ namespace LocadoraDeVeiculos.ModuloAluguel
         }
         public override void GerarPdf()
         {
-            Teste testeSelecionado = ObterTesteSelecionado();
+            Aluguel aluguelSelecionado = ObterAluguelSelecionado();
 
-            if (testeSelecionado != null)
+            if (aluguelSelecionado != null)
             {
                 string diretorioTemporario = Path.GetTempPath();
-
-                string caminhoArquivo = Path.Combine(diretorioTemporario, "teste.pdf");
+                string caminhoArquivo = Path.Combine(diretorioTemporario, $"aluguel_{aluguelSelecionado.Id}.pdf");
 
                 Document doc = new Document();
-
                 PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(caminhoArquivo, FileMode.Create));
 
                 doc.Open();
 
-                doc.Add(new Paragraph($"ID do Teste: {testeSelecionado.id}"));
-                doc.Add(new Paragraph($"Disciplina: {testeSelecionado.disciplina.nome}"));
-                doc.Add(new Paragraph($"Matéria: {testeSelecionado.materia.nome}"));
-                doc.Add(new Paragraph("Questões: \n--------------------------------------------------------------------------------------"));
-
-                string letra = string.Empty;
-
-                foreach (Questao questao in testeSelecionado.questoes)
-                {
-                    int contadorAlternativa = 0;
-                    doc.Add(new Paragraph($"Titulo: {questao.titulo} \n"));
-
-                    foreach (Alternativa alternativa in repositorioQuestoes.SelecionarAlternativas(questao))
-                    {
-
-                        if (contadorAlternativa == 0)
-                            letra = "A) ";
-                        else if (contadorAlternativa == 1)
-                            letra = "B) ";
-                        else if (contadorAlternativa == 2)
-                            letra = "C) ";
-                        else if (contadorAlternativa == 3)
-                            letra = "D) ";
-
-                        contadorAlternativa++;
-
-                        doc.Add(new Paragraph($"{letra} {alternativa.alternativa}"));
-                    }
-                    doc.Add(new Paragraph($"--------------------------------------------------------------------------------------"));
-                }
-
-
+                doc.Add(new Paragraph($"ID do Aluguel: {aluguelSelecionado.Id}"));
+                doc.Add(new Paragraph($"Cliente: {aluguelSelecionado.Cliente.Nome}"));
+                doc.Add(new Paragraph($"Veículo: {aluguelSelecionado.Veiculo.Modelo}"));
+                doc.Add(new Paragraph($"Data de Início: {aluguelSelecionado.DataLocacao.ToShortDateString()}"));
+                doc.Add(new Paragraph($"Data de Término: {aluguelSelecionado.DataDevolucaoPrevista.ToShortDateString()}"));
+                doc.Add(new Paragraph($"Valor Total: {aluguelSelecionado.Preco.ToString("C")}"));
+                doc.Add(new Paragraph($"Km Percorrido: {aluguelSelecionado.KmPercorrido ?? 0}"));
+                doc.Add(new Paragraph($"Plano Cobrança: {aluguelSelecionado.PlanoCobranca.Plano}"));
                 doc.Close();
 
-                MessageBox.Show("PDF do 'Teste' gerado com sucesso! \n'AppData/Local/Temp/teste.pdf'");
+                MessageBox.Show($"PDF do Aluguel {aluguelSelecionado.Id} gerado com sucesso! Caminho: {caminhoArquivo}");
+
+               
+                EnviarEmailComPdfAnexado(aluguelSelecionado, caminhoArquivo);
             }
         }
+
+        private void EnviarEmailComPdfAnexado(Aluguel aluguel, string caminhoPdf)
+        {
+            try
+            {
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Seu Nome", "seu_email_de_envio@example.com"));
+                message.To.Add(new MailboxAddress(aluguel.Cliente.Nome, aluguel.Cliente.Email)); 
+                message.Subject = "Assunto do E-mail";
+
+                var bodyBuilder = new BodyBuilder();
+                bodyBuilder.TextBody = "Corpo do E-mail";
+
+               
+                var pdfAttachment = new MimePart("application", "pdf")
+                {
+                    Content = new MimeContent(File.OpenRead(caminhoPdf)),
+                    ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                    ContentTransferEncoding = ContentEncoding.Base64,
+                    FileName = Path.GetFileName(caminhoPdf)
+                };
+
+                bodyBuilder.Attachments.Add(pdfAttachment);
+                message.Body = bodyBuilder.ToMessageBody();
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("seu_servidor_smtp", 587, false);
+                    client.Authenticate("seu_usuario", "sua_senha");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+
+                MessageBox.Show("E-mail enviado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao enviar o e-mail: " + ex.Message);
+            }
+        }
+
+
+
+
+
+
     }
 }
 

@@ -93,6 +93,16 @@ namespace LocadoraDeVeiculos.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap contract_FILL0_wght400_GRAD0_opsz24 {
+            get {
+                object obj = ResourceManager.GetObject("contract_FILL0_wght400_GRAD0_opsz24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delete_FILL0_wght400_GRAD0_opsz24 {
             get {
                 object obj = ResourceManager.GetObject("delete_FILL0_wght400_GRAD0_opsz24", resourceCulture);
@@ -123,19 +133,19 @@ namespace LocadoraDeVeiculos.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap person_add_FILL0_wght400_GRAD0_opsz24 {
+        internal static System.Drawing.Bitmap keyboard_return_FILL0_wght400_GRAD0_opsz40__1_ {
             get {
-                object obj = ResourceManager.GetObject("person_add_FILL0_wght400_GRAD0_opsz24", resourceCulture);
+                object obj = ResourceManager.GetObject("keyboard_return_FILL0_wght400_GRAD0_opsz40 (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap keyboard_return_FILL0_wght400_GRAD0_opsz40__1_ {
+        internal static System.Drawing.Bitmap person_add_FILL0_wght400_GRAD0_opsz24 {
             get {
-                object obj = ResourceManager.GetObject("keyboard_return_FILL0_wght400_GRAD0_opsz40 (1)", resourceCulture);
+                object obj = ResourceManager.GetObject("person_add_FILL0_wght400_GRAD0_opsz24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
