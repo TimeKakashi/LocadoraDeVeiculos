@@ -17,6 +17,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
     public partial class telaCondutorForm : Form
     {
         public event GravarRegistroDelegate<Condutor> OnGravarRegistro;
+
         private Condutor condutor;
         private Cliente clienteRelacionado;
         private List<Cliente> listaClinte;

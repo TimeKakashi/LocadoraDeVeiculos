@@ -23,6 +23,7 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         {
             this.repositorioCondutor = repositorioCondutor;
             this.repositorioCliente = repositorioCliente;
+            this.servicoCondutor = servicoCondutor;
             this.listaClientes = listaClientes;
         }
 
@@ -37,9 +38,9 @@ namespace LocadoraDeVeiculos.ModuloCondutor
         {
             var telaCondutor = new telaCondutorForm(repositorioCliente.SelecionarTodos());
 
-            telaCondutor.OnGravarRegistro += servicoCondutor.Inserir;
-
             telaCondutor.ArrumaTela(new Condutor(), true);
+
+            telaCondutor.OnGravarRegistro += servicoCondutor.Inserir;
 
             DialogResult result = telaCondutor.ShowDialog();
 
